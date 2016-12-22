@@ -1,0 +1,15 @@
+.row
+  .col-md-12
+    .jumbotron
+      %h1 Hive API query
+      %p Get player statistics from NS2's Hive2 ELO system.
+
+.row
+  .col-md-4
+    = form_tag url(:player_data, :index), method: :post do
+      .form-group
+        = label_tag :steam_account_id
+        = text_field_tag :steam_account_id, class: 'form-control'
+
+      = submit_tag 'Query', class: 'btn btn-default'
+  .col-md-8
