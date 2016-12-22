@@ -29,6 +29,8 @@ gem 'rack-test', :require => 'rack/test', :group => 'test'
 # Padrino Stable Gem
 gem 'padrino', '0.13.3.3'
 
+gem 'hive-stalker', '~>0.1.0'
+
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'
 

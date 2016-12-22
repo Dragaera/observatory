@@ -1,15 +1,52 @@
 .row
   .col-md-12
     .jumbotron
-      %h1 Hive API query
-      %p Get player statistics from NS2's Hive2 ELO system.
+      %h1 Observatory
+      %p Get player statistics from NS2's Hive 2 ranking system.
 
 .row
   .col-md-4
-    = form_tag url(:player_data, :index), method: :post do
+    %h2 Query data of player
+    = form_tag url(:player_data, :index), method: :get do
       .form-group
         = label_tag :steam_account_id
-        = text_field_tag :steam_account_id, class: 'form-control'
+        = text_field_tag :steam_account_id, class: 'form-control', value: params['steam_account_id'], placeholder: 'Steam ID, Steam ID 3, Steam ID 64'
 
       = submit_tag 'Query', class: 'btn btn-default'
-  .col-md-8
+
+  .col-md-2
+
+  .col-md-6
+    - if @data
+      %h2
+        = @data.alias
+        %small= params['steam_account_id']
+      %table.table.table-bordered
+        %tbody
+          %tr
+            %th Skill
+            %td= pp_separator(@data.skill)
+          %tr
+            %th Level / Exp
+            %td= "Lvl #{ @data.level } / #{ pp_separator(@data.experience) } XP"
+          %tr
+            %th Score
+            %td= pp_separator(@data.score)
+
+      %table.table.table-bordered
+        %tbody
+          %tr
+            %th{ colspan: 2 } Time played as
+          %tr
+            %td Total
+            %td= pp_timespan(@data.time_total)
+          %tr
+            %td Alien
+            %td= "#{ pp_timespan(@data.time_alien) } (#{ pp_percentage(@data.time_alien, @data.time_total) })"
+          %tr
+            %td Marine
+            %td= "#{ pp_timespan(@data.time_marine) } (#{ pp_percentage(@data.time_marine, @data.time_total) })"
+          %tr
+            %td Commander
+            %td= "#{ pp_timespan(@data.time_commander) } (#{ pp_percentage(@data.time_commander, @data.time_total) })"
+
