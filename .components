@@ -1,0 +1,9 @@
+---
+:orm: sequel
+:test: rspec
+:mock: mocha
+:script: none
+:renderer: haml
+:stylesheet: none
+:namespace: Observatory
+:migration_format: number
