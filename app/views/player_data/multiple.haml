@@ -23,4 +23,4 @@
         - if hsh
           = partial 'player_data/player_data_table', locals: { data: hsh, steam_id: steam_id }
         - else
-          %p= "Could not retrieve data from #{ steam_id }"
+          %p= "Could not retrieve data for '#{ steam_id }'"
