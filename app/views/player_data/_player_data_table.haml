@@ -1,0 +1,31 @@
+%h2
+  = data.alias
+  %small= steam_id
+%table.table.table-bordered
+  %tbody
+    %tr
+      %th Skill
+      %td= pp_separator(data.skill)
+    %tr
+      %th Level / Exp
+      %td= "Lvl #{ data.level } / #{ pp_separator(data.experience) } XP"
+    %tr
+      %th Score
+      %td= pp_separator(data.score)
+
+%table.table.table-bordered
+  %tbody
+    %tr
+      %th{ colspan: 2 } Time played as
+    %tr
+      %td Total
+      %td= pp_timespan(data.time_total)
+    %tr
+      %td Alien
+      %td= "#{ pp_timespan(data.time_alien) } (#{ pp_percentage(data.time_alien, data.time_total) })"
+    %tr
+      %td Marine
+      %td= "#{ pp_timespan(data.time_marine) } (#{ pp_percentage(data.time_marine, data.time_total) })"
+    %tr
+      %td Commander
+      %td= "#{ pp_timespan(data.time_commander) } (#{ pp_percentage(data.time_commander, data.time_total) })"
