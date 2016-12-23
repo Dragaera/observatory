@@ -12,5 +12,12 @@ Observatory::App.controllers :player_data do
   end
 
   get :multiple do
+    if params.key? 'steam_account_ids'
+      @steam_account_ids = params['steam_account_ids'].lines.map(&:strip).uniq
+      @data = Hash[@steam_account_ids.map { |id| [id, get_player_data(id)] }]
+    else
+      @steam_account_ids = []
+    end
+    render 'multiple'
   end
 end

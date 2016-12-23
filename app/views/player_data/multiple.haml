@@ -1,0 +1,26 @@
+.row
+  .col-md-12
+    .jumbotron
+      %h1 Observatory
+      %p Get player statistics from NS2's Hive 2 ranking system.
+
+.row
+  .col-md-4
+    %h2 Query data of players
+    = form_tag url(:player_data, :multiple), method: :get do
+      .form-group
+        = label_tag :steam_account_ids
+        -# Solely works (Chromium and Firefox on Linux) with CR only - not with LF or CRLF.
+        = text_area_tag :steam_account_ids, class: 'form-control', value: @steam_account_ids.join("\r"), placeholder: 'Steam ID, Steam ID 3, Steam ID 64 (one per line)'
+
+      = submit_tag 'Query', class: 'btn btn-default'
+
+  .col-md-2
+
+  .col-md-6
+    - if @data
+      - @data.each do |steam_id, hsh|
+        - if hsh
+          = partial 'player_data/player_data_table', locals: { data: hsh, steam_id: steam_id }
+        - else
+          %p= "Could not retrieve data from #{ steam_id }"
