@@ -60,5 +60,8 @@ module Observatory
     #     render 'errors/500'
     #   end
     #
+    get '/' do
+      redirect url(:player_data, :single)
+    end
   end
 end

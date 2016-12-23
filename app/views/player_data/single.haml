@@ -7,7 +7,7 @@
 .row
   .col-md-4
     %h2 Query data of player
-    = form_tag url(:player_data, :index), method: :get do
+    = form_tag url(:player_data, :single), method: :get do
       .form-group
         = label_tag :steam_account_id
         = text_field_tag :steam_account_id, class: 'form-control', value: params['steam_account_id'], placeholder: 'Steam ID, Steam ID 3, Steam ID 64'

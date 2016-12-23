@@ -3,9 +3,16 @@
 module Observatory
   class App
     module PlayerDataHelper
-      # def simple_helper_method
-      # ...
-      # end
+      def get_player_data(steam_id)
+        stalker = HiveStalker::Stalker.new()
+        begin
+          @data = stalker.get_player_data(steam_id)
+        rescue HiveStalker::APIError => e
+          msg = "Caught API Error: #{ e.message }"
+          msg << " caused by: #{ e.cause.message }" if e.cause
+          raise e
+        end
+      end
     end
 
     helpers PlayerDataHelper

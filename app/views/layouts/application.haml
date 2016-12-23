@@ -10,6 +10,7 @@
 
     =  stylesheet_link_tag 'bootstrap.min'
 
+    = javascript_include_tag 'jquery-3.1.0.min.js'
     =  javascript_include_tag 'bootstrap.min'
 
   %body
@@ -24,6 +25,16 @@
             Observatory
 
         #navbar.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.dropdown
+              %a.dropdown-toggle{ href: '#', 'data-toggle': 'dropdown', role: 'button' }
+                Player Data
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to 'Single', url(:player_data, :single)
+                %li
+                  = link_to 'Multiple', url(:player_data, :multiple)
 
     .container
       = yield(:content)
