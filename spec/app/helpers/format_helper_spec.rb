@@ -54,4 +54,15 @@ RSpec.describe "Observatory::App::FormatHelperHelper" do
       expect(subject.pp_separator(123456, '.')).to eq '123.456'
     end
   end
+
+  describe '.pp_percentage' do
+    it 'should return a well-formatted percentage' do
+      expect(subject.pp_percentage(23, 100)).to eq '23.0%'
+      expect(subject.pp_percentage(3, 9)).to eq '33.3%'
+    end
+
+    it 'should support varying accuriacies' do
+      expect(subject.pp_percentage(3, 9, 3)).to eq '33.333%'
+    end
+  end
 end

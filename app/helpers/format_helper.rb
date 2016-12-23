@@ -41,6 +41,12 @@ module Observatory
       def pp_separator(number, sep = "'")
         number.to_s.reverse.gsub(/\d\d\d(?=\d)/) { |s| "#{ s }#{ sep }" }.reverse
       end
+
+      def pp_percentage(part, full, accuracy = 1)
+        percentage = (part * 100.0 / full).round(accuracy)
+
+        "#{ percentage }%"
+      end
     end
 
     helpers FormatHelperHelper
