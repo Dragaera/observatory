@@ -15,12 +15,16 @@
 
       = submit_tag 'Query', class: 'btn btn-default'
 
-  .col-md-2
+  .col-md-8
 
-  .col-md-6
-    - if @data
-      - @data.each do |steam_id, hsh|
-        - if hsh
-          = partial 'player_data/player_data_table', locals: { data: hsh, steam_id: steam_id }
-        - else
-          %p= "Could not retrieve data for '#{ steam_id }'"
+- if @data
+  - @data.each_slice(3) do |slice|
+    .row
+      - slice.each do |steam_id, data|
+        .col-md-4
+          - if data
+            = partial 'player_data/player_data_table', locals: { data: data, steam_id: steam_id }
+          - else
+            %h2
+              = steam_id
+              %small Failed to retrieve data
