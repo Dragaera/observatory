@@ -5,8 +5,11 @@ Observatory::App.controllers :player_data do
   get :single do
     if params.key? 'steam_account_id'
       @data = get_player_data(params.fetch('steam_account_id'))
-      # `nil` indicates that something went awry with the request.
-      redirect(url(:player_data, :single)) unless @data
+      if @data[:result].nil?
+        # `nil` indicates that something went awry with the request.
+        flash[:error] = @data[:error].message
+        redirect(url(:player_data, :single))
+      end
     end
     render 'single'
   end

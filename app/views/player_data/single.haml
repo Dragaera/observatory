@@ -18,4 +18,4 @@
 
   .col-md-6
     - if @data
-      = partial 'player_data/player_data_table', locals: { data: @data, steam_id: params['steam_account_id'] }
+      = partial 'player_data/player_data_table', locals: { data: @data[:result], steam_id: params['steam_account_id'] }

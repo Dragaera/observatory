@@ -22,9 +22,11 @@
     .row
       - slice.each do |steam_id, data|
         .col-md-4
-          - if data
-            = partial 'player_data/player_data_table', locals: { data: data, steam_id: steam_id }
+          - if data[:result]
+            = partial 'player_data/player_data_table', locals: { data: data[:result], steam_id: steam_id }
           - else
             %h2
-              = steam_id
-              %small Failed to retrieve data
+              (Unknown)
+              %small
+                = steam_id
+            %p= "Failed to retrieve data: #{ data[:error].message }"
