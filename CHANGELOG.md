@@ -21,6 +21,13 @@ glance - what to expact from upgrading to a new version.
 ### Removed
 
 
+## [0.2.0] - 2016-12-25
+
+### Added
+
+- Allows 'vanity'-URLs as input, in addition to various formats of Steam ID.
+
+
 ## [0.1.0] - 2016-12-25
 
 ### Added
