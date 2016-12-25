@@ -8,8 +8,6 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- Allows 'vanity'-URLs as input, in addition to various formats of Steam ID.
-
 ### Changed
 
 ### Fixed
@@ -21,7 +19,14 @@ glance - what to expact from upgrading to a new version.
 ### Removed
 
 
-## [0.2.0] - 2016-12-25
+## [0.2.1] - 2016-12-26
+
+### Fixed
+
+- Updates HiveStalker gem to fix bug with low account IDs.
+
+
+## [0.2.0] - 2016-12-26
 
 ### Added
 
