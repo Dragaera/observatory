@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Allows 'vanity'-URLs as input, in addition to various formats of Steam ID.
+
 ### Changed
 
 ### Fixed
