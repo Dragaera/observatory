@@ -32,6 +32,9 @@ gem 'padrino', '0.13.3.3'
 # Application server
 gem 'unicorn'
 
+# Bindings to Steam Web-API
+gem 'steam-condenser'
+
 # Binding to Hive HTTP API
 gem 'hive-stalker', '~>0.1.0'
 
