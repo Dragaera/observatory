@@ -1,4 +1,8 @@
 Sequel::Model.plugin(:schema)
+
+# Automated created at / updated at timestamps
+Sequel::Model.plugin :timestamps
+
 Sequel::Model.raise_on_save_failure = false # Do not throw exceptions on failure
 
 db_adapter  = ENV.fetch('DB_ADAPTER', 'sqlite')
