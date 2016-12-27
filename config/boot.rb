@@ -49,7 +49,7 @@ Padrino.dependency_paths.unshift Padrino.root('config/initializers/*.rb')
 # These hooks are run before any dependencies are required.
 #
 Padrino.before_load do
-  Dotenv.load if RACK_ENV == 'development'
+  Dotenv.load
 end
 
 ##
