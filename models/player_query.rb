@@ -4,7 +4,7 @@ class PlayerQuery < Sequel::Model
 
   plugin :validation_helpers
   def validate
-    validates_presence [:query, :pending]
+    validates_presence [:query]
   end
 
   def execute(resolver: nil, stalker: nil)

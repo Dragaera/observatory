@@ -37,13 +37,11 @@ RSpec.describe PlayerQuery do
       query = build(:player_query)
       expect(query).to be_valid
     end
+  end
 
-    it 'should not be valid if `pending` is missing' do
-      query = build(:player_query, pending: nil)
-      expect(query).to_not be_valid
-
-      query = build(:player_query)
-      expect(query).to be_valid
+  describe '#save' do
+    it 'should set the default value of `pending` to true' do
+      expect(query).to be_pending
     end
   end
 
