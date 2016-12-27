@@ -61,7 +61,7 @@ module Observatory
     #   end
     #
     get '/' do
-      redirect url(:player_query, :create)
+      redirect url(:player_query, :single)
     end
   end
 end

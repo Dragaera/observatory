@@ -8,7 +8,7 @@
   .col-md-4
     %h2 Query data of player
 
-    = form_tag url(:player_query, :create), method: :post do
+    = form_tag url(:player_query, :single), method: :post do
       .form-group
         = label_tag :steam_account_id
         = text_field_tag :steam_account_id, class: 'form-control', value: params['steam_account_id'], placeholder: 'Account identifier'
