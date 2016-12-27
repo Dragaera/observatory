@@ -18,7 +18,8 @@
         - if query.success
           = partial 'player_data/player_data_table', locals: { data: data, steam_id: query.query }
         - else
-          %h3
+          %h2
             = query.query
+            %br
             %small= query.error_message
 
