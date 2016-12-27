@@ -1,33 +1,14 @@
 .row
   .col-md-12
-    .jumbotron
-      %h1 Observatory
-      %p Get player statistics from NS2's Hive 2 ranking system.
+    = partial 'player_query/header'
 
 .row
   .col-md-4
-    %h2 Query data of player
-
-    = form_tag url(:player_query, :single), method: :post do
-      .form-group
-        = label_tag :steam_account_id
-        = text_field_tag :steam_account_id, class: 'form-control', value: params['steam_account_id'], placeholder: 'Account identifier'
-
-      = submit_tag 'Query', class: 'btn btn-default'
+    = partial 'player_query/form', locals: { url: url(:player_query, :single), text_area: false}
 
   .col-md-4
     - if @data
       = partial 'player_data/player_data_table', locals: { data: @data, steam_id: @steam_account_id }
 
   .col-md-4
-    %h2 Supported identifiers
-    .panel.panel-default
-      .panel-body
-        Following identifiers are supported to query for data:
-        %ul
-          %li Steam ID: STEAM_0:0:11101
-          %li Steam ID 3: U:1:22202
-          %li Steam ID 64: 76561197960287930
-          %li Custom URL: gabelogannewell
-          %li Custom Profile URL: http://steamcommunity.com/id/gabelogannewell/
-
+    = partial 'player_query/help'
