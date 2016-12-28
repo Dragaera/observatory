@@ -20,4 +20,17 @@ FactoryGirl.define do
     sequence(:hive2_player_id) { |i| i }
     sequence(:account_id) { |i| i }
   end
+
+  factory :player_data do
+    sequence(:alias) { |i| "Player #{ i }" }
+    score 100
+    level 10
+    experience 1_000
+    skill 500
+    time_total 3_600
+    time_alien 1_600
+    time_marine 2_000
+    time_commander 300
+    adagrad_sum 0.1
+  end
 end
