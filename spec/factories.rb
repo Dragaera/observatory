@@ -15,4 +15,9 @@ FactoryGirl.define do
       pending false
     end
   end
+
+  factory :player do
+    sequence(:hive2_player_id) { |i| i }
+    sequence(:account_id) { |i| i }
+  end
 end
