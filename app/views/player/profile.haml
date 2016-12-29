@@ -1,0 +1,9 @@
+%h1
+  = @player.alias
+  %small= "Updated: #{ time_ago_in_words(@player.current_player_data.created_at) } ago"
+
+.row
+  .col-md-4
+    = partial 'player/player_data', locals: { player: @player }
+
+  .col-md-8

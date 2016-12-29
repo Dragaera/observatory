@@ -2,30 +2,17 @@ class Player < Sequel::Model
   def self.from_player_data(data)
     player = Player.where(account_id: data.steam_id).first
     if player.nil?
+      # Create new player if needed.
       player = Player.create(
         hive2_player_id: data.player_id,
         account_id:      data.steam_id,
         reinforced_tier: data.reinforced_tier
       )
-
-      player_data = PlayerData.create(
-        player_id:       player.id,
-        adagrad_sum:     data.adagrad_sum,
-        alias:           data.alias,
-        experience:      data.experience,
-        level:           data.level,
-        score:           data.score,
-        skill:           data.skill,
-        time_total:      data.time_total,
-        time_alien:      data.time_alien,
-        time_marine:     data.time_marine,
-        time_commander:  data.time_commander,
-      )
-
-      player.update(current_player_data: player_data)
-
-      player
     end
+
+    # Add new data point based on current data.
+    player_data = PlayerData.build_from_player_data(data, player_id: player.id)
+    player.update(current_player_data: player_data)
 
     player
   end
@@ -86,5 +73,19 @@ class Player < Sequel::Model
   def time_commander
     return nil unless current_player_data
     current_player_data.time_commander
+  end
+
+  def update_data(stalker: nil)
+    stalker ||= HiveStalker::Stalker.new
+
+    begin
+      data = stalker.get_player_data(account_id)
+      player_data = PlayerData.build_from_player_data(data, player_id: id)
+      player.update(current_player_data: player_data)
+
+      true
+    rescue APIError
+      false
+    end
   end
 end

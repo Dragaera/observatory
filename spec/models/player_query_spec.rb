@@ -46,6 +46,10 @@ RSpec.describe PlayerQuery do
   end
 
   describe '#execute' do
+    before(:each) do
+      allow(Player).to receive(:from_player_data) { Player.new }
+    end
+
     it 'should set `pending` to false' do
       query.execute(resolver: resolver_success, stalker: stalker_success)
 
@@ -71,10 +75,10 @@ RSpec.describe PlayerQuery do
         expect(query.account_id).to eq 12345
       end
 
-      it "should return the player's data" do
+      it "should return the updated player" do
         result = query.execute(resolver: resolver_success, stalker: stalker_success)
 
-        expect(result.alias).to eq 'Foobar'
+        expect(result).to be_a Player
       end
     end
 

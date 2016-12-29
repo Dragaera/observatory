@@ -13,33 +13,11 @@ Observatory::App.controllers :player_query do
     end
 
     query.save
-    @data = query.execute
-    if @data.nil?
-      flash[:error] = "Error: #{ query.error_message }" if @data.nil?
+    player = query.execute
+    if player.nil?
+      flash[:error] = "Error: #{ query.error_message }"
       redirect(url(:player_query, :single))
     end
-    render 'single'
-  end
-
-  get :multiple, map: '/query/multiple' do
-    @data = []
-    render 'multiple'
-  end
-
-  post :multiple, map: '/query/multiple' do
-    steam_account_ids = params.fetch('steam_account_ids').lines.map(&:chomp).uniq
-
-    @data = Hash[steam_account_ids.map do |id|
-      query = PlayerQuery.new(query: id)
-
-      if query.valid?
-        query.save
-
-        data = query.execute
-        [query, data]
-      end
-    end]
-
-    render 'multiple'
+    redirect(url(:player, :profile, id: player.id))
   end
 end
