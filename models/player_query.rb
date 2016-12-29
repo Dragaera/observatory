@@ -13,11 +13,13 @@ class PlayerQuery < Sequel::Model
 
     begin
       update(account_id: resolver.resolve(query))
+      data = stalker.get_player_data(account_id)
+
       update(pending: false,
              success: true,
              executed_at: DateTime.now)
 
-      return stalker.get_player_data(account_id)
+      return data
 
     rescue ArgumentError, HiveStalker::APIError => e
       update(pending: false,
