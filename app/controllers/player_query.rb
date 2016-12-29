@@ -26,7 +26,7 @@ Observatory::App.controllers :player_query do
     render 'multiple'
   end
 
-  post :single, map: '/query/multiple' do
+  post :multiple, map: '/query/multiple' do
     steam_account_ids = params.fetch('steam_account_ids').lines.map(&:chomp).uniq
 
     @data = Hash[steam_account_ids.map do |id|
