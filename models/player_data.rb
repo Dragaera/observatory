@@ -8,16 +8,19 @@ class PlayerData < Sequel::Model(:player_data)
 
   def self.build_from_player_data(data, player_id: nil)
       data = PlayerData.new(
-        adagrad_sum:     data.adagrad_sum,
-        alias:           data.alias,
-        experience:      data.experience,
-        level:           data.level,
-        score:           data.score,
-        skill:           data.skill,
-        time_total:      data.time_total,
-        time_alien:      data.time_alien,
-        time_marine:     data.time_marine,
-        time_commander:  data.time_commander,
+        # Sometimes the API returns `nil`.
+        # Not fixing this in the client, as it's not equal to 0 / ''. But I need to
+        # somehow handle it in the application.
+        adagrad_sum:     data.adagrad_sum.to_i,
+        alias:           data.alias.to_s,
+        experience:      data.experience.to_i,
+        level:           data.level.to_i,
+        score:           data.score.to_i,
+        skill:           data.skill.to_i,
+        time_total:      data.time_total.to_i,
+        time_alien:      data.time_alien.to_i,
+        time_marine:     data.time_marine.to_i,
+        time_commander:  data.time_commander.to_i,
       )
 
       if player_id
