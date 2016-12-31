@@ -1,3 +1,7 @@
 .sort-col-icon {
   text-decoration: underline;
 }
+
+table th {
+  white-space: nowrap;
+}
