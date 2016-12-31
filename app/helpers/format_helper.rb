@@ -33,7 +33,7 @@ module Observatory
         out << "#{ days }d" if days > 0
         out << "#{ hours }h" if hours > 0
         out << "#{ minutes }m" if minutes > 0
-        out << "#{ seconds }s" if seconds > 0
+        out << "#{ seconds }s" if seconds > 0 || (seconds == 0 && minutes == 0 && hours == 0 && days == 0)
 
         out.join(' ')
       end

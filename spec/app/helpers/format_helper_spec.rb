@@ -6,6 +6,10 @@ RSpec.describe "Observatory::App::FormatHelperHelper" do
   subject { helpers }
 
   describe '.pp_timespan' do
+    it 'should handle a timespan of 0 seconds' do
+      expect(subject.pp_timespan(0)).to eq '0s'
+    end
+
     it 'should handle sub-minute timespans' do
       expect(subject.pp_timespan(45)).to eq '45s'
     end
