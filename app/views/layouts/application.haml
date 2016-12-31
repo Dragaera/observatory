@@ -8,7 +8,8 @@
 
     %title Observatory
 
-    =  stylesheet_link_tag 'bootstrap.min'
+    = stylesheet_link_tag 'bootstrap.min'
+    = stylesheet_link_tag 'application'
 
     = javascript_include_tag 'jquery-3.1.0.min.js'
     = javascript_include_tag 'bootstrap.min'
@@ -33,6 +34,9 @@
               %ul.dropdown-menu
                 %li
                   = link_to 'Single', url(:player_query, :single)
+
+              %li
+                = link_to 'Leaderboard', url(:leaderboard, :players)
 
           %p.navbar-text.navbar-right
             = link_to "Version: #{ Observatory::VERSION }", 'https://bitbucket.org/Lavode/observatory/src/master/CHANGELOG.md'

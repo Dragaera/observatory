@@ -29,6 +29,7 @@ gem 'dotenv'
 
 group :test do
   gem 'rspec'
+  gem 'capybara'
   gem 'rack-test', :require => 'rack/test'
   gem 'database_cleaner'
   gem 'factory_girl'

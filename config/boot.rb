@@ -50,6 +50,7 @@ Padrino.dependency_paths.unshift Padrino.root('config/initializers/*.rb')
 #
 Padrino.before_load do
   Dotenv.load
+  require_relative 'observatory'
 end
 
 ##

@@ -1,0 +1,40 @@
+%h1 Player Leaderboard
+
+.row
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        Disclaimer
+      .panel-body
+        %ul
+          %li This board only contains players who have previously queried their data via this tool.
+          %li Information is based on the last time player data was refreshed - it might not be up-to-date.
+
+.row
+  .col-md-12
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th #
+          %th Player
+          - ['Skill', 'Score', 'Level', 'Experience', 'Time Total', 'Time Alien', 'Time Marine', 'Time Commander'].each do |column|
+            %th= sort_column(column, url_key: [:leaderboard, :players]).html_safe
+
+      %tbody
+        - offset = 1 + (@players.current_page - 1) * @players.page_size
+        - @players.each_with_index do |player, i|
+          %tr
+            %td= i + offset
+            %td= link_to player.alias, url(:player, :profile, id: player.id)
+            %td= pp_separator player.skill
+            %td= pp_separator player.score
+            %td= player.level
+            %td= pp_separator player.experience
+            %td= pp_timespan player.time_total
+            %td= pp_timespan player.time_alien
+            %td= pp_timespan player.time_marine
+            %td= pp_timespan player.time_commander
+
+.row
+  .col-md-12
+    = partial 'leaderboard/pagination', locals: { dataset: @players }

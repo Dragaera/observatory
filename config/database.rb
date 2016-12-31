@@ -1,3 +1,5 @@
+Sequel::Database.extension(:pagination)
+
 Sequel::Model.plugin(:schema)
 
 # Automated created at / updated at timestamps
