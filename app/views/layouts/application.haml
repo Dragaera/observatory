@@ -34,6 +34,9 @@
                 %li
                   = link_to 'Single', url(:player_query, :single)
 
+          %p.navbar-text.navbar-right
+            = link_to "Version: #{ Observatory::VERSION }", 'https://bitbucket.org/Lavode/observatory/src/master/CHANGELOG.md'
+
     .container
       .flash
         - if flash[:error]
