@@ -88,4 +88,68 @@ class Player < Sequel::Model
       false
     end
   end
+
+  # Retrieves recent distinct player data.  That is, if two entries are equal
+  # (which is determined by whether total playtime changed), only the newest
+  # will be returned.
+  #
+  # @param count [Fixnum] Number of entries which to return at most. `nil` in
+  #   order to not limit entries.
+  # @return [Array<PlayerData>]
+  def recent_player_data(count = nil)
+    out = []
+    last_data = nil
+
+    player_data_dataset.order_by(Sequel.desc(:created_at)).each do |data|
+      if count && out.size >= count
+        return out
+      end
+
+      if last_data.nil? || last_data.time_total != data.time_total
+        out << data
+      end
+      last_data = data
+    end
+
+    out
+  end
+
+#   def graph_time_played_total
+#     {
+#       'Alien': time_alien,
+#       'Marine': time_marine
+#     }
+#   end
+# 
+#   def graph_time_played
+#     [
+#       {
+#         name: 'Alien',
+#         data: player_data.map { |data| [data.created_at, data.time_alien] }
+#       },
+#       {
+#         name: 'Marine',
+#         data: player_data.map { |data| [data.created_at, data.time_marine] }
+#       },
+#     ]
+#   end
+# 
+#   def graph_skill
+#     player_data.map do |data|
+#       [data.created_at, data.skill]
+#     end
+#   end
+# 
+#   def graph_experience_level
+#     [
+#       {
+#         name: 'Experience',
+#         data: player_data.map { |data| [data.created_at, data.experience] }
+#       },
+#       {
+#         name: 'Level',
+#         data: player_data.map { |data| [data.created_at, data.level] }
+#       },
+#     ]
+#   end
 end
