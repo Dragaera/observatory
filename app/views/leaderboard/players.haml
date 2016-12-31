@@ -15,13 +15,16 @@
     %table.table.table-bordered
       %thead
         %tr
+          %th #
           %th Player
           - ['Skill', 'Score', 'Level', 'Experience', 'Time Total', 'Time Alien', 'Time Marine', 'Time Commander'].each do |column|
             %th= sort_column(column, url_key: [:leaderboard, :players]).html_safe
 
       %tbody
-        - @players.each do |player|
+        - offset = 1 + (@players.current_page - 1) * @players.page_size
+        - @players.each_with_index do |player, i|
           %tr
+            %td= i + offset
             %td= link_to player.alias, url(:player, :profile, id: player.id)
             %td= pp_separator player.skill
             %td= pp_separator player.score
@@ -31,3 +34,7 @@
             %td= pp_timespan player.time_alien
             %td= pp_timespan player.time_marine
             %td= pp_timespan player.time_commander
+
+.row
+  .col-md-12
+    = partial 'leaderboard/pagination', locals: { dataset: @players }
