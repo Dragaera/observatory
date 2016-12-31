@@ -18,6 +18,7 @@ glance - what to expact from upgrading to a new version.
 
 ### Removed
 
+
 ## [0.3.1] - 2016-12-31
 
 ### Fixed
