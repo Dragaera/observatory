@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Persistent storage of Hive 2 user profiles and data.
+
 ### Changed
 
 ### Fixed
