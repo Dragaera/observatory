@@ -18,6 +18,12 @@ glance - what to expact from upgrading to a new version.
 
 ### Removed
 
+## [0.3.1] - 2016-12-31
+
+### Fixed
+
+- Fixed docker container: Log to stdout, add missing DB adapters.
+
 
 ## [0.3.0] - 2016-12-31
 
