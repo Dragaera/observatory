@@ -9,6 +9,10 @@ case "$1" in
         echo "Calling Rake task $2"
         exec rake $2
         ;;
+    migrate)
+        echo "Applying database migrations"
+        exec rake sq:migrate
+        ;;  
     shell)
         echo "Opening Padrino shell"
         exec padrino c
