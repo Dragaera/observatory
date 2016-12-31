@@ -1,0 +1,25 @@
+.row
+  .col-md-12
+    = partial 'player_query/header'
+
+.row
+  .col-md-4
+    = partial 'player_query/form', locals: { url: url(:player_query, :multiple), text_area: true}
+
+  .col-md-4
+
+  .col-md-4
+    = partial 'player_query/help'
+
+- @data.each_slice(3) do |data_ary|
+  .row
+    - data_ary.each do |query, data|
+      .col-md-4
+        - if query.success
+          = partial 'player_data/player_data_table', locals: { data: data, steam_id: query.query }
+        - else
+          %h2
+            = query.query
+            %br
+            %small= query.error_message
+

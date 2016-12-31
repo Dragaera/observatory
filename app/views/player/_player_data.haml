@@ -1,0 +1,28 @@
+%table.table.table-bordered
+  %tbody
+    %tr
+      %th Skill
+      %td= pp_separator(player.skill)
+    %tr
+      %th Level / Exp
+      %td= "Lvl #{ player.level } / #{ pp_separator(player.experience) } XP"
+    %tr
+      %th Score
+      %td= pp_separator(player.score)
+
+%table.table.table-bordered
+  %tbody
+    %tr
+      %th{ colspan: 2 } Time played as
+    %tr
+      %td Total
+      %td= pp_timespan(player.time_total)
+    %tr
+      %td Alien
+      %td= "#{ pp_timespan(player.time_alien) } (#{ pp_percentage(player.time_alien, player.time_total) })"
+    %tr
+      %td Marine
+      %td= "#{ pp_timespan(player.time_marine) } (#{ pp_percentage(player.time_marine, player.time_total) })"
+    %tr
+      %td Commander
+      %td= "#{ pp_timespan(player.time_commander) } (#{ pp_percentage(player.time_commander, player.time_total) })"

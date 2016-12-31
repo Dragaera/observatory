@@ -3,19 +3,23 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/boot")
 Dir[File.expand_path(File.dirname(__FILE__) + "/../app/helpers/**/*.rb")].each(&method(:require))
 
 RSpec.configure do |conf|
-  conf.mock_with :mocha
   conf.include Rack::Test::Methods
+  conf.include FactoryGirl::Syntax::Methods
+
+  conf.before(:suite) do
+    FactoryGirl.find_definitions
+
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with :truncation
+
+    conf.around(:each) do |spec|
+      DatabaseCleaner.cleaning do
+        spec.run
+      end
+    end
+  end
 end
 
-# You can use this method to custom specify a Rack app
-# you want rack-test to invoke:
-#
-#   app Observatory::App
-#   app Observatory::App.tap { |a| }
-#   app(Observatory::App) do
-#     set :foo, :bar
-#   end
-#
 def app(app = nil, &blk)
   @app ||= block_given? ? app.instance_eval(&blk) : app
   @app ||= Padrino.application

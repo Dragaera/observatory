@@ -1,0 +1,10 @@
+%h2 Query data of player
+= form_tag url, method: :post do
+  .form-group
+    = label_tag :steam_account_id
+    - if text_area
+      = text_area_tag :steam_account_ids, class: 'form-control', value: params['steam_account_id'], placeholder: 'Account identifiers (one per line)', rows: 10
+    - else
+      = text_field_tag :steam_account_id, class: 'form-control', value: params['steam_account_id'], placeholder: 'Account identifier'
+
+  = submit_tag 'Query', class: 'btn btn-default'

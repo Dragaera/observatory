@@ -1,0 +1,14 @@
+.row
+  .col-md-12
+    = partial 'player_query/header'
+
+.row
+  .col-md-4
+    = partial 'player_query/form', locals: { url: url(:player_query, :single), text_area: false}
+
+  .col-md-4
+    - if @data
+      = partial 'player_data/player_data_table', locals: { data: @data, steam_id: @steam_account_id }
+
+  .col-md-4
+    = partial 'player_query/help'

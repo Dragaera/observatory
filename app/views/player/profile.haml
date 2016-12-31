@@ -1,0 +1,27 @@
+%h1
+  = @player.alias
+  %small= "Updated: #{ time_ago_in_words(@player.current_player_data.created_at) } ago"
+
+.row
+  .col-md-4
+    %h2 Stats
+    = partial 'player/player_data', locals: { player: @player }
+
+  .col-md-8
+    %h2 Skill progression
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Date
+          %th Skill
+          %th Score
+          %th Experience
+          %th Level
+      %tbody
+        - @player.recent_player_data(30).each do |data|
+          %tr
+            %td= data.created_at.strftime('%d.%m.%Y %H:%M')
+            %td= pp_separator data.skill
+            %td= pp_separator data.score
+            %td= pp_separator data.experience
+            %td= data.level
