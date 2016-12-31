@@ -9,10 +9,14 @@ glance - what to expact from upgrading to a new version.
 ### Added
 
 - Persistent storage of Hive 2 user profiles and data.
+- Basic paginated leaderboard.
 
 ### Changed
 
 ### Fixed
+
+- Properly format 0s-timespans.
+- Updates HiveStalker gem to fix bug with resolving of Steam IDs.
 
 ### Security
 
