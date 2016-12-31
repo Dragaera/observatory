@@ -16,7 +16,7 @@
       %thead
         %tr
           %th Player
-          - ['Skill', 'Score', 'Level', 'Experience', 'Time total', 'Time alien', 'Time marine', 'Time commander'].each do |column|
+          - ['Skill', 'Score', 'Level', 'Experience', 'Time Total', 'Time Alien', 'Time Marine', 'Time Commander'].each do |column|
             %th= sort_column(column, url_key: [:leaderboard, :players]).html_safe
 
       %tbody
