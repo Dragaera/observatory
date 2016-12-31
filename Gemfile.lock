@@ -41,6 +41,7 @@ GEM
     multi_xml (0.6.0)
     mustermann19 (0.4.4)
       enumerable-lazy
+    mysql2 (0.4.4)
     nokogiri (1.7.0)
       mini_portile2 (~> 2.1.0)
     padrino (0.13.3.3)
@@ -78,6 +79,7 @@ GEM
       padrino-core (= 0.13.3.3)
     padrino-support (0.13.3.3)
       activesupport (>= 3.1)
+    pg (0.18.4)
     public_suffix (2.0.4)
     rack (1.6.5)
     rack-protection (1.5.3)
@@ -100,6 +102,9 @@ GEM
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
     sequel (4.41.0)
+    sequel_pg (1.6.17)
+      pg (>= 0.8.0)
+      sequel (>= 4.0.0)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -131,11 +136,14 @@ DEPENDENCIES
   factory_girl
   haml
   hive-stalker (~> 0.1.0)
+  mysql2
   padrino (= 0.13.3.3)
+  pg
   rack-test
   rake
   rspec
   sequel
+  sequel_pg
   sqlite3
   steam-condenser
   unicorn
