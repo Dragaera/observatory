@@ -1,0 +1,23 @@
+# Vim
+*.swp
+
+# Git
+.git/
+.gitignore
+
+# SQLite DBs
+db/*.db
+
+# Logfiles
+log/*
+
+# CTags
+tags
+
+# File with ENV variables for docker
+docker.env
+docker.env.dist
+
+# Dev-only files
+.env*
+!.env.dist
