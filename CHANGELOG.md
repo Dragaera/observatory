@@ -14,6 +14,9 @@ glance - what to expact from upgrading to a new version.
 
 ### Security
 
+- Adds .dockerignore, preventing dev credentials from leaking into public
+  containers.
+
 ### Deprecated
 
 ### Removed
