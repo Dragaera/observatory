@@ -14,12 +14,17 @@ glance - what to expact from upgrading to a new version.
 
 ### Security
 
-- Adds .dockerignore, preventing dev credentials from leaking into public
-  containers.
-
 ### Deprecated
 
 ### Removed
+
+
+## [0.3.2] - 2017-01-02
+
+### Security
+
+- Adds .dockerignore, preventing dev credentials from leaking into public
+  containers.
 
 
 ## [0.3.1] - 2016-12-31
