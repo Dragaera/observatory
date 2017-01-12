@@ -1,0 +1,7 @@
+---
+update_stale_players:
+  cron: '* * * * *'
+  class: 'Observatory::StalePlayersUpdate'
+  queue: stale_players_update
+  args:
+  description: 'Schedule update for all players with stale data'
