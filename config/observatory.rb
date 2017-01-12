@@ -4,5 +4,9 @@ module Observatory
     if PAGINATION_SIZE_LEADERBOARD < 1
       raise ArgumentError, "PAGINATION_SIZE_LEADERBOARD must be greater than 0. Was: #{ PAGINATION_SIZE_LEADERBOARD }"
     end
+
+    REDIS_HOST = ENV.fetch('REDIS_HOST', '127.0.0.1')
+    REDIS_PORT = ENV.fetch('REDIS_PORT', 6379)
+    RESQUE_WEB_PATH = ENV.fetch('RESQUE_WEB_PATH', nil)
   end
 end

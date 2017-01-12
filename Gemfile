@@ -26,6 +26,10 @@ gem 'pg'
 gem 'sequel_pg', require: 'sequel'
 gem 'sqlite3'
 
+# Background tasks
+gem 'resque'
+gem 'resque-scheduler'
+
 # Bindings to Steam Web-API
 gem 'steam-condenser'
 
