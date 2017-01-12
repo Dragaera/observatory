@@ -89,6 +89,10 @@ class Player < Sequel::Model
     end
   end
 
+  def async_update_data
+    Resque.enqueue(Observatory::PlayerUpdate, id)
+  end
+
   # Retrieves recent distinct player data.  That is, if two entries are equal
   # (which is determined by whether total playtime changed), only the newest
   # will be returned.
