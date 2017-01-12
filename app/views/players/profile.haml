@@ -4,12 +4,12 @@
 
 .row
   .col-md-4
-    = form_tag url(:player, :update, id: @player.id), method: 'post', class: 'btn' do
+    = form_tag url(:players, :update, id: @player.id), method: 'post', class: 'btn' do
       = submit_tag 'Update', class: 'btn btn-warning'
 .row
   .col-md-4
     %h2 Stats
-    = partial 'player/player_data', locals: { player: @player }
+    = partial 'players/player_data', locals: { player: @player }
 
   .col-md-8
     %h2 Skill progression
