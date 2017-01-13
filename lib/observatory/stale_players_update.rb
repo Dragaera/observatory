@@ -3,8 +3,9 @@ module Observatory
     @queue = :stale_players_update
 
     def self.perform
-      t = Time.now - Observatory::Config::PLAYER_UPDATE_INTERVAL * 60 * 60
-      Player.where { created_at < t }.each do |player|
+      t = Time.now - Observatory::Config::PLAYER_DATA_UPDATE_INTERVAL * 60 * 60
+      Player.where { updated_at < t }.each do |player|
+        puts "Scheduling update for #{ player.inspect }"
         player.async_update_data
       end
     end
