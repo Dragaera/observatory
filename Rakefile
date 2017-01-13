@@ -8,10 +8,10 @@ PadrinoTasks.use(:sequel)
 PadrinoTasks.init
 
 task :default => :test
-namespace :rescue do
-  task setup: :environment
 
-  task setup_schedule: :setup do
-    Resque.schedule = YAML.load_file('config/schedule.yml')
-  end
+task 'resque:setup' => :environment
+task 'resque:setup_schedule' => 'resque:setup' do
+  schedule = YAML.load_file('config/schedule.yml')
+  Resque.schedule = schedule
 end
+task 'resque:scheduler' => 'resque:setup_schedule'
