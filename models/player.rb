@@ -79,6 +79,8 @@ class Player < Sequel::Model
     stalker ||= HiveStalker::Stalker.new
 
     begin
+      @@rate_limit.add('hive.total', 1)
+      @@rate_limit.add('hive.get_player_data', 1)
       data = stalker.get_player_data(account_id)
       player_data = PlayerData.build_from_player_data(data, player_id: id)
       update(current_player_data: player_data)
