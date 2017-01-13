@@ -30,6 +30,9 @@ gem 'sqlite3'
 gem 'resque'
 gem 'resque-scheduler'
 
+# Rate-limiting
+gem 'ratelimit'
+
 # Bindings to Steam Web-API
 gem 'steam-condenser'
 
