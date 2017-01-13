@@ -81,12 +81,16 @@ class Player < Sequel::Model
     begin
       data = stalker.get_player_data(account_id)
       player_data = PlayerData.build_from_player_data(data, player_id: id)
-      player.update(current_player_data: player_data)
+      update(current_player_data: player_data)
 
       true
-    rescue APIError
+    rescue HiveStalker::APIError
       false
     end
+  end
+
+  def async_update_data
+    Resque.enqueue(Observatory::PlayerUpdate, id)
   end
 
   # Retrieves recent distinct player data.  That is, if two entries are equal

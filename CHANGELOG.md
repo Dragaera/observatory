@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Automated and on-demand background updates for player data.
+
 ### Changed
 
 ### Fixed

@@ -18,6 +18,6 @@ Observatory::App.controllers :player_query do
       flash[:error] = "Error: #{ query.error_message }"
       redirect(url(:player_query, :single))
     end
-    redirect(url(:player, :profile, id: player.id))
+    redirect(url(:players, :profile, id: player.id))
   end
 end

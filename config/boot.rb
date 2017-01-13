@@ -6,6 +6,8 @@ PADRINO_ROOT = File.expand_path('../..', __FILE__) unless defined?(PADRINO_ROOT)
 require 'bundler/setup'
 Bundler.require(:default, RACK_ENV)
 
+require 'resque/scheduler/server'
+
 Padrino::Logger::Config[:production][:log_level] = :debug
 Padrino::Logger::Config[:production][:stream] = :stdout
 ##
@@ -53,6 +55,10 @@ Padrino.dependency_paths.unshift Padrino.root('config/initializers/*.rb')
 Padrino.before_load do
   Dotenv.load
   require_relative 'observatory'
+
+  Resque.redis = "#{ Observatory::Config::REDIS_HOST }:#{ Observatory::Config::REDIS_PORT }"
+  schedule = YAML.load_file('config/schedule.yml')
+  Resque.schedule = schedule
 end
 
 ##
