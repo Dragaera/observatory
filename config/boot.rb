@@ -6,8 +6,6 @@ PADRINO_ROOT = File.expand_path('../..', __FILE__) unless defined?(PADRINO_ROOT)
 require 'bundler/setup'
 Bundler.require(:default, RACK_ENV)
 
-require 'resque/scheduler/server'
-
 Padrino::Logger::Config[:production][:log_level] = :debug
 Padrino::Logger::Config[:production][:stream] = :stdout
 ##
