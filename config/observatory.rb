@@ -11,5 +11,8 @@ module Observatory
 
     # Interval for automatic player data updates in hours.
     PLAYER_DATA_UPDATE_INTERVAL = ENV.fetch('PLAYER_DATA_UPDATE_INTERVAL', 24).to_i
+    if PLAYER_DATA_UPDATE_INTERVAL <= 0
+      raise ArgumentError, "PLAYER_DATA_UPDATE_INTERVAL must be greater than 0. Was: #{ PLAYER_DATA_UPDATE_INTERVAL }"
+    end
   end
 end
