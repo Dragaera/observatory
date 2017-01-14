@@ -8,20 +8,27 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- Automated and on-demand background updates for player data.
-- Rate-limiting for on-demand and background updates.
-
 ### Changed
 
 ### Fixed
-
-- Adagrad sum is now properly saved as a float rather than an integer.
 
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.4.0] - 2017-01-14
+
+### Added
+
+- Automated and on-demand background updates for player data.
+- Rate-limiting for on-demand and background updates.
+
+### Fixed
+
+- Adagrad sum is now properly saved as a float rather than an integer.
 
 
 ## [0.3.2] - 2017-01-02
