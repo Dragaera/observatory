@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Docker entrypoints for Resque worker and scheduler.
+
 ### Changed
 
 ### Fixed
