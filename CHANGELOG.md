@@ -8,19 +8,26 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- Docker entrypoints for Resque worker and scheduler.
-
 ### Changed
 
 ### Fixed
-
-- Ratelimit gem now respects redis connection settings.
 
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.4.1] - 2017-01-14
+
+### Added
+
+- Docker entrypoints for Resque worker and scheduler.
+
+### Fixed
+
+- Ratelimit gem now respects redis connection settings.
 
 
 ## [0.4.0] - 2017-01-14
