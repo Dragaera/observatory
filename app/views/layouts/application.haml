@@ -38,8 +38,6 @@
               %li
                 = link_to 'Leaderboard', url(:leaderboard, :players)
 
-          %p.navbar-text
-            = "Hive queries user: #{ Observatory::RateLimit.rate_limit.count('hive.get_player_data.user', 600) }, background: #{ Observatory::RateLimit.rate_limit.count('hive.get_player_data.background', 600) }"
           %p.navbar-text.navbar-right
             = link_to "Version: #{ Observatory::VERSION }", 'https://bitbucket.org/Lavode/observatory/src/master/CHANGELOG.md'
 
