@@ -13,8 +13,7 @@ class PlayerQuery < Sequel::Model
 
     begin
       update(account_id: resolver.resolve(query))
-      @@rate_limit.add('hive.total', 1)
-      @@rate_limit.add('hive.get_player_data', 1)
+      Observatory::RateLimit.log_get_player_data(type: :user)
       data = stalker.get_player_data(account_id)
       player = Player.from_player_data(data)
 

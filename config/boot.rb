@@ -57,13 +57,6 @@ Padrino.before_load do
   Resque.redis = "#{ Observatory::Config::REDIS_HOST }:#{ Observatory::Config::REDIS_PORT }"
   schedule = YAML.load_file('config/schedule.yml')
   Resque.schedule = schedule
-
-  @@rate_limit = Ratelimit.new(
-    redis: Redis.new(
-      host: Observatory::Config::REDIS_HOST,
-      port: Observatory::Config::REDIS_PORT
-    )
-  )
 end
 
 ##

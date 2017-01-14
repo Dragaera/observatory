@@ -9,7 +9,11 @@ module Observatory
         return false
       end
 
-      player.update_data
+      # TODO: This will potentially block all workers.
+      # Should have some way to retry later. Resque-scheduler delayed job?
+      RateLimit.rate_limit.exec_within_threshold('hive.total', threshold: 1, interval: 1) do
+        player.update_data
+      end
     end
   end
 end
