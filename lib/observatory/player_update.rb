@@ -9,10 +9,15 @@ module Observatory
         return false
       end
 
-      # TODO: This will potentially block all workers.
-      # Should have some way to retry later. Resque-scheduler delayed job?
-      RateLimit.rate_limit.exec_within_threshold('hive.total', threshold: 1, interval: 1) do
+      if RateLimit.get_player_data?(type: :background)
         player.update_data
+      else
+        puts "Rescheduling player update for #{ player_id } in 10s."
+        Resque.enqueue_in(
+          10,
+          PlayerUpdate,
+          player_id
+        )
       end
     end
   end
