@@ -71,6 +71,10 @@ glance - what to expact from upgrading to a new version.
 - Properly format 0s-timespans.
 - Updates HiveStalker gem to fix bug with resolving of Steam IDs.
 
+### Removed
+
+- Multi-person queries due to rate-limiting concerns.
+
 
 ## [0.2.1] - 2016-12-26
 
