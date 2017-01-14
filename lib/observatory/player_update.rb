@@ -12,9 +12,10 @@ module Observatory
       if RateLimit.get_player_data?(type: :background)
         player.update_data
       else
-        puts "Rescheduling player update for #{ player_id } in 10s."
+        delay = 10 + rand(5) + 1
+        puts "Rescheduling player update for #{ player_id } in #{ delay }s."
         Resque.enqueue_in(
-          10,
+          delay,
           PlayerUpdate,
           player_id
         )
