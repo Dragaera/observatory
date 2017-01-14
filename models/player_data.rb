@@ -11,7 +11,7 @@ class PlayerData < Sequel::Model(:player_data)
         # Sometimes the API returns `nil`.
         # Not fixing this in the client, as it's not equal to 0 / ''. But I need to
         # somehow handle it in the application.
-        adagrad_sum:     data.adagrad_sum.to_i,
+        adagrad_sum:     data.adagrad_sum.to_f,
         alias:           data.alias.to_s,
         experience:      data.experience.to_i,
         level:           data.level.to_i,

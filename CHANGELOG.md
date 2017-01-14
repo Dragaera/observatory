@@ -14,6 +14,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Adagrad sum is now properly saved as a float rather than an integer.
+
 ### Security
 
 ### Deprecated
