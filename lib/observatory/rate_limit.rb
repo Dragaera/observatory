@@ -5,6 +5,7 @@ module Observatory
     KEY_TOTAL                      = 'hive.total'
 
     @@rate_limit = Ratelimit.new(
+      'Hive queries',
       redis: Redis.new(
         host: Observatory::Config::REDIS_HOST,
         port: Observatory::Config::REDIS_PORT

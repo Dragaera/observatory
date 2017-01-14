@@ -12,6 +12,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Ratelimit gem now respects redis connection settings.
+
 ### Security
 
 ### Deprecated
