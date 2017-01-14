@@ -79,6 +79,7 @@ class Player < Sequel::Model
     stalker ||= HiveStalker::Stalker.new
 
     begin
+      Observatory::RateLimit.log_get_player_data(type: :background)
       data = stalker.get_player_data(account_id)
       player_data = PlayerData.build_from_player_data(data, player_id: id)
       update(current_player_data: player_data)
