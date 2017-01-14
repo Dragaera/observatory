@@ -10,6 +10,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Randomize delay duration in case of rate limiting of background updates.
+
 ### Fixed
 
 ### Security
