@@ -24,7 +24,6 @@ gem 'unicorn'
 gem 'mysql2'
 gem 'pg'
 gem 'sequel_pg', require: 'sequel'
-gem 'sqlite3'
 
 # Background tasks
 gem 'resque'
