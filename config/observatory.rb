@@ -5,6 +5,14 @@ module Observatory
       PORT = ENV.fetch('REDIS_PORT', 6379).to_i
     end
 
+    module Database
+      ADAPTER  = ENV.fetch('DB_ADAPATER', 'sqlite')
+      HOST     = ENV['DB_HOST']
+      DATABASE = ENV.fetch('DB_DATABASE', "db/observatory_#{ Padrino.env }.db")
+      USER     = ENV['DB_USER']
+      PASS     = ENV['DB_PASS']
+    end
+
     module Resque
       WEB_PATH = ENV.fetch('RESQUE_WEB_PATH', nil)
     end
