@@ -90,8 +90,19 @@ class Player < Sequel::Model
     end
   end
 
-  def async_update_data
-    Resque.enqueue(Observatory::PlayerUpdate, id)
+  def async_update_data(random_delay: false)
+    if random_delay
+      delay = rand(Observatory::Config::PlayerData::BACKOFF_DELAY)
+      Resque.enqueue_in(
+        delay,
+        Observatory::PlayerUpdate,
+        id
+      )
+
+      delay
+    else
+      Resque.enqueue(Observatory::PlayerUpdate, id)
+    end
   end
 
   # Retrieves recent distinct player data.  That is, if two entries are equal

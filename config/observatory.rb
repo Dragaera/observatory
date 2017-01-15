@@ -33,6 +33,8 @@ module Observatory
       if UPDATE_INTERVAL < 0
         raise ArgumentError, "PLAYER_DATA_UPDATE_INTERVAL must be greater than 0. Was: #{ UPDATE_INTERVAL }"
       end
+
+      BACKOFF_DELAY = ENV.fetch('PLAYER_DATA_BACKOFF_DELAY', 300)
     end
 
     module RateLimiting

@@ -5,20 +5,17 @@ module Observatory
     def self.perform(player_id)
       player = Player[player_id.to_i]
       if player.nil?
-        puts "No player with id #{ player_id } (#{ player_id.to_i })"
+        puts "No player with id #{ player_id.inspect }"
         return false
       end
 
       if RateLimit.get_player_data?(type: :background)
         player.update_data
       else
-        delay = 10 + rand(5) + 1
+        delay = player.async_update_data(random_delay: true)
         puts "Rescheduling player update for #{ player_id } in #{ delay }s."
-        Resque.enqueue_in(
-          delay,
-          PlayerUpdate,
-          player_id
-        )
+
+        false
       end
     end
   end
