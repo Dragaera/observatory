@@ -1,5 +1,14 @@
 %nav
   %ul.pagination
+    - if dataset.first_page?
+      %li.disabled
+        %a{ href: '#' }
+          %span &laquo;
+    - else
+      %li
+        %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], page: dataset.prev_page ) }
+          %span &laquo;
+
     - dataset.page_range.each do |i|
       - if dataset.current_page == i
         %li.active
@@ -8,3 +17,11 @@
         %li
           = link_to i, url(:leaderboard, :players, sort_by: params['sort_by'], page: i)
 
+    - if dataset.last_page?
+      %li.disabled
+        %a{ href: '#' }
+          %span &raquo;
+    - else
+      %li
+        %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], page: dataset.next_page ) }
+          %span &raquo;
