@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- New pagination to leaderboard which scales better with number of pages.
+
 ### Changed
 
 - Randomize delay duration in case of rate limiting of background updates.
