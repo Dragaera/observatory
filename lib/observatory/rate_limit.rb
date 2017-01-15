@@ -7,8 +7,8 @@ module Observatory
     @@rate_limit = Ratelimit.new(
       'Hive queries',
       redis: Redis.new(
-        host: Observatory::Config::REDIS_HOST,
-        port: Observatory::Config::REDIS_PORT
+        host: Observatory::Config::Redis::HOST,
+        port: Observatory::Config::Redis::PORT
       )
     )
 
@@ -19,8 +19,8 @@ module Observatory
     def self.hive_query?
       @@rate_limit.within_bounds?(
         KEY_TOTAL,
-        threshold: ::Observatory::Config::RATE_LIMITING_TOTAL_THRESHOLD,
-        interval:  ::Observatory::Config::RATE_LIMITING_TOTAL_INTERVAL
+        threshold: ::Observatory::Config::RateLimiting::TOTAL_THRESHOLD,
+        interval:  ::Observatory::Config::RateLimiting::TOTAL_INTERVAL
       )
     end
 
@@ -31,14 +31,14 @@ module Observatory
         # puts "User queries in 10s: #{ @@rate_limit.count(KEY_GET_PLAYER_DATA_USER, 10) }"
         @@rate_limit.within_bounds?(
           KEY_GET_PLAYER_DATA_USER,
-          threshold: Observatory::Config::RATE_LIMITING_USER_THRESHOLD,
-          interval:  Observatory::Config::RATE_LIMITING_USER_INTERVAL
+          threshold: Observatory::Config::RateLimiting::USER_THRESHOLD,
+          interval:  Observatory::Config::RateLimiting::USER_INTERVAL
         )
       elsif type == :background
         @@rate_limit.within_bounds?(
           KEY_GET_PLAYER_DATA_BACKGROUND,
-          threshold: Observatory::Config::RATE_LIMITING_BACKGROUND_THRESHOLD,
-          interval:  Observatory::Config::RATE_LIMITING_BACKGROUND_INTERVAL
+          threshold: Observatory::Config::RateLimiting::BACKGROUND_THRESHOLD,
+          interval:  Observatory::Config::RateLimiting::BACKGROUND_INTERVAL
         )
       else
         raise ArgumentError, "Invalid type given: #{ type.inspect }"

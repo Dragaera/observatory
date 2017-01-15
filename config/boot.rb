@@ -54,7 +54,7 @@ Padrino.before_load do
   Dotenv.load
   require_relative 'observatory'
 
-  Resque.redis = "#{ Observatory::Config::REDIS_HOST }:#{ Observatory::Config::REDIS_PORT }"
+  Resque.redis = "#{ Observatory::Config::Redis::HOST }:#{ Observatory::Config::Redis::PORT }"
   schedule = YAML.load_file('config/schedule.yml')
   Resque.schedule = schedule
 end
@@ -63,7 +63,7 @@ end
 # Add your after (RE)load hooks here
 #
 Padrino.after_load do
-  WebApi.api_key = ENV.fetch('STEAM_WEB_API_KEY')
+  WebApi.api_key = Observatory::Config::Steam::WEB_API_KEY
 end
 
 Padrino.load!

@@ -13,7 +13,7 @@ url_map = {
   '/' => Padrino.application
 }
 
-resque_web_path = Observatory::Config::RESQUE_WEB_PATH
+resque_web_path = Observatory::Config::Resque::WEB_PATH
 url_map[resque_web_path] = Resque::Server.new if resque_web_path
 
 run Rack::URLMap.new(url_map)
