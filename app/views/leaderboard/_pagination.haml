@@ -11,31 +11,19 @@
 
     - if dataset.page_count <= 20
       - dataset.page_range.each do |i|
-        - if dataset.current_page == i
-          %li.active
-            = link_to i, url(:leaderboard, :players, sort_by: params['sort_by'], page: i)
-        - else
-          %li
-            = link_to i, url(:leaderboard, :players, sort_by: params['sort_by'], page: i)
+        %li{class: dataset.current_page == i ? 'active' : nil}
+          = leaderboard_pagination_link(i)
     - else
       - (1 .. 10).each do |i|
-        - if dataset.current_page == i
-          %li.active
-            = link_to i, url(:leaderboard, :players, sort_by: params['sort_by'], page: i)
-        - else
-          %li
-            = link_to i, url(:leaderboard, :players, sort_by: params['sort_by'], page: i)
+        %li{class: dataset.current_page == i ? 'active' : nil}
+          = leaderboard_pagination_link(i)
 
       %li.disabled
         %span ...
 
       - (dataset.page_count - 10 .. dataset.page_count).each do |i|
-        - if dataset.current_page == i
-          %li.active
-            = link_to i, url(:leaderboard, :players, sort_by: params['sort_by'], page: i)
-        - else
-          %li
-            = link_to i, url(:leaderboard, :players, sort_by: params['sort_by'], page: i)
+        %li{class: dataset.current_page == i ? 'active' : nil}
+          = leaderboard_pagination_link(i)
 
     - if dataset.last_page?
       %li.disabled
