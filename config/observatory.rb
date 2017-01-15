@@ -41,5 +41,9 @@ module Observatory
       BACKGROUND_THRESHOLD = ENV.fetch('RATE_LIMITING_BACKGROUND_THRESHOLD', 2).to_i
       BACKGROUND_INTERVAL  = ENV.fetch('RATE_LIMITING_BACKGROUND_INTERVAL', 1).to_i
     end
+
+    module Steam
+      WEB_API_KEY = ENV.fetch('STEAM_WEB_API_KEY')
+    end
   end
 end
