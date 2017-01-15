@@ -38,40 +38,39 @@ module Observatory
     def self.page_subset(page_range, current_page, leading: , surrounding: , trailing: )
       out = []
 
-      out += page_range.first(leading)
+      out += page_subset_leading(page_range, leading: leading)
+      out += page_subset_surrounding(page_range, current_page, surrounding: surrounding)
+      out += page_subset_trailing(page_range, trailing: trailing)
 
+      out.uniq.sort
+    end
+
+    def self.page_subset_leading(page_range, leading: )
+      page_range.first(leading)
+    end
+
+    def self.page_subset_trailing(page_range, trailing: )
+      page_range.last(trailing)
+    end
+
+    def self.page_subset_surrounding(page_range, current_page, surrounding: )
+      out = []
       buffer = []
-      surrounding_before = []
-      surrounding_after = []
-
       page_range.each do |i|
+
         if i < current_page
           buffer << i
         elsif i == current_page
-          # Try to get surrounding members on LHS.
-          surrounding.times do
-            surrounding_before << buffer.pop unless buffer.empty?
-          end
-          out += surrounding_before.reverse
-
-          # Add page itself
+          out += buffer.last(surrounding).reverse
           out << i
         elsif i > current_page
-          # Add following items to buffer until enough present - or range
-          # empty.
-          if surrounding_after.count < surrounding
-            surrounding_after << i
-          else
-            break
+          if out.count < surrounding * 2 + 1
+            out << i
           end
         end
+
       end
-
-      out += surrounding_after
-
-      out += page_range.last(trailing)
-
-      out.sort.uniq
+      out
     end
   end
 end
