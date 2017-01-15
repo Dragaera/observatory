@@ -1,35 +1,33 @@
 %nav
   %ul.pagination
-    - if dataset.first_page?
-      %li.disabled
-        %a{ href: '#' }
-          %span &laquo;
-    - else
-      %li
-        %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], page: dataset.prev_page ) }
-          %span &laquo;
+    - pagination = Observatory::Pagination.paginate(dataset.page_range, dataset.current_page)
+    - pagination.each do |item|
+      - if item[:type] == :prev
+        - if item[:attributes].include? :disabled
+          %li.disabled
+            %a{ href: '#' }
+              %span &laquo;
+        - else
+          %li
+            %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], page: item[:page]) }
+              %span &laquo;
 
-    - if dataset.page_count <= 20
-      - dataset.page_range.each do |i|
-        %li{class: dataset.current_page == i ? 'active' : nil}
-          = leaderboard_pagination_link(i)
-    - else
-      - (1 .. 10).each do |i|
-        %li{class: dataset.current_page == i ? 'active' : nil}
-          = leaderboard_pagination_link(i)
+      - elsif item[:type] == :next
+        - if item[:attributes].include? :disabled
+          %li.disabled
+            %a{ href: '#' }
+              %span &raquo;
+        - else
+          %li
+            %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], page: item[:page]) }
+              %span &raquo;
 
-      %li.disabled
-        %span ...
 
-      - (dataset.page_count - 10 .. dataset.page_count).each do |i|
-        %li{class: dataset.current_page == i ? 'active' : nil}
-          = leaderboard_pagination_link(i)
+      - elsif item[:type] == :page
+        %li{class: item[:attributes].include?(:active) ? 'active' : nil}
+          = leaderboard_pagination_link(item[:page])
 
-    - if dataset.last_page?
-      %li.disabled
-        %a{ href: '#' }
-          %span &raquo;
-    - else
-      %li
-        %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], page: dataset.next_page ) }
-          %span &raquo;
+      - elsif item[:type] == :separator
+        %li.disabled
+          %span ...
+
