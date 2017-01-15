@@ -8,11 +8,7 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- New pagination to leaderboard which scales better with number of pages.
-
 ### Changed
-
-- Randomize delay duration in case of rate limiting of background updates.
 
 ### Fixed
 
@@ -21,6 +17,17 @@ glance - what to expact from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.5.0] - 2017-01-15
+
+### Added
+
+- New pagination to leaderboard which scales better with number of pages.
+
+### Changed
+
+- Randomize delay duration in case of rate limiting of background updates.
 
 
 ## [0.4.1] - 2017-01-14
