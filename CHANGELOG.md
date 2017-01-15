@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Backoff time for player updates in case of rate limiting is now configurable.
+
 ### Changed
 
 ### Fixed
