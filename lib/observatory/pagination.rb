@@ -5,14 +5,35 @@ module Observatory
 
       out << prev_marker(page_range, current_page)
 
-      subset_range = page_subset(page_range, current_page, leading: leading, surrounding: surrounding, trailing: trailing)
-      subset_range.each do |i|
+      subset_range = page_subset(
+        page_range,
+        current_page,
+        leading: leading,
+        surrounding: surrounding,
+        trailing: trailing
+      )
+
+      subset_range.each_cons(2) do |page, next_page|
         out << {
           type: :page,
-          page: i,
-          attributes: i == current_page ? [:active] : [],
+          page: page,
+          attributes: page == current_page ? [:active] : [],
         }
+
+        if next_page - page > 1
+          out << {
+            type: :separator,
+            page: nil,
+            attributes: [:disabled],
+          }
+        end
       end
+      # each_cons does not have an entry for the last one.
+      out << {
+        type: :page,
+        page: subset_range.last,
+        attributes: subset_range.last == current_page ? [:active] : [],
+      }
 
       out << next_marker(page_range, current_page)
 

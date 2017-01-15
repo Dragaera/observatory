@@ -100,7 +100,7 @@ module Observatory
             { type: :page, page: 14, attributes: [] },
           ]
 
-          expect(result[4..10]).to eq expected
+          expect(result[5..11]).to eq expected
         end
 
         it 'should contain entries for the trailing pages' do
@@ -114,7 +114,11 @@ module Observatory
           expect(result[-4..-2]).to eq expected
         end
 
-        it 'should contain proper separators'
+        it 'should contain proper separators' do
+          [4, 12].each do |i|
+            expect(result[i]).to eq({ type: :separator, page: nil, attributes: [:disabled] })
+          end
+        end
       end
     end
 
