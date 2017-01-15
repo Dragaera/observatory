@@ -170,11 +170,22 @@ module Observatory
       end
 
       context 'if there is some overlap' do
-        let(:result) { Pagination.page_subset(1..100, 97, leading: 2, surrounding: 5, trailing: 10) }
-        it 'should contain the correct subset' do
-          expect(result).to eq (
-            [1, 2, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
-          )
+        context 'at the end of the range' do
+          let(:result) { Pagination.page_subset(1..100, 97, leading: 2, surrounding: 5, trailing: 10) }
+          it 'should contain the correct subset' do
+            expect(result).to eq (
+              [1, 2, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
+            )
+          end
+        end
+
+        context 'at the beginning of the range' do
+          let(:result) { Pagination.page_subset(1..36, 2, leading: 5, surrounding: 5, trailing: 5) }
+          it 'should contain the correct subset' do
+            expect(result).to eq (
+              [1, 2, 3, 4, 5, 6, 7, 32, 33, 34, 35, 36]
+            )
+          end
         end
       end
     end

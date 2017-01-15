@@ -77,6 +77,7 @@ module Observatory
     def self.page_subset_surrounding(page_range, current_page, surrounding: )
       out = []
       buffer = []
+      after_count = 0
       page_range.each do |i|
 
         if i < current_page
@@ -85,8 +86,9 @@ module Observatory
           out += buffer.last(surrounding).reverse
           out << i
         elsif i > current_page
-          if out.count < surrounding * 2 + 1
+          if after_count < surrounding
             out << i
+            after_count += 1
           end
         end
 
