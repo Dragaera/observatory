@@ -1,10 +1,33 @@
 %nav
   %ul.pagination
-    - dataset.page_range.each do |i|
-      - if dataset.current_page == i
-        %li.active
-          = link_to i, url(:leaderboard, :players, sort_by: params['sort_by'], page: i)
-      - else
-        %li
-          = link_to i, url(:leaderboard, :players, sort_by: params['sort_by'], page: i)
+    - pagination = Observatory::Pagination.paginate(dataset.page_range, dataset.current_page, leading: Observatory::Config::Leaderboard::PAGINATION_LEADING, surrounding: Observatory::Config::Leaderboard::PAGINATION_SURROUNDING, trailing: Observatory::Config::Leaderboard::PAGINATION_TRAILING)
+    - pagination.each do |item|
+      - if item[:type] == :prev
+        - if item[:attributes].include? :disabled
+          %li.disabled
+            %a{ href: '#' }
+              %span &laquo;
+        - else
+          %li
+            %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], page: item[:page]) }
+              %span &laquo;
+
+      - elsif item[:type] == :next
+        - if item[:attributes].include? :disabled
+          %li.disabled
+            %a{ href: '#' }
+              %span &raquo;
+        - else
+          %li
+            %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], page: item[:page]) }
+              %span &raquo;
+
+
+      - elsif item[:type] == :page
+        %li{class: item[:attributes].include?(:active) ? 'active' : nil}
+          = leaderboard_pagination_link(item[:page])
+
+      - elsif item[:type] == :separator
+        %li.disabled
+          %span ...
 

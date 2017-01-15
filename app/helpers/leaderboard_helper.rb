@@ -26,6 +26,10 @@ module Observatory
           column
         end
       end
+
+      def leaderboard_pagination_link(page)
+        link_to page, url(:leaderboard, :players, sort_by: params['sort_by'], page: page)
+      end
     end
 
     helpers LeaderboardHelper

@@ -22,6 +22,10 @@ module Observatory
       if PAGINATION_SIZE < 1
         raise ArgumentError, "LEADERBOARD_PAGINATION_SIZE must be greater than 0. Was: #{ PAGINATION_SIZE }"
       end
+
+      PAGINATION_LEADING = ENV.fetch('LEADERBOARD_PAGINATION_LEADING', 5).to_i
+      PAGINATION_SURROUNDING = ENV.fetch('LEADERBOARD_PAGINATION_TRAILING', 3).to_i
+      PAGINATION_TRAILING = ENV.fetch('LEADERBOARD_PAGINATION_TRAILING', 5).to_i
     end
 
     module PlayerData
