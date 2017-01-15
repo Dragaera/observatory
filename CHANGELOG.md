@@ -8,19 +8,26 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- Backoff time for player updates in case of rate limiting is now configurable.
-
 ### Changed
 
 ### Fixed
-
-- Updated dependencies to fix handling of account IDs starting with 765.
 
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.5.1] - 2017-01-15
+
+### Added
+
+- Backoff time for player updates in case of rate limiting is now configurable.
+
+### Fixed
+
+- Updated dependencies to fix handling of account IDs starting with 765.
 
 
 ## [0.5.0] - 2017-01-15
