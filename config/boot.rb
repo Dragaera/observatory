@@ -54,7 +54,7 @@ Padrino.before_load do
   Dotenv.load
   require_relative 'observatory'
 
-  Resque.redis = "#{ Observatory::Config::REDIS_HOST }:#{ Observatory::Config::REDIS_PORT }"
+  Resque.redis = "#{ Observatory::Config::Redis::HOST }:#{ Observatory::Config::Redis::PORT }"
   schedule = YAML.load_file('config/schedule.yml')
   Resque.schedule = schedule
 end

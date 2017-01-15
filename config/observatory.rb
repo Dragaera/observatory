@@ -1,26 +1,37 @@
 module Observatory
   module Config
-    PAGINATION_SIZE_LEADERBOARD = ENV.fetch('PAGINATION_SIZE_LEADERBOARD', 30).to_i
-    if PAGINATION_SIZE_LEADERBOARD < 1
-      raise ArgumentError, "PAGINATION_SIZE_LEADERBOARD must be greater than 0. Was: #{ PAGINATION_SIZE_LEADERBOARD }"
+    module Redis
+      HOST = ENV.fetch('REDIS_HOST', '127.0.0.1')
+      PORT = ENV.fetch('REDIS_PORT', 6379).to_i
     end
 
-    REDIS_HOST = ENV.fetch('REDIS_HOST', '127.0.0.1')
-    REDIS_PORT = ENV.fetch('REDIS_PORT', 6379).to_i
-    RESQUE_WEB_PATH = ENV.fetch('RESQUE_WEB_PATH', nil)
-
-    PLAYER_DATA_UPDATE_INTERVAL = ENV.fetch('PLAYER_DATA_UPDATE_INTERVAL', 24).to_i
-    if PLAYER_DATA_UPDATE_INTERVAL < 0
-      raise ArgumentError, "PLAYER_DATA_UPDATE_INTERVAL must be greater than 0. Was: #{ PLAYER_DATA_UPDATE_INTERVAL }"
+    module Resque
+      WEB_PATH = ENV.fetch('RESQUE_WEB_PATH', nil)
     end
 
-    RATE_LIMITING_TOTAL_THRESHOLD      = ENV.fetch('RATE_LIMITING_TOTAL_THRESHOLD', 2).to_i
-    RATE_LIMITING_TOTAL_INTERVAL       = ENV.fetch('RATE_LIMITING_TOTAL_INTERVAL', 1).to_i
+    module Leaderboard
+      PAGINATION_SIZE = ENV.fetch('LEADERBOARD_PAGINATION_SIZE', 30).to_i
+      if PAGINATION_SIZE < 1
+        raise ArgumentError, "LEADERBOARD_PAGINATION_SIZE must be greater than 0. Was: #{ PAGINATION_SIZE }"
+      end
+    end
 
-    RATE_LIMITING_USER_THRESHOLD       = ENV.fetch('RATE_LIMITING_USER_THRESHOLD', 2).to_i
-    RATE_LIMITING_USER_INTERVAL        = ENV.fetch('RATE_LIMITING_USER_INTERVAL', 1).to_i
+    module PlayerData
+      UPDATE_INTERVAL = ENV.fetch('PLAYER_DATA_UPDATE_INTERVAL', 24).to_i
+      if UPDATE_INTERVAL < 0
+        raise ArgumentError, "PLAYER_DATA_UPDATE_INTERVAL must be greater than 0. Was: #{ UPDATE_INTERVAL }"
+      end
+    end
 
-    RATE_LIMITING_BACKGROUND_THRESHOLD = ENV.fetch('RATE_LIMITING_BACKGROUND_THRESHOLD', 2).to_i
-    RATE_LIMITING_BACKGROUND_INTERVAL  = ENV.fetch('RATE_LIMITING_BACKGROUND_INTERVAL', 1).to_i
+    module RateLimiting
+      TOTAL_THRESHOLD      = ENV.fetch('RATE_LIMITING_TOTAL_THRESHOLD', 2).to_i
+      TOTAL_INTERVAL       = ENV.fetch('RATE_LIMITING_TOTAL_INTERVAL', 1).to_i
+
+      USER_THRESHOLD       = ENV.fetch('RATE_LIMITING_USER_THRESHOLD', 2).to_i
+      USER_INTERVAL        = ENV.fetch('RATE_LIMITING_USER_INTERVAL', 1).to_i
+
+      BACKGROUND_THRESHOLD = ENV.fetch('RATE_LIMITING_BACKGROUND_THRESHOLD', 2).to_i
+      BACKGROUND_INTERVAL  = ENV.fetch('RATE_LIMITING_BACKGROUND_INTERVAL', 1).to_i
+    end
   end
 end
