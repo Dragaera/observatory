@@ -55,9 +55,10 @@ must define manually.
 
 ### Player Data
 
-| Variable          | Default value | Required | Description                                |
-| ----------------- | ------------- | -------- | ------------------------------------------ |
-| `PLAYER_DATA_UPDATE_INTERVAL` | 24  | y        | Interval for automated player updates in hours |
+| Variable                      | Default value | Required | Description                                |
+| ----------------------------- | ------------- | -------- | ------------------------------------------ |
+| `PLAYER_DATA_UPDATE_INTERVAL` | 24            | y        | Interval for automated player updates in hours |
+| `PLAYER_DATA_BACKOFF_DELAY`   | 300           | y        | A random number between 0 and this settings is chosen to determine the amount of seconds which a rate-limited player updat will be delayed. |
 
 
 ### Rate Limiting
