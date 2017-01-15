@@ -14,6 +14,13 @@ application to function properly.
 Hence, required settings with no default value are the minimum set which you
 must define manually.
 
+### Unicorn
+
+| Variable          | Default value | Required | Description                                     |
+| ----------------- | ------------- | -------- | ----------------------------------------------- |
+| `UNICORN_LISTEN`  | 8080          | y        | Port which the application server will bind to. |
+| `UNICORN_WORKERS` | 2             | y        | Number of worker processes. # of CPU cores + 1 is likely a good choice. |
+
 ### Redis
 
 | Variable | Default value | Required | Description |
