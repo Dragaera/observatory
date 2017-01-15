@@ -49,6 +49,9 @@ must define manually.
 | Variable          | Default value | Required | Description                                |
 | ----------------- | ------------- | -------- | ------------------------------------------ |
 | `LEADERBOARD_PAGINATION_SIZE` | 30            | y        | Number of per-page entries on leaderboard. |
+| `LEADERBOARD_PAGINATION_LEADING` | 5            | y        | Number of leading pages in pagination toolbar. |
+| `LEADERBOARD_PAGINATION_SURROUNDING` | 3            | y        | Number of pages in pagination toolbar surrounding the current page. |
+| `LEADERBOARD_PAGINATION_TRAILING` | 5            | y        | Number of trailing pages in pagination toolbar. |
 
 ### Player Data
 
