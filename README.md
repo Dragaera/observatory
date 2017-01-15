@@ -62,11 +62,11 @@ must define manually.
 | Variable                           | Default value | Required | Description                                |
 | ---------------------------------- | ------------- | -------- | ------------------------------------------ |
 | `RATE_LIMITING_TOTAL_THRESHOLD`      | 2             | y        | Maximum number of API queries in set interval. |
-| `RATE_LIMITING_TOTAL_INTERVAL`       | 2             | y        | Interval duration in seconds. |
+| `RATE_LIMITING_TOTAL_INTERVAL`       | 1             | y        | Interval duration in seconds. |
 | `RATE_LIMITING_USER_THRESHOLD`       | 2             | y        | Maximum number of user-initiated API queries in set interval. |
-| `RATE_LIMITING_USER_INTERVAL`        | 2             | y        | Interval duration in seconds. |
+| `RATE_LIMITING_USER_INTERVAL`        | 1             | y        | Interval duration in seconds. |
 | `RATE_LIMITING_BACKGROUND_THRESHOLD` | 2             | y        | Maximum number of user-initiated API queries in set interval. |
-| `RATE_LIMITING_BACKGROUND_INTERVAL`  | 2             | y        | Interval duration in seconds. |
+| `RATE_LIMITING_BACKGROUND_INTERVAL`  | 1             | y        | Interval duration in seconds. |
 
 ### Steam
 
