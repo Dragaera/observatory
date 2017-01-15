@@ -9,7 +9,7 @@ Observatory::App.controllers :leaderboard do
 
     sort_param = "player_data__#{ sort_by }".to_sym
     # Graph ensures that column names will be full-qualified, so no conflicts will happen.
-    @players= Player.graph(:player_data, id: :current_player_data_id).order(Sequel.desc(sort_param)).paginate(page, Observatory::Config::PAGINATION_SIZE_LEADERBOARD)
+    @players= Player.graph(:player_data, id: :current_player_data_id).order(Sequel.desc(sort_param)).paginate(page, Observatory::Config::Leaderboard::PAGINATION_SIZE)
     render 'players'
   end
 end
