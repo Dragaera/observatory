@@ -59,6 +59,7 @@ must define manually.
 | ----------------------------- | ------------- | -------- | ------------------------------------------ |
 | `PLAYER_DATA_UPDATE_INTERVAL` | 24            | y        | Interval for automated player updates in hours |
 | `PLAYER_DATA_BACKOFF_DELAY`   | 300           | y        | A random number between 0 and this settings is chosen to determine the amount of seconds which a rate-limited player updat will be delayed. |
+| `PLAYER_DATA_CLEAR_UPDATE_SCHEDULED_AT_DELAY` | 7200 | y | Number of seconds after which a scheduled player update is assumed to have failed silently, and new scheduling new updates is allowed. You should not need to tune this setting, this is only to prevent a bug from causing updates to cease. |
 
 
 ### Rate Limiting

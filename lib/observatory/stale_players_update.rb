@@ -4,7 +4,7 @@ module Observatory
 
     def self.perform
       t = Time.now - Observatory::Config::PlayerData::UPDATE_INTERVAL * 60 * 60
-      Player.where { updated_at < t }.each do |player|
+      Player.where(update_scheduled_at: nil).where { updated_at < t }.each do |player|
         puts "Scheduling update for #{ player.inspect }"
         player.async_update_data
       end
