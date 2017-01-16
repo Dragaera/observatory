@@ -8,9 +8,14 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Prevent user from scheduling multiple updates for the same player.
+
 ### Changed
 
 ### Fixed
+
+- Prevent background updates from scheduling multiple updates for the same
+  player.
 
 ### Security
 
