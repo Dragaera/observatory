@@ -5,3 +5,10 @@ update_stale_players:
   queue: stale_players_update
   args:
   description: 'Schedule update for all players with stale data'
+
+clear_update_scheduled_at:
+  cron: '* * * * *'
+  class: 'Observatory::ClearUpdateScheduledAt'
+  queue: clear_update_scheduled_at
+  args:
+  description: 'Clears `update scheduled at` flag after certain time passed'
