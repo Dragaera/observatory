@@ -8,20 +8,27 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- Prevent user from scheduling multiple updates for the same player.
-
 ### Changed
 
 ### Fixed
-
-- Prevent background updates from scheduling multiple updates for the same
-  player.
 
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.5.3] - 2017-01-16
+
+### Added
+
+- Prevent user from scheduling multiple updates for the same player.
+
+### Fixed
+
+- Prevent background updates from scheduling multiple updates for the same
+  player.
 
 
 ## [0.5.2] - 2017-01-16
