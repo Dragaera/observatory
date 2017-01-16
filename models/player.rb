@@ -24,6 +24,7 @@ class Player < Sequel::Model
 
   one_to_many :player_data,         class: :PlayerData
   many_to_one :current_player_data, class: :PlayerData, key: :current_player_data_id
+  many_to_one :update_frequency
 
   def adagrad_sum
     return nil unless current_player_data
