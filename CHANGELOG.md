@@ -19,6 +19,13 @@ glance - what to expact from upgrading to a new version.
 ### Removed
 
 
+## [0.5.2] - 2017-01-16
+
+### Fixed
+
+- Fixed `PLAYER_DATA_BACKOFF_DELAY` setting.
+
+
 ## [0.5.1] - 2017-01-15
 
 ### Added
