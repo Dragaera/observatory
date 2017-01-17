@@ -21,7 +21,7 @@ FactoryGirl.define do
     sequence(:account_id) { |i| i }
   end
 
-  factory :player_data do
+  factory :player_data_point do
     sequence(:alias) { |i| "Player #{ i }" }
     score 100
     level 10

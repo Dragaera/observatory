@@ -11,8 +11,8 @@ class Player < Sequel::Model
     end
 
     # Add new data point based on current data.
-    player_data = PlayerData.build_from_player_data(data, player_id: player.id)
-    player.update(current_player_data: player_data)
+    player_data = PlayerDataPoint.build_from_player_data_point(data, player_id: player.id)
+    player.update(current_player_data_point: player_data)
 
     player
   end
@@ -22,58 +22,58 @@ class Player < Sequel::Model
     validates_presence [:account_id, :hive2_player_id]
   end
 
-  one_to_many :player_data,         class: :PlayerData
-  many_to_one :current_player_data, class: :PlayerData, key: :current_player_data_id
+  one_to_many :player_data_points
+  many_to_one :current_player_data_point, class: :PlayerDataPoint, key: :current_player_data_point_id
   many_to_one :update_frequency
 
   def adagrad_sum
-    return nil unless current_player_data
-    current_player_data.adagrad_sum
+    return nil unless current_player_data_point
+    current_player_data_point.adagrad_sum
   end
 
   def alias
-    return nil unless current_player_data
-    current_player_data.alias
+    return nil unless current_player_data_point
+    current_player_data_point.alias
   end
 
   def experience
-    return nil unless current_player_data
-    current_player_data.experience
+    return nil unless current_player_data_point
+    current_player_data_point.experience
   end
 
   def level
-    return nil unless current_player_data
-    current_player_data.level
+    return nil unless current_player_data_point
+    current_player_data_point.level
   end
 
   def score
-    return nil unless current_player_data
-    current_player_data.score
+    return nil unless current_player_data_point
+    current_player_data_point.score
   end
 
   def skill
-    return nil unless current_player_data
-    current_player_data.skill
+    return nil unless current_player_data_point
+    current_player_data_point.skill
   end
 
   def time_total
-    return nil unless current_player_data
-    current_player_data.time_total
+    return nil unless current_player_data_point
+    current_player_data_point.time_total
   end
 
   def time_alien
-    return nil unless current_player_data
-    current_player_data.time_alien
+    return nil unless current_player_data_point
+    current_player_data_point.time_alien
   end
 
   def time_marine
-    return nil unless current_player_data
-    current_player_data.time_marine
+    return nil unless current_player_data_point
+    current_player_data_point.time_marine
   end
 
   def time_commander
-    return nil unless current_player_data
-    current_player_data.time_commander
+    return nil unless current_player_data_point
+    current_player_data_point.time_commander
   end
 
   def update_data(stalker: nil)
@@ -82,8 +82,8 @@ class Player < Sequel::Model
     begin
       Observatory::RateLimit.log_get_player_data(type: :background)
       data = stalker.get_player_data(account_id)
-      player_data = PlayerData.build_from_player_data(data, player_id: id)
-      update(current_player_data: player_data)
+      player_data = PlayerDataPoint.build_from_player_data_point(data, player_id: id)
+      update(current_player_data_point: player_data)
 
       # Succesful updates will lead to reclassification.
       Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
@@ -118,12 +118,12 @@ class Player < Sequel::Model
   #
   # @param count [Fixnum] Number of entries which to return at most. `nil` in
   #   order to not limit entries.
-  # @return [Array<PlayerData>]
+  # @return [Array<PlayerDataPoint>]
   def recent_player_data(count = nil)
     out = []
     last_data = nil
 
-    player_data_dataset.order_by(Sequel.desc(:created_at)).each do |data|
+    player_data_points_dataset.order_by(Sequel.desc(:created_at)).each do |data|
       if count && out.size >= count
         return out
       end

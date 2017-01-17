@@ -16,11 +16,11 @@ module Observatory
         return false
       end
 
-      current_data = player.current_player_data
+      current_data = player.current_player_data_point
       previous_data = nil
       # Look for the *newest* data entry which is different from the current
       # one.
-      player.player_data_dataset.order(Sequel.desc(:created_at)).each do |data|
+      player.player_data_points_dataset.order(Sequel.desc(:created_at)).each do |data|
         if current_data.time_total > data.time_total
           previous_data = data
         end
@@ -29,7 +29,7 @@ module Observatory
       # If all are equal, we'll pick the *oldest* for classification.
       unless previous_data
         puts 'All data points equal'
-        previous_data = player.player_data_dataset.order(Sequel.asc(:created_at)).first
+        previous_data = player.player_data_points_dataset.order(Sequel.asc(:created_at)).first
       end
 
       last_change = current_data.created_at - previous_data.created_at
