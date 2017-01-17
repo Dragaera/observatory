@@ -58,5 +58,10 @@ RSpec.describe PlayerDataPoint do
       player = build(:player_data_point, player_id: nil)
       expect(player).to_not be_valid
     end
+
+    it 'should not be valid if `hive_player_id` is missing' do
+      player = build(:player_data_point, hive_player_id: nil)
+      expect(player).to_not be_valid
+    end
   end
 end

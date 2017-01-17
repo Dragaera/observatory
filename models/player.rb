@@ -4,9 +4,7 @@ class Player < Sequel::Model
     if player.nil?
       # Create new player if needed.
       player = Player.create(
-        hive2_player_id: data.player_id,
         account_id:      data.steam_id,
-        reinforced_tier: data.reinforced_tier
       )
     end
 
@@ -19,7 +17,7 @@ class Player < Sequel::Model
 
   plugin :validation_helpers
   def validate
-    validates_presence [:account_id, :hive2_player_id]
+    validates_presence [:account_id]
   end
 
   one_to_many :player_data_points
@@ -36,6 +34,11 @@ class Player < Sequel::Model
     current_player_data_point.alias
   end
 
+  def hive_account_id
+    return nil unless current_player_data_point
+    current_player_data_point.hive_account_id
+  end
+
   def experience
     return nil unless current_player_data_point
     current_player_data_point.experience
@@ -44,6 +47,11 @@ class Player < Sequel::Model
   def level
     return nil unless current_player_data_point
     current_player_data_point.level
+  end
+
+  def reinforced_tier
+    return nil unless current_player_data_point
+    current_player_data_point.reinforced_tier
   end
 
   def score
