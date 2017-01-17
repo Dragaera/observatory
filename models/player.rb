@@ -24,6 +24,7 @@ class Player < Sequel::Model
 
   one_to_many :player_data,         class: :PlayerData
   many_to_one :current_player_data, class: :PlayerData, key: :current_player_data_id
+  many_to_one :update_frequency
 
   def adagrad_sum
     return nil unless current_player_data
@@ -83,6 +84,9 @@ class Player < Sequel::Model
       data = stalker.get_player_data(account_id)
       player_data = PlayerData.build_from_player_data(data, player_id: id)
       update(current_player_data: player_data)
+
+      # Succesful updates will lead to reclassification.
+      Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
 
       true
     rescue HiveStalker::APIError

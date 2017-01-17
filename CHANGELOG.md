@@ -8,6 +8,9 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Per-player update frequency which determines at which rate background updates
+  get scheduled. Frequency is determined by player activity.
+
 ### Changed
 
 ### Fixed
