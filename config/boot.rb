@@ -51,7 +51,10 @@ Padrino.dependency_paths.unshift Padrino.root('config/initializers/*.rb')
 # These hooks are run before any dependencies are required.
 #
 Padrino.before_load do
-  Dotenv.load
+  Dotenv.load(
+    File.expand_path("../../.env.#{ Padrino.env }", __FILE__),
+    File.expand_path('../../.env', __FILE__),
+  )
   require_relative 'observatory'
 
   Resque.redis = "#{ Observatory::Config::Redis::HOST }:#{ Observatory::Config::Redis::PORT }"
