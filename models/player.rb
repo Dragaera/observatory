@@ -85,6 +85,9 @@ class Player < Sequel::Model
       player_data = PlayerData.build_from_player_data(data, player_id: id)
       update(current_player_data: player_data)
 
+      # Succesful updates will lead to reclassification.
+      Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
+
       true
     rescue HiveStalker::APIError
       false
