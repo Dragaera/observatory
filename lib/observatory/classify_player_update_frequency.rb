@@ -11,7 +11,7 @@ module Observatory
 
       puts "Classifying update frequency of #{ player.inspect }"
 
-      if player.player_data.count < 2
+      if player.player_data_points_dataset.count < 2
         puts "Not enough data to classify update frequency."
         return false
       end

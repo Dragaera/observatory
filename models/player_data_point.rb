@@ -1,7 +1,7 @@
 class PlayerDataPoint < Sequel::Model
   plugin :validation_helpers
   def validate
-    validates_presence [:alias, :score, :level, :experience, :skill, :time_total, :time_alien, :time_marine, :time_commander, :adagrad_sum, :player_id, :hive_account_id]
+    validates_presence [:alias, :score, :level, :experience, :skill, :time_total, :time_alien, :time_marine, :time_commander, :adagrad_sum, :player_id, :hive_player_id]
   end
 
   many_to_one :player

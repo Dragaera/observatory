@@ -34,9 +34,9 @@ class Player < Sequel::Model
     current_player_data_point.alias
   end
 
-  def hive_account_id
+  def hive_player_id
     return nil unless current_player_data_point
-    current_player_data_point.hive_account_id
+    current_player_data_point.hive_player_id
   end
 
   def experience
