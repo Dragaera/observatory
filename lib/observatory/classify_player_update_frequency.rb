@@ -35,20 +35,20 @@ module Observatory
       last_change = current_data.created_at - previous_data.created_at
       puts "Seconds since last change: #{ current_data.created_at } - #{ previous_data.created_at } = #{ last_change }"
 
-      UpdateFrequency.where(enabled: true).order(Sequel.asc(:threshold)).each do |f|
-        if last_change <= f.threshold
-          puts "Classified as '#{ f.name }'"
-          player.update_frequency = f
-          player.save
-          return true
-        end
+      # Find frequencies with big enough threshold, get lowest of them.
+      f = UpdateFrequency.where(enabled: true).where { threshold >= last_change }.order(Sequel.asc(:threshold)).first
+      if f
+        puts "Classified as '#{ f.name }'"
+        player.update_frequency = f
+        player.save
+        return true
       end
       puts 'Player not active enough for any update frequency!'
 
       # Did not match any thresholds?
       fallback_frequency = UpdateFrequency.where(enabled: true, fallback: true).order(Sequel.asc(:threshold)).first
       if fallback_frequency
-        puts "Assigning fallback frequency: '#{ f.name }'"
+        puts "Assigning fallback frequency: '#{ fallback_frequency.name }'"
         player.update_frequency = fallback_frequency
         player.save
         return true
