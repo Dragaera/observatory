@@ -29,11 +29,6 @@ module Observatory
     end
 
     module PlayerData
-      UPDATE_INTERVAL = ENV.fetch('PLAYER_DATA_UPDATE_INTERVAL', 24).to_i
-      if UPDATE_INTERVAL < 0
-        raise ArgumentError, "PLAYER_DATA_UPDATE_INTERVAL must be greater than 0. Was: #{ UPDATE_INTERVAL }"
-      end
-
       INITIAL_DELAY = ENV.fetch('PLAYER_DATA_INITIAL_DELAY', 60).to_i
       BACKOFF_DELAY = ENV.fetch('PLAYER_DATA_BACKOFF_DELAY', 300).to_i
 

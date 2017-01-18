@@ -18,6 +18,9 @@ glance - what to expact from upgrading to a new version.
 
 ### Removed
 
+- PLAYER_DATA_UPDATE_INTERVAL: With custom update frequencies this setting has
+  no value anymore.
+
 
 ## [0.6.0] - 2017-01-18
 
