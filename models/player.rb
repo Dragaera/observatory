@@ -1,18 +1,7 @@
 class Player < Sequel::Model
-  def self.from_player_data(data)
-    player = Player.where(account_id: data.steam_id).first
-    if player.nil?
-      # Create new player if needed.
-      player = Player.create(
-        account_id:      data.steam_id,
-      )
-    end
-
-    # Add new data point based on current data.
-    player_data = PlayerDataPoint.build_from_player_data_point(data, player_id: player.id)
-    player.update(current_player_data_point: player_data)
-
-    player
+  def self.get_or_create(account_id:)
+    Player.where(account_id: account_id).first ||
+      Player.create(account_id: account_id)
   end
 
   plugin :validation_helpers

@@ -47,7 +47,7 @@ RSpec.describe PlayerQuery do
 
   describe '#execute' do
     before(:each) do
-      allow(Player).to receive(:from_player_data) { Player.new }
+      allow(Player).to receive(:get_or_create) { Player.new }
     end
 
     it 'should set `pending` to false' do
