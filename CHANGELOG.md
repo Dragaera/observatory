@@ -11,6 +11,9 @@ glance - what to expact from upgrading to a new version.
 - Per-player update frequency which determines at which rate background updates
   get scheduled. Frequency is determined by player activity.
 
+- Delay automatically scheduled player updates to prevent them from
+  trying to execute all at once.
+
 ### Changed
 
 - Refactored Player and PlayerDataPoint models. All Hive data is now stored in

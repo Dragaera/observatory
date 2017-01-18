@@ -12,7 +12,8 @@ module Observatory
       if RateLimit.get_player_data?(type: :background)
         player.update_data
       else
-        delay = player.async_update_data(random_delay: true)
+        delay = rand(Observatory::Config::PlayerData::BACKOFF_DELAY)
+        player.async_update_data(delay: delay)
         puts "Rescheduling player update for #{ player_id } in #{ delay }s."
 
         false

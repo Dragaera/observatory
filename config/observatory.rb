@@ -34,6 +34,7 @@ module Observatory
         raise ArgumentError, "PLAYER_DATA_UPDATE_INTERVAL must be greater than 0. Was: #{ UPDATE_INTERVAL }"
       end
 
+      INITIAL_DELAY = ENV.fetch('PLAYER_DATA_INITIAL_DELAY', 60).to_i
       BACKOFF_DELAY = ENV.fetch('PLAYER_DATA_BACKOFF_DELAY', 300).to_i
 
       CLEAR_UPDATE_SCHEDULED_AT_DELAY = ENV.fetch('PLAYER_DATA_CLEAR_UPDATE_SCHEDULED_AT_DELAY', 2 * 60 * 60).to_i
