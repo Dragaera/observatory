@@ -8,6 +8,21 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.6.0] - 2017-01-18
+
+### Added
+
 - Per-player update frequency which determines at which rate background updates
   get scheduled. Frequency is determined by player activity.
 
@@ -21,14 +36,6 @@ glance - what to expact from upgrading to a new version.
 
   Also adds a `relevant` field to data points, which states whether the data
   changed since its predecessor.
-
-### Fixed
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.5.3] - 2017-01-16
