@@ -6,8 +6,8 @@ class PlayerDataPoint < Sequel::Model
 
   many_to_one :player
 
-  def self.build_from_player_data_point(data, player_id: nil)
-      data = PlayerDataPoint.new(
+  def self.build_from_player_data_point(data)
+      PlayerDataPoint.new(
         # Sometimes the API returns `nil`.
         # Not fixing this in the client, as it's not equal to 0 / ''. But I need to
         # somehow handle it in the application.
@@ -24,12 +24,20 @@ class PlayerDataPoint < Sequel::Model
         time_marine:     data.time_marine.to_i,
         time_commander:  data.time_commander.to_i,
       )
+  end
 
-      if player_id
-        data.player_id = player_id
-        data.save
-      end
-
-      data
+  def ==(other)
+    self.alias == other.alias &&
+      self.score == other.score &&
+      self.level == other.level &&
+      self.experience == other.experience &&
+      self.skill == other.skill &&
+      self.time_total == other.time_total &&
+      self.time_alien == other.time_alien &&
+      self.time_marine == other.time_marine &&
+      self.time_commander == other.time_commander &&
+      self.adagrad_sum == other.adagrad_sum &&
+      self.player_id == other.player_id &&
+      self.hive_player_id == other.hive_player_id
   end
 end
