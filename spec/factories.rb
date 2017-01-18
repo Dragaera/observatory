@@ -17,12 +17,12 @@ FactoryGirl.define do
   end
 
   factory :player do
-    sequence(:hive2_player_id) { |i| i }
     sequence(:account_id) { |i| i }
   end
 
-  factory :player_data do
+  factory :player_data_point do
     sequence(:alias) { |i| "Player #{ i }" }
+    sequence(:hive_player_id) { |i| i }
     score 100
     level 10
     experience 1_000

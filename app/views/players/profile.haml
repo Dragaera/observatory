@@ -1,6 +1,6 @@
 %h1
   = @player.alias
-  %small= "Updated: #{ time_ago_in_words(@player.current_player_data.created_at) } ago (Updates: Every #{ pp_timespan @player.update_frequency.interval })"
+  %small= "Updated: #{ time_ago_in_words(@player.current_player_data_point.created_at) } ago (Updates: Every #{ pp_timespan @player.update_frequency.interval })"
 
 .row
   .col-md-4

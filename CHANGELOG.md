@@ -13,6 +13,12 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Refactored Player and PlayerDataPoint models. All Hive data is now stored in
+  the later, while the former only contains the player's resolved account ID.
+
+  Also adds a `relevant` field to data points, which states whether the data
+  changed since its predecessor.
+
 ### Fixed
 
 ### Security

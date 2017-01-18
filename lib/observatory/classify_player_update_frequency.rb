@@ -11,51 +11,56 @@ module Observatory
 
       puts "Classifying update frequency of #{ player.inspect }"
 
-      if player.player_data.count < 2
+      if player.player_data_points_dataset.count < 1
         puts "Not enough data to classify update frequency."
         return false
       end
 
-      current_data = player.current_player_data
-      previous_data = nil
-      # Look for the *newest* data entry which is different from the current
-      # one.
-      player.player_data_dataset.order(Sequel.desc(:created_at)).each do |data|
-        if current_data.time_total > data.time_total
-          previous_data = data
+      # We will compare it to #current_data.created_at, instead of Time.now.
+      # This prevents the time difference from looking artifically big if the
+      # classification job was delayed.
+      # It does mean, however, that, if new player updates do not get
+      # persisted, the player's classification will stay as-is.
+      current_data = player.current_player_data_point
+      # This might be the oldest point - which is always relevant.
+      # It could also be #current_data, if that one changed.
+      last_data_with_change = player.player_data_points_dataset.
+        where(relevant: true).
+        order(Sequel.desc(:created_at)).
+        first
+
+      time_to_change = current_data.created_at - last_data_with_change.created_at
+      puts "Seconds since last change: #{ time_to_change }"
+
+      # Find frequencies with big enough threshold, get lowest of them.
+      f = UpdateFrequency.
+        where(enabled: true).
+        where { threshold >= time_to_change }.
+        order(Sequel.asc(:threshold)).
+        first
+
+      unless f
+        puts 'Player not active enough for any update frequency!'
+
+        # Did not match any thresholds?
+        f = UpdateFrequency.
+          where(enabled: true, fallback: true).
+          order(Sequel.asc(:threshold)).
+          first
+
+        if f
+          puts "Assigning fallback frequency: '#{ f.name }'"
+        else
+          puts 'No fallback frequency found. Not changing anything.'
+          return false
         end
       end
 
-      # If all are equal, we'll pick the *oldest* for classification.
-      unless previous_data
-        puts 'All data points equal'
-        previous_data = player.player_data_dataset.order(Sequel.asc(:created_at)).first
-      end
+      puts "Classified as '#{ f.name }'"
+      player.update_frequency = f
+      player.save
 
-      last_change = current_data.created_at - previous_data.created_at
-      puts "Seconds since last change: #{ current_data.created_at } - #{ previous_data.created_at } = #{ last_change }"
-
-      # Find frequencies with big enough threshold, get lowest of them.
-      f = UpdateFrequency.where(enabled: true).where { threshold >= last_change }.order(Sequel.asc(:threshold)).first
-      if f
-        puts "Classified as '#{ f.name }'"
-        player.update_frequency = f
-        player.save
-        return true
-      end
-      puts 'Player not active enough for any update frequency!'
-
-      # Did not match any thresholds?
-      fallback_frequency = UpdateFrequency.where(enabled: true, fallback: true).order(Sequel.asc(:threshold)).first
-      if fallback_frequency
-        puts "Assigning fallback frequency: '#{ fallback_frequency.name }'"
-        player.update_frequency = fallback_frequency
-        player.save
-        return true
-      else
-        puts 'No fallback frequency found. Not changing anything.'
-        return false
-      end
+      true
     end
   end
 end
