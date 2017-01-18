@@ -106,17 +106,14 @@ class Player < Sequel::Model
     end
   end
 
-  def async_update_data(random_delay: false)
+  def async_update_data(delay: nil)
     update(update_scheduled_at: Time.now)
-    if random_delay
-      delay = rand(Observatory::Config::PlayerData::BACKOFF_DELAY)
+    if delay
       Resque.enqueue_in(
         delay,
         Observatory::PlayerUpdate,
         id
       )
-
-      delay
     else
       Resque.enqueue(Observatory::PlayerUpdate, id)
     end
