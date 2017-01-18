@@ -130,21 +130,9 @@ class Player < Sequel::Model
   #   order to not limit entries.
   # @return [Array<PlayerDataPoint>]
   def recent_player_data(count = nil)
-    out = []
-    last_data = nil
-
-    player_data_points_dataset.order_by(Sequel.desc(:created_at)).each do |data|
-      if count && out.size >= count
-        return out
-      end
-
-      if last_data.nil? || last_data.time_total != data.time_total
-        out << data
-      end
-      last_data = data
-    end
-
-    out
+    player_data_points_dataset.where(relevant: true).
+      order_by(Sequel.desc(:created_at)).
+      limit(count)
   end
 
 #   def graph_time_played_total
