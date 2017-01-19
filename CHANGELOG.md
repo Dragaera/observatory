@@ -8,9 +8,13 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Placeholder player profile for players with no data.
+
 ### Changed
 
 ### Fixed
+
+- Removed players without player data from leaderboard.
 
 ### Security
 
