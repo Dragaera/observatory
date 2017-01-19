@@ -12,13 +12,18 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
-- Fixed creation of stale user objects if the Hive query failed.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.6.2] - 2017-01-19
+
+### Fixed
+
+- Fixed creation of stale user objects if the Hive query failed.
 
 
 ## [0.6.1] - 2017-01-19
