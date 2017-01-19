@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- 'Score per minute' value to player profiles and leaderboard.
+
 ### Changed
 
 ### Fixed
