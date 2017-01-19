@@ -5,11 +5,16 @@ module Observatory
     module LeaderboardHelper
       SORT_ICON = 'glyphicon glyphicon-sort-by-attributes-alt'
       def sort_column(column, url_key: , sort_key: nil)
-        sort_key ||= column.downcase.gsub(/\s/, '_')
+        if column.is_a? Array
+          column, sort_key = *column
+        else
+          sort_key = column.downcase.gsub(/\s/, '_')
+        end
+
         current_sort_key = params['sort_by']
         current_page = params['page']
 
-        if column.downcase.gsub(/\s/, '_') == current_sort_key
+        if sort_key == current_sort_key
           sort_icon = link_to("<span class ='#{ SORT_ICON } sort-col-icon'></span>".html_safe, url(*url_key, sort_by: sort_key, page: current_page))
         else
           sort_icon = link_to("<span class ='#{ SORT_ICON }'></span>".html_safe, url(*url_key, sort_by: sort_key, page: current_page))

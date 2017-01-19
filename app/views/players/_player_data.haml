@@ -9,6 +9,9 @@
     %tr
       %th Score
       %td= pp_separator(player.score)
+    %tr
+      %th Score / min
+      %td= (player.score_per_second * 60).round(2)
 
 %table.table.table-bordered
   %tbody

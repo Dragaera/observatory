@@ -1,5 +1,5 @@
 Observatory::App.controllers :leaderboard do
-  ALLOWED_SORT_COLUMNS = %w(skill score level experience time_total time_marine time_alien time_commander)
+  ALLOWED_SORT_COLUMNS = %w(skill score level experience time_total time_marine time_alien time_commander score_per_second)
   get :players, map: '/leaderboard' do
     sort_by = params.fetch('sort_by', 'skill')
     page = params.fetch('page', 1).to_i

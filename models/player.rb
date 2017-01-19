@@ -55,6 +55,16 @@ class Player < Sequel::Model
     current_player_data_point.score
   end
 
+  def score_per_second
+    return nil unless current_player_data_point
+    current_player_data_point.score_per_second
+  end
+
+  def score_per_second_field
+    return nil unless current_player_data_point
+    current_player_data_point.score_per_second_field
+  end
+
   def skill
     return nil unless current_player_data_point
     current_player_data_point.skill
