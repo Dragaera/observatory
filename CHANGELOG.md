@@ -8,17 +8,26 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- Placeholder player profile for players with no data.
-
 ### Changed
 
 ### Fixed
 
-- Removed players without player data from leaderboard.
-
 ### Security
 
 ### Deprecated
+
+### Removed
+
+
+## [0.6.1] - 2017-01-19
+
+### Added
+
+- Placeholder player profile for players with no data.
+
+### Fixed
+
+- Removed players without player data from leaderboard.
 
 ### Removed
 
