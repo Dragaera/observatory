@@ -12,6 +12,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Stay on current pagee if sort column of leaderboard changed.
+
 ### Security
 
 ### Deprecated
