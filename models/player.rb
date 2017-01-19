@@ -97,12 +97,14 @@ class Player < Sequel::Model
 
       # Succesful updates will lead to reclassification.
       Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
+      # TODO: Refactor this to use transaction-style block. `ensure` won't
+      # work, as we reraise the caught exception.
+      update(update_scheduled_at: nil)
 
       true
     rescue HiveStalker::APIError
-      false
-    ensure
       update(update_scheduled_at: nil)
+      raise
     end
   end
 
