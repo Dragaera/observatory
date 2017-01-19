@@ -10,6 +10,7 @@ class PlayerQuery < Sequel::Model
   def execute(resolver: nil, stalker: nil)
     resolver ||= Observatory::SteamID
 
+    player = nil
     begin
       update(account_id: resolver.resolve(query))
       player = Player.get_or_create(account_id: self.account_id)
@@ -26,6 +27,8 @@ class PlayerQuery < Sequel::Model
              success: false,
              executed_at: DateTime.now,
              error_message: e.message)
+
+      player.delete if player
 
       return nil
     end
