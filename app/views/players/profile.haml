@@ -1,31 +1,41 @@
-%h1
-  = @player.alias
-  %small= "Updated: #{ time_ago_in_words(@player.current_player_data_point.created_at) } ago (Updates: Every #{ pp_timespan @player.update_frequency.interval })"
+- if @player.current_player_data_point
+  %h1
+    = @player.alias
+    %small= "Updated: #{ time_ago_in_words(@player.current_player_data_point.created_at) } ago (Updates: Every #{ pp_timespan @player.update_frequency.interval })"
 
-.row
-  .col-md-4
-    = form_tag url(:players, :update, id: @player.id), method: 'post', class: 'btn' do
-      = submit_tag 'Update', class: 'btn btn-warning'
-.row
-  .col-md-4
-    %h2 Stats
-    = partial 'players/player_data', locals: { player: @player }
+  .row
+    .col-md-4
+      = form_tag url(:players, :update, id: @player.id), method: 'post', class: 'btn' do
+        = submit_tag 'Update', class: 'btn btn-warning'
+  .row
+    .col-md-4
+      %h2 Stats
+      = partial 'players/player_data', locals: { player: @player }
 
-  .col-md-8
-    %h2 Skill progression
-    %table.table.table-bordered
-      %thead
-        %tr
-          %th Date
-          %th Skill
-          %th Score
-          %th Experience
-          %th Level
-      %tbody
-        - @player.recent_player_data(30).each do |data|
+    .col-md-8
+      %h2 Skill progression
+      %table.table.table-bordered
+        %thead
           %tr
-            %td= data.created_at.strftime('%d.%m.%Y %H:%M')
-            %td= pp_separator data.skill
-            %td= pp_separator data.score
-            %td= pp_separator data.experience
-            %td= data.level
+            %th Date
+            %th Skill
+            %th Score
+            %th Experience
+            %th Level
+        %tbody
+          - @player.recent_player_data(30).each do |data|
+            %tr
+              %td= data.created_at.strftime('%d.%m.%Y %H:%M')
+              %td= pp_separator data.skill
+              %td= pp_separator data.score
+              %td= pp_separator data.experience
+              %td= data.level
+
+- else
+  .jumbotron
+    %h1= "Account: #{ @player.account_id }"
+    = "Please stand by while we retrieve data."
+    - if @player.update_scheduled_at
+      = "Update was scheduled: #{ time_ago_in_words(@player.update_scheduled_at) } ago"
+    %br
+    Feel free to reload the page in a few seconds!

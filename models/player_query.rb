@@ -9,7 +9,6 @@ class PlayerQuery < Sequel::Model
 
   def execute(resolver: nil, stalker: nil)
     resolver ||= Observatory::SteamID
-    stalker ||= HiveStalker::Stalker.new
 
     begin
       update(account_id: resolver.resolve(query))
