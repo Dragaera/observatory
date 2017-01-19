@@ -17,7 +17,7 @@
         %tr
           %th #
           %th Player
-          - ['Skill', 'Score', 'Level', 'Experience', 'Time Total', 'Time Alien', 'Time Marine', 'Time Commander'].each do |column|
+          - ['Skill', ['Score / min', 'score_per_second'], 'Score', 'Level', 'Experience', 'Time Total', 'Time Alien', 'Time Marine', 'Time Commander'].each do |column|
             %th= sort_column(column, url_key: [:leaderboard, :players]).html_safe
 
       %tbody
@@ -27,6 +27,7 @@
             %td= i + offset
             %td= link_to player.alias, url(:players, :profile, id: player.id)
             %td= pp_separator player.skill
+            %td= (player.score_per_second * 60).round(2)
             %td= pp_separator player.score
             %td= player.level
             %td= pp_separator player.experience
