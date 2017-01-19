@@ -8,19 +8,26 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- 'Score per minute' value to player profiles and leaderboard.
-
 ### Changed
 
 ### Fixed
-
-- Stay on current pagee if sort column of leaderboard changed.
 
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.7.0] - 2017-01-19
+
+### Added
+
+- 'Score per minute' value to player profiles and leaderboard.
+
+### Fixed
+
+- Stay on current pagee if sort column of leaderboard changed.
 
 
 ## [0.6.2] - 2017-01-19
