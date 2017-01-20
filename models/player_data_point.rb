@@ -1,4 +1,6 @@
 class PlayerDataPoint < Sequel::Model
+  alias_method :relevant?, :relevant
+
   plugin :validation_helpers
   def validate
     validates_presence [:alias, :score, :level, :experience, :skill, :time_total, :time_alien, :time_marine, :time_commander, :adagrad_sum, :player_id, :hive_player_id, :score_per_second, :score_per_second_field]
