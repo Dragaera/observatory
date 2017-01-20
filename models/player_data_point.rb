@@ -5,15 +5,19 @@ class PlayerDataPoint < Sequel::Model
   end
 
   def before_validation
-    if time_total == 0 || time_total == time_commander
-      self.score_per_second       = 0
-      self.score_per_second_field = 0
-    else
-      self.score_per_second       = score.to_f / time_total
-      self.score_per_second_field = score.to_f / (time_total - time_commander)
-    end
+    # If those are not specified we won't do anything. It will not pass
+    # validation anyway.
+    if [time_total, time_commander, score].all?
+      if time_total == 0 || time_total == time_commander
+        self.score_per_second       = 0
+        self.score_per_second_field = 0
+      else
+        self.score_per_second       = score.to_f / time_total
+        self.score_per_second_field = score.to_f / (time_total - time_commander)
+      end
 
-    super
+      super
+    end
   end
 
   many_to_one :player
