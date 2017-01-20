@@ -35,4 +35,9 @@ FactoryGirl.define do
     time_commander 300
     adagrad_sum 0.1
   end
+
+  factory :update_frequency do
+    fallback false
+    enabled  true
+  end
 end
