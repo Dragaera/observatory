@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  database:
+    image: 'postgres'
+    env_file: .env.docker
+
+  redis:
+    image: 'redis:latest'
+    env_file: .env.docker
+
+  test:
+    image: 'observatory:latest'
+    command: ci-spec
+    env_file: .env.docker
+    depends_on:
+      - redis
+      - database
