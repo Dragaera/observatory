@@ -14,7 +14,7 @@ class PlayerQuery < Sequel::Model
     begin
       update(account_id: resolver.resolve(query))
       player = Player.get_or_create(account_id: self.account_id)
-      player.update_data
+      player.update_data(stalker: stalker)
 
       update(pending: false,
              success: true,

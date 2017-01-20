@@ -8,11 +8,15 @@ RSpec.configure do |conf|
   conf.include Rack::Test::Methods
   conf.include FactoryGirl::Syntax::Methods
 
+  # conf.filter_run_including focus: true
+
   conf.before(:suite) do
     FactoryGirl.find_definitions
 
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with :truncation
+    # This will also delete FrequencyUpdate entities - which are used in the
+    # Player model.
+    # DatabaseCleaner.clean_with :truncation
 
     conf.around(:each) do |spec|
       DatabaseCleaner.cleaning do
