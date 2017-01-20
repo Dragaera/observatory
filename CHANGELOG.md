@@ -12,6 +12,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Calculation of 'Score per Minute' if both score and total time are 0.
+
 ### Security
 
 ### Deprecated
