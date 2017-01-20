@@ -10,17 +10,24 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
-- Updates dependencies.
-
 ### Fixed
-
-- Calculation of 'Score per Minute' if both score and total time are 0.
 
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.7.1] - 2017-01-20
+
+### Changed
+
+- Updates dependencies.
+
+### Fixed
+
+- Calculation of 'Score per Minute' if both score and total time are 0.
 
 
 ## [0.7.0] - 2017-01-19
