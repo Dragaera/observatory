@@ -81,6 +81,38 @@ RSpec.describe PlayerDataPoint do
     end
   end
 
+  describe '#save' do
+    context 'calculates score_per_second and score_per_second_field' do
+      context 'when time_total is 0' do
+        it 'should set them to 0' do
+          data_point = create(:player_data_point, time_total: 0)
+          expect(data_point.score_per_second).to eq 0
+          expect(data_point.score_per_second_field).to eq 0
+        end
+      end
+
+      context 'when score is 0' do
+        it 'should set them to 0' do
+          data_point = create(:player_data_point, score: 0)
+          expect(data_point.score_per_second).to eq 0
+          expect(data_point.score_per_second_field).to eq 0
+        end
+      end
+
+      context 'when neither score nor time_total is 0' do
+        it 'should set score_per_second' do
+          data_point = create(:player_data_point, score: 100, time_total: 20)
+          expect(data_point.score_per_second).to be_within(0.01).of(5)
+        end
+
+        it 'should set score_per_second_field' do
+          data_point = create(:player_data_point, score: 100, time_total: 20, time_commander: 5)
+          expect(data_point.score_per_second_field).to be_within(0.01).of(100.0/15)
+        end
+      end
+    end
+  end
+
   describe '::build_from_player_data' do
     let(:data_point) { PlayerDataPoint.build_from_player_data_point(incomplete_api_data) }
 
