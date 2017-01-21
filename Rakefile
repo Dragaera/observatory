@@ -11,3 +11,5 @@ task :default => :test
 
 task 'resque:setup' => :environment
 task 'resque:scheduler' => 'resque:setup'
+
+task 'ci:spec' => ['sq:migrate', :spec]

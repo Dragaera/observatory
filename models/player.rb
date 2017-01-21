@@ -15,6 +15,14 @@ class Player < Sequel::Model
     point.player_id = id
     point.relevant = current_player_data_point != point
     point.save
+
+    # Using `current_player_data_point` will *not* work, as that one checks
+    # whether the current and new object are equal, and only updates if they
+    # are not. 
+    # Due to us overwriting PlayerData#==, this would lead to non-relevant
+    # updates being discarded.
+    update(current_player_data_point_id: point.id)
+
   end
 
   many_to_one :current_player_data_point, class: :PlayerDataPoint, key: :current_player_data_point_id
@@ -98,12 +106,6 @@ class Player < Sequel::Model
       data = stalker.get_player_data(account_id)
       player_data = PlayerDataPoint.build_from_player_data_point(data)
       add_player_data_point(player_data)
-      # Using `current_player_data_point` will *not* work, as that one checks
-      # whether the current and new object are equal, and only updates if they
-      # are not. 
-      # Due to us overwriting PlayerData#==, this would lead to non-relevant
-      # updates being discarded.
-      update(current_player_data_point_id: player_data.id)
 
       # Succesful updates will lead to reclassification.
       Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)

@@ -18,7 +18,22 @@ RSpec.describe PlayerQuery do
 
   let(:stalker_success) do
     stalker = double(HiveStalker::Stalker)
-    allow(stalker).to receive(:get_player_data) { HiveStalker::PlayerData.new(alias: 'Foobar') }
+    allow(stalker).to receive(:get_player_data) do
+      HiveStalker::PlayerData.new(
+        adagrad_sum: 0.1,
+        alias: 'Foo',
+        experience: 10,
+        player_id: 1,
+        level: 5,
+        reinforced_tier: nil,
+        score: 50,
+        skill: 200,
+        time_total: 10,
+        time_alien: 3,
+        time_marine: 7,
+        time_commander: 2
+      )
+    end
 
     stalker
   end
@@ -46,10 +61,6 @@ RSpec.describe PlayerQuery do
   end
 
   describe '#execute' do
-    before(:each) do
-      allow(Player).to receive(:get_or_create) { Player.new }
-    end
-
     it 'should set `pending` to false' do
       query.execute(resolver: resolver_success, stalker: stalker_success)
 
