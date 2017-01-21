@@ -2,6 +2,7 @@ require 'spec_helper'
 
 RSpec.describe PlayerDataPoint do
   let(:data) { create(:player_data_point) }
+  let(:player) { create(:player) }
   let(:incomplete_api_data) do
     HiveStalker::PlayerData.new(
       adagrad_sum: nil,
@@ -21,52 +22,52 @@ RSpec.describe PlayerDataPoint do
 
   describe '#valid?' do
     it 'should not be valid if `alias` is missing' do
-      data_point = build(:player_data_point, alias: nil)
+      data_point = build(:player_data_point, alias: nil, player: player)
       expect(data_point).to_not be_valid
     end
 
     it 'should not be valid if `score` is missing' do
-      data_point = build(:player_data_point, score: nil)
+      data_point = build(:player_data_point, score: nil, player: player)
       expect(data_point).to_not be_valid
     end
 
     it 'should not be valid if `level` is missing' do
-      data_point = build(:player_data_point, level: nil)
+      data_point = build(:player_data_point, level: nil, player: player)
       expect(data_point).to_not be_valid
     end
 
     it 'should not be valid if `experience` is missing' do
-      data_point = build(:player_data_point, experience: nil)
+      data_point = build(:player_data_point, experience: nil, player: player)
       expect(data_point).to_not be_valid
     end
 
     it 'should not be valid if `skill` is missing' do
-      data_point = build(:player_data_point, skill: nil)
+      data_point = build(:player_data_point, skill: nil, player: player)
       expect(data_point).to_not be_valid
     end
 
     it 'should not be valid if `time_total` is missing' do
-      data_point = build(:player_data_point, time_total: nil)
+      data_point = build(:player_data_point, time_total: nil, player: player)
       expect(data_point).to_not be_valid
     end
 
     it 'should not be valid if `time_alien` is missing' do
-      data_point = build(:player_data_point, time_alien: nil)
+      data_point = build(:player_data_point, time_alien: nil, player: player)
       expect(data_point).to_not be_valid
     end
 
     it 'should not be valid if `time_marine` is missing' do
-      data_point = build(:player_data_point, time_marine: nil)
+      data_point = build(:player_data_point, time_marine: nil, player: player)
       expect(data_point).to_not be_valid
     end
 
     it 'should not be valid if `time_commander` is missing' do
-      data_point = build(:player_data_point, time_commander: nil)
+      data_point = build(:player_data_point, time_commander: nil, player: player)
       expect(data_point).to_not be_valid
     end
 
     it 'should not be valid if `adagrad_sum` is missing' do
-      data_point = build(:player_data_point, adagrad_sum: nil)
+      data_point = build(:player_data_point, adagrad_sum: nil, player: player)
       expect(data_point).to_not be_valid
     end
 
@@ -76,7 +77,7 @@ RSpec.describe PlayerDataPoint do
     end
 
     it 'should not be valid if `hive_player_id` is missing' do
-      data_point = build(:player_data_point, hive_player_id: nil)
+      data_point = build(:player_data_point, hive_player_id: nil, player: player)
       expect(data_point).to_not be_valid
     end
   end
@@ -85,7 +86,7 @@ RSpec.describe PlayerDataPoint do
     context 'calculates score_per_second and score_per_second_field' do
       context 'when time_total is 0' do
         it 'should set them to 0' do
-          data_point = create(:player_data_point, time_total: 0)
+          data_point = create(:player_data_point, time_total: 0, player: player)
           expect(data_point.score_per_second).to eq 0
           expect(data_point.score_per_second_field).to eq 0
         end
@@ -93,7 +94,7 @@ RSpec.describe PlayerDataPoint do
 
       context 'when score is 0' do
         it 'should set them to 0' do
-          data_point = create(:player_data_point, score: 0)
+          data_point = create(:player_data_point, score: 0, player: player)
           expect(data_point.score_per_second).to eq 0
           expect(data_point.score_per_second_field).to eq 0
         end
@@ -101,12 +102,12 @@ RSpec.describe PlayerDataPoint do
 
       context 'when neither score nor time_total is 0' do
         it 'should set score_per_second' do
-          data_point = create(:player_data_point, score: 100, time_total: 20)
+          data_point = create(:player_data_point, score: 100, time_total: 20, player: player)
           expect(data_point.score_per_second).to be_within(0.01).of(5)
         end
 
         it 'should set score_per_second_field' do
-          data_point = create(:player_data_point, score: 100, time_total: 20, time_commander: 5)
+          data_point = create(:player_data_point, score: 100, time_total: 20, time_commander: 5, player: player)
           expect(data_point.score_per_second_field).to be_within(0.01).of(100.0/15)
         end
       end

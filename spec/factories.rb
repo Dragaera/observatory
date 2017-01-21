@@ -21,8 +21,6 @@ FactoryGirl.define do
   end
 
   factory :player_data_point do
-    player
-
     sequence(:alias) { |i| "Player #{ i }" }
     sequence(:hive_player_id) { |i| i }
     score 100
