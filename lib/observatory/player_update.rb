@@ -5,7 +5,7 @@ module Observatory
     def self.perform(player_id)
       player = Player[player_id.to_i]
       if player.nil?
-        puts "No player with id #{ player_id.inspect }"
+        logger.error "No player with id #{ player_id.inspect }"
         return false
       end
 
@@ -14,7 +14,7 @@ module Observatory
       else
         delay = rand(Observatory::Config::PlayerData::BACKOFF_DELAY)
         player.async_update_data(delay: delay)
-        puts "Rescheduling player update for #{ player_id } in #{ delay }s."
+        logger.info "Rescheduling player update for #{ player_id } in #{ delay }s."
 
         false
       end
