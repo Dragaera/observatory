@@ -17,6 +17,8 @@
       = partial 'players/player_data_point_pagination', locals: { player: @player, dataset: @player_data_points }
 
   .row
+    %h2 Graphs
+  .row
     .col-md-12
       = partial 'player_graphs/skill', locals: { player: @player }
 
