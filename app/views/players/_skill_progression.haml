@@ -1,0 +1,19 @@
+%h2 Skill progression
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Date
+      %th Skill
+      %th Score
+      %th Score / min
+      %th Experience
+      %th Level
+  %tbody
+    - player_data_points.each do |data|
+      %tr
+        %td= data.created_at.strftime('%d.%m.%Y %H:%M')
+        %td= pp_separator data.skill
+        %td= pp_separator data.score
+        %td= (data.score_per_second * 60).round(2)
+        %td= pp_separator data.experience
+        %td= data.level
