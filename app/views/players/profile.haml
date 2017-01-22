@@ -13,25 +13,18 @@
       = partial 'players/player_data', locals: { player: @player }
 
     .col-md-8
-      %h2 Skill progression
-      %table.table.table-bordered
-        %thead
-          %tr
-            %th Date
-            %th Skill
-            %th Score
-            %th Score / min
-            %th Experience
-            %th Level
-        %tbody
-          - @player.recent_player_data(30).each do |data|
-            %tr
-              %td= data.created_at.strftime('%d.%m.%Y %H:%M')
-              %td= pp_separator data.skill
-              %td= pp_separator data.score
-              %td= (data.score_per_second * 60).round(2)
-              %td= pp_separator data.experience
-              %td= data.level
+      = partial 'players/skill_progression', locals: { player_data_points: @player_data_points }
+      = partial 'players/player_data_point_pagination', locals: { player: @player, dataset: @player_data_points }
+
+  .row
+    %h2 Graphs
+  .row
+    .col-md-12
+      = partial 'player_graphs/skill', locals: { player: @player }
+
+  .row
+    .col-md-12
+      = partial 'player_graphs/playtime', locals: { player: @player }
 
 - else
   .jumbotron
