@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Debug mode for hunting down the CSRF failures in Chrome.
+
 ### Changed
 
 ### Fixed
