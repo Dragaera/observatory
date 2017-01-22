@@ -32,6 +32,9 @@ gem 'resque-scheduler'
 # Rate-limiting
 gem 'ratelimit'
 
+# Fancy charts
+gem 'chartkick'
+
 # Bindings to Steam Web-API
 gem 'steam-condenser'
 
