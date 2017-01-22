@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Observatory
-  RSpec.describe Player do
+  RSpec.describe ClassifyPlayerUpdateFrequency do
     describe '::perform' do
       let!(:hourly) { create(:update_frequency, name: 'Hourly', interval: 60 * 60, threshold: 24 * 60 * 60) }
       let!(:daily)  { create(:update_frequency, name: 'Daily', interval: 24 * 60 * 60, threshold: 7 * 24 * 60 * 60) }
