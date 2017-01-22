@@ -1,5 +1,11 @@
 module Observatory
   module Config
+    if ENV['DEBUG']
+      DEBUG = true
+    else
+      DEBUG = false
+    end
+
     module Redis
       HOST = ENV.fetch('REDIS_HOST', '127.0.0.1')
       PORT = ENV.fetch('REDIS_PORT', 6379).to_i

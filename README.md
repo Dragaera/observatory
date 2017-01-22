@@ -14,6 +14,12 @@ application to function properly.
 Hence, required settings with no default value are the minimum set which you
 must define manually.
 
+### General
+
+| Variable          | Default value | Required | Description                                     |
+| ----------------- | ------------- | -------- | ----------------------------------------------- |
+| `DEBUG`  | | n        | If set, this application will dump potentially sensitive session information into the log. |
+
 ### Unicorn
 
 | Variable          | Default value | Required | Description                                     |
