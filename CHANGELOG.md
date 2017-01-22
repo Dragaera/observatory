@@ -11,8 +11,11 @@ glance - what to expact from upgrading to a new version.
 ### Changed
 
 - Made update scheduling more resistant to unexpected failures.
+- Internal refactoring of logging output.
 
 ### Fixed
+
+- Automatic test suite.
 
 ### Security
 
