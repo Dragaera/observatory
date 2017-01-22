@@ -1,8 +1,7 @@
-require 'pry'
 require 'spec_helper'
 
 module Observatory
-  RSpec.describe Player do
+  RSpec.describe ClassifyPlayerUpdateFrequency do
     describe '::perform' do
       let!(:hourly) { create(:update_frequency, name: 'Hourly', interval: 60 * 60, threshold: 24 * 60 * 60) }
       let!(:daily)  { create(:update_frequency, name: 'Daily', interval: 24 * 60 * 60, threshold: 7 * 24 * 60 * 60) }
@@ -42,6 +41,13 @@ module Observatory
             player.reload
             expect(player.update_frequency).to eq hourly
           end
+
+          it 'should calculate `next_update_at`' do
+            ClassifyPlayerUpdateFrequency.perform(player.id)
+            # Yuuup.
+            player.reload
+            expect(player.next_update_at).to eq(Time.now + hourly.interval)
+          end
         end
 
         context 'if the player has had a relevant data point in the last week' do
@@ -58,6 +64,13 @@ module Observatory
             player.reload
             expect(player.update_frequency).to eq daily
           end
+
+          it 'should calculate `next_update_at`' do
+            ClassifyPlayerUpdateFrequency.perform(player.id)
+            # Yuuup.
+            player.reload
+            expect(player.next_update_at).to eq(Time.now + daily.interval)
+          end
         end
 
         context 'if the player has had no relevant recent update' do
@@ -73,6 +86,13 @@ module Observatory
             # Yuuup.
             player.reload
             expect(player.update_frequency).to eq weekly
+          end
+
+          it 'should calculate `next_update_at`' do
+            ClassifyPlayerUpdateFrequency.perform(player.id)
+            # Yuuup.
+            player.reload
+            expect(player.next_update_at).to eq(Time.now + weekly.interval)
           end
         end
       end

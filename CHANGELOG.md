@@ -10,6 +10,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Made update scheduling more resistant to unexpected failures.
+
 ### Fixed
 
 ### Security
