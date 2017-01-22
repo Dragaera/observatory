@@ -5,14 +5,14 @@ module Observatory
     def self.perform(player_id)
       player = Player[player_id]
       if player.nil?
-        puts "No player with id #{ player_id.inspect }"
+        logger.error "No player with id #{ player_id.inspect }"
         return false
       end
 
-      puts "Classifying update frequency of #{ player.inspect }"
+      logger.info "Classifying update frequency of #{ player.inspect }"
 
       if player.player_data_points_dataset.count < 1
-        puts "Not enough data to classify update frequency."
+        logger.info "Not enough data to classify update frequency."
         return false
       end
 
@@ -30,7 +30,7 @@ module Observatory
         first
 
       time_to_change = current_data.created_at - last_data_with_change.created_at
-      puts "Seconds since last change: #{ time_to_change }"
+      logger.debug "Seconds since last change: #{ time_to_change }"
 
       # Find frequencies with big enough threshold, get lowest of them.
       f = UpdateFrequency.
@@ -40,7 +40,7 @@ module Observatory
         first
 
       unless f
-        puts 'Player not active enough for any update frequency!'
+        logger.info 'Player not active enough for any update frequency!'
 
         # Did not match any thresholds?
         f = UpdateFrequency.
@@ -49,14 +49,14 @@ module Observatory
           first
 
         if f
-          puts "Assigning fallback frequency: '#{ f.name }'"
+          logger.info "Assigning fallback frequency: '#{ f.name }'"
         else
-          puts 'No fallback frequency found. Not changing anything.'
+          logger.info 'No fallback frequency found. Not changing anything.'
           return false
         end
       end
 
-      puts "Classified as '#{ f.name }'"
+      logger.info "Classified as '#{ f.name }'"
       player.update_frequency = f
       player.next_update_at = current_data.created_at + f.interval
       player.save
