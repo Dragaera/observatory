@@ -16,6 +16,14 @@
       = partial 'players/skill_progression', locals: { player_data_points: @player_data_points }
       = partial 'players/player_data_point_pagination', locals: { player: @player, dataset: @player_data_points }
 
+  .row
+    .col-md-12
+      = partial 'player_graphs/skill', locals: { player: @player }
+
+  .row
+    .col-md-12
+      = partial 'player_graphs/playtime', locals: { player: @player }
+
 - else
   .jumbotron
     %h1= "Account: #{ @player.account_id }"
