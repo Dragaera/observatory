@@ -12,6 +12,32 @@ RSpec.describe Player do
     end
   end
 
+  describe '::with_stale_data' do
+    let!(:player_1) { create(:player, next_update_at: Time.now + 20 * 60 * 60) }
+    let!(:player_2) { create(:player, next_update_at: Time.now + 22 * 60 * 60) }
+    let!(:player_3) { create(:player, next_update_at: Time.now + 12 * 60 * 60) }
+    let!(:player_4) { create(:player, next_update_at: Time.now + 36 * 60 * 60) }
+
+    around do |example|
+      Timecop.freeze(2017, 1, 1) do
+        example.run
+      end
+    end
+
+    it 'should return players which need an update' do
+      Timecop.freeze(Time.now + 24 * 60 * 60) do
+        expect(Player.with_stale_data).to match_array([player_1, player_2, player_3])
+      end
+    end
+
+    it 'should not return players which already have an update scheduled' do
+      player_5 = create(:player, next_update_at: Time.now + 2 * 60 * 60, update_scheduled_at: Time.now - 60 * 60)
+      Timecop.freeze(Time.now + 24 * 60 * 60) do
+        expect(Player.with_stale_data).to_not include(player_5)
+      end
+    end
+  end
+
   describe '#add_player_data_point' do
     let(:data_point1) { build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100) }
     let(:data_point2) { build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100) }

@@ -28,6 +28,14 @@ class Player < Sequel::Model
   many_to_one :current_player_data_point, class: :PlayerDataPoint, key: :current_player_data_point_id
   many_to_one :update_frequency
 
+  # Returns list of players with stale data, who do not have an update
+  # scheduled yet.
+  #
+  # @return [Sequel::Dataset] Players with stale data.
+  def self.with_stale_data
+    where { next_update_at <= Time.now }.where(update_scheduled_at: nil)
+  end
+
   def adagrad_sum
     return nil unless current_player_data_point
     current_player_data_point.adagrad_sum
