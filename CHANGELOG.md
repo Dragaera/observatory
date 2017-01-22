@@ -8,6 +8,12 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Improved profile pages:
+  - For score, skill, score / minute and experience, the player's rank is shown
+    too.
+  - Graphs to visualize development of playtime and skill over time.
+  - Pagination for 'skill progression' table.
+
 ### Changed
 
 - Made update scheduling more resistant to unexpected failures.
