@@ -8,6 +8,21 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.8.0] - 2017-01-22
+
+### Added
+
 - Improved profile pages:
   - For score, skill, score / minute and experience, the player's rank is shown
     too.
@@ -22,12 +37,6 @@ glance - what to expact from upgrading to a new version.
 ### Fixed
 
 - Automatic test suite.
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.7.1] - 2017-01-20
