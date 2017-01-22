@@ -154,6 +154,18 @@ class Player < Sequel::Model
       limit(count)
   end
 
+  def rank(col)
+    Player.
+      graph(:player_data_points, id: :current_player_data_point_id).
+      select { [
+        rank.function.over(order: Sequel.desc(col)),
+        :players__id
+      ] }.
+      all.
+      select { |hsh| hsh[:id] == id }.
+      first[:rank]
+  end
+
 #   def graph_time_played_total
 #     {
 #       'Alien': time_alien,
