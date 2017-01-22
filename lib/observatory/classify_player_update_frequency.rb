@@ -58,6 +58,7 @@ module Observatory
 
       puts "Classified as '#{ f.name }'"
       player.update_frequency = f
+      player.next_update_at = current_data.created_at + f.interval
       player.save
 
       true
