@@ -8,14 +8,7 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- 'Last active' field in leaderboard, showing when last tracked activity of
-  player was.
-- Stats page, with some graphs of statisics for the Observatory.
-
 ### Changed
-
-- Made Steam Web API optional. If no key configured, the application will work
-  as long as no name resolution is attempted.
 
 ### Fixed
 
@@ -24,6 +17,20 @@ glance - what to expact from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.9.0] - 2017-01-23
+
+### Added
+
+- 'Last active' field in leaderboard, showing when last tracked activity of
+  player was.
+- Stats page, with some graphs of statisics for the Observatory.
+
+### Changed
+
+- Made Steam Web API optional. If no key configured, the application will work
+  as long as no name resolution is attempted.
 
 
 ## [0.8.1] - 2017-01-22
