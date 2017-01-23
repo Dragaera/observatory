@@ -8,6 +8,9 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- 'Last active' field in leaderboard, showing when last tracked activity of
+  player was.
+
 ### Changed
 
 - Made Steam Web API optional. If no key configured, the application will work
