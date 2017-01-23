@@ -29,6 +29,9 @@ gem 'sequel_pg', require: 'sequel'
 gem 'resque'
 gem 'resque-scheduler'
 
+# Named timezones
+gem 'tzinfo'
+
 # Rate-limiting
 gem 'ratelimit'
 

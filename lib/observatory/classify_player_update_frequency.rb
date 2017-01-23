@@ -29,7 +29,11 @@ module Observatory
         order(Sequel.desc(:created_at)).
         first
 
-      time_to_change = current_data.created_at - last_data_with_change.created_at
+      # If the timestamps have a difference which can be represented as a
+      # rational (e.g 2 hours), subtraction returned a rational representing
+      # *hours* instead of the number of seconds.
+      # Subtracting time objects seems to work.
+      time_to_change = current_data.created_at.to_time - last_data_with_change.created_at.to_time
       logger.debug "Seconds since last change: #{ time_to_change }"
 
       # Find frequencies with big enough threshold, get lowest of them.
@@ -58,7 +62,7 @@ module Observatory
 
       logger.info "Classified as '#{ f.name }'"
       player.update_frequency = f
-      player.next_update_at = current_data.created_at + f.interval
+      player.next_update_at = current_data.created_at.to_time + f.interval
       player.save
 
       true

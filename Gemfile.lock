@@ -188,6 +188,7 @@ DEPENDENCIES
   sqlite3
   steam-condenser
   timecop
+  tzinfo
   unicorn
 
 BUNDLED WITH

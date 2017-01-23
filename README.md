@@ -27,6 +27,41 @@ must define manually.
 | `UNICORN_LISTEN`  | 8080          | y        | Port which the application server will bind to. |
 | `UNICORN_WORKERS` | 2             | y        | Number of worker processes. # of CPU cores + 1 is likely a good choice. |
 
+### Timezone
+
+Dealing with timezones can be rather frustrating, as the options available vary
+depending on the database adapter.
+
+With some adapters, you are able to use named timezones for the settings below
+- these are timezones like `Europe/London` or `EST`.
+With others you are limited to two options - `local` to use the server's local
+time, and `utc` to use UTC. 
+
+**Mind the capitalization!** `UTC` will use the
+named-timezone for UTC, whereas `utc` will use the basic-behaviour UTC.
+
+| Variable          | Default value | Required | Description                                     |
+| ----------------- | ------------- | -------- | ----------------------------------------------- |
+| `TIMEZONE_DATABASE`  | utc | y        | Timezone which to use for storing timestamps in the database. Also the timezone which timestamps in the database are assumed to be in, unless specified otherwise. Only change this if you are certain of what you are doing. |
+| `TIMEZONE_APPLICATION`  | utc | y        | Timezone which timestamps will be converted to when loaded from the database. This is essentially the timezone you will see in the application's frontend. |
+| `TIMEZONE_TYPECAST`  | TIMEZONE_APPLICATION | y        | Timezone which *unamrked* timestamps will be assumed to be in. |
+
+
+#### Recommended setup for named-timezone-capable adapters
+
+* `TIMEZONE_DATABASE` = UTC
+* `TIMEZONE_APPLICATION` = `Your/Local/Timezone`
+* Do not set `TZ`
+
+#### Recommended setup for non-named-timezone-capable adapters
+
+* `TIMEZONE_DATABASE` = utc
+* `TIMEZONE_APPLICATION` = local
+* `TZ` = `Your/Local/Timezone`
+
+This works (in my tests) well, at the cost of modifying the container's
+timezone.
+
 ### Redis
 
 | Variable | Default value | Required | Description |
