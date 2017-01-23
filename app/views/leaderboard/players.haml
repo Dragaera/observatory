@@ -19,6 +19,7 @@
           %th Player
           - ['Skill', ['Score / min', 'score_per_second'], 'Score', 'Level', 'Experience', 'Time Total', 'Time Alien', 'Time Marine', 'Time Commander'].each do |column|
             %th= sort_column(column, url_key: [:leaderboard, :players]).html_safe
+          %th Last active
 
       %tbody
         - offset = 1 + (@players.current_page - 1) * @players.page_size
@@ -35,6 +36,7 @@
             %td= pp_timespan player.time_alien
             %td= pp_timespan player.time_marine
             %td= pp_timespan player.time_commander
+            %td= player.last_activity.strftime('%d.%m.%Y')
 
 .row
   .col-md-12
