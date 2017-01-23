@@ -27,6 +27,7 @@ class Player < Sequel::Model
 
   many_to_one :current_player_data_point, class: :PlayerDataPoint, key: :current_player_data_point_id
   many_to_one :update_frequency
+  many_to_many :badges
 
   # Returns list of players with stale data, who do not have an update
   # scheduled yet.
@@ -114,6 +115,20 @@ class Player < Sequel::Model
       data = stalker.get_player_data(account_id)
       player_data = PlayerDataPoint.build_from_player_data_point(data)
       add_player_data_point(player_data)
+
+      data.badges.each do |badge_key|
+        badge = Badge.where(key: badge_key).first
+        if badge
+          if badges.include?(badge)
+            logger.info "Skipping existing badge #{ badge.name }"
+          else
+            logger.info "Adding new badge: #{ badge.name }"
+            add_badge(badge)
+          end
+        else
+          logger.error "Unknown badge key: #{ badge_key }"
+        end
+      end
 
       # Succesful updates will lead to reclassification.
       Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
