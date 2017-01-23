@@ -60,7 +60,7 @@ module Observatory
     end
 
     module Steam
-      WEB_API_KEY = ENV.fetch('STEAM_WEB_API_KEY')
+      WEB_API_KEY = ENV['STEAM_WEB_API_KEY']
     end
   end
 end

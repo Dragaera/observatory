@@ -10,6 +10,9 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Made Steam Web API optional. If no key configured, the application will work
+  as long as no name resolution is attempted.
+
 ### Fixed
 
 ### Security

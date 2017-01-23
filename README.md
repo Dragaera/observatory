@@ -92,4 +92,4 @@ must define manually.
 
 | Variable                           | Default value | Required | Description                                |
 | ---------------------------------- | ------------- | -------- | ------------------------------------------ |
-| `STEAM_WEB_API_KEY`                |               | y        | Key for Steam Web API, used for name resolution. |
+| `STEAM_WEB_API_KEY`                |               | n        | Key for Steam Web API, used for name resolution. If undefined, name resolution will not be supported. |
