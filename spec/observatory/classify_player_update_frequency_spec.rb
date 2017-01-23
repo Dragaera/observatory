@@ -12,7 +12,7 @@ module Observatory
       describe 'assigns a player an update frequency depending on his activity' do
         around :each do |example|
           UpdateFrequency.dataset.delete
-          Timecop.freeze(2017, 1, 1, 1, 0) do
+          Timecop.freeze(Time.utc(2017, 1, 1, 1, 0)) do
             player.add_player_data_point(
               build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100)
             )
@@ -46,7 +46,7 @@ module Observatory
             ClassifyPlayerUpdateFrequency.perform(player.id)
             # Yuuup.
             player.reload
-            expect(player.next_update_at).to eq(Time.now + hourly.interval)
+            expect(player.next_update_at.to_time).to eq(Time.now + hourly.interval)
           end
         end
 
@@ -69,7 +69,7 @@ module Observatory
             ClassifyPlayerUpdateFrequency.perform(player.id)
             # Yuuup.
             player.reload
-            expect(player.next_update_at).to eq(Time.now + daily.interval)
+            expect(player.next_update_at.to_time).to eq(Time.now + daily.interval)
           end
         end
 
@@ -92,7 +92,7 @@ module Observatory
             ClassifyPlayerUpdateFrequency.perform(player.id)
             # Yuuup.
             player.reload
-            expect(player.next_update_at).to eq(Time.now + weekly.interval)
+            expect(player.next_update_at.to_time).to eq(Time.now + weekly.interval)
           end
         end
       end
