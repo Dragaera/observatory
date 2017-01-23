@@ -1,7 +1,8 @@
 - if @player.current_player_data_point
-  %h1
-    = @player.alias
-    %small= "Updated: #{ time_ago_in_words(@player.current_player_data_point.created_at) } ago (Updates: Every #{ pp_timespan @player.update_frequency.interval })"
+  .page-header
+    %h1
+      = @player.alias
+      %small= "Updated: #{ time_ago_in_words(@player.current_player_data_point.created_at) } ago (Updates: Every #{ pp_timespan @player.update_frequency.interval })"
 
   .row
     .col-md-4
