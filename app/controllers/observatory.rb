@@ -34,4 +34,11 @@ Observatory::App.controllers :observatory do
       map { |hsh| [hsh[:created_at], hsh[:count]] }.
       to_json
   end
+
+  get :player_data_points_relevance_graph do
+    [
+      ['True', PlayerDataPoint.where(relevant: true).count],
+      ['False', PlayerDataPoint.where(relevant: false).count],
+    ].to_json
+  end
 end

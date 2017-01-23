@@ -34,6 +34,20 @@ module Observatory
         )
       end
 
+      def player_data_points_relevance_graph()
+        pie_chart(
+          url(:observatory, :player_data_points_relevance_graph),
+          download: "player_data_points_relevance",
+          legend: true,
+          library: {
+            title: {
+              display: true,
+              text: 'Player Data Points Relevance',
+            }
+          }
+        )
+      end
+
       def player_queries_graph()
         line_chart(
           url(:observatory, :player_queries_graph),
