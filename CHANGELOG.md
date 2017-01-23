@@ -10,6 +10,7 @@ glance - what to expact from upgrading to a new version.
 
 - 'Last active' field in leaderboard, showing when last tracked activity of
   player was.
+- Stats page, with some graphs of statisics for the Observatory.
 
 ### Changed
 
