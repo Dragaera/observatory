@@ -4,20 +4,24 @@ Observatory::App.controllers :observatory do
   end
 
   get :scheduled_player_updates_graph do
-    data = Player.
-      group_by { Sequel.extract(:hour, :next_update_at) }.
-      select {
-      [
-        Sequel.function(:count, 1),
-        Sequel.extract(:hour, :next_update_at)
-      ]
-    }.
-    map { |hsh| [hsh[:date_part].to_i, hsh[:count]] }.
-    sort_by(&:first)
+    data = Hash[
+      Player.
+        where { next_update_at < Time.now + 24 * 60 * 60 }.
+        group_by { Sequel.extract(:hour, :next_update_at) }.
+        select {
+        [
+          Sequel.function(:count, 1),
+          Sequel.extract(:hour, :next_update_at)
+        ]
+        }.
+        map { |hsh| [hsh[:date_part].to_i, hsh[:count]] }
+    ]
 
-    data << [24, data.first[1]]
-
-    data.to_json
+    # TODO: Should support timezone specified in config
+    current_hour = Time.now.utc.hour
+    ((current_hour...24).to_a + (0...current_hour).to_a).map do |hour|
+      [hour, data[hour]]
+    end.to_json
   end
 
   get :player_update_frequencies_graph do

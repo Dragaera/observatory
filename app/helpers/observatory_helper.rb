@@ -14,7 +14,7 @@ module Observatory
           library: {
             title: {
               display: true,
-              text: 'Scheduled Player Updates',
+              text: 'Scheduled Player Updates in next 24h',
             }
           }
         )
