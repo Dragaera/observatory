@@ -66,7 +66,9 @@ end
 # Add your after (RE)load hooks here
 #
 Padrino.after_load do
-  WebApi.api_key = Observatory::Config::Steam::WEB_API_KEY
+  if Observatory::Config::Steam::WEB_API_KEY
+    WebApi.api_key = Observatory::Config::Steam::WEB_API_KEY
+  end
 end
 
 Padrino.load!

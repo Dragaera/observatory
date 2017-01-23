@@ -13,6 +13,10 @@ module Observatory
 
     private
     def self.resolve_custom_url(identifier)
+      unless Observatory::Config::Steam::WEB_API_KEY
+        raise ArgumentError, "Steam API not available as no key specified!"
+      end
+
       custom_url = identifier
       /^https?:\/\/steamcommunity\.com\/id\/([^\/]+)\/?$/.match(identifier) do |m|
         custom_url = m[1]
