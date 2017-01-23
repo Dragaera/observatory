@@ -73,4 +73,27 @@ RSpec.describe Player do
       end
     end
   end
+
+  describe '#last_activity' do
+    it "should return the last time the player's data changed" do
+      Timecop.freeze(Time.utc(2017, 1, 1))
+      player.add_player_data_point(
+        build(:player_data_point, alias: 'John', score: 100)
+      )
+      Timecop.freeze(Time.now + 24 * 60 * 60)
+      player.add_player_data_point(
+        build(:player_data_point, alias: 'John', score: 100)
+      )
+      Timecop.freeze(Time.now + 24 * 60 * 60)
+      player.add_player_data_point(
+        build(:player_data_point, alias: 'John', score: 150)
+      )
+      Timecop.freeze(Time.now + 24 * 60 * 60)
+      player.add_player_data_point(
+        build(:player_data_point, alias: 'John', score: 150)
+      )
+
+      expect(player.last_activity.to_time).to eq Time.utc(2017, 1, 4)
+    end
+  end
 end
