@@ -11,6 +11,12 @@ module Observatory
       PORT = ENV.fetch('REDIS_PORT', 6379).to_i
     end
 
+    module Timezone
+      DATABASE = ENV.fetch('TIMEZONE_DATABASE', 'utc')
+      APPLICATION = ENV.fetch('TIMEZONE_APPLICATION', 'utc')
+      TYPECAST = ENV.fetch('TIMEZONE_TYPECAST', APPLICATION)
+    end
+
     module Database
       ADAPTER  = ENV.fetch('DB_ADAPTER', 'sqlite')
       HOST     = ENV['DB_HOST']
