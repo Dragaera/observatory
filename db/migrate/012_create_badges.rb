@@ -14,6 +14,7 @@ Sequel.migration do
     [
       ['CDT',                'cdt.png',               'community_dev'],
       ['Commander',          'commander.png',         'commander'],
+      ['Constellation',      'constellation.png',     'constellation'],
       ['Developer',          'dev.png',               'dev'],
       ['Retired Developer',  'dev_retired.png',        nil],
       ['Reinforced Tier 1',  'game_tier_1.png',       'reinforced1'],
