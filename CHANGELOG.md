@@ -12,6 +12,9 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Fixed ranking on profile page being incorrect while new players are being
+  added.
+
 ### Security
 
 ### Deprecated
