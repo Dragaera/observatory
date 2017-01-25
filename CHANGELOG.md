@@ -8,10 +8,6 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- Badge support:
-  - Per-player badges
-  - Global stats
-
 ### Changed
 
 ### Fixed
@@ -21,6 +17,15 @@ glance - what to expact from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.10.0] - 2017-01-25
+
+### Added
+
+- Badge support:
+  - Per-player badges
+  - Global stats
 
 
 ## [0.9.0] - 2017-01-23
