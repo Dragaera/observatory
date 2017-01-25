@@ -8,6 +8,10 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Badge support:
+  - Per-player badges
+  - Global stats
+
 ### Changed
 
 ### Fixed
