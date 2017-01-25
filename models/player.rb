@@ -27,6 +27,7 @@ class Player < Sequel::Model
 
   many_to_one :current_player_data_point, class: :PlayerDataPoint, key: :current_player_data_point_id
   many_to_one :update_frequency
+  many_to_many :badges
 
   # Returns list of players with stale data, who do not have an update
   # scheduled yet.
@@ -115,6 +116,20 @@ class Player < Sequel::Model
       player_data = PlayerDataPoint.build_from_player_data_point(data)
       add_player_data_point(player_data)
 
+      data.badges.each do |badge_key|
+        badge = Badge.where(key: badge_key).first
+        if badge
+          if badges.include?(badge)
+            logger.info "Skipping existing badge #{ badge.name }"
+          else
+            logger.info "Adding new badge: #{ badge.name }"
+            add_badge(badge)
+          end
+        else
+          logger.error "Unknown badge key: #{ badge_key }"
+        end
+      end
+
       # Succesful updates will lead to reclassification.
       Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
       # TODO: Refactor this to use transaction-style block. `ensure` won't
@@ -179,43 +194,4 @@ class Player < Sequel::Model
       nil
     end
   end
-
-#   def graph_time_played_total
-#     {
-#       'Alien': time_alien,
-#       'Marine': time_marine
-#     }
-#   end
-# 
-#   def graph_time_played
-#     [
-#       {
-#         name: 'Alien',
-#         data: player_data.map { |data| [data.created_at, data.time_alien] }
-#       },
-#       {
-#         name: 'Marine',
-#         data: player_data.map { |data| [data.created_at, data.time_marine] }
-#       },
-#     ]
-#   end
-# 
-#   def graph_skill
-#     player_data.map do |data|
-#       [data.created_at, data.skill]
-#     end
-#   end
-# 
-#   def graph_experience_level
-#     [
-#       {
-#         name: 'Experience',
-#         data: player_data.map { |data| [data.created_at, data.experience] }
-#       },
-#       {
-#         name: 'Level',
-#         data: player_data.map { |data| [data.created_at, data.level] }
-#       },
-#     ]
-#   end
 end
