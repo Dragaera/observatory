@@ -194,43 +194,4 @@ class Player < Sequel::Model
       nil
     end
   end
-
-#   def graph_time_played_total
-#     {
-#       'Alien': time_alien,
-#       'Marine': time_marine
-#     }
-#   end
-# 
-#   def graph_time_played
-#     [
-#       {
-#         name: 'Alien',
-#         data: player_data.map { |data| [data.created_at, data.time_alien] }
-#       },
-#       {
-#         name: 'Marine',
-#         data: player_data.map { |data| [data.created_at, data.time_marine] }
-#       },
-#     ]
-#   end
-# 
-#   def graph_skill
-#     player_data.map do |data|
-#       [data.created_at, data.skill]
-#     end
-#   end
-# 
-#   def graph_experience_level
-#     [
-#       {
-#         name: 'Experience',
-#         data: player_data.map { |data| [data.created_at, data.experience] }
-#       },
-#       {
-#         name: 'Level',
-#         data: player_data.map { |data| [data.created_at, data.level] }
-#       },
-#     ]
-#   end
 end
