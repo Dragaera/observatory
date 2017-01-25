@@ -12,14 +12,19 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
-- Fixed ranking on profile page being incorrect while new players are being
-  added.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.10.1] - 2017-01-25
+
+### Fixed
+
+- Fixed ranking on profile page being incorrect while new players are being
+  added.
 
 
 ## [0.10.0] - 2017-01-25
