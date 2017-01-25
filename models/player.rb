@@ -171,7 +171,10 @@ class Player < Sequel::Model
 
   def rank(col)
     Player.
-      graph(:player_data_points, id: :current_player_data_point_id).
+      # Inner join essential, as there can be players without data (e.g.
+      # freshly added), which would otherwise be included in the join, which
+      # will then throw off the ranking. (NULL > number, I guess?)
+      graph(:player_data_points, [player_data_points__id: :current_player_data_point_id], join_type: :inner).
       select { [
         rank.function.over(order: Sequel.desc(col)),
         :players__id
