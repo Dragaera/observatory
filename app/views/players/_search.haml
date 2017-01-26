@@ -1,0 +1,7 @@
+%h2 Search for player
+= form_tag url(:players, :index), method: :get do
+  .form-group
+    = label_tag :filter
+    = text_field_tag :filter, class: 'form-control', value: params['filter'], placeholder: 'Account ID, Ingame nick'
+
+  = submit_tag 'Query', class: 'btn btn-default'
