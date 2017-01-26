@@ -1,15 +1,15 @@
 Observatory::App.controllers :player_query do
-  get :single, map: '/query' do
-    render 'single'
+  get :new do
+    render 'new'
   end
 
-  post :single, map: '/query' do
+  post :new do
     @steam_account_id = params.fetch('steam_account_id')
     query = PlayerQuery.new(query: @steam_account_id)
 
     unless query.valid?
       flash[:error] = 'Could not query for data, please retry with a different term'
-      redirect(url(:player_query, :single))
+      redirect(url(:player_query, :new))
     end
 
     query.save
@@ -20,13 +20,13 @@ Observatory::App.controllers :player_query do
         error_message: "Rate-limited: #{ Observatory::RateLimit.rate_limit.count('hive.total', 1) }"
       )
       flash[:error] = 'Too many queries, please wait a few seconds.'
-      redirect(url(:player_query, :single))
+      redirect(url(:player_query, :new))
     end
 
     player = query.execute
     if player.nil?
       flash[:error] = "Error: #{ query.error_message }"
-      redirect(url(:player_query, :single))
+      redirect(url(:player_query, :new))
     end
     redirect(url(:players, :profile, id: player.id))
   end

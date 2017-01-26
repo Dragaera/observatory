@@ -1,4 +1,8 @@
 Observatory::App.controllers :observatory do
+  get :index, map: '/' do
+    render 'index'
+  end
+
   get :stats, map: '/stats' do
     render 'stats'
   end

@@ -6,7 +6,15 @@
     = partial 'players/search'
     %br
 
-  .col-md-8
+  .col-md-4
+
+  .col-md-4
+    %h2 Not found?
+    .panel.panel-warning
+      .panel-body
+        Did you not find whom you were looking for?
+        How about
+        = link_to 'adding a new player?', url(:player_query, :new)
 
 .row
   .col-md-12
