@@ -45,8 +45,7 @@ class Player < Sequel::Model
     ids = graph(:player_data_points, {:players__current_player_data_point_id => :player_data_points__id}, join_type: :inner).
       select(:players__id).
       where(Sequel.ilike(:alias, "%#{ name }%")).
-      distinct(:players__id).
-      map(&:id)
+      distinct(:players__id)
 
     Player.where(id: ids)
   end
@@ -55,8 +54,7 @@ class Player < Sequel::Model
     ids = graph(:player_data_points, {:players__id => :player_data_points__player_id}, join_type: :inner).
       select(:players__id).
       where(Sequel.ilike(:alias, "%#{ name }%")).
-      distinct(:players__id).
-      map(&:id)
+      distinct(:players__id)
 
     Player.where(id: ids)
   end
