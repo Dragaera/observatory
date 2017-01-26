@@ -1,0 +1,12 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Account ID
+      %th Alias
+      %th Last Active
+  %tbody
+    - players.each do |player|
+      %tr
+        %td= link_to player.account_id, url(:players, :profile, id: player.id)
+        %td= player.alias
+        %td= player.last_activity ? player.last_activity.strftime('%d.%m.%Y') : 'Never'

@@ -1,0 +1,33 @@
+%nav
+  %ul.pagination
+    - pagination = Observatory::Pagination.paginate(dataset.page_range, dataset.current_page, leading: Observatory::Config::Player::PAGINATION_LEADING, surrounding: Observatory::Config::Player::PAGINATION_SURROUNDING, trailing: Observatory::Config::Player::PAGINATION_TRAILING)
+    - pagination.each do |item|
+      - if item[:type] == :prev
+        - if item[:attributes].include? :disabled
+          %li.disabled
+            %a{ href: '#' }
+              %span &laquo;
+        - else
+          %li
+            %a{ href: url(:players, :index, page: item[:page], filter: params['filter']) }
+              %span &laquo;
+
+      - elsif item[:type] == :next
+        - if item[:attributes].include? :disabled
+          %li.disabled
+            %a{ href: '#' }
+              %span &raquo;
+        - else
+          %li
+            %a{ href: url(:players, :index, page: item[:page], filter: params['filter']) }
+              %span &raquo;
+
+
+      - elsif item[:type] == :page
+        %li{class: item[:attributes].include?(:active) ? 'active' : nil}
+          = player_pagination_link(item[:page], params['filter'])
+
+      - elsif item[:type] == :separator
+        %li.disabled
+          %span ...
+

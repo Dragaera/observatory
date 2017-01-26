@@ -6,6 +6,10 @@ module Observatory
       def player_profile_pagination_link(player_id, page)
         link_to page, url(:players, :profile, id: player_id, page: page)
       end
+
+      def player_pagination_link(page, filter = nil)
+        link_to page, url(:players, :index, page: page, filter: filter)
+      end
     end
 
     helpers PlayerHelper
