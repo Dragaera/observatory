@@ -17,6 +17,7 @@ glance - what to expact from upgrading to a new version.
 
 - Player - Badge join table will now cascade on update / delete. This allows to
   reasonably delete a player with badges.
+- Updates dependencies.
 
 ### Fixed
 
