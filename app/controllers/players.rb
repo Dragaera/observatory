@@ -5,8 +5,14 @@ Observatory::App.controllers :players do
 
     result_sets = []
 
+    # TODO: Refactor, add support for searching for alias *and* badge
+    # (currently it's OR)
+    if params['badge']
+      badge = Badge[params['badge'].to_i]
+    end
+
     search_param = params['filter']
-    unless search_param
+    unless search_param || badge
       result_sets << Player.dataset
     end
 
@@ -18,6 +24,10 @@ Observatory::App.controllers :players do
     # Non-empty? Match for aliases
     if search_param
       result_sets << Player.by_any_alias(search_param)
+    end
+
+    if badge
+      result_sets << badge.players_dataset
     end
 
     # UNION the different results together
