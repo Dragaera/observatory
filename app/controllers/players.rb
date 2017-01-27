@@ -5,9 +5,7 @@ Observatory::App.controllers :players do
 
     result_sets = []
 
-    if params['badges']
-      badges = params['badges'].uniq.map { |id| Badge[id.to_i] }.compact
-    end
+    badges = params.fetch('badges', []).uniq.map { |id| Badge[id.to_i] }.compact
 
     search_param = params['filter']
     unless search_param

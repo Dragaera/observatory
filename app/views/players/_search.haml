@@ -4,14 +4,15 @@
     = label_tag :filter
     = text_field_tag :filter, class: 'form-control', value: params['filter'], placeholder: 'Account ID, Current ingame nick, Old ingame nick'
 
-  .form-group
-    = label_tag :badges
-    - badge_ids = params['badges'] ? params['badges'].map(&:to_i) : []
-    %select.form-control.select2{ multiple: 'multiple', name: 'badges[]' }
-      - Badge.order(:id).each do |badge|
-        - if badge_ids.include? badge.id
-          %option{ value: badge.id, selected: 'selected' }= badge.name
-        - else
-          %option{ value: badge.id }= badge.name
+  - if show_badge_filter
+    .form-group
+      = label_tag :badges
+      - badge_ids = params['badges'] ? params['badges'].map(&:to_i) : []
+      %select.form-control.select2{ multiple: 'multiple', name: 'badges[]' }
+        - Badge.order(:id).each do |badge|
+          - if badge_ids.include? badge.id
+            %option{ value: badge.id, selected: 'selected' }= badge.name
+          - else
+            %option{ value: badge.id }= badge.name
 
   = submit_tag 'Query', class: 'btn btn-default'
