@@ -8,6 +8,21 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.11.0] - 2017-01-27
+
+### Added
+
 - Adds search functionality to search through players in database using account
   ID, ingame alias (both past and current), and badges. The 'add new player'
   query form on the main page was moved to a separate screen.
@@ -18,14 +33,6 @@ glance - what to expact from upgrading to a new version.
 - Player - Badge join table will now cascade on update / delete. This allows to
   reasonably delete a player with badges.
 - Updates dependencies.
-
-### Fixed
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.10.1] - 2017-01-25
