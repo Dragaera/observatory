@@ -18,6 +18,10 @@ glance - what to expact from upgrading to a new version.
 
 ### Removed
 
+- SQLite support. As we extensively use window functions to dyamically
+  calculate player ranks, SQLite is not an option, as it does not support
+  those.
+
 
 ## [0.11.0] - 2017-01-27
 

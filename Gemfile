@@ -8,7 +8,6 @@ gem 'rake'
 
 # Component requirements
 gem 'haml'
-gem 'sqlite3'
 gem 'sequel'
 
 # Test requirements
