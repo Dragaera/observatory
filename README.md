@@ -71,13 +71,13 @@ timezone.
 
 ### Database
 
-| Variable   | Default value | Required | Description |
-| ---------- | ------------- | -------- | ----------- |
-| `DB_ADAPTER`  | sqlite        | y        | Database adapter which to use. Valid options are `sqlite`, `postgres`, `mysql2` |
-| `DB_HOST`     |               | n        | Hostname of database server. Empty for flatfile database. |
-| `DB_DATABASE` |               | n        | Name of database which to use. Empty for flatfile database. |
-| `DB_USER`     |               | n        | User which to authenticate as. Empty if no authentication needed. |
-| `DB_PASS`     |               | n        | Password of user to authenticate as. Empty if no authentication needed. |
+| Variable      | Default value | Required | Description                                                                                |
+| ------------- | ------------- | -------- | ------------------------------------------------------------------------------------------ |
+| `DB_ADAPTER`  |               | y        | Database adapter which to use. Valid options are `postgres`, `mysql2`                      |
+| `DB_HOST`     |               | n        | Hostname of database server. Empty will use whatever the adpater wants - likely localhost. |
+| `DB_DATABASE` |               | y        | Name of database which to use.                                                             |
+| `DB_USER`     |               | n        | User which to authenticate as. Empty if no authentication needed.                          |
+| `DB_PASS`     |               | n        | Password of user to authenticate as. Empty if no authentication needed.                    |
 
 ### Resque
 

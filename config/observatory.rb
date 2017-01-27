@@ -18,9 +18,9 @@ module Observatory
     end
 
     module Database
-      ADAPTER  = ENV.fetch('DB_ADAPTER', 'sqlite')
+      ADAPTER  = ENV.fetch('DB_ADAPTER')
       HOST     = ENV['DB_HOST']
-      DATABASE = ENV.fetch('DB_DATABASE', "db/observatory_#{ Padrino.env }.db")
+      DATABASE = ENV.fetch('DB_DATABASE')
       USER     = ENV['DB_USER']
       PASS     = ENV['DB_PASS']
     end
