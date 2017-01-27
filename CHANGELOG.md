@@ -8,6 +8,11 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Adds search functionality to search through players in database using account
+  ID, ingame alias (both past and current), and badges. The 'add new player'
+  query form on the main page was moved to a separate screen.
+- Links entries on badge overview page to search result page.
+
 ### Changed
 
 ### Fixed

@@ -1,0 +1,22 @@
+.page-header
+  %h1 Players
+
+.row
+  .col-md-4
+    = partial 'players/search', locals: { show_badge_filter: true }
+    %br
+
+  .col-md-4
+
+  .col-md-4
+    %h2 Not found?
+    .panel.panel-warning
+      .panel-body
+        Did you not find whom you were looking for?
+        How about
+        = link_to 'adding a new player?', url(:player_query, :new)
+
+.row
+  .col-md-12
+    = partial 'players/search_results', locals: { players: @players }
+    = partial 'players/pagination', locals: { dataset: @players }

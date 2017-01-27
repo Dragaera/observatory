@@ -37,6 +37,28 @@ class Player < Sequel::Model
     where { next_update_at <= Time.now }.where(update_scheduled_at: nil)
   end
 
+  def self.by_account_id(id)
+    where(account_id: id)
+  end
+
+  def self.by_current_alias(name)
+    ids = graph(:player_data_points, {:players__current_player_data_point_id => :player_data_points__id}, join_type: :inner).
+      select(:players__id).
+      where(Sequel.ilike(:alias, "%#{ name }%")).
+      distinct(:players__id)
+
+    Player.where(id: ids)
+  end
+
+  def self.by_any_alias(name)
+    ids = graph(:player_data_points, {:players__id => :player_data_points__player_id}, join_type: :inner).
+      select(:players__id).
+      where(Sequel.ilike(:alias, "%#{ name }%")).
+      distinct(:players__id)
+
+    Player.where(id: ids)
+  end
+
   def adagrad_sum
     return nil unless current_player_data_point
     current_player_data_point.adagrad_sum

@@ -63,9 +63,5 @@ module Observatory
     before do
       logger.debug "Session: #{ session.inspect }" if Observatory::Config::DEBUG
     end
-
-    get '/' do
-      redirect url(:player_query, :single)
-    end
   end
 end

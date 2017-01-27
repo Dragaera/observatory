@@ -1,15 +1,14 @@
 .page-header
   %h1 Badges
 
-
 - @badge_groups.all.each_slice(3) do |ary|
   .row
     - ary.each do |badge_group|
       .col-md-4
         %h2= badge_group.name
-        %ul.list-group
+        .list-group
           - badge_group.badges_dataset.order(Sequel.asc(:sort)).each do |badge|
-            %li.list-group-item
+            %a.list-group-item{ href: url(:players, :index, badges: [badge.id]) }
               %img{ src: badge_image_path(badge), title: badge.name }
               = badge.name
               %span.badge= badge.players_dataset.count
