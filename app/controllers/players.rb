@@ -5,8 +5,8 @@ Observatory::App.controllers :players do
 
     result_sets = []
 
-    if params['badge']
-      badge = Badge[params['badge'].to_i]
+    if params['badges']
+      badges = params['badges'].uniq.map { |id| Badge[id.to_i] }.compact
     end
 
     search_param = params['filter']
@@ -30,8 +30,14 @@ Observatory::App.controllers :players do
       result = result.union(ds)
     end
 
-    if badge
-      result = result.where(id: badge.players_dataset.select(:id))
+    if badges.any?
+      player_ids = badges.map { |badge| badge.players_dataset.select(:id) }
+      ids = player_ids.shift
+      player_ids.each do |ds|
+        ids = ids.union(ds)
+      end
+
+      result = result.where(id: ids)
     end
 
     @players = result.
