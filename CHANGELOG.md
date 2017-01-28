@@ -14,6 +14,15 @@ glance - what to expact from upgrading to a new version.
 
 ### Security
 
+### Deprecated
+
+### Removed
+
+
+## [0.11.1]
+
+### Security
+
 - Disable CSRF protection.
 
   There is an obscure issue where Google Chrome consistently fails CSRF
@@ -30,8 +39,6 @@ glance - what to expact from upgrading to a new version.
 
   Must be same on all hosts in case of loadbalanced setups. Will be generated
   randomly if not defined. See the README for further details.
-
-### Deprecated
 
 ### Removed
 
