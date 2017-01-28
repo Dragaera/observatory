@@ -1,3 +1,4 @@
+require 'securerandom'
 ##
 # This file mounts each app in the Padrino project to a specified sub-uri.
 # You can mount additional applications using any of these commands below:
@@ -27,7 +28,7 @@
 #
 Padrino.configure_apps do
   # enable :sessions
-  set :session_secret, '9eb0919bbfa216e87eb5f2487bc3f3f28466d4741de846744cf32261a4e804ea'
+  set :session_secret, ENV.fetch('SESSION_SECRET', SecureRandom.hex(64))
   set :protection, :except => :path_traversal
   # TODO: On Chrome, when using nginx as a reverse proxy, the CSRF token -
   # albeit present in the cookie - does not get carried over into the sessions

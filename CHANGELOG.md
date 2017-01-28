@@ -14,7 +14,7 @@ glance - what to expact from upgrading to a new version.
 
 ### Security
 
-- Disables CSRF protection.
+- Disable CSRF protection.
 
   There is an obscure issue where Google Chrome consistently fails CSRF
   protection, when nginx is put in front of the application server.
@@ -25,6 +25,11 @@ glance - what to expact from upgrading to a new version.
   While the bug is under investigation, CSRF protection has been disabled;
   there is no sensitive information stored within the application, and no
   destructive actions can be taken, so while not ideal, it is acceptable.
+
+- Add session secret configuration via env variable.
+
+  Must be same on all hosts in case of loadbalanced setups. Will be generated
+  randomly if not defined. See the README for further details.
 
 ### Deprecated
 
