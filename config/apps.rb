@@ -29,7 +29,14 @@ Padrino.configure_apps do
   # enable :sessions
   set :session_secret, '9eb0919bbfa216e87eb5f2487bc3f3f28466d4741de846744cf32261a4e804ea'
   set :protection, :except => :path_traversal
-  set :protect_from_csrf, true
+  # TODO: On Chrome, when using nginx as a reverse proxy, the CSRF token -
+  # albeit present in the cookie - does not get carried over into the sessions
+  # object. Any other browsers, or accessing the application directly, works
+  # fine.
+  # As CSRF protection is not absolutely mandatory for this application - any
+  # information is public, and no damaging actions can be taken - it will be
+  # disabled until the bug is fixed.
+  set :protect_from_csrf, false
 end
 
 # Mounts the core application for this project

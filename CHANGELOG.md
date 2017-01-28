@@ -14,6 +14,18 @@ glance - what to expact from upgrading to a new version.
 
 ### Security
 
+- Disables CSRF protection.
+
+  There is an obscure issue where Google Chrome consistently fails CSRF
+  protection, when nginx is put in front of the application server.
+
+  Other browsers work fine, and so does Google Chrome if accessing the
+  application server (be that Unicorn or Webrick) directly.
+
+  While the bug is under investigation, CSRF protection has been disabled;
+  there is no sensitive information stored within the application, and no
+  destructive actions can be taken, so while not ideal, it is acceptable.
+
 ### Deprecated
 
 ### Removed
