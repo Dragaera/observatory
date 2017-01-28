@@ -28,7 +28,7 @@ require 'securerandom'
 #
 Padrino.configure_apps do
   # enable :sessions
-  set :session_secret, ENV.fetch('SESSION_SECRET', SecureRandom.hex(64))
+  set :session_secret, ENV.fetch('SESSION_SECRET')
   set :protection, :except => :path_traversal
   set :protect_from_csrf, true
 end

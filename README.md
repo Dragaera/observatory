@@ -19,7 +19,7 @@ must define manually.
 | Variable          | Default value | Required | Description                                     |
 | ----------------- | ------------- | -------- | ----------------------------------------------- |
 | `DEBUG`  | | n        | If set, this application will dump potentially sensitive session information into the log. |
-| `SESSION_SECRET`  | | n        | An alphanumeric string which is used to encrypt cookies. If you have multiple applications running behind e.g a loadbalancer, this secret must be identical on all hosts. Leaving it empty makes the application generation a random one on startup - which means that sessions will not survive a reboot! |
+| `SESSION_SECRET`  | | y        | An alphanumeric string which is used to encrypt cookies. This config must be identical on all hosts, if you run a loadbalanced setup! |
 
 ### Unicorn
 
