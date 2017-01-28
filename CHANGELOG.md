@@ -12,6 +12,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Fix pagination of player search resetting badge parameter.
+
 ### Security
 
 ### Deprecated
