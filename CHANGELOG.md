@@ -14,11 +14,16 @@ glance - what to expact from upgrading to a new version.
 
 ### Security
 
-- Enable CSRF protection. Configuration issue fixed.
-
 ### Deprecated
 
 ### Removed
+
+
+## [0.11.2]
+
+### Security
+
+- Enable CSRF protection. Configuration issue fixed.
 
 
 ## [0.11.1]
