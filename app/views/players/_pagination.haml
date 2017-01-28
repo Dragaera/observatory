@@ -9,7 +9,7 @@
               %span &laquo;
         - else
           %li
-            %a{ href: url(:players, :index, page: item[:page], filter: params['filter'], badge: params['badge']) }
+            %a{ href: url(:players, :index, page: item[:page], filter: params['filter'], badges: params['badges']) }
               %span &laquo;
 
       - elsif item[:type] == :next
@@ -19,13 +19,13 @@
               %span &raquo;
         - else
           %li
-            %a{ href: url(:players, :index, page: item[:page], filter: params['filter'], badge: params['badge']) }
+            %a{ href: url(:players, :index, page: item[:page], filter: params['filter'], badges: params['badges']) }
               %span &raquo;
 
 
       - elsif item[:type] == :page
         %li{class: item[:attributes].include?(:active) ? 'active' : nil}
-          = player_pagination_link(item[:page], filter: params['filter'], badge: params['badge'])
+          = player_pagination_link(item[:page], filter: params['filter'], badges: params['badges'])
 
       - elsif item[:type] == :separator
         %li.disabled

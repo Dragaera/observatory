@@ -7,8 +7,8 @@ module Observatory
         link_to page, url(:players, :profile, id: player_id, page: page)
       end
 
-      def player_pagination_link(page, filter: nil, badge: nil)
-        link_to page, url(:players, :index, page: page, filter: filter)
+      def player_pagination_link(page, filter: nil, badges: nil)
+        link_to page, url(:players, :index, page: page, filter: filter, badges: badges)
       end
     end
 
