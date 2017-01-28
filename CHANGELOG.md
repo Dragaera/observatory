@@ -14,6 +14,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Security
 
+- Enable CSRF protection. Configuration issue fixed.
+
 ### Deprecated
 
 ### Removed
