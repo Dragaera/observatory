@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Resque::Plugin::JobStats to monitor job performance.
+
 ### Changed
 
 ### Fixed

@@ -82,9 +82,10 @@ timezone.
 
 ### Resque
 
-| Variable   | Default value | Required | Description |
-| ---------- | ------------- | -------- | ----------- |
-| `RESQUE_WEB_PATH` |               | n        | URL where the Resque GUI will be made available. Empty to disable Resque GUI. |
+| Variable                    | Default value | Required | Description                                                                   |
+| --------------------------- | ------------- | -------- | ----------------------------------------------------------------------------- |
+| `RESQUE_WEB_PATH`           |               | n        | URL where the Resque GUI will be made available. Empty to disable Resque GUI. |
+| `RESQUE_DURATIONS_RECORDED` | 1000          | y        | URL where the Resque GUI will be made available. Empty to disable Resque GUI. |
 
 ### Leaderboard
 

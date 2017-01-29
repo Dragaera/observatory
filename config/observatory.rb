@@ -27,6 +27,7 @@ module Observatory
 
     module Resque
       WEB_PATH = ENV.fetch('RESQUE_WEB_PATH', nil)
+      DURATIONS_RECORDED = ENV.fetch('RESQUE_DURATIONS_RECORDED', 1000).to_i
     end
 
     module Leaderboard

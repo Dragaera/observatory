@@ -27,6 +27,7 @@ gem 'sequel_pg', require: 'sequel'
 # Background tasks
 gem 'resque'
 gem 'resque-scheduler'
+gem 'resque-job-stats'
 
 # Named timezones
 gem 'tzinfo'

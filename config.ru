@@ -8,6 +8,7 @@ require File.expand_path("../config/boot.rb", __FILE__)
 
 require 'resque/server'
 require 'resque/scheduler/server'
+require 'resque-job-stats/server'
 
 url_map = {
   '/' => Padrino.application
