@@ -1,6 +1,9 @@
 module Observatory
   class ClassifyPlayerUpdateFrequency
+    extend Resque::Plugins::JobStats
+
     @queue = :classify_player_update_frequency
+    @durations_recorded = Observatory::Config::Resque::DURATIONS_RECORDED
 
     def self.perform(player_id)
       player = Player[player_id]

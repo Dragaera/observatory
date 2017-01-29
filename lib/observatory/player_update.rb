@@ -1,6 +1,9 @@
 module Observatory
   class PlayerUpdate
+    extend Resque::Plugins::JobStats
+
     @queue = :get_player_data
+    @durations_recorded = Observatory::Config::Resque::DURATIONS_RECORDED
 
     def self.perform(player_id)
       player = Player[player_id.to_i]
