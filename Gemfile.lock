@@ -46,7 +46,6 @@ GEM
     multi_xml (0.6.0)
     mustermann19 (0.4.4)
       enumerable-lazy
-    mysql2 (0.4.5)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     padrino (0.13.3.3)
@@ -175,7 +174,6 @@ DEPENDENCIES
   factory_girl
   haml
   hive-stalker (~> 0.1.0)
-  mysql2
   padrino (= 0.13.3.3)
   pg
   pry
