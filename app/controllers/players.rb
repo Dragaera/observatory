@@ -17,6 +17,16 @@ Observatory::App.controllers :players do
     # Non-empty? Match for aliases
     if search_param
       result = Player.by_any_alias(search_param)
+
+      # Might be a Steam ID
+      begin
+        resolver = Observatory::SteamID
+        account_id = resolver.resolve(search_param)
+        player = Player.by_account_id(account_id)
+        direct_results << player if player # Might be a valid Steam ID for which we have no data
+      rescue ArgumentError
+        # Or not
+      end
     else
       result = Player.dataset
     end
@@ -29,6 +39,9 @@ Observatory::App.controllers :players do
       end
 
       result = result.where(id: ids)
+      direct_results = direct_results.map do |ds|
+        ds.where(id: ids)
+      end
     end
 
     indirect_results = result.
