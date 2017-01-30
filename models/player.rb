@@ -51,12 +51,12 @@ class Player < Sequel::Model
   end
 
   def self.by_any_alias(name)
-    ids = graph(:player_data_points, {:players__id => :player_data_points__player_id}, join_type: :inner).
-      select(:players__id).
-      where(Sequel.ilike(:alias, "%#{ name }%")).
-      distinct(:players__id)
-
-    Player.where(id: ids)
+    Player.where(
+      id: PlayerDataPoint.
+            select(:player_id).
+            where(Sequel.ilike(:alias, "%#{ name }%")).
+            distinct(:player_id)
+    )
   end
 
   def adagrad_sum
