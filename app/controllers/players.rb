@@ -11,8 +11,15 @@ Observatory::App.controllers :players do
 
     # Numeric? Match for account ID
     if search_param =~ /^\d+$/
+      logger.debug "Searching for account ID #{ search_param }"
       player = Player.by_account_id(search_param.to_i)
-      direct_results << player if player # Might be a valid Steam ID for which we have no data
+      if player
+        direct_results << player
+        logger.debug "Found player: #{ player }"
+      else
+        # Might be a valid Steam ID for which we have no data
+        logger.debug 'No matching player found'
+      end
     end
 
     # Non-empty? Match for aliases
@@ -21,12 +28,22 @@ Observatory::App.controllers :players do
 
       # Might be a Steam ID
       begin
+        logger.debug "Searching for SteamID #{ search_param }"
         resolver = Observatory::SteamID
         account_id = resolver.resolve(search_param)
+        logger.debug "Resolved to #{ account_id } as Steam ID"
+
         player = Player.by_account_id(account_id)
-        direct_results << player if player # Might be a valid Steam ID for which we have no data
+        # Might be a valid Steam ID for which we have no data
+        if player
+          logger.debug "Found player: #{ player.inspect }"
+          direct_results << player
+        else
+          logger.debug 'No matching player found'
+        end
       rescue ArgumentError
         # Or not
+        logger.debug 'Not a valid Steam ID'
       end
     else
       result = Player.dataset
