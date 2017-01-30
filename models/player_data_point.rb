@@ -6,6 +6,8 @@ class PlayerDataPoint < Sequel::Model
     validates_presence [:alias, :score, :level, :experience, :skill, :time_total, :time_alien, :time_marine, :time_commander, :adagrad_sum, :player_id, :hive_player_id, :score_per_second, :score_per_second_field]
   end
 
+  plugin :pg_trgm
+
   def before_validation
     # If those are not specified we won't do anything. It will not pass
     # validation anyway.

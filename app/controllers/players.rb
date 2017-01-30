@@ -3,29 +3,50 @@ Observatory::App.controllers :players do
     page = params.fetch('page', 1).to_i
     page = 1 if page < 1
 
-    result_sets = []
-
     badges = params.fetch('badges', []).uniq.map { |id| Badge[id.to_i] }.compact
 
     search_param = params['filter']
-    unless search_param
-      result_sets << Player.dataset
-    end
 
-    # Numberic? Match for account ID
+    direct_results = []
+
+    # Numeric? Match for account ID
     if search_param =~ /^\d+$/
-      result_sets << Player.by_account_id(search_param.to_i)
+      logger.debug "Searching for account ID #{ search_param }"
+      player = Player.by_account_id(search_param.to_i)
+      if player
+        direct_results << player
+        logger.debug "Found player: #{ player }"
+      else
+        # Might be a valid Steam ID for which we have no data
+        logger.debug 'No matching player found'
+      end
     end
 
     # Non-empty? Match for aliases
     if search_param
-      result_sets << Player.by_any_alias(search_param)
-    end
+      result = Player.by_any_alias(search_param)
 
-    # UNION the different results together
-    result = result_sets.shift
-    result_sets.each do |ds|
-      result = result.union(ds)
+      # Might be a Steam ID
+      begin
+        logger.debug "Searching for SteamID #{ search_param }"
+        resolver = Observatory::SteamID
+        account_id = resolver.resolve(search_param)
+        logger.debug "Resolved to #{ account_id } as Steam ID"
+
+        player = Player.by_account_id(account_id)
+        # Might be a valid Steam ID for which we have no data
+        if player
+          logger.debug "Found player: #{ player.inspect }"
+          direct_results << player
+        else
+          logger.debug 'No matching player found'
+        end
+      rescue ArgumentError
+        # Or not
+        logger.debug 'Not a valid Steam ID'
+      end
+    else
+      result = Player.dataset
     end
 
     if badges.any?
@@ -36,11 +57,20 @@ Observatory::App.controllers :players do
       end
 
       result = result.where(id: ids)
+      direct_results = direct_results.map do |ds|
+        ds.where(id: ids)
+      end
     end
 
-    @players = result.
+    indirect_results = result.
+      exclude(id: direct_results.uniq.map(&:id)).
       paginate(page, Observatory::Config::Player::PAGINATION_SIZE).
       order(:id)
+
+    @results = {
+      direct: direct_results.uniq,
+      indirect: indirect_results,
+    }
 
     render 'index'
   end

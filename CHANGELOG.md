@@ -9,6 +9,10 @@ glance - what to expact from upgrading to a new version.
 ### Added
 
 - Resque::Plugin::JobStats to monitor job performance.
+- Improve player search
+  - Allow searching for Steam IDs and custom URLs
+  - Show direct matches (e.g. Steam ID) first
+  - Improve alias search by using Postgres Trigrams.
 
 ### Changed
 
@@ -21,6 +25,9 @@ glance - what to expact from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+- MySQL support. Player search implemention requires Postgres-specific
+  features.
 
 
 ## [0.11.2]

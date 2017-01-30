@@ -2,7 +2,7 @@
 = form_tag url(:players, :index), method: :get do
   .form-group
     = label_tag :filter
-    = text_field_tag :filter, class: 'form-control', value: params['filter'], placeholder: 'Account ID, Current ingame nick, Old ingame nick'
+    = text_field_tag :filter, class: 'form-control', value: params['filter'], placeholder: 'Account ID, Steam ID, Ingame nick'
 
   - if show_badge_filter
     .form-group

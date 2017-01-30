@@ -8,6 +8,7 @@ Sequel::Model.plugin :timestamps
 Sequel::Model.raise_on_save_failure = true # Do not throw exceptions on failure
 
 Sequel.extension :named_timezones
+Sequel.extension :pg_trgm
 
 timezone_db          = Observatory::Config::Timezone::DATABASE
 timezone_application = Observatory::Config::Timezone::APPLICATION
