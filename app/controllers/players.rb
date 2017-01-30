@@ -63,6 +63,7 @@ Observatory::App.controllers :players do
     end
 
     indirect_results = result.
+      exclude(id: direct_results.uniq.map(&:id)).
       paginate(page, Observatory::Config::Player::PAGINATION_SIZE).
       order(:id)
 
