@@ -38,7 +38,7 @@ class Player < Sequel::Model
   end
 
   def self.by_account_id(id)
-    where(account_id: id)
+    where(account_id: id).first
   end
 
   def self.by_current_alias(name)

@@ -7,7 +7,15 @@
       %th Skill
       %th Last Active
   %tbody
-    - players.each do |player|
+    - results[:direct].each do |player|
+      %tr
+        %td= link_to player.account_id, url(:players, :profile, id: player.id)
+        %td= player.alias
+        %td= player.level
+        %td= player.skill
+        %td= player.last_activity ? player.last_activity.strftime('%d.%m.%Y') : 'Never'
+
+    - results[:indirect].each do |player|
       %tr
         %td= link_to player.account_id, url(:players, :profile, id: player.id)
         %td= player.alias

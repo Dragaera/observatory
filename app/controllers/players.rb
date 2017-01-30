@@ -3,29 +3,22 @@ Observatory::App.controllers :players do
     page = params.fetch('page', 1).to_i
     page = 1 if page < 1
 
-    result_sets = []
-
     badges = params.fetch('badges', []).uniq.map { |id| Badge[id.to_i] }.compact
 
     search_param = params['filter']
-    unless search_param
-      result_sets << Player.dataset
-    end
 
-    # Numberic? Match for account ID
+    direct_results = []
+
+    # Numeric? Match for account ID
     if search_param =~ /^\d+$/
-      result_sets << Player.by_account_id(search_param.to_i)
+      direct_results << Player.by_account_id(search_param.to_i)
     end
 
     # Non-empty? Match for aliases
     if search_param
-      result_sets << Player.by_any_alias(search_param)
-    end
-
-    # UNION the different results together
-    result = result_sets.shift
-    result_sets.each do |ds|
-      result = result.union(ds)
+      result = Player.by_any_alias(search_param)
+    else
+      result = Player.dataset
     end
 
     if badges.any?
@@ -38,9 +31,14 @@ Observatory::App.controllers :players do
       result = result.where(id: ids)
     end
 
-    @players = result.
+    indirect_results = result.
       paginate(page, Observatory::Config::Player::PAGINATION_SIZE).
       order(:id)
+
+    @results = {
+      direct: direct_results,
+      indirect: indirect_results,
+    }
 
     render 'index'
   end
