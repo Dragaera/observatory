@@ -8,21 +8,30 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.12.0] - 2017-01-30
+
+### Added
+
 - Resque::Plugin::JobStats to monitor job performance.
 - Improve player search
   - Allow searching for Steam IDs and custom URLs
   - Show direct matches (e.g. Steam ID) first
   - Improve alias search by using Postgres Trigrams.
 
-### Changed
-
 ### Fixed
 
 - Fix pagination of player search resetting badge parameter.
-
-### Security
-
-### Deprecated
 
 ### Removed
 
