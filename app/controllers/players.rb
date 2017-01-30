@@ -11,7 +11,8 @@ Observatory::App.controllers :players do
 
     # Numeric? Match for account ID
     if search_param =~ /^\d+$/
-      direct_results << Player.by_account_id(search_param.to_i)
+      player = Player.by_account_id(search_param.to_i)
+      direct_results << player if player # Might be a valid Steam ID for which we have no data
     end
 
     # Non-empty? Match for aliases
@@ -49,7 +50,7 @@ Observatory::App.controllers :players do
       order(:id)
 
     @results = {
-      direct: direct_results,
+      direct: direct_results.uniq,
       indirect: indirect_results,
     }
 
