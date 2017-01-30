@@ -23,6 +23,7 @@ gem 'unicorn'
 gem 'mysql2'
 gem 'pg'
 gem 'sequel_pg', require: 'sequel'
+gem 'sequel-pg-trgm'
 
 # Background tasks
 gem 'resque'
