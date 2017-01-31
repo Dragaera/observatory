@@ -131,7 +131,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rufus-scheduler (3.3.2)
+    rufus-scheduler (3.3.3)
       tzinfo
     sequel (4.42.1)
     sequel-pg-trgm (0.0.2)
@@ -139,7 +139,7 @@ GEM
     sequel_pg (1.6.17)
       pg (>= 0.8.0)
       sequel (>= 4.0.0)
-    sinatra (1.4.7)
+    sinatra (1.4.8)
       rack (~> 1.5)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
