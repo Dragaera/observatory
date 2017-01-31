@@ -41,14 +41,6 @@ class Player < Sequel::Model
     where(account_id: id).first
   end
 
-  def self.by_current_alias(name)
-    Player.where(
-      current_player_data_point_id: PlayerDataPoint.
-                                      select(:id).
-                                      text_search(:alias, name)
-    )
-  end
-
   def self.by_any_alias(name)
     Player.where(
       id: PlayerDataPoint.
