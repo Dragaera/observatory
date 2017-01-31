@@ -31,7 +31,8 @@ RSpec.describe PlayerQuery do
         time_total: 10,
         time_alien: 3,
         time_marine: 7,
-        time_commander: 2
+        time_commander: 2,
+        badges: [],
       )
     end
 
