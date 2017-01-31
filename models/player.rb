@@ -41,12 +41,21 @@ class Player < Sequel::Model
     where(account_id: id).first
   end
 
-  def self.by_any_alias(name)
-    Player.where(
-      id: PlayerDataPoint.
-            select(:player_id).
-            text_search(:alias, name)
-    )
+  def self.ids_by_any_alias(name)
+    # DISTINCT ON requires distinct columns to be primary sorting key (as
+    # otherwise ordering would be arbitrary) - so to satisfy this, while also
+    # having the order we want, we select the similarity, and then sort on it
+    # in a subquery.
+    PlayerDataPoint.
+      select(
+        :player_id,
+        Sequel.function(:similarity, :alias, 'DoctorDongle').as(:rank)
+      ).
+      text_search(:alias, name).
+      distinct(:player_id).
+      order_by(:player_id).
+      from_self(alias: :result).
+      order_by(Sequel.desc(:result__rank))
   end
 
   def adagrad_sum
