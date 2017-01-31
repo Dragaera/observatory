@@ -24,11 +24,12 @@ Observatory::App.controllers :players do
 
     # Non-empty? Match for aliases
     if search_param
-      result = Player.by_any_alias(search_param)
+      indirect_results = Player.by_current_alias(search_param)
 
       # Might be a Steam ID
       begin
         logger.debug "Searching for SteamID #{ search_param }"
+        raise ArgumentError, 'FIXME'
         resolver = Observatory::SteamID
         account_id = resolver.resolve(search_param)
         logger.debug "Resolved to #{ account_id } as Steam ID"
@@ -46,7 +47,7 @@ Observatory::App.controllers :players do
         logger.debug 'Not a valid Steam ID'
       end
     else
-      result = Player.dataset
+      indirect_results = Player.exclude(current_player_data_point_id: nil)
     end
 
     if badges.any?
@@ -56,16 +57,18 @@ Observatory::App.controllers :players do
         ids = ids.union(ds)
       end
 
-      result = result.where(id: ids)
+      # Limit direct and indirect results to those who also own the specified
+      # badges.
+      indirect_results = player_ids.where(player_id: ids)
       direct_results = direct_results.map do |ds|
         ds.where(id: ids)
       end
     end
 
-    indirect_results = result.
-      exclude(id: direct_results.uniq.map(&:id)).
-      paginate(page, Observatory::Config::Player::PAGINATION_SIZE).
-      order(:id)
+    indirect_results = indirect_results.
+      exclude(players__id: direct_results.uniq.map(&:id)).
+      paginate(page, Observatory::Config::Player::PAGINATION_SIZE)
+    logger.debug "Matching indirect results: #{ player_ids }"
 
     @results = {
       direct: direct_results.uniq,
