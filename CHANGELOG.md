@@ -12,6 +12,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Minor performance fixes on profile pages.
+
 ### Security
 
 ### Deprecated
