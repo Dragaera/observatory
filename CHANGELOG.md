@@ -9,6 +9,8 @@ glance - what to expact from upgrading to a new version.
 ### Added
 
 ### Changed
+ 
+ - Update Ruby to 2.4.0.
 
 ### Fixed
 
