@@ -12,13 +12,18 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
-- Fix search breaking in anything but the default configuration.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.12.2] - 2017-01-31
+
+### Fixed
+
+- Fix search breaking in anything but the default configuration.
 
 
 ## [0.12.1] - 2017-01-31
