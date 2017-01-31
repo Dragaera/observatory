@@ -215,8 +215,8 @@ class Player < Sequel::Model
         rank.function.over(order: Sequel.desc(col)),
         :players__id
       ] }.
-      all.
-      select { |hsh| hsh[:id] == id }.
+      from_self.
+      where(id: id).
       first[:rank]
   end
 
