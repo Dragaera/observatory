@@ -12,13 +12,18 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
-- Fix ordering in player search, at the cost of only searching current alias.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.12.1] - 2017-01-31
+
+### Fixed
+
+- Fix ordering in player search, at the cost of only searching current alias.
 
 
 ## [0.12.0] - 2017-01-30
