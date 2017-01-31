@@ -10,6 +10,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Fix ordering in player search, at the cost of only searching current alias.
+
 ### Fixed
 
 ### Security

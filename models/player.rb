@@ -42,19 +42,9 @@ class Player < Sequel::Model
   end
 
   def self.by_current_alias(name)
-    Player.where(
-      current_player_data_point_id: PlayerDataPoint.
-                                      select(:id).
-                                      text_search(:alias, name)
-    )
-  end
-
-  def self.by_any_alias(name)
-    Player.where(
-      id: PlayerDataPoint.
-            select(:player_id).
-            text_search(:alias, name)
-    )
+    PlayerDataPoint.
+      graph(:players, { players__current_player_data_point_id: :player_data_points__id }, join_type: :inner).
+      text_search(:alias, name)
   end
 
   def adagrad_sum
