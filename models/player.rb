@@ -9,6 +9,8 @@ class Player < Sequel::Model
     validates_presence [:account_id]
   end
 
+  plugin :pg_trgm
+
   one_to_many :player_data_points
   def _add_player_data_point(point)
     # Important to do this first, as equality check also checks `player_id`.
@@ -42,9 +44,12 @@ class Player < Sequel::Model
   end
 
   def self.by_current_alias(name)
-    PlayerDataPoint.
-      graph(:players, { players__current_player_data_point_id: :player_data_points__id }, join_type: :inner).
-      text_search(:alias, name)
+    Player.
+      dataset.graph(:player_data_points,
+                    { players__current_player_data_point_id: :player_data_points__id }, 
+                    join_type: :inner,
+                    select: [:alias]).
+    text_search(:alias, name)
   end
 
   def adagrad_sum

@@ -12,6 +12,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Fix search breaking in anything but the default configuration.
+
 ### Security
 
 ### Deprecated
