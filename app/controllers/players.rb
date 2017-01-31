@@ -23,7 +23,7 @@ Observatory::App.controllers :players do
     end
 
     # Non-empty? Match for aliases
-    if search_param
+    if search_param && !search_param.empty?
       indirect_results = Player.by_current_alias(search_param)
 
       # Might be a Steam ID
@@ -59,7 +59,9 @@ Observatory::App.controllers :players do
 
       # Limit direct and indirect results to those who also own the specified
       # badges.
-      indirect_results = player_ids.where(player_id: ids)
+      # Mind that this is actually not a plain Player dataset, but a join on
+      # data points, so care must be taken to refer to the propre `id`.
+      indirect_results = indirect_results.where(players__id: ids)
       direct_results = direct_results.map do |ds|
         ds.where(id: ids)
       end
@@ -68,11 +70,10 @@ Observatory::App.controllers :players do
     indirect_results = indirect_results.
       exclude(players__id: direct_results.uniq.map(&:id)).
       paginate(page, Observatory::Config::Player::PAGINATION_SIZE)
-    logger.debug "Matching indirect results: #{ player_ids }"
 
     @results = {
       direct: direct_results.uniq,
-      indirect: indirect_results,
+      indirect: indirect_results
     }
 
     render 'index'
