@@ -5,11 +5,7 @@ feature 'Visiting the home page' do
     visit '/'
   end
 
-  it 'redirects me to /query' do
-    expect(page).to have_current_path('/query')
-  end
-
-  it 'shows a form to query for player data' do
-    expect(page).to have_content 'Query data of player'
+  it 'shows a form to search for players' do
+    expect(page).to have_content 'Search for player'
   end
 end
