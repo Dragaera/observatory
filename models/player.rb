@@ -162,11 +162,14 @@ class Player < Sequel::Model
       true
     rescue HiveStalker::APIError => e
       logger.error "Player update for player #{ id } failed: #{ e.message }"
+
+      enabled = current_player_data_point ||
+        (error_count.to_i < Observatory::Config::Player::ERROR_THRESHOLD)
       update(
         update_scheduled_at: nil,
         error_count:         error_count + 1,
         error_message:       e.message,
-        enabled:             (error_count.to_i + 1) < Observatory::Config::Player::ERROR_THRESHOLD,
+        enabled:             enabled,
       )
       raise
     end
