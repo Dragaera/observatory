@@ -8,7 +8,12 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Adding a new player is now mostly asynchronous - only initial resolving of
+  the Steam ID happens synchronously.
+
 ### Changed
+
+- Improved placeholder page for players with no data.
 
 ### Fixed
 
