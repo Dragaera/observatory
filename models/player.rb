@@ -153,6 +153,7 @@ class Player < Sequel::Model
         update_scheduled_at: nil,
         error_count:         0,
         error_message:       nil,
+        enabled:             true,
       )
 
       true
@@ -162,6 +163,7 @@ class Player < Sequel::Model
         update_scheduled_at: nil,
         error_count:         error_count + 1,
         error_message:       e.message,
+        enabled:             (error_count.to_i + 1) < Observatory::Config::Player::ERROR_THRESHOLD,
       )
       raise
     end

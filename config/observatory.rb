@@ -53,6 +53,8 @@ module Observatory
       PAGINATION_LEADING = ENV.fetch('PLAYER_PAGINATION_LEADING', 5).to_i
       PAGINATION_SURROUNDING = ENV.fetch('PLAYER_PAGINATION_TRAILING', 3).to_i
       PAGINATION_TRAILING = ENV.fetch('PLAYER_PAGINATION_TRAILING', 5).to_i
+
+      ERROR_THRESHOLD = ENV.fetch('PLAYER_ERROR_THRESHOLD', 3).to_i
     end
 
     module PlayerData
