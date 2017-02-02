@@ -11,10 +11,12 @@ glance - what to expact from upgrading to a new version.
 - Link from per-stats rank on profile page to corresponding page in leaderboard.
 
 ### Changed
- 
+
  - Update Ruby to 2.4.0.
 
 ### Fixed
+
+- Fix searching for player by Steam ID.
 
 ### Security
 
