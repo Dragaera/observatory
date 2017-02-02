@@ -63,61 +63,47 @@ RSpec.describe PlayerQuery do
 
   describe '#execute' do
     it 'should set `pending` to false' do
-      query.execute(resolver: resolver_success, stalker: stalker_success)
+      query.execute(resolver: resolver_success)
 
       expect(query).to_not be_pending
     end
 
     it 'should set the `executed_at` timestamp' do
-      query.execute(resolver: resolver_success, stalker: stalker_success)
+      query.execute(resolver: resolver_success)
 
       expect(query.executed_at).to_not be_nil
     end
 
     context 'when querying for data succeeds' do
       it 'should set `success` to true' do
-        query.execute(resolver: resolver_success, stalker: stalker_success)
+        query.execute(resolver: resolver_success)
 
         expect(query.success).to be true
       end
 
       it 'should set `account_id`' do
-        query.execute(resolver: resolver_success, stalker: stalker_success)
+        query.execute(resolver: resolver_success)
 
         expect(query.account_id).to eq 12345
       end
 
       it "should return the updated player" do
-        result = query.execute(resolver: resolver_success, stalker: stalker_success)
+        result = query.execute(resolver: resolver_success)
 
         expect(result).to be_a Player
       end
     end
 
     context 'when querying for data fails' do
-      context 'due to an API failure' do
-        it 'should set `success` to false' do
-          query.execute(resolver: resolver_success, stalker: stalker_failure)
-
-          expect(query.success).to be false
-        end
-
-        it 'should set `error_message`' do
-          query.execute(resolver: resolver_success, stalker: stalker_failure)
-
-          expect(query.error_message).to eq 'API error'
-        end
-      end
-
       context 'due to an invalid identifier' do
         it 'should set `success` to false' do
-          query.execute(resolver: resolver_failure, stalker: stalker_failure)
+          query.execute(resolver: resolver_failure)
 
           expect(query.success).to be false
         end
 
         it 'should set `error_message`' do
-          query.execute(resolver: resolver_failure, stalker: stalker_failure)
+          query.execute(resolver: resolver_failure)
 
           expect(query.error_message).to eq 'Invalid identifier'
         end

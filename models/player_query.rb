@@ -7,14 +7,13 @@ class PlayerQuery < Sequel::Model
     validates_presence [:query]
   end
 
-  def execute(resolver: nil, stalker: nil)
+  def execute(resolver: nil)
     resolver ||= Observatory::SteamID
 
-    player = nil
     begin
       update(account_id: resolver.resolve(query))
       player = Player.get_or_create(account_id: self.account_id)
-      player.update_data(stalker: stalker)
+      player.async_update_data
 
       update(pending: false,
              success: true,
@@ -22,13 +21,11 @@ class PlayerQuery < Sequel::Model
 
       return player
 
-    rescue ArgumentError, HiveStalker::APIError => e
+    rescue ArgumentError => e
       update(pending: false,
              success: false,
              executed_at: DateTime.now,
              error_message: e.message)
-
-      player.delete if player
 
       return nil
     end

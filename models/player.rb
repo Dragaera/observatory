@@ -1,7 +1,10 @@
 class Player < Sequel::Model
   def self.get_or_create(account_id:)
     Player.where(account_id: account_id).first ||
-      Player.create(account_id: account_id)
+      Player.create(
+        account_id:     account_id,
+        next_update_at: Time.now,
+    )
   end
 
   plugin :validation_helpers
