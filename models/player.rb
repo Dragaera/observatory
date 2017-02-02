@@ -36,7 +36,7 @@ class Player < Sequel::Model
   #
   # @return [Sequel::Dataset] Players with stale data.
   def self.with_stale_data
-    where { next_update_at <= Time.now }.where(update_scheduled_at: nil)
+    where { next_update_at <= Time.now }.where(update_scheduled_at: nil, enabled: true)
   end
 
   def self.by_account_id(id)
