@@ -55,6 +55,7 @@ module Observatory
       PAGINATION_TRAILING = ENV.fetch('PLAYER_PAGINATION_TRAILING', 5).to_i
 
       ERROR_THRESHOLD = ENV.fetch('PLAYER_ERROR_THRESHOLD', 3).to_i
+      INVALID_RETENTION_TIME = ENV.fetch('PLAYER_INVALID_RETENTION_TIME', 60 * 60).to_i
     end
 
     module PlayerData
