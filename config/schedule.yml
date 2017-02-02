@@ -12,3 +12,10 @@ clear_update_scheduled_at:
   queue: clear_update_scheduled_at
   args:
   description: 'Clears `update scheduled at` flag after certain time passed'
+
+delete_invalid_players:
+  cron: '* * * * *'
+  class: 'Observatory::DeleteInvalidPlayers'
+  queue: delete_invalid_players
+  args:
+  description: 'Deletes players for whom no data could be retrieved'

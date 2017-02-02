@@ -1,7 +1,10 @@
 class Player < Sequel::Model
   def self.get_or_create(account_id:)
     Player.where(account_id: account_id).first ||
-      Player.create(account_id: account_id)
+      Player.create(
+        account_id:     account_id,
+        next_update_at: Time.now,
+    )
   end
 
   plugin :validation_helpers
@@ -36,7 +39,7 @@ class Player < Sequel::Model
   #
   # @return [Sequel::Dataset] Players with stale data.
   def self.with_stale_data
-    where { next_update_at <= Time.now }.where(update_scheduled_at: nil)
+    where { next_update_at <= Time.now }.where(update_scheduled_at: nil, enabled: true)
   end
 
   def self.by_account_id(id)
@@ -149,11 +152,25 @@ class Player < Sequel::Model
       Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
       # TODO: Refactor this to use transaction-style block. `ensure` won't
       # work, as we reraise the caught exception.
-      update(update_scheduled_at: nil)
+      update(
+        update_scheduled_at: nil,
+        error_count:         0,
+        error_message:       nil,
+        enabled:             true,
+      )
 
       true
-    rescue HiveStalker::APIError
-      update(update_scheduled_at: nil)
+    rescue HiveStalker::APIError => e
+      logger.error "Player update for player #{ id } failed: #{ e.message }"
+
+      enabled = current_player_data_point ||
+        (error_count.to_i < Observatory::Config::Player::ERROR_THRESHOLD)
+      update(
+        update_scheduled_at: nil,
+        error_count:         error_count + 1,
+        error_message:       e.message,
+        enabled:             enabled,
+      )
       raise
     end
   end

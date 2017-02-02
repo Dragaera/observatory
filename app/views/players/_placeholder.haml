@@ -1,0 +1,31 @@
+.page-header
+  %h1= "Account: #{ player.account_id }"
+
+.row
+  - if player.enabled
+    .panel.panel-default
+      .panel-heading
+        Loading player data
+      .panel-body
+        .progress
+          .progress-bar.progress-bar-striped.progress-bar-success.active{ role: 'progressbar', style: 'width: 50%;' }
+            50%
+
+        - if player.error_message
+          %span.glyphicon.glyphicon-exclamation-sign
+          %span
+            There was an error while retrieving player data. We will try again shortly. Please check back in a few minutes.
+        - else
+          %span
+            Feel free to reload the page in a few seconds.
+
+
+  - else
+    .panel.panel-danger
+      .panel-heading
+        %span.glyphicon.glyphicon-exclamation-sign
+        %span
+          Unable to retrieve player data
+      .panel-body
+        %p
+          Apologies, but we were unable to retrieve this player's data! This means that either the Hive API is down, or that Hive has no data for the player you were looking for. Maybe try another?
