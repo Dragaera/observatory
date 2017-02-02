@@ -1,0 +1,25 @@
+.page-header
+  %h1= "Account: #{ player.account_id }"
+
+- if player.enabled
+  .panel.panel-default
+    .panel-heading
+      Waiting for player data...
+    .panel-body
+      Please stand by while we retrieve data.
+      - if player.update_scheduled_at
+        = "Update was scheduled: #{ time_ago_in_words(player.update_scheduled_at) } ago"
+
+      - if player.error_message
+        %p= "Error during data update: #{ player.error_message }"
+
+- else
+  .panel.panel-danger
+    .panel-heading
+      Player disabled
+    .panel-body
+      Too many errors during data retrieval, no further attempts will be made.
+
+      - if player.error_message
+        %p= "Last error: #{ player.error_message }"
+

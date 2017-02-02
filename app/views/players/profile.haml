@@ -32,10 +32,4 @@
       = partial 'player_graphs/playtime', locals: { player: @player }
 
 - else
-  .jumbotron
-    %h1= "Account: #{ @player.account_id }"
-    = "Please stand by while we retrieve data."
-    - if @player.update_scheduled_at
-      = "Update was scheduled: #{ time_ago_in_words(@player.update_scheduled_at) } ago"
-    %br
-    Feel free to reload the page in a few seconds!
+  = partial 'players/placeholder', locals: { player: @player }
