@@ -149,11 +149,20 @@ class Player < Sequel::Model
       Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
       # TODO: Refactor this to use transaction-style block. `ensure` won't
       # work, as we reraise the caught exception.
-      update(update_scheduled_at: nil)
+      update(
+        update_scheduled_at: nil,
+        error_count:         0,
+        error_message:       nil,
+      )
 
       true
-    rescue HiveStalker::APIError
-      update(update_scheduled_at: nil)
+    rescue HiveStalker::APIError => e
+      logger.error "Player update for player #{ id } failed: #{ e.message }"
+      update(
+        update_scheduled_at: nil,
+        error_count:         error_count + 1,
+        error_message:       e.message,
+      )
       raise
     end
   end
