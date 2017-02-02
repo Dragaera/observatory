@@ -105,6 +105,17 @@ timezone.
 | `PROFILE_PAGINATION_SURROUNDING` | 3             | y        | Number of pages in pagination toolbar surrounding the current page. |
 | `PROFILE_PAGINATION_TRAILING`    | 5             | y        | Number of trailing pages in pagination toolbar.                     |
 
+### Player
+
+| Variable                         | Default value | Required | Description                                                         |
+| -------------------------------- | ------------- | -------- | --------------------------------------------------------------------|
+| `PLAYER_PAGINATION_SIZE`         | 30            | y        | Number of per-page entries in player search.                        |
+| `PLAYER_PAGINATION_LEADING`      | 5             | y        | Number of leading pages in pagination toolbar.                      |
+| `PLAYER_PAGINATION_SURROUNDING`  | 3             | y        | Number of pages in pagination toolbar surrounding the current page. |
+| `PLAYER_PAGINATION_TRAILING`     | 5             | y        | Number of trailing pages in pagination toolbar.                     |
+| `PLAYER_ERROR_THRESHOLD`         | 3             | y        | Number of failed data-retrieval attempts after which a player will be disabled.  This only affects players which never had a successful data retrieval. |
+| `PLAYER_INVALID_RETENTION_TIME`  | 3600          | y        | Number of seconds after which disabled players without data will be removed. |
+
 ### Player Data
 
 | Variable                      | Default value        | Required | Description                                                                                                                                  |
