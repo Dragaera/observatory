@@ -1,25 +1,31 @@
 .page-header
   %h1= "Account: #{ player.account_id }"
 
-- if player.enabled
-  .panel.panel-default
-    .panel-heading
-      Waiting for player data...
-    .panel-body
-      Please stand by while we retrieve data.
-      - if player.update_scheduled_at
-        = "Update was scheduled: #{ time_ago_in_words(player.update_scheduled_at) } ago"
+.row
+  - if player.enabled
+    .panel.panel-default
+      .panel-heading
+        Loading player data
+      .panel-body
+        .progress
+          .progress-bar.progress-bar-striped.progress-bar-success.active{ role: 'progressbar', style: 'width: 50%;' }
+            50%
 
-      - if player.error_message
-        %p= "Error during data update: #{ player.error_message }"
+        - if player.error_message
+          %span.glyphicon.glyphicon-exclamation-sign
+          %span
+            There was an error while retrieving player data. We will try again shortly. Please check back in a few minutes.
+        - else
+          %span
+            Feel free to reload the page in a few seconds.
 
-- else
-  .panel.panel-danger
-    .panel-heading
-      Player disabled
-    .panel-body
-      Too many errors during data retrieval, no further attempts will be made.
 
-      - if player.error_message
-        %p= "Last error: #{ player.error_message }"
-
+  - else
+    .panel.panel-danger
+      .panel-heading
+        %span.glyphicon.glyphicon-exclamation-sign
+        %span
+          Unable to retrieve player data
+      .panel-body
+        %p
+          Apologies, but we were unable to retrieve this player's data! This means that either the Hive API is down, or that Hive has no data for the player you were looking for. Maybe try another?
