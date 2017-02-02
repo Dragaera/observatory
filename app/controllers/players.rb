@@ -29,7 +29,6 @@ Observatory::App.controllers :players do
       # Might be a Steam ID
       begin
         logger.debug "Searching for SteamID #{ search_param }"
-        raise ArgumentError, 'FIXME'
         resolver = Observatory::SteamID
         account_id = resolver.resolve(search_param)
         logger.debug "Resolved to #{ account_id } as Steam ID"
