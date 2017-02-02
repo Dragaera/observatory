@@ -10,6 +10,14 @@ module Observatory
       def player_pagination_link(page, filter: nil, badges: nil)
         link_to page, url(:players, :index, page: page, filter: filter, badges: badges)
       end
+
+      def player_rank_link(player, col)
+        rank = player.rank(col)
+        # rank - 1 sincce it starts at 1, not at 0. Result + 1 since pages
+        # start at 1, not 0.
+        page = (rank - 1) / Observatory::Config::Leaderboard::PAGINATION_SIZE + 1
+        link_to "##{ rank }", url(:leaderboard, :players, page: page, sort_by: col)
+      end
     end
 
     helpers PlayerHelper
