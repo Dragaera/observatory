@@ -8,6 +8,21 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.13.0] - 2017-02-02
+
+### Added
+
 - Link from per-stats rank on profile page to corresponding page in leaderboard.
 
 ### Changed
@@ -17,12 +32,6 @@ glance - what to expact from upgrading to a new version.
 ### Fixed
 
 - Fix searching for player by Steam ID.
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.12.2] - 2017-01-31
