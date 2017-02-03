@@ -36,6 +36,49 @@ RSpec.describe Player do
         expect(Player.with_stale_data).to_not include(player_5)
       end
     end
+
+    it 'should not return disabled players' do
+      player_5 = create(:player, next_update_at: Time.now + 2 * 60 * 60, enabled: false)
+      Timecop.freeze(Time.now + 24 * 60 * 60) do
+        expect(Player.with_stale_data).to_not include(player_5)
+      end
+    end
+  end
+
+  describe '::by_account_id' do
+    let!(:player_1) { create(:player, account_id: 1) }
+    let!(:player_2) { create(:player, account_id: 2) }
+    let!(:player_3) { create(:player, account_id: 3) }
+    it 'should return the player with matching account id' do
+      expect(Player.by_account_id(2)).to eq player_2
+    end
+
+    it 'should return nil if no player matches' do
+      expect(Player.by_account_id(10)).to eq nil
+    end
+  end
+
+  describe '::by_current_alias' do
+    let!(:player_with_two_aliases) { create(:player, :with_player_data_points, count: 2, aliases: ['Hans', 'Mittens']) }
+    let!(:john)   { create(:player, :with_player_data_points, count: 1, aliases: ['John']) }
+    let!(:george) { create(:player, :with_player_data_points, count: 1, aliases: ['George']) }
+
+    it 'should return players whose alias is an exact match' do
+      result = Player.by_current_alias('John').to_a
+      expect(result.count).to eq 1
+      expect(result.first.id).to eq john.id
+    end
+
+    it 'should return players whose alias is a fuzzy match' do
+      result = Player.by_current_alias('Johnny').to_a
+      expect(result.count).to eq 1
+      expect(result.first.id).to eq john.id
+    end
+
+    it 'should not return players whose previous alias is a match' do
+      result = Player.by_current_alias('Hans').to_a
+      expect(result).to be_empty
+    end
   end
 
   describe '#add_player_data_point' do

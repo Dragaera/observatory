@@ -18,6 +18,19 @@ FactoryGirl.define do
 
   factory :player do
     sequence(:account_id) { |i| i }
+
+    trait :with_player_data_points do
+      transient do
+        count 1
+        aliases []
+      end
+
+      after(:create) do |player, evaluator|
+        evaluator.count.times do
+          player.add_player_data_point(build(:player_data_point, alias: evaluator.aliases.shift))
+        end
+      end
+    end
   end
 
   factory :player_data_point do
