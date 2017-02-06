@@ -2,6 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Player do
   let(:player) { create(:player) }
+
   describe '#valid?' do
     it 'should not be valid if `account_id` is missing' do
       player = build(:player, account_id: nil)
@@ -137,6 +138,70 @@ RSpec.describe Player do
       )
 
       expect(player.last_activity.to_time).to eq Time.utc(2017, 1, 4)
+    end
+  end
+
+  describe '#update_data' do
+    context 'when querying for data succeeds' do
+      it 'should unset `update_scheduled_at`'
+
+      it 'should reset error-handling fields'
+
+      it 'should re-enabled the player'
+
+      it 'should add a new data point with supplied data'
+
+      it 'should add badges based on supplied data'
+    end
+
+    context 'when querying for data fails' do
+      let(:stalker_failure) do
+        stalker = double(HiveStalker::Stalker)
+        allow(stalker).to receive(:get_player_data).and_raise(HiveStalker::APIError, 'API error')
+        stalker
+      end
+
+      it 'should increase error count' do
+        expect { player.update_data(stalker: stalker_failure) }.to(
+          change{ player.error_count }.from(0).to(1).
+          and raise_error HiveStalker::APIError
+        )
+      end
+
+      it 'should store the error message' do
+        expect { player.update_data(stalker: stalker_failure) }.to(
+          change{ player.error_message }.to('API error').
+          and raise_error HiveStalker::APIError
+        )
+      end
+
+      context 'and the player has no data points' do
+        it 'should disable the player if requisites are met' do
+          player.update(error_count: Observatory::Config::Player::ERROR_THRESHOLD - 1)
+          expect { player.update_data(stalker: stalker_failure) }.to(
+            change{ player.enabled }.to(false).
+            and raise_error HiveStalker::APIError
+          )
+        end
+      end
+
+      context 'and the player has data points' do
+        it 'should not disable the player' do
+          player = create(:player, :with_player_data_points, count: 1, aliases: %w(John))
+          player.update(error_count: Observatory::Config::Player::ERROR_THRESHOLD - 1)
+          expect { player.update_data(stalker: stalker_failure) }.to raise_error HiveStalker::APIError
+          player.reload
+          expect(player.enabled).to be true
+        end
+      end
+
+      it 'should unset `update_scheduled_at`' do
+        player.update(update_scheduled_at: Time.now)
+        expect { player.update_data(stalker: stalker_failure) }.to(
+          change{ player.update_scheduled_at }.to(nil).
+          and raise_error HiveStalker::APIError
+        )
+      end
     end
   end
 end
