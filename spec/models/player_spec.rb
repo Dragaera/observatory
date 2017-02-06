@@ -190,7 +190,6 @@ RSpec.describe Player do
           player = create(:player, :with_player_data_points, count: 1, aliases: %w(John))
           player.update(error_count: Observatory::Config::Player::ERROR_THRESHOLD - 1)
           expect { player.update_data(stalker: stalker_failure) }.to raise_error HiveStalker::APIError
-          player.reload
           expect(player.enabled).to be true
         end
       end
