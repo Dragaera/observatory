@@ -63,6 +63,8 @@ module Observatory
       BACKOFF_DELAY = ENV.fetch('PLAYER_DATA_BACKOFF_DELAY', 300).to_i
 
       CLEAR_UPDATE_SCHEDULED_AT_DELAY = ENV.fetch('PLAYER_DATA_CLEAR_UPDATE_SCHEDULED_AT_DELAY', 2 * 60 * 60).to_i
+
+      EXPORT_ROOT = ENV.fetch('PLAYER_DATA_EXPORT_ROOT', '/mnt/observatory')
     end
 
     module RateLimiting
