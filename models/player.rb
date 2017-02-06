@@ -166,8 +166,8 @@ class Player < Sequel::Model
       # Important to do this here, so we can calculate the `enabled` property.
       # to_i as it might be nil - and that'll give us a convenient 0.
       error_count = self.error_count.to_i + 1
-      enabled = current_player_data_point ||
-        (error_count < Observatory::Config::Player::ERROR_THRESHOLD)
+      enabled = !!(current_player_data_point ||
+        (error_count < Observatory::Config::Player::ERROR_THRESHOLD))
       update(
         update_scheduled_at: nil,
         error_count:         error_count,
