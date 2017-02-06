@@ -163,11 +163,14 @@ class Player < Sequel::Model
     rescue HiveStalker::APIError => e
       logger.error "Player update for player #{ id } failed: #{ e.message }"
 
-      enabled = current_player_data_point ||
-        (error_count.to_i < Observatory::Config::Player::ERROR_THRESHOLD)
+      # Important to do this here, so we can calculate the `enabled` property.
+      # to_i as it might be nil - and that'll give us a convenient 0.
+      error_count = self.error_count.to_i + 1
+      enabled = !!(current_player_data_point ||
+        (error_count < Observatory::Config::Player::ERROR_THRESHOLD))
       update(
         update_scheduled_at: nil,
-        error_count:         error_count + 1,
+        error_count:         error_count,
         error_message:       e.message,
         enabled:             enabled,
       )

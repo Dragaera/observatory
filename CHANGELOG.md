@@ -17,6 +17,11 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Bug in the logic which disables a player after too many updates failed
+  made it disable the player one failed update later than configured.
+- Bug in logic which re-enables a player after a succesful update which might
+  have prevented it being re-enabled.
+
 ### Security
 
 ### Deprecated
