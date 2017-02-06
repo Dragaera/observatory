@@ -143,15 +143,75 @@ RSpec.describe Player do
 
   describe '#update_data' do
     context 'when querying for data succeeds' do
-      it 'should unset `update_scheduled_at`'
+      let(:stalker_success) do
+        stalker = double(HiveStalker::Stalker)
+        allow(stalker).to receive(:get_player_data) do
+          HiveStalker::PlayerData.new(
+            adagrad_sum: 0.1,
+            alias: 'John',
+            experience: 10,
+            player_id: 1,
+            level: 5,
+            reinforced_tier: nil,
+            score: 50,
+            skill: 200,
+            time_total: 10,
+            time_alien: 3,
+            time_marine: 7,
+            time_commander: 2,
+            badges: ['commander', 'dev'],
+          )
+        end
+        stalker
+      end
 
-      it 'should reset error-handling fields'
+      it 'should unset `update_scheduled_at`' do
+        player.update(update_scheduled_at: Time.now)
+        expect { player.update_data(stalker: stalker_success) }.to(
+          change { player.update_scheduled_at }.to(nil)
+        )
+      end
 
-      it 'should re-enabled the player'
+      it 'should reset error-handling fields' do
+        player.update(error_count: 2, error_message: 'Foo')
+        expect { player.update_data(stalker: stalker_success) }.to(
+          change { player.error_count }.to(0).and(
+            change { player.error_message }.to(nil)
+          )
+        )
+      end
 
-      it 'should add a new data point with supplied data'
+      it 'should re-enable the player' do
+        player.update(enabled: false)
+        expect { player.update_data(stalker: stalker_success) }.to(
+          change { player.enabled }.to(true)
+        )
+      end
 
-      it 'should add badges based on supplied data'
+      it 'should add a new data point with supplied data' do
+        expect { player.update_data(stalker: stalker_success) }.to(
+          change { player.player_data_points_dataset.count }.to(1)
+        )
+
+        # Good enough of a check. Probably. ;)
+        expect(player.alias).to eq 'John'
+      end
+
+      it 'should add badges based on supplied data' do
+        badge_commander = Badge.where(key: 'commander').first
+        badge_dev       = Badge.where(key: 'dev').first
+
+        player.update_data(stalker: stalker_success)
+
+        expect(player.badges.to_a).to include badge_commander
+        expect(player.badges.to_a).to include badge_dev
+      end
+
+      it 'should not re-add existing badges' do
+        player.update_data(stalker: stalker_success)
+
+        expect { player.update_data(stalker: stalker_success) }.to_not change { player.badges_dataset.count }
+      end
     end
 
     context 'when querying for data fails' do
