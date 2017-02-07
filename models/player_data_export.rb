@@ -99,6 +99,8 @@ class PlayerDataExport < Sequel::Model
       "player_export_#{ id }_#{ Time.now.strftime('%Y%m%d_%H%M%S') }.csv"
     )
 
+    update(file_path: outfile)
+
     File.open(outfile, 'w')
   end
 end
