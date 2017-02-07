@@ -240,6 +240,8 @@ class Player < Sequel::Model
         player_id: id
       )
       export.async_create_csv
+
+      export
     else
       raise ArgumentError, "Unknown type: #{ type.inspect }"
     end

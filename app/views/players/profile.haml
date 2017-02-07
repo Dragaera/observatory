@@ -12,6 +12,9 @@
       = form_tag url(:players, :update, id: @player.id), method: 'post', class: 'btn' do
         = submit_tag 'Update', class: 'btn btn-warning'
 
+      = form_tag url(:players, :export, id: @player.id), method: 'post', class: 'btn' do
+        = submit_tag 'Download CSV', class: 'btn btn-info'
+
   .row
     .col-md-4
       %h2 Stats

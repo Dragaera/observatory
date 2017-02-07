@@ -1,0 +1,21 @@
+.page-header
+  %h1
+    = @export.player.alias
+    %small= "CSV Data export"
+
+.row
+  .col-md-12
+    .jumbotron
+      - if @export.pending?
+        %p Please stand by while we retrieve your data! Feel free to reload this page in a few seconds.
+
+      - elsif @export.error?
+        %p Something went wrong while trying to create your CSV. Sorry!
+
+        %p= @export.error_message
+
+      - elsif @export.success?
+        %h2 CSV created successfully
+        = link_to 'Download', url(:player_data_exports, :download, player_id: @export.player.id, id: @export.id), class: 'btn btn-primary'
+
+
