@@ -1,5 +1,3 @@
-! require 'csv'
-
 module Observatory
   class PlayerDataExportJob
     extend Resque::Plugins::JobStats
