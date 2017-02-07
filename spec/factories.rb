@@ -51,4 +51,8 @@ FactoryGirl.define do
     fallback false
     enabled  true
   end
+
+  factory :player_data_export do
+    player
+  end
 end

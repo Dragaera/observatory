@@ -33,6 +33,7 @@ class Player < Sequel::Model
   many_to_one :current_player_data_point, class: :PlayerDataPoint, key: :current_player_data_point_id
   many_to_one :update_frequency
   many_to_many :badges
+  one_to_many :player_data_exports
 
   # Returns list of players with stale data, who do not have an update
   # scheduled yet.
@@ -230,6 +231,17 @@ class Player < Sequel::Model
       relevant_data.created_at
     else
       nil
+    end
+  end
+
+  def export_data(type: :csv)
+    if type == :csv
+      export = PlayerDataExport.create(
+        player_id: id
+      )
+      export.async_create_csv
+    else
+      raise ArgumentError, "Unknown type: #{ type.inspect }"
     end
   end
 end
