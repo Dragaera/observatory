@@ -8,13 +8,13 @@ module Observatory
     @durations_recorded = Observatory::Config::Resque::DURATIONS_RECORDED
 
     def self.perform(id)
-      player = Player[id.to_i]
-      if player.nil?
-        logger.error "No player with id #{ id.inspect }"
+      export = PlayerDataExport[id.to_i]
+      if export.nil?
+        logger.error "No export with id #{ id.inspect }"
         return false
       end
 
-      player.create_csv
+      export.create_csv
     end
   end
 end

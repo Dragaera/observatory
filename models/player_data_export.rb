@@ -37,7 +37,7 @@ class PlayerDataExport < Sequel::Model
   end
 
   def create_csv(io: nil)
-    io ||= self.default_io(player.id)
+    io ||= default_io(player.id)
     csv = CSV.new(
       io,
       write_headers: true,
@@ -93,7 +93,7 @@ class PlayerDataExport < Sequel::Model
   end
 
   private
-  def self.default_io(id)
+  def default_io(id)
     outfile = File.join(
       Observatory::Config::PlayerData::EXPORT_ROOT,
       "player_export_#{ id }_#{ Time.now.strftime('%Y%m%d_%H%M%S') }.csv"
