@@ -7,15 +7,22 @@
   .col-md-12
     .jumbotron
       - if @export.pending?
+        %h2 Report pending
         %p Please stand by while we retrieve your data! Feel free to reload this page in a few seconds.
 
       - elsif @export.error?
+        %h2 Report failed
         %p Something went wrong while trying to create your CSV. Sorry!
 
         %p= @export.error_message
 
+      - elsif @export.expired?
+        %h2 Report expired
+        %p Sorry, this report was deleted because it is too old.
+        = link_to 'Create a new one', url(:players, :profile, id: @export.player.id), class: 'btn btn-primary'
+
       - elsif @export.success?
-        %h2 CSV created successfully
+        %h2 Report created
         = link_to 'Download', url(:player_data_exports, :download, player_id: @export.player.id, id: @export.id), class: 'btn btn-primary'
 
 
