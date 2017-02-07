@@ -79,6 +79,14 @@ class PlayerDataExport < Sequel::Model
           data.relevant,
         ]
       end
+      update(status: STATUS_SUCCESS)
+    rescue IOError => e
+      # That takes care of the most obviousy one, at least. But there's tons of
+      # ERRNO:ENOACCESS and the likes.
+      update(
+        status: STATUS_ERROR,
+        error_message: e.message,
+      )
     ensure
       csv.close
     end
