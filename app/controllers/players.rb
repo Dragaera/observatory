@@ -104,4 +104,11 @@ Observatory::App.controllers :players do
 
     redirect(url(:players, :profile, id: id))
   end
+
+  post :export, map: '/player/:id/export' do |id|
+    player = get_or_404(Player, id)
+
+    export = player.export_data
+    redirect(url(:player_data_exports, :show, player_id: player.id, id: export.id))
+  end
 end

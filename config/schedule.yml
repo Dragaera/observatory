@@ -19,3 +19,10 @@ delete_invalid_players:
   queue: delete_invalid_players
   args:
   description: 'Deletes players for whom no data could be retrieved'
+
+expire_old_player_data_exports:
+  cron: '* * * * 0'
+  class: 'Observatory::ExpireOldPlayerDataExports'
+  queue: expire_old_player_data_exports
+  args:
+  description: 'Deletes old player exports'
