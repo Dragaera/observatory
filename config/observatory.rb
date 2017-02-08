@@ -65,6 +65,7 @@ module Observatory
       CLEAR_UPDATE_SCHEDULED_AT_DELAY = ENV.fetch('PLAYER_DATA_CLEAR_UPDATE_SCHEDULED_AT_DELAY', 2 * 60 * 60).to_i
 
       EXPORT_ROOT = ENV.fetch('PLAYER_DATA_EXPORT_ROOT', '/mnt/observatory')
+      EXPORT_EXPIRY_THRESHOLD = ENV.fetch('PLAYER_DATA_EXPORT_EXPIRY_THRESHOLD', 7 * 24 * 60 * 60).to_i
     end
 
     module RateLimiting

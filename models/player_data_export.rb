@@ -3,6 +3,7 @@ class PlayerDataExport < Sequel::Model
   STATUS_DOING   = 'DOING'
   STATUS_SUCCESS = 'SUCCESS'
   STATUS_ERROR   = "ERROR"
+  STATUS_EXPIRED = 'EXPIRED'
 
   plugin :validation_helpers
   def before_validation
@@ -11,7 +12,7 @@ class PlayerDataExport < Sequel::Model
 
   def validate
     validates_presence [:status]
-    validates_includes [STATUS_PENDING, STATUS_DOING, STATUS_SUCCESS, STATUS_ERROR], :status
+    validates_includes [STATUS_PENDING, STATUS_DOING, STATUS_SUCCESS, STATUS_ERROR, STATUS_EXPIRED], :status
   end
 
   many_to_one :player
@@ -30,6 +31,10 @@ class PlayerDataExport < Sequel::Model
 
   def error?
     status == STATUS_ERROR
+  end
+
+  def expired?
+    status == STATUS_EXPIRED
   end
 
   def async_create_csv
