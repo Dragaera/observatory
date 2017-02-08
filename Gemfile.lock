@@ -32,7 +32,7 @@ GEM
       tilt
     hive-stalker (0.1.5)
       typhoeus
-    i18n (0.7.0)
+    i18n (0.8.0)
     kgio (2.11.0)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
@@ -133,7 +133,7 @@ GEM
     rspec-support (3.5.0)
     rufus-scheduler (3.3.3)
       tzinfo
-    sequel (4.42.1)
+    sequel (4.43.0)
     sequel-pg-trgm (0.0.2)
       sequel (> 3.0)
     sequel_pg (1.6.17)
@@ -194,4 +194,4 @@ DEPENDENCIES
   unicorn
 
 BUNDLED WITH
-   1.13.6
+   1.14.3
