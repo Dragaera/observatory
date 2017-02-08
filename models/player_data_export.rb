@@ -1,3 +1,5 @@
+require 'csv'
+
 class PlayerDataExport < Sequel::Model
   STATUS_PENDING = 'PENDING'
   STATUS_DOING   = 'DOING'
