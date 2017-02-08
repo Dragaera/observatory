@@ -118,12 +118,13 @@ timezone.
 
 ### Player Data
 
-| Variable                      | Default value        | Required | Description                                                                                                                                  |
-| ----------------------------- | -------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PLAYER_DATA_BACKOFF_DELAY`   | 300                  | y        | A random number between 0 and this settings is chosen to determine the amount of seconds which a rate-limited player update will be delayed. |
-| `PLAYER_DATA_INITIAL_DELAY`   | 60                   | y        | A random number between 0 and this settings is chosen to determine the amount of seconds which an automated player update will be delayed by initially. This serves to prevent all freshly-scheduled updates from trying to execute at once. |
-| `PLAYER_DATA_CLEAR_UPDATE_SCHEDULED_AT_DELAY` | 7200 | y        | Number of seconds after which a scheduled player update is assumed to have failed silently, and new scheduling new updates is allowed. You should not need to tune this setting, this is only to prevent a bug from causing updates to cease. |
-| `PLAYER_DATA_EXPORT_ROOT`     | /mnt/observatory     | y        | Path in the file system where generated CSVs will be stored for a certain duration. Default value is suitable for running in a Docker container and mounting a volume there - but feel free to adjust to your liking. |
+| Variable                                      | Default value        | Required | Description                                                                                                                                  |
+| --------------------------------------------- | -------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PLAYER_DATA_BACKOFF_DELAY`                   | 300                  | y        | A random number between 0 and this settings is chosen to determine the amount of seconds which a rate-limited player update will be delayed. |
+| `PLAYER_DATA_INITIAL_DELAY`                   | 60                   | y        | A random number between 0 and this settings is chosen to determine the amount of seconds which an automated player update will be delayed by initially. This serves to prevent all freshly-scheduled updates from trying to execute at once. |
+| `PLAYER_DATA_CLEAR_UPDATE_SCHEDULED_AT_DELAY` | 7200                 | y        | Number of seconds after which a scheduled player update is assumed to have failed silently, and new scheduling new updates is allowed. You should not need to tune this setting, this is only to prevent a bug from causing updates to cease. |
+| `PLAYER_DATA_EXPORT_ROOT`                     | /mnt/observatory     | y        | Path in the file system where generated CSVs will be stored for a certain duration. Default value is suitable for running in a Docker container and mounting a volume there - but feel free to adjust to your liking. |
+| `PLAYER_DATA_EXPORT_EXPIRY_THRESHOLD`         | 7 * 24 * 60 * 60     | y        | Number of seconds after which a player data export will be expired, that is its file deleted. Set to 0 to keep indefinitely. |
 
 
 ### Rate Limiting
