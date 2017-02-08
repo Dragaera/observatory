@@ -6,6 +6,10 @@ module Observatory
     @durations_recorded = Observatory::Config::Resque::DURATIONS_RECORDED
 
     def self.perform
+      if Observatory::Config::PlayerData::EXPORT_EXPIRY_THRESHOLD == 0
+        logger.info 'Expiry of player data exports disabled'
+        return
+      end
       expired_reports = PlayerDataExport.
         where { created_at < Time.now - Observatory::Config::PlayerData::EXPORT_EXPIRY_THRESHOLD}.
         # Keeping failed (and pending) ones for invevstigation.
