@@ -11,6 +11,8 @@ glance - what to expact from upgrading to a new version.
 - Adding a new player is now mostly asynchronous - only initial resolving of
   the Steam ID happens synchronously.
 
+- Exports which allow to export all stored data of a player as a CSV.
+
 ### Changed
 
 - Improved placeholder page for players with no data.
