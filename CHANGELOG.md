@@ -8,6 +8,21 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.14.0] - 2017-02-08
+
+### Added
+
 - Adding a new player is now mostly asynchronous - only initial resolving of
   the Steam ID happens synchronously.
 
@@ -24,12 +39,6 @@ glance - what to expact from upgrading to a new version.
 
 - Bug in logic which re-enables a player after a succesful update which might
   have prevented it being re-enabled.
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.13.0] - 2017-02-02
