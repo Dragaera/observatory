@@ -3,19 +3,19 @@
     %tr
       %th Skill
       %td= pp_separator(player.skill)
-      %td= player_rank_link(player, :skill)
+      //%td= player_rank_link(player, :skill)
     %tr
       %th Level / Exp
       %td= "Lvl #{ player.level } / #{ pp_separator(player.experience) } XP"
-      %td= player_rank_link(player, :experience)
+      //%td= player_rank_link(player, :experience)
     %tr
       %th Score
       %td= pp_separator(player.score)
-      %td= player_rank_link(player, :score)
+      //%td= player_rank_link(player, :score)
     %tr
       %th Score / min
       %td= (player.score_per_second * 60).round(2)
-      %td= player_rank_link(player, :score_per_second)
+      //%td= player_rank_link(player, :score_per_second)
 
 %table.table.table-bordered
   %tbody
