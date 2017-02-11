@@ -10,6 +10,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Disable dynamic player rank on profile page due to performance reasons.
+
 ### Fixed
 
 ### Security
