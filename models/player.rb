@@ -55,10 +55,18 @@ class Player < Sequel::Model
 
   def self.by_current_alias(name = nil)
     result = Player.
-      dataset.graph(:player_data_points,
-                    { players__current_player_data_point_id: :player_data_points__id },
-                    join_type: :inner
-                   )
+      dataset.
+      select(:account_id, :id).
+      graph(
+        :player_data_points,
+        { players__current_player_data_point_id: :player_data_points__id },
+        join_type: :inner,
+        select: [
+          :alias,
+          :level,
+          :skill,
+        ]
+      )
 
     if name
       result.text_search(:alias, name)
