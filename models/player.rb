@@ -234,7 +234,16 @@ class Player < Sequel::Model
 
   # Return timestamp of last time player's data changed.
   def last_activity
-    last_update_at
+    relevant_data = player_data_points_dataset.
+      where(relevant: true).
+      order(Sequel.desc(:created_at)).
+      first
+
+    if relevant_data
+      relevant_data.created_at
+    else
+      nil
+    end
   end
 
   def export_data(type: :csv)
