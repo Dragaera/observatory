@@ -39,7 +39,7 @@
             %td= pp_timespan player[:time_alien]
             %td= pp_timespan player[:time_marine]
             %td= pp_timespan player[:time_commander]
-            %td= player.last_activity.strftime('%d.%m.%Y')
+            %td= player.last_update_at.strftime('%d.%m.%Y')
 
 .row
   .col-md-12
