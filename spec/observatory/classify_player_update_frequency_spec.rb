@@ -16,6 +16,7 @@ module Observatory
             player.add_player_data_point(
               build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100)
             )
+            player.update(last_update_at: Time.now)
 
             example.run
           end
@@ -33,6 +34,7 @@ module Observatory
             player.add_player_data_point(
               build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100)
             )
+            player.update(last_update_at: Time.now)
           end
 
           it 'should classify it as hourly' do
@@ -56,6 +58,7 @@ module Observatory
             player.add_player_data_point(
               build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100)
             )
+            player.update(last_update_at: Time.now)
           end
 
           it 'should classify it as daily' do
@@ -79,6 +82,7 @@ module Observatory
             player.add_player_data_point(
               build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100)
             )
+            player.update(last_update_at: Time.now)
           end
 
           it 'should classify it with the fallback frequency' do

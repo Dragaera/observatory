@@ -9,13 +9,21 @@ Sequel.migration do
       where(relevant: false).
       exclude(
         id: from(:players).
-        select(:current_player_data_point_id)
+              select(:current_player_data_point_id)
     ).
     delete()
 
     alter_table :players do
       add_foreign_key [:current_player_data_point_id], :player_data_points
+      add_column      :last_update_at, DateTime, null: true
     end
+
+    from(:players).
+      update(
+        last_update_at: from(:player_data_points).
+                          where(id: :players__current_player_data_point_id).
+                          select(:created_at)
+    )
   end
 
   down do
@@ -24,6 +32,7 @@ Sequel.migration do
       drop_foreign_key [:current_player_data_point_id]
       # Old-style key name
       add_foreign_key [:current_player_data_point_id], :player_data_points, name: :players_current_player_data_id_fkey
+      drop_column     :last_update_at
     end
   end
 end

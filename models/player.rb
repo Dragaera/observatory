@@ -19,15 +19,21 @@ class Player < Sequel::Model
     # Important to do this first, as equality check also checks `player_id`.
     point.player_id = id
     point.relevant = current_player_data_point != point
-    point.save
 
-    # Using `current_player_data_point` will *not* work, as that one checks
-    # whether the current and new object are equal, and only updates if they
-    # are not. 
-    # Due to us overwriting PlayerData#==, this would lead to non-relevant
-    # updates being discarded.
-    update(current_player_data_point_id: point.id)
+    if point.relevant
+      point.save
 
+      # Using `current_player_data_point` will *not* work, as that one checks
+      # whether the current and new object are equal, and only updates if they
+      # are not. 
+      # Due to us overwriting PlayerData#==, this would lead to non-relevant
+      # updates being discarded.
+      update(current_player_data_point_id: point.id)
+    else
+      logger.debug "Discarding irrelevant player data point of player #{ point.player_id }"
+      point.delete if point.exists?
+      false
+    end
   end
 
   many_to_one :current_player_data_point, class: :PlayerDataPoint, key: :current_player_data_point_id
@@ -155,6 +161,7 @@ class Player < Sequel::Model
       # work, as we reraise the caught exception.
       update(
         update_scheduled_at: nil,
+        last_update_at:      Time.now,
         error_count:         0,
         error_message:       nil,
         enabled:             true,
