@@ -53,13 +53,18 @@ class Player < Sequel::Model
     where(account_id: id).first
   end
 
-  def self.by_current_alias(name)
-    Player.
+  def self.by_current_alias(name = nil)
+    result = Player.
       dataset.graph(:player_data_points,
-                    { players__current_player_data_point_id: :player_data_points__id }, 
-                    join_type: :inner,
-                    select: [:alias]).
-    text_search(:alias, name)
+                    { players__current_player_data_point_id: :player_data_points__id },
+                    join_type: :inner
+                   )
+
+    if name
+      result.text_search(:alias, name)
+    else
+      result
+    end
   end
 
   def adagrad_sum
@@ -229,16 +234,7 @@ class Player < Sequel::Model
 
   # Return timestamp of last time player's data changed.
   def last_activity
-    relevant_data = player_data_points_dataset.
-      where(relevant: true).
-      order(Sequel.desc(:created_at)).
-      first
-
-    if relevant_data
-      relevant_data.created_at
-    else
-      nil
-    end
+    last_update_at
   end
 
   def export_data(type: :csv)
