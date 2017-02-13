@@ -124,18 +124,25 @@ RSpec.describe Player do
       player.add_player_data_point(
         build(:player_data_point, alias: 'John', score: 100)
       )
+      player.update(last_update_at: Time.now)
+
       Timecop.freeze(Time.now + 24 * 60 * 60)
       player.add_player_data_point(
         build(:player_data_point, alias: 'John', score: 100)
       )
+      player.update(last_update_at: Time.now)
+
       Timecop.freeze(Time.now + 24 * 60 * 60)
       player.add_player_data_point(
         build(:player_data_point, alias: 'John', score: 150)
       )
+      player.update(last_update_at: Time.now)
+
       Timecop.freeze(Time.now + 24 * 60 * 60)
       player.add_player_data_point(
         build(:player_data_point, alias: 'John', score: 150)
       )
+      player.update(last_update_at: Time.now)
 
       expect(player.last_activity.to_time).to eq Time.utc(2017, 1, 4)
     end
