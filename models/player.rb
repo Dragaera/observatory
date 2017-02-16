@@ -230,18 +230,14 @@ class Player < Sequel::Model
       cols = [cols]
     end
 
-    Player.
-      # Inner join essential, as there can be players without data (e.g.
-      # freshly added), which would otherwise be included in the join, which
-      # will then throw off the ranking. (NULL > number, I guess?)
-      graph(:player_data_points, [player_data_points__id: :current_player_data_point_id], join_type: :inner).
+    PlayerDataPoint.
+      where(id: Player.select(:current_player_data_point_id)).
       select {
-        cols.map { |col| rank.function.over(order: Sequel.desc(col)).as("rank_#{ col }") } << :players__id
+        cols.map { |col| rank.function.over(order: Sequel.desc(col)).as("rank_#{ col }") } << :player_id
       }.
       from_self.
-      where(id: id).
-      first.
-      to_hash
+      where(player_id: id).
+      first
   end
 
   # Return timestamp of last time player's data changed.

@@ -12,7 +12,7 @@ module Observatory
       end
 
       def player_rank_link(ranks, col)
-        rank = ranks.fetch("rank_#{ col }".to_sym)
+        rank = ranks["rank_#{ col }".to_sym]
         # rank - 1 sincce it starts at 1, not at 0. Result + 1 since pages
         # start at 1, not 0.
         page = (rank - 1) / Observatory::Config::Leaderboard::PAGINATION_SIZE + 1
