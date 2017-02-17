@@ -8,10 +8,10 @@ module Observatory
       end
 
       def get_or_raise(cls, key, ex_cls = KeyError, msg = nil)
-        obj = cls[key]
+        obj = cls[key.to_i]
 
         if obj.nil?
-          msg = "No #{ cls.name } with id #{ key }" unless msg
+          msg = "No #{ cls.inspect } with id #{ key }" unless msg
           raise ex_cls, msg
         end
 
