@@ -1,6 +1,7 @@
 Observatory::App.controllers :player_data_exports, parent: :player do
   get :show, map: 'exports/:id' do |player_id, id|
-    @export = get_or_404(PlayerDataExport, id)
+    player  = get_or_404(Player, player_id)
+    @export = get_or_404(player.player_data_exports_dataset, id)
 
     render 'show'
   end
