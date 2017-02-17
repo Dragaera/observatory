@@ -46,7 +46,7 @@ Observatory::App.controllers :players do
         logger.debug 'Not a valid Steam ID'
       end
     else
-      indirect_results = Player.exclude(current_player_data_point_id: nil)
+      indirect_results = Player.by_current_alias(nil)
     end
 
     if badges.any?

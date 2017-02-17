@@ -1,5 +1,7 @@
 Observatory::App.controllers :observatory do
-  get :index, map: '/' do
+  get :index, map: '/', cache: true do
+    expires 60
+
     render 'index'
   end
 

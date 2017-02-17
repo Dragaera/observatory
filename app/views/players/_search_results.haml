@@ -9,6 +9,7 @@
   %tbody
     - results[:direct].each do |player|
       %tr
+        =# In case of direct searches (e.g account ID) this might be a pure player object, not a JOIN dataset.
         %td= link_to player.account_id, url(:players, :profile, id: player.id)
         %td= player.alias
         %td= player.level
@@ -17,8 +18,8 @@
 
     - results[:indirect].each do |player|
       %tr
-        %td= link_to player.account_id, url(:players, :profile, id: player.id)
-        %td= player.alias
-        %td= player.level
-        %td= player.skill
+        %td= link_to player[:account_id], url(:players, :profile, id: player[:id])
+        %td= player[:alias]
+        %td= player[:level]
+        %td= player[:skill]
         %td= player.last_activity ? player.last_activity.strftime('%d.%m.%Y') : 'Never'

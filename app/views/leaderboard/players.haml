@@ -26,18 +26,20 @@
         - offset = 1 + (@players.current_page - 1) * @players.page_size
         - @players.each_with_index do |player, i|
           %tr
+            =# Using the attributes of the JOIN datasete prevents another query to fetch the current player data point.
+            =# TODO: Might be able to retrieve it via eager-loading?
             %td= i + offset
-            %td= link_to player.alias, url(:players, :profile, id: player.id)
-            %td= pp_separator player.skill
-            %td= (player.score_per_second * 60).round(2)
-            %td= pp_separator player.score
-            %td= player.level
-            %td= pp_separator player.experience
-            %td= pp_timespan player.time_total
-            %td= pp_timespan player.time_alien
-            %td= pp_timespan player.time_marine
-            %td= pp_timespan player.time_commander
-            %td= player.last_activity.strftime('%d.%m.%Y')
+            %td= link_to player[:alias], url(:players, :profile, id: player[:id])
+            %td= pp_separator player[:skill]
+            %td= (player[:score_per_second] * 60).round(2)
+            %td= pp_separator player[:score]
+            %td= player[:level]
+            %td= pp_separator player[:experience]
+            %td= pp_timespan player[:time_total]
+            %td= pp_timespan player[:time_alien]
+            %td= pp_timespan player[:time_marine]
+            %td= pp_timespan player[:time_commander]
+            %td= player.last_update_at.strftime('%d.%m.%Y')
 
 .row
   .col-md-12

@@ -19,14 +19,10 @@ module Observatory
         return false
       end
 
-      # We will compare it to #current_data.created_at, instead of Time.now.
-      # This prevents the time difference from looking artifically big if the
-      # classification job was delayed.
-      # It does mean, however, that, if new player updates do not get
-      # persisted, the player's classification will stay as-is.
-      current_data = player.current_player_data_point
-      # This might be the oldest point - which is always relevant.
-      # It could also be #current_data, if that one changed.
+      # This will be the most current point with changed data. (Which - for
+      # active players - will also be the one referenced in
+      # #current_player_data - but for legacy players that one might be an
+      # irrelevant point.
       last_data_with_change = player.player_data_points_dataset.
         where(relevant: true).
         order(Sequel.desc(:created_at)).
@@ -36,7 +32,7 @@ module Observatory
       # rational (e.g 2 hours), subtraction returned a rational representing
       # *hours* instead of the number of seconds.
       # Subtracting time objects seems to work.
-      time_to_change = current_data.created_at.to_time - last_data_with_change.created_at.to_time
+      time_to_change = player.last_update_at.to_time - last_data_with_change.created_at.to_time
       logger.debug "Seconds since last change: #{ time_to_change }"
 
       # Find frequencies with big enough threshold, get lowest of them.
@@ -65,7 +61,7 @@ module Observatory
 
       logger.info "Classified as '#{ f.name }'"
       player.update_frequency = f
-      player.next_update_at = current_data.created_at.to_time + f.interval
+      player.next_update_at = player.last_update_at.to_time + f.interval
       player.save
 
       true

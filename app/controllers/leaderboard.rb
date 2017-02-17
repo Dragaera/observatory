@@ -9,9 +9,15 @@ Observatory::App.controllers :leaderboard do
 
     sort_param = "player_data_points__#{ sort_by }".to_sym
     # Graph ensures that column names will be full-qualified, so no conflicts will happen.
-    @players= Player.
+    @players = Player.
+      select(:id, :last_update_at).
+      eager(:current_player_data_point).
       exclude(current_player_data_point_id: nil).
-      graph(:player_data_points, id: :current_player_data_point_id).
+      graph(
+        :player_data_points,
+        { id: :current_player_data_point_id },
+        join_type: :inner
+      ).
       order(Sequel.desc(sort_param)).
       paginate(page, Observatory::Config::Leaderboard::PAGINATION_SIZE)
     render 'players'

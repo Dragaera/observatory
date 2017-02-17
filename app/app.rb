@@ -7,8 +7,8 @@ module Observatory
     ##
     # Caching support.
     #
-    # register Padrino::Cache
-    # enable :caching
+    register Padrino::Cache
+    enable :caching
     #
     # You can customize caching store engines:
     #
@@ -17,7 +17,7 @@ module Observatory
     # set :cache, Padrino::Cache.new(:Memcached, :server => '127.0.0.1:11211', :exception_retry_limit => 1)
     # set :cache, Padrino::Cache.new(:Memcached, :backend => memcached_or_dalli_instance)
     # set :cache, Padrino::Cache.new(:Redis) # Uses default server at localhost
-    # set :cache, Padrino::Cache.new(:Redis, :host => '127.0.0.1', :port => 6379, :db => 0)
+    set :cache, Padrino::Cache.new(:Redis, :host => Observatory::Config::Redis::HOST, :port => Observatory::Config::Redis::PORT)
     # set :cache, Padrino::Cache.new(:Redis, :backend => redis_instance)
     # set :cache, Padrino::Cache.new(:Mongo) # Uses default server at localhost
     # set :cache, Padrino::Cache.new(:Mongo, :backend => mongo_client_instance)

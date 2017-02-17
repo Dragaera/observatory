@@ -8,7 +8,14 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Redis-based page cache for static pages.
+- Big performance improvements for player rank queries.
+- Minor performance improvements for player profile, search and leaderboard.
+
 ### Changed
+
+- Re-enabled dynamic rank on player profile.
+- Non-relevant player points no longer get stored in the database.
 
 ### Fixed
 
@@ -17,6 +24,8 @@ glance - what to expact from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+- Existing non-relevant player points from database.
 
 
 ## [0.14.1] - 2017-02-11

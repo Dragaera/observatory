@@ -19,15 +19,21 @@ class Player < Sequel::Model
     # Important to do this first, as equality check also checks `player_id`.
     point.player_id = id
     point.relevant = current_player_data_point != point
-    point.save
 
-    # Using `current_player_data_point` will *not* work, as that one checks
-    # whether the current and new object are equal, and only updates if they
-    # are not. 
-    # Due to us overwriting PlayerData#==, this would lead to non-relevant
-    # updates being discarded.
-    update(current_player_data_point_id: point.id)
+    if point.relevant
+      point.save
 
+      # Using `current_player_data_point` will *not* work, as that one checks
+      # whether the current and new object are equal, and only updates if they
+      # are not. 
+      # Due to us overwriting PlayerData#==, this would lead to non-relevant
+      # updates being discarded.
+      update(current_player_data_point_id: point.id)
+    else
+      logger.debug "Discarding irrelevant player data point of player #{ point.player_id }"
+      point.delete if point.exists?
+      false
+    end
   end
 
   many_to_one :current_player_data_point, class: :PlayerDataPoint, key: :current_player_data_point_id
@@ -47,13 +53,26 @@ class Player < Sequel::Model
     where(account_id: id).first
   end
 
-  def self.by_current_alias(name)
-    Player.
-      dataset.graph(:player_data_points,
-                    { players__current_player_data_point_id: :player_data_points__id }, 
-                    join_type: :inner,
-                    select: [:alias]).
-    text_search(:alias, name)
+  def self.by_current_alias(name = nil)
+    result = Player.
+      dataset.
+      select(:account_id, :id).
+      graph(
+        :player_data_points,
+        { players__current_player_data_point_id: :player_data_points__id },
+        join_type: :inner,
+        select: [
+          :alias,
+          :level,
+          :skill,
+        ]
+      )
+
+    if name
+      result.text_search(:alias, name)
+    else
+      result
+    end
   end
 
   def adagrad_sum
@@ -155,6 +174,7 @@ class Player < Sequel::Model
       # work, as we reraise the caught exception.
       update(
         update_scheduled_at: nil,
+        last_update_at:      Time.now,
         error_count:         0,
         error_message:       nil,
         enabled:             true,
@@ -205,19 +225,19 @@ class Player < Sequel::Model
       limit(count)
   end
 
-  def rank(col)
-    Player.
-      # Inner join essential, as there can be players without data (e.g.
-      # freshly added), which would otherwise be included in the join, which
-      # will then throw off the ranking. (NULL > number, I guess?)
-      graph(:player_data_points, [player_data_points__id: :current_player_data_point_id], join_type: :inner).
-      select { [
-        rank.function.over(order: Sequel.desc(col)),
-        :players__id
-      ] }.
-      all.
-      select { |hsh| hsh[:id] == id }.
-      first[:rank]
+  def rank(cols)
+    unless cols.is_a? Array
+      cols = [cols]
+    end
+
+    PlayerDataPoint.
+      where(id: Player.select(:current_player_data_point_id)).
+      select {
+        cols.map { |col| rank.function.over(order: Sequel.desc(col)).as("rank_#{ col }") } << :player_id
+      }.
+      from_self.
+      where(player_id: id).
+      first
   end
 
   # Return timestamp of last time player's data changed.
