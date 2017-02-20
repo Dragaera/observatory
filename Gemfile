@@ -27,6 +27,9 @@ gem 'resque'
 gem 'resque-scheduler'
 gem 'resque-job-stats'
 
+# BCrypt
+gem 'bcrypt'
+
 # Named timezones
 gem 'tzinfo'
 
