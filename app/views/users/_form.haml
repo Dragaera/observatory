@@ -1,0 +1,33 @@
+- if type == :new
+  - back_link = url(:users, :index)
+  - action = 'create'
+  - submit_caption = 'Create'
+- elsif type == :edit
+  - back_link = url(:users, :show, id: @user.id)
+  - action = 'edit'
+  - submit_caption = 'Edit'
+
+= form_for @user, target_url do |f|
+  - if flash[:form_error]
+    = partial 'form_errors', locals: { form_errors: flash[:form_error], action: action }
+
+  .form-group
+    = f.label :user
+    = f.text_field :user, class: 'form-control', required: true
+
+  .form-group
+    = f.label :password
+    = f.password_field :password, class: 'form-control', required: type == :new
+
+  .form-group
+    = f.label :password_confirm
+    = f.password_field :password_confirm, class: 'form-control', required: type == :new
+
+  .checkbox
+    %label
+      = f.check_box :active
+      Active
+
+  = f.submit submit_caption, class: 'btn btn-default'
+
+  = link_to 'Cancel', back_link, class: 'btn btn-link'

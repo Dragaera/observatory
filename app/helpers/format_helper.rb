@@ -47,6 +47,16 @@ module Observatory
 
         "#{ percentage }%"
       end
+
+      def to_bool(input)
+        if ['1', 1, 'true', 'y', 'yes'].include? input
+          true
+        elsif ['0', 0, 'false', 'n', 'no'].include? input
+          false
+        else
+          raise ArgumentError, "#{ input.inspect } could not be interpreted as boolean"
+        end
+      end
     end
 
     helpers FormatHelperHelper
