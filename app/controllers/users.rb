@@ -114,7 +114,7 @@ Observatory::App.controllers :users do
     user = User.authenticate(username, password)
     if user
       user.update(last_signin_at: DateTime.now)
-      session['login_user'] = user
+      session['login_user_id'] = user.id
       redirect('/')
     else
       redirect(url(:users, :login))
@@ -122,7 +122,7 @@ Observatory::App.controllers :users do
   end
 
   get :logout, map: '/logout' do
-    session.delete 'login_user'
+    session.delete 'login_user_id'
     redirect(url(:users, :login))
   end
 end

@@ -4,21 +4,20 @@ module Observatory
   class App
     module UsersHelper
       def authenticate!
+        # Don't enforce authentication on login page. ;)
         if request && request.route_obj && request.route_obj.name.to_s != 'users login'
-          login
+          current_user || redirect((url(:users, :login)))
         end
       end
 
-      def login
-        if session.key? 'login_user'
-          session['login_user']
-        else
-          redirect(url(:users, :login))
-        end
+      def current_user
+        return nil unless session.key? 'login_user_id'
+        id = session['login_user_id'].to_i
+        User[id]
       end
 
       def logged_in?
-        session['login_user']
+        !!current_user
       end
     end
 
