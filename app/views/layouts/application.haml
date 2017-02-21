@@ -51,10 +51,25 @@
             %li
               = link_to 'Stats', url(:observatory, :stats)
 
-            - if logged_in?
-              %li
-                = link_to 'Users', url(:users, :index)
+              %li.dropdown
+                %a.dropdown-toggle{ href: '#', 'data-toggle': 'dropdown', role: 'button' }
+                  Admin
+                  %span.caret
+                %ul.dropdown-menu
+                  - if logged_in?
+                    %li
+                      = link_to 'Users', url(:users, :index)
+                    %li
+                      = link_to 'Update frequencies', url(:update_frequencies, :index)
 
+                  - else
+                    %li
+                      = link_to 'Login', url(:users, :login)
+
+          - if current_user
+            %p.navbar-text.navbar-right
+              = "Welcome #{ current_user.user }"
+              = link_to "(logout)", url(:users, :logout)
           %p.navbar-text.navbar-right
             = link_to "Version: #{ Observatory::VERSION }", 'https://bitbucket.org/Lavode/observatory/src/master/CHANGELOG.md'
 
