@@ -51,6 +51,10 @@
             %li
               = link_to 'Stats', url(:observatory, :stats)
 
+            - if logged_in?
+              %li
+                = link_to 'Users', url(:users, :index)
+
           %p.navbar-text.navbar-right
             = link_to "Version: #{ Observatory::VERSION }", 'https://bitbucket.org/Lavode/observatory/src/master/CHANGELOG.md'
 
