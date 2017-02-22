@@ -5,4 +5,9 @@
 
 .row
   .col-md-6
-    = partial 'form', locals: { frequency: @frequency }
+    = form_tag url(:update_frequencies, :delete, id: @frequency.id), method: 'post', class: 'btn' do
+      = submit_tag 'Delete', class: 'btn btn-danger'
+
+.row
+  .col-md-6
+    = partial 'form', locals: { type: :edit, target_url: url(:update_frequencies, :edit, id: @frequency.id), frequency: @frequency }

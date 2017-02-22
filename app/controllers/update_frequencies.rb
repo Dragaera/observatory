@@ -8,6 +8,21 @@ Observatory::App.controllers :update_frequencies do
     render 'index'
   end
 
+  get :new do
+    @frequency = session['update_frequency'] || UpdateFrequency.new(enabled: true)
+    session.delete 'update_frequency'
+
+    render 'new'
+  end
+
+  post :new do
+    obj_params = params.fetch('update_frequency')
+
+    frequency = UpdateFrequency.new(obj_params)
+    frequency.save
+    redirect(url(:update_frequencies, :index))
+  end
+
   get :edit, map: '/update_frequencies/:id/edit' do
     @frequency = get_or_404(UpdateFrequency, params['id'])
 
@@ -25,6 +40,12 @@ Observatory::App.controllers :update_frequencies do
       fallback: to_bool(data.fetch('fallback')),
     )
 
+    redirect(url(:update_frequencies, :index))
+  end
+
+  post :delete, map: '/update_frequencies/:id/delete' do
+    frequency = get_or_404(UpdateFrequency, params['id'])
+    frequency.destroy
     redirect(url(:update_frequencies, :index))
   end
 end
