@@ -57,6 +57,12 @@ module Observatory
           raise ArgumentError, "#{ input.inspect } could not be interpreted as boolean"
         end
       end
+
+      def pp_form_errors(form_errors)
+        form_errors.map do |attr, errors|
+          "#{ attr.capitalize }: #{ errors.map(&:capitalize).join(', ') }"
+        end
+      end
     end
 
     helpers FormatHelperHelper
