@@ -15,7 +15,7 @@
         %tbody
           - @frequencies.each do |f|
             %tr
-              %td= link_to f.name, url(:update_frequencies, :show, f.id)
+              %td= link_to f.name, url(:update_frequencies, :edit, f.id)
               %td= pp_timespan f.interval
               %td= pp_timespan f.threshold
               %td= f.enabled
