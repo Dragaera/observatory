@@ -1,0 +1,26 @@
+= form_for frequency, url(:update_frequencies, :edit, id: frequency.id) do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', required: true
+
+  .form-group
+    = f.label :interval
+    = f.text_field :interval, class: 'form-control', required: true
+
+  .form-group
+    = f.label :threshold
+    = f.text_field :threshold, class: 'form-control', required: true
+
+  .checkbox
+    %label
+      = f.check_box :enabled
+      Active
+
+  .checkbox
+    %label
+      = f.check_box :fallback
+      Fallback
+
+  = f.submit 'Edit', class: 'btn btn-default'
+
+  = link_to 'Cancel', url(:update_frequencies, :index), class: 'btn btn-link'
