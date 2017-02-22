@@ -1,0 +1,28 @@
+.page-header
+  %h1 Update Frequencies
+
+.row
+  .col-md-12
+    %a{ href: url(:update_frequencies, :new) }
+      %span.glyphicon.glyphicon-plus
+
+.row
+  .col-md-12
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Frequency
+          %th Interval
+          %th Threshold
+          %th Enabled
+          %th Fallback
+          %th # Players
+        %tbody
+          - @frequencies.each do |f|
+            %tr
+              %td= link_to f.name, url(:update_frequencies, :edit, f.id)
+              %td= pp_timespan f.interval
+              %td= pp_timespan f.threshold
+              %td= f.enabled
+              %td= f.fallback
+              %td= f.players_dataset.count

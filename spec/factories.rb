@@ -1,6 +1,14 @@
 FactoryGirl.define do
   to_create(&:save)
 
+  trait :active do
+    active true
+  end
+
+  trait :inactive do
+    active false
+  end
+
   factory :player_query do
     sequence(:query) { |i| "fake-vanity-url-#{ i }" }
     pending true
@@ -54,5 +62,10 @@ FactoryGirl.define do
 
   factory :player_data_export do
     player
+  end
+
+  factory :user do
+    sequence(:user) { |i| "user#{ i }" }
+    password 'sekkrit'
   end
 end

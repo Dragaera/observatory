@@ -1,0 +1,15 @@
+.page-headre
+  %h1 Login
+
+.row
+  .col-md-6
+    = form_tag url(:users, :login), method: 'post' do
+      .form-group
+        = label_tag :user
+        = text_field_tag :user, class: 'form-control'
+
+      .form-group
+        = label_tag :password
+        = password_field_tag :password, class: 'form-control'
+
+      = submit_tag 'Login', class: 'btn btn-default'

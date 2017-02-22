@@ -1,0 +1,31 @@
+- if type == :new
+  - submit_caption = 'Create'
+- elsif type == :edit
+  - submit_caption = 'Edit'
+
+= form_for frequency, target_url do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', required: true
+
+  .form-group
+    = f.label :interval
+    = f.text_field :interval, class: 'form-control', required: true
+
+  .form-group
+    = f.label :threshold
+    = f.text_field :threshold, class: 'form-control', required: true
+
+  .checkbox
+    %label
+      = f.check_box :enabled
+      Active
+
+  .checkbox
+    %label
+      = f.check_box :fallback
+      Fallback
+
+  = f.submit submit_caption, class: 'btn btn-default'
+
+  = link_to 'Cancel', url(:update_frequencies, :index), class: 'btn btn-link'

@@ -8,6 +8,9 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Views to manage update frequencies.
+- User accounts with authentication, and management viewes.
+
 ### Changed
 
 ### Fixed
@@ -17,6 +20,10 @@ glance - what to expact from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+- Caching of fully-static pages. Performance gains are minor, and implementing
+  cache-invvalidation - as needed now that we have authenticationn - not worth
+  it.
 
 
 ## [v0.15.0] - 2017-02-17

@@ -1,0 +1,8 @@
+.page-header
+  %h1
+    Create
+    %small Louis XIV User
+
+.row
+  .col-md-6
+    = partial 'users/form', locals: { type: :new, target_url: url(:users, :new) }
