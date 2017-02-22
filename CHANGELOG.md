@@ -8,6 +8,9 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Views to manage update frequencies.
+- User accounts with authentication, and management viewes.
+
 ### Changed
 
 ### Fixed
