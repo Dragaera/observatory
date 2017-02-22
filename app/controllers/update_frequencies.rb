@@ -1,4 +1,8 @@
 Observatory::App.controllers :update_frequencies do
+  before do
+    authenticate!
+  end
+
   get :index do
     @frequencies = UpdateFrequency.order(:interval)
     render 'index'
