@@ -10,6 +10,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Update dependencies.
+
 ### Fixed
 
 - 'Last active' on leaderboard showed time of last update instead of last time
