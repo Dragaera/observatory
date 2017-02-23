@@ -12,6 +12,9 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- 'Last active' on leaderboard showed time of last update instead of last time
+  the player's data changed.
+
 ### Security
 
 ### Deprecated
