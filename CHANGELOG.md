@@ -10,18 +10,25 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
-- Update dependencies.
-
 ### Fixed
-
-- 'Last active' on leaderboard showed time of last update instead of last time
-  the player's data changed.
 
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.16.1]
+
+### Changed
+
+- Update dependencies.
+
+### Fixed
+
+- 'Last active' on leaderboard showed time of last update instead of last time
+  the player's data changed.
 
 
 ## [0.16.0] - 2017-02-22
