@@ -29,8 +29,8 @@ glance - what to expact from upgrading to a new version.
 ### Removed
 
 - Caching of fully-static pages. Performance gains are minor, and implementing
-  cache-invvalidation - as needed now that we have authenticationn - not worth
-  it.
+  cache-invalidation - as would be needed now that we have authentication - not
+  worth it.
 
 
 ## [0.15.0] - 2017-02-17
