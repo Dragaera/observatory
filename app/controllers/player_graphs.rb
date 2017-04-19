@@ -28,18 +28,18 @@ Observatory::App.controllers :player_graphs, parent: :player do
 
     [
       {
-        name: 'Aliens',
-        data: @player.
-                player_data_points_dataset.
-                where(relevant: true).
-                map { |point| [point.created_at.iso8601, (point.time_alien / 3600.0).round(2)] }
-      },
-      {
         name: 'Marines',
         data: @player.
                 player_data_points_dataset.
                 where(relevant: true).
                 map { |point| [point.created_at.iso8601, (point.time_marine / 3600.0).round(2)] }
+      },
+      {
+        name: 'Aliens',
+        data: @player.
+                player_data_points_dataset.
+                where(relevant: true).
+                map { |point| [point.created_at.iso8601, (point.time_alien / 3600.0).round(2)] }
       },
     ].to_json
   end

@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Configurable colours for aliens and marines in graphs.
+
 ### Changed
 
 ### Fixed
