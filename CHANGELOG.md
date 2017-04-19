@@ -13,6 +13,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Update Ruby base image, Tini, gems
+
 ### Fixed
 
 ### Security
