@@ -87,5 +87,10 @@ module Observatory
       ALIEN  = ENV.fetch('COLOUR_ALIEN', '#FF0000')
       MARINE = ENV.fetch('COLOUR_MARINE', '#0000FF')
     end
+
+    module Localization
+      DATE_FORMAT     = ENV.fetch('LOCALIZATION_DATE_FORMAT', '%F')
+      DATETIME_FORMAT = ENV.fetch('LOCALIZATION_DATETIME_FORMAT', '%FT%T%:z')
+    end
   end
 end

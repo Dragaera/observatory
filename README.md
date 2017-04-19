@@ -149,3 +149,10 @@ timezone.
 | --------------- | ------------- | -------- | ------------------------------------------------- |
 | `COLOUR_ALIEN`  | #FF0000       | y        | RGB colour to use to represent aliens on graphs.  |
 | `COLOUR_MARINE` | #0000FF       | y        | RGB colour to use to represent marines on graphs. |
+
+### Localization
+
+| Variable                       | Default value | Required | Description                                                                                                                                                                                |
+| ------------------------------ | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `LOCALIZATION_DATE_FORMAT`     | %F            | y        | Formatting directive which to use for formatting dates. Check the Ruby documentation for specifics, although it behaves nearly identical to `strftime` of the ISO C / POSIX standard.      |
+| `LOCALIZATION_DATETIME_FORMAT` | %FT%T%:z      | y        | Formatting directive which to use for formatting date-times. Check the Ruby documentation for specifics, although it behaves nearly identical to `strftime` of the ISO C / POSIX standard. |

@@ -63,6 +63,14 @@ module Observatory
           "#{ attr.capitalize }: #{ errors.map(&:capitalize).join(', ') }"
         end
       end
+
+      def pp_date(date)
+        date.strftime(Config::Localization::DATE_FORMAT)
+      end
+
+      def pp_datetime(datetime)
+        datetime.strftime(Config::Localization::DATETIME_FORMAT)
+      end
     end
 
     helpers FormatHelperHelper
