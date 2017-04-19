@@ -8,12 +8,7 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- Configurable colours for aliens and marines in graphs.
-- Configurable formatting directives for date and datetime.
-
 ### Changed
-
-- Update Ruby base image, Tini, gems
 
 ### Fixed
 
@@ -22,6 +17,18 @@ glance - what to expact from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.17.0]
+
+### Added
+
+- Configurable colours for aliens and marines in graphs.
+- Configurable formatting directives for date and datetime.
+
+### Changed
+
+- Update Ruby base image, Tini, gems
 
 
 ## [0.16.1]
