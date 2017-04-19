@@ -10,6 +10,10 @@ module Observatory
           stacked: true,
           curve: false,
           download: "playtime_#{ player.account_id }",
+          colors: [
+            Config::Colour::MARINE,
+            Config::Colour::ALIEN,
+          ],
           library: {
             title: {
               display: true,

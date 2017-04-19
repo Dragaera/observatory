@@ -82,5 +82,10 @@ module Observatory
     module Steam
       WEB_API_KEY = ENV['STEAM_WEB_API_KEY']
     end
+
+    module Colour
+      ALIEN  = ENV.fetch('COLOUR_ALIEN', '#FF0000')
+      MARINE = ENV.fetch('COLOUR_MARINE', '#0000FF')
+    end
   end
 end
