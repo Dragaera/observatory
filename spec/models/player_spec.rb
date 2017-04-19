@@ -270,4 +270,24 @@ RSpec.describe Player do
       end
     end
   end
+
+  describe '#rank' do
+    let!(:player_1) { create(:player, next_update_at: Time.now + 20 * 60 * 60) }
+    let!(:player_2) { create(:player, next_update_at: Time.now + 22 * 60 * 60) }
+    let!(:player_3) { create(:player, next_update_at: Time.now + 12 * 60 * 60) }
+
+    before do
+      player_1.add_player_data_point(build(:player_data_point, skill: 100))
+      player_2.add_player_data_point(build(:player_data_point, skill: 10))
+      player_3.add_player_data_point(build(:player_data_point, skill: 11))
+    end
+
+    context 'when querying for a single column' do
+      it 'should return the rank of the player for the queried columns' do
+        expect(player_1.rank(:skill)[:rank_skill]).to eq 1
+        expect(player_2.rank(:skill)[:rank_skill]).to eq 3
+        expect(player_3.rank(:skill)[:rank_skill]).to eq 2
+      end
+    end
+  end
 end
