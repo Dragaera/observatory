@@ -13,7 +13,7 @@ gem 'sequel'
 # Test requirements
 
 # Padrino Stable Gem
-gem 'padrino', '0.13.3.3'
+gem 'padrino', '0.14.1'
 
 # Application server
 gem 'unicorn'
