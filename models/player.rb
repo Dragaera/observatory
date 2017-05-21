@@ -59,7 +59,7 @@ class Player < Sequel::Model
       select(:account_id, :id).
       graph(
         :player_data_points,
-        { players__current_player_data_point_id: :player_data_points__id },
+        { Sequel[:players][:current_player_data_point_id] => Sequel[:player_data_points][:id] },
         join_type: :inner,
         select: [
           :alias,
