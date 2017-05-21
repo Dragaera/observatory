@@ -7,7 +7,7 @@ Observatory::App.controllers :leaderboard do
 
     redirect url(:leaderboard, :players) unless ALLOWED_SORT_COLUMNS.include? sort_by
 
-    sort_param = "player_data_points__#{ sort_by }".to_sym
+    sort_param = Sequel[:player_data_points][sort_by]
     # Graph ensures that column names will be full-qualified, so no conflicts will happen.
     @players = Player.
       select(:id, :last_update_at).

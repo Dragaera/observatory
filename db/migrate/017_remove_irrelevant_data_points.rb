@@ -21,7 +21,7 @@ Sequel.migration do
     from(:players).
       update(
         last_update_at: from(:player_data_points).
-                          where(id: :players__current_player_data_point_id).
+                          where(id: Sequel[:players][:current_player_data_point_id]).
                           select(:created_at)
     )
   end

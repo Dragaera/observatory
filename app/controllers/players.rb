@@ -60,14 +60,14 @@ Observatory::App.controllers :players do
       # badges.
       # Mind that this is actually not a plain Player dataset, but a join on
       # data points, so care must be taken to refer to the propre `id`.
-      indirect_results = indirect_results.where(players__id: ids)
+      indirect_results = indirect_results.where(Sequel[:players][:id] => ids)
       direct_results = direct_results.map do |ds|
         ds.where(id: ids)
       end
     end
 
     indirect_results = indirect_results.
-      exclude(players__id: direct_results.uniq.map(&:id)).
+      exclude(Sequel[:players][:id] => direct_results.uniq.map(&:id)).
       paginate(page, Observatory::Config::Player::PAGINATION_SIZE)
 
     @results = {
