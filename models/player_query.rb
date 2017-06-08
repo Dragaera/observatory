@@ -8,10 +8,9 @@ class PlayerQuery < Sequel::Model
   end
 
   def execute(resolver: nil)
-    resolver ||= Observatory::SteamID
-
     begin
-      update(account_id: resolver.resolve(query))
+      resolver ||= SteamID::SteamID
+      update(account_id: resolver.from_string(query, steam_api_key: Observatory::Config::Steam::WEB_API_KEY))
       player = Player.get_or_create(account_id: self.account_id)
       player.async_update_data
 
@@ -21,7 +20,7 @@ class PlayerQuery < Sequel::Model
 
       return player
 
-    rescue ArgumentError => e
+    rescue ArgumentError, WebApiError => e
       update(pending: false,
              success: false,
              executed_at: DateTime.now,

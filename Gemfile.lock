@@ -151,6 +151,8 @@ GEM
     steam-condenser (1.3.11)
       multi_json (~> 1.6)
       multi_xml (~> 0.5)
+    steam-id2 (0.3.0)
+      steam-condenser (~> 1.3)
     temple (0.8.0)
     thor (0.19.4)
     thread_safe (0.3.6)
@@ -195,6 +197,7 @@ DEPENDENCIES
   sequel-pg-trgm
   sequel_pg
   steam-condenser
+  steam-id2 (~> 0.3.0)
   timecop
   tzinfo
   unicorn

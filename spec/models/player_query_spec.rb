@@ -4,14 +4,14 @@ RSpec.describe PlayerQuery do
   let(:query) { create(:player_query) }
 
   let(:resolver_success) do
-    resolver = double(Observatory::SteamID)
-    allow(resolver).to receive(:resolve) { 12345 }
+    resolver = double(SteamID::SteamID)
+    allow(resolver).to receive(:from_string) { 12345 }
 
     resolver
   end
   let(:resolver_failure) do
-    resolver = double(Observatory::SteamID)
-    allow(resolver).to receive(:resolve).and_raise(ArgumentError, 'Invalid identifier')
+    resolver = double(SteamID::SteamID)
+    allow(resolver).to receive(:from_string).and_raise(ArgumentError, 'Invalid identifier')
 
     resolver
   end

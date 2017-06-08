@@ -29,8 +29,7 @@ Observatory::App.controllers :players do
       # Might be a Steam ID
       begin
         logger.debug "Searching for SteamID #{ search_param }"
-        resolver = Observatory::SteamID
-        account_id = resolver.resolve(search_param)
+        account_id = SteamID::SteamID.from_string(search_param, steam_api_key: Observatory::Config::Steam::WEB_API_KEY)
         logger.debug "Resolved to #{ account_id } as Steam ID"
 
         player = Player.by_account_id(account_id)
@@ -41,7 +40,7 @@ Observatory::App.controllers :players do
         else
           logger.debug 'No matching player found'
         end
-      rescue ArgumentError
+      rescue ArgumentError, WebApiError
         # Or not
         logger.debug 'Not a valid Steam ID'
       end
