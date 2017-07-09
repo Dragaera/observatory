@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Configure databasee port via DB_PORT.
+
 ### Changed
 
 - Update dependencies.

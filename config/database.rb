@@ -38,6 +38,7 @@ Sequel.typecast_timezone    = tz_cast
 opts            = { loggers: [logger] }
 opts[:adapter]  = Observatory::Config::Database::ADAPTER
 opts[:host]     = Observatory::Config::Database::HOST     if Observatory::Config::Database::HOST
+opts[:port]     = Observatory::Config::Database::PORT     if Observatory::Config::Database::PORT
 opts[:database] = Observatory::Config::Database::DATABASE if Observatory::Config::Database::DATABASE
 opts[:user]     = Observatory::Config::Database::USER     if Observatory::Config::Database::USER
 opts[:password] = Observatory::Config::Database::PASS     if Observatory::Config::Database::PASS
