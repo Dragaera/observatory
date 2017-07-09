@@ -1,6 +1,6 @@
 FROM ruby:2.4.1
 
-MAINTAINER Michael Senn <michael@morrolan.ch>
+LABEL maintainer="Michael Senn <michael@morrolan.ch>"
 
 EXPOSE 8080
 
