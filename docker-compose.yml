@@ -1,18 +1,21 @@
-version: '2'
+version: '3'
+
+networks:
+  observatory-dev:
 
 services:
   database:
-    image: 'postgres'
-    env_file: .env.docker
+    image: 'lavode/observatory-database:9.4'
+    env_file: .env.development
+    networks:
+      - observatory-dev
+    ports:
+      - 15432:5432
 
   redis:
-    image: 'redis:latest'
-    env_file: .env.docker
-
-  test:
-    image: 'observatory:latest'
-    command: ci-spec
-    env_file: .env.docker
-    depends_on:
-      - redis
-      - database
+    image: 'redis:3.0'
+    env_file: .env.development
+    networks:
+      - observatory-dev
+    ports:
+      - 16379:6379
