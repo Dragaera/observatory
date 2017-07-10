@@ -74,8 +74,9 @@ timezone.
 
 | Variable      | Default value | Required | Description                                                                                |
 | ------------- | ------------- | -------- | ------------------------------------------------------------------------------------------ |
-| `DB_ADAPTER`  |               | y        | Database adapter which to use. Only valid option is `postgres`.                      |
+| `DB_ADAPTER`  |               | y        | Database adapter which to use. Only valid option is `postgres`.                            |
 | `DB_HOST`     |               | n        | Hostname of database server. Empty will use whatever the adpater wants - likely localhost. |
+| `DB_PORT`     |               | n        | Port of database server. Empty will use whatever the adpater wants.                        |
 | `DB_DATABASE` |               | y        | Name of database which to use.                                                             |
 | `DB_USER`     |               | n        | User which to authenticate as. Empty if no authentication needed.                          |
 | `DB_PASS`     |               | n        | Password of user to authenticate as. Empty if no authentication needed.                    |
