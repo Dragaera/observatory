@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function main {
+    _wait_for_redis
     _wait_for_database
 
     case "$1" in
@@ -43,11 +44,23 @@ function main {
 }
 
 function _wait_for_database {
+    echo "Waiting for database: $DB_HOST:$DB_PORT"
     ./wait-for-it.sh $DB_HOST:$DB_PORT --timeout=20
     if [ $? -eq 0 ]; then
         echo "Database ready"
     else
         echo "Databse not ready in time"
+        exit 1
+    fi
+}
+
+function _wait_for_redis {
+    echo "Waiting for Redis: $REDIS_HOST:$REDIS_PORT"
+    ./wait-for-it.sh $REDIS_HOST:$REDIS_PORT --timeout=20
+    if [ $? -eq 0 ]; then
+        echo "Redis ready"
+    else
+        echo "Redis not ready in time"
         exit 1
     fi
 }

@@ -1,5 +1,19 @@
 # Observatory
 
+## Running tests
+
+You can easily run tests within a fully dockerized environment.
+
+This has several benefits - you are not dependenant on local systems, not
+influenced by dev systems, and as close to production as possible.
+
+```
+# Build container
+docker build -t lavode/observatory:latest .
+# Launch tests
+docker-compose -f docker-compose.testing.yml up
+```
+
 ## Configuration
 
 Configuration is done exclusively via environment variables. There are some

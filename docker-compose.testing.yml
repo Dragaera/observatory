@@ -1,0 +1,24 @@
+version: '3'
+
+networks:
+  observatory-testing:
+
+services:
+  database-testing:
+    image: 'lavode/observatory-database:9.4'
+    env_file: .env.testing
+    networks:
+      - observatory-testing
+
+  redis-testing:
+    image: 'redis:3.0'
+    env_file: .env.testing
+    networks:
+      - observatory-testing
+
+  observatory-tests:
+    image: 'lavode/observatory:latest'
+    env_file: .env.testing
+    networks:
+      - observatory-testing
+    command: ci-spec
