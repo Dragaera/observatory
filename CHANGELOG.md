@@ -8,13 +8,7 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
-- Configure databasee port via DB_PORT.
-
 ### Changed
-
-- Update dependencies.
-- Use steam_id2 gem to resolve Steam IDs.
-  Unifies resolving behaviour with Lerk Discord bot.
 
 ### Fixed
 
@@ -23,6 +17,19 @@ glance - what to expact from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.18.0]
+
+### Added
+
+- Configure databasee port via DB_PORT.
+
+### Changed
+
+- Update dependencies.
+- Use steam_id2 gem to resolve Steam IDs.
+  Unifies resolving behaviour with Lerk Discord bot.
 
 
 ## [0.17.0]
