@@ -10,6 +10,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Minify Chartkick JS.
+
 ### Fixed
 
 ### Security
