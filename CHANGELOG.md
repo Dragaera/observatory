@@ -20,6 +20,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Removed
 
+- 'Player data point relevance' graph, as we only store relevant data points.
+
 
 ## [0.18.0]
 
