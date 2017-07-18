@@ -21,7 +21,7 @@ module Observatory
       end
 
       def player_update_frequencies_graph()
-        bar_chart(
+        pie_chart(
           url(:observatory, :player_update_frequencies_graph),
           download: "player_update_frequencies",
           legend: true,
