@@ -11,6 +11,7 @@ glance - what to expact from upgrading to a new version.
 ### Changed
 
 - Minify Chartkick JS.
+- Use pie chart for 'player update frequency' graph.
 
 ### Fixed
 
@@ -20,8 +21,10 @@ glance - what to expact from upgrading to a new version.
 
 ### Removed
 
+- 'Player data point relevance' graph, as we only store relevant data points.
 
-## [0.18.0]
+
+## [0.18.0] - 2017-07-14
 
 ### Added
 
@@ -34,7 +37,7 @@ glance - what to expact from upgrading to a new version.
   Unifies resolving behaviour with Lerk Discord bot.
 
 
-## [0.17.0]
+## [0.17.0] - 2017-04-19
 
 ### Added
 
@@ -46,7 +49,7 @@ glance - what to expact from upgrading to a new version.
 - Update Ruby base image, Tini, gems
 
 
-## [0.16.1]
+## [0.16.1] - 2017-02-23
 
 ### Changed
 
@@ -168,14 +171,14 @@ glance - what to expact from upgrading to a new version.
   features.
 
 
-## [0.11.2]
+## [0.11.2] - 2017-01-28
 
 ### Security
 
 - Enable CSRF protection. Configuration issue fixed.
 
 
-## [0.11.1]
+## [0.11.1] - 2017-01-28
 
 ### Security
 

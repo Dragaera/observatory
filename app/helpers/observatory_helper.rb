@@ -21,7 +21,7 @@ module Observatory
       end
 
       def player_update_frequencies_graph()
-        bar_chart(
+        pie_chart(
           url(:observatory, :player_update_frequencies_graph),
           download: "player_update_frequencies",
           legend: true,
@@ -29,20 +29,6 @@ module Observatory
             title: {
               display: true,
               text: 'Player Update Frequencies',
-            }
-          }
-        )
-      end
-
-      def player_data_points_relevance_graph()
-        pie_chart(
-          url(:observatory, :player_data_points_relevance_graph),
-          download: "player_data_points_relevance",
-          legend: true,
-          library: {
-            title: {
-              display: true,
-              text: 'Player Data Points Relevance',
             }
           }
         )
