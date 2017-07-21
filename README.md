@@ -8,10 +8,8 @@ This has several benefits - you are not dependenant on local systems, not
 influenced by dev systems, and as close to production as possible.
 
 ```
-# Build container
-docker build -t lavode/observatory:latest .
-# Launch tests
-docker-compose -f docker-compose.testing.yml up
+# Build container and run tests
+docker-compose -f docker-compose.testing.yml up --build
 ```
 
 ## Configuration

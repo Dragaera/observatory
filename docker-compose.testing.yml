@@ -17,6 +17,10 @@ services:
       - observatory-testing
 
   observatory-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
     image: 'lavode/observatory:latest'
     env_file: .env.testing
     networks:
