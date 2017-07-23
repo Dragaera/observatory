@@ -12,6 +12,8 @@ glance - what to expact from upgrading to a new version.
 
 - Minify Chartkick JS.
 - Use pie chart for 'player update frequency' graph.
+- Update `sequel-pg-trgm` to latest git version.
+  Removes deprecated Sequel behaviour.
 
 ### Fixed
 
