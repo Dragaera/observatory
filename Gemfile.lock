@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/mitchellhenke/sequel-pg-trgm
+  revision: b9148f1a245a170e6d7b8312d4e49a6d00e1b0c6
+  ref: b9148f1a
+  specs:
+    sequel-pg-trgm (0.0.2)
+      sequel (> 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -137,8 +145,6 @@ GEM
     rufus-scheduler (3.4.2)
       et-orbi (~> 1.0)
     sequel (4.48.0)
-    sequel-pg-trgm (0.0.2)
-      sequel (> 3.0)
     sequel_pg (1.7.0)
       pg (>= 0.8.0)
       sequel (>= 4.0.0)
@@ -194,7 +200,7 @@ DEPENDENCIES
   resque-scheduler
   rspec
   sequel
-  sequel-pg-trgm
+  sequel-pg-trgm!
   sequel_pg
   steam-condenser
   steam-id2 (~> 0.3.0)
