@@ -1,28 +1,28 @@
 version: '3'
 
 networks:
-  observatory-testing:
+  observatory-ci:
 
 services:
-  database-testing:
+  database-ci:
     image: 'lavode/observatory-database:9.4'
-    env_file: .env.testing
+    env_file: .env.ci
     networks:
-      - observatory-testing
+      - observatory-ci
 
-  redis-testing:
+  redis-ci:
     image: 'redis:3.0'
-    env_file: .env.testing
+    env_file: .env.ci
     networks:
-      - observatory-testing
+      - observatory-ci
 
-  observatory-tests:
+  observatory-ci:
     build:
       context: .
       dockerfile: Dockerfile
 
     image: 'lavode/observatory:latest'
-    env_file: .env.testing
+    env_file: .env.ci
     networks:
-      - observatory-testing
+      - observatory-ci
     command: ci-spec
