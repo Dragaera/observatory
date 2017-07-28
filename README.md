@@ -1,18 +1,14 @@
 # Observatory
 
-## Running tests
+This is the git repository of the Observatory - a basic webinterface to the
+Hive 2 API of Natural Selection 2.
 
-You can easily run tests within a fully dockerized environment.
+A live version of this application can be found at
+https://observatory.morrolan.ch.
 
-This has several benefits - you are not dependenant on local systems, not
-influenced by dev systems, and as close to production as possible.
+## Running
 
-```
-# Build container and run tests
-docker-compose -f docker-compose.testing.yml up --build
-```
-
-## Configuration
+### Configuration
 
 Configuration is done exclusively via environment variables. There are some
 which need to be set for proper operation, but wherever possible, sane defaults
@@ -26,21 +22,21 @@ application to function properly.
 Hence, required settings with no default value are the minimum set which you
 must define manually.
 
-### General
+#### General
 
 | Variable          | Default value | Required | Description                                                                                                                           |
 | ----------------- | ------------- | -------- | -----------------------------------------------                                                                                       |
 | `DEBUG`           |               | n        | If set, this application will dump potentially sensitive session information into the log.                                            |
 | `SESSION_SECRET`  |               | y        | An alphanumeric string which is used to encrypt cookies. This config must be identical on all hosts, if you run a loadbalanced setup! |
 
-### Unicorn
+#### Unicorn
 
 | Variable          | Default value | Required | Description                                                             |
 | ----------------- | ------------- | -------- | ----------------------------------------------------------------------- |
 | `UNICORN_LISTEN`  | 8080          | y        | Port which the application server will bind to.                         |
 | `UNICORN_WORKERS` | 2             | y        | Number of worker processes. # of CPU cores + 1 is likely a good choice. |
 
-### Timezone
+#### Timezone
 
 Dealing with timezones can be rather frustrating, as the options available vary
 depending on the database adapter.
@@ -60,13 +56,13 @@ named-timezone for UTC, whereas `utc` will use the basic-behaviour UTC.
 | `TIMEZONE_TYPECAST`     | TIMEZONE_APPLICATION | y        | Timezone which *unmarked* timestamps will be assumed to be in. |
 
 
-#### Recommended setup for named-timezone-capable adapters
+##### Recommended setup for named-timezone-capable adapters
 
 * `TIMEZONE_DATABASE` = UTC
 * `TIMEZONE_APPLICATION` = `Your/Local/Timezone`
 * Do not set `TZ`
 
-#### Recommended setup for non-named-timezone-capable adapters
+##### Recommended setup for non-named-timezone-capable adapters
 
 * `TIMEZONE_DATABASE` = utc
 * `TIMEZONE_APPLICATION` = local
@@ -75,14 +71,14 @@ named-timezone for UTC, whereas `utc` will use the basic-behaviour UTC.
 This works (in my tests) well, at the cost of modifying the container's
 timezone.
 
-### Redis
+#### Redis
 
 | Variable       | Default value | Required | Description              |
 | -------------- | ------------- | -------- | ------------------------ |
 | `REDIS_HOST`   | 127.0.0.1     | y        | Hostname of Redis server |
 | `REDIS_PORT`   | 6379          | y        | Port of Redis server     |
 
-### Database
+#### Database
 
 | Variable      | Default value | Required | Description                                                                                |
 | ------------- | ------------- | -------- | ------------------------------------------------------------------------------------------ |
@@ -93,14 +89,14 @@ timezone.
 | `DB_USER`     |               | n        | User which to authenticate as. Empty if no authentication needed.                          |
 | `DB_PASS`     |               | n        | Password of user to authenticate as. Empty if no authentication needed.                    |
 
-### Resque
+#### Resque
 
 | Variable                    | Default value | Required | Description                                                                     |
 | --------------------------- | ------------- | -------- | ------------------------------------------------------------------------------- |
 | `RESQUE_WEB_PATH`           |               | n        | URL where the Resque GUI will be made available. Empty to disable Resque GUI.   |
 | `RESQUE_DURATIONS_RECORDED` | 1000          | y        | Number of past jobs to use for calculation of floating average in stats plugin. |
 
-### Leaderboard
+#### Leaderboard
 
 | Variable                             | Default value | Required | Description                                                         |
 | ------------------------------------ | ------------- | -------- | ------------------------------------------------------------------- |
@@ -109,7 +105,7 @@ timezone.
 | `LEADERBOARD_PAGINATION_SURROUNDING` | 3             | y        | Number of pages in pagination toolbar surrounding the current page. |
 | `LEADERBOARD_PAGINATION_TRAILING`    | 5             | y        | Number of trailing pages in pagination toolbar.                     |
 
-### Profile
+#### Profile
 
 | Variable                         | Default value | Required | Description                                                         |
 | -------------------------------- | ------------- | -------- | --------------------------------------------------------------------|
@@ -118,7 +114,7 @@ timezone.
 | `PROFILE_PAGINATION_SURROUNDING` | 3             | y        | Number of pages in pagination toolbar surrounding the current page. |
 | `PROFILE_PAGINATION_TRAILING`    | 5             | y        | Number of trailing pages in pagination toolbar.                     |
 
-### Player
+#### Player
 
 | Variable                         | Default value | Required | Description                                                         |
 | -------------------------------- | ------------- | -------- | --------------------------------------------------------------------|
@@ -129,7 +125,7 @@ timezone.
 | `PLAYER_ERROR_THRESHOLD`         | 3             | y        | Number of failed data-retrieval attempts after which a player will be disabled.  This only affects players which never had a successful data retrieval. |
 | `PLAYER_INVALID_RETENTION_TIME`  | 3600          | y        | Number of seconds after which disabled players without data will be removed. |
 
-### Player Data
+#### Player Data
 
 | Variable                                      | Default value        | Required | Description                                                                                                                                  |
 | --------------------------------------------- | -------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -139,7 +135,7 @@ timezone.
 | `PLAYER_DATA_EXPORT_ROOT`                     | /mnt/observatory     | y        | Path in the file system where generated CSVs will be stored for a certain duration. Default value is suitable for running in a Docker container and mounting a volume there - but feel free to adjust to your liking. |
 | `PLAYER_DATA_EXPORT_EXPIRY_THRESHOLD`         | 604800               | y        | Number of seconds after which a player data export will be expired, that is its file deleted. Set to 0 to keep indefinitely. |
 
-### Rate Limiting
+#### Rate Limiting
 
 | Variable                             | Default value | Required | Description                                                   |
 | ------------------------------------ | ------------- | -------- | ------------------------------------------------------------- |
@@ -150,22 +146,82 @@ timezone.
 | `RATE_LIMITING_BACKGROUND_THRESHOLD` | 2             | y        | Maximum number of user-initiated API queries in set interval. |
 | `RATE_LIMITING_BACKGROUND_INTERVAL`  | 1             | y        | Interval duration in seconds.                                 |
 
-### Steam
+#### Steam
 
 | Variable                           | Default value | Required | Description                                                                                           |
 | ---------------------------------- | ------------- | -------- | ----------------------------------------------------------------------------------------------------- |
 | `STEAM_WEB_API_KEY`                |               | n        | Key for Steam Web API, used for name resolution. If undefined, name resolution will not be supported. |
 
-### Colour
+#### Colour
 
 | Variable        | Default value | Required | Description                                       |
 | --------------- | ------------- | -------- | ------------------------------------------------- |
 | `COLOUR_ALIEN`  | #FF0000       | y        | RGB colour to use to represent aliens on graphs.  |
 | `COLOUR_MARINE` | #0000FF       | y        | RGB colour to use to represent marines on graphs. |
 
-### Localization
+#### Localization
 
 | Variable                       | Default value | Required | Description                                                                                                                                                                                |
 | ------------------------------ | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `LOCALIZATION_DATE_FORMAT`     | %F            | y        | Formatting directive which to use for formatting dates. Check the Ruby documentation for specifics, although it behaves nearly identical to `strftime` of the ISO C / POSIX standard.      |
 | `LOCALIZATION_DATETIME_FORMAT` | %FT%T%:z      | y        | Formatting directive which to use for formatting date-times. Check the Ruby documentation for specifics, although it behaves nearly identical to `strftime` of the ISO C / POSIX standard. |
+
+## Developing
+
+Want to work on this application? Here's some steps to get you started.
+
+### Install dependencies
+
+In order to conveniently work on the application, you will need:
+
+- Ruby version manager, eg pry, rvm, rbenv, ...
+- Bundler
+- Docker & docker-compose
+- Install ruby dependencies (`bundle install`)
+
+### Prepare environment
+
+The easiest way to spawn the required environment (database, redis, ...) is via
+the supplied `docker-compose` file. This will provide you with the required
+environment to run a development server, as well as tests, on your machine.
+
+Alternatively, you will need:
+
+- PostgreSQL
+- Redis
+
+If you set these up yourself, you will have to adjust the config in the
+following step accordingly.
+
+
+### Run development server
+
+- Copy .env.dev.dist to .env.dev
+- Open configuration file, and adjust all settings marked as `CHANGEME`
+- Spawn environment via `docker-compose up`
+- Run application server: `bundle exec padrino s`
+- Run worker process: `QUEUE=* bundle exec rake resque:work`
+- Run scheduler process: `bundle exec rake resque:scheduler`
+- Now the server should be accessible at http://localhost:3000
+
+
+### Running tests
+
+- Copy .env.test.dist to .env.test
+- Open configuration file, and adjust all settings marked as `CHANGEME`
+- Spawn environment via `docker-compose up` (if already done during
+  development, no need to do it again)
+- Run tests: `bundle exec rake rspec -fd -c spec/`
+
+#### Running dockerized tests
+
+Alternatively you can run tests within a Docker container - this has the
+advantage of being fully contained, at the cost of some speed.
+
+This is mainly interesting for CI solutions, but could also be used locally.
+
+```
+# Build container and run tests
+docker-compose -f docker-compose.testing.yml up --build --abort-on-container-exit
+```
+

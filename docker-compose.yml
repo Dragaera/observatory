@@ -2,20 +2,37 @@ version: '3'
 
 networks:
   observatory-dev:
+  observatory-test:
 
 services:
   database:
     image: 'lavode/observatory-database:9.4'
-    env_file: .env.development
+    env_file: .env.dev
     networks:
       - observatory-dev
     ports:
       - 15432:5432
 
+  database-test:
+    image: 'lavode/observatory-database:9.4'
+    env_file: .env.test
+    networks:
+      - observatory-test
+    ports:
+      - 25432:5432
+
   redis:
     image: 'redis:3.0'
-    env_file: .env.development
+    env_file: .env.dev
     networks:
       - observatory-dev
     ports:
       - 16379:6379
+
+  redis-test:
+    image: 'redis:3.0'
+    env_file: .env.test
+    networks:
+      - observatory-test
+    ports:
+      - 26379:6379
