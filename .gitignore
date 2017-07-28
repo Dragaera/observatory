@@ -10,3 +10,4 @@ db/*.db
 # Dotenv
 .env*
 !.env.*dist
+!.env.ci
