@@ -196,7 +196,7 @@ following step accordingly.
 
 ### Run development server
 
-- Copy .env.dev.dist to .env.dev
+- Copy .env.development.dist to .env.development
 - Open configuration file, and adjust all settings marked as `CHANGEME`
 - Spawn environment via `docker-compose up`
 - Run application server: `bundle exec padrino s`

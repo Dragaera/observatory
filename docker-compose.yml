@@ -7,7 +7,7 @@ networks:
 services:
   database:
     image: 'lavode/observatory-database:9.4'
-    env_file: .env.dev
+    env_file: .env.development
     networks:
       - observatory-dev
     ports:
@@ -23,7 +23,7 @@ services:
 
   redis:
     image: 'redis:3.0'
-    env_file: .env.dev
+    env_file: .env.development
     networks:
       - observatory-dev
     ports:
