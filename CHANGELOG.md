@@ -10,6 +10,7 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Replace Unicorn in favour of Puma
 - Minify Chartkick JS.
 - Use pie chart for 'player update frequency' graph.
 - Update `sequel-pg-trgm` to latest git version.
