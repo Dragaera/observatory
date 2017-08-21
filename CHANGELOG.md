@@ -8,6 +8,21 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.19.0] - 2017-08-21
+
+### Added
+
 - Healthcheck URL at `/health`
 
 ### Changed
@@ -17,12 +32,6 @@ glance - what to expact from upgrading to a new version.
 - Use pie chart for 'player update frequency' graph.
 - Update `sequel-pg-trgm` to latest git version.
   Removes deprecated Sequel behaviour.
-
-### Fixed
-
-### Security
-
-### Deprecated
 
 ### Removed
 
