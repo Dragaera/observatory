@@ -29,12 +29,15 @@ must define manually.
 | `DEBUG`           |               | n        | If set, this application will dump potentially sensitive session information into the log.                                            |
 | `SESSION_SECRET`  |               | y        | An alphanumeric string which is used to encrypt cookies. This config must be identical on all hosts, if you run a loadbalanced setup! |
 
-#### Unicorn
+#### Puma
 
-| Variable          | Default value | Required | Description                                                             |
-| ----------------- | ------------- | -------- | ----------------------------------------------------------------------- |
-| `UNICORN_LISTEN`  | 8080          | y        | Port which the application server will bind to.                         |
-| `UNICORN_WORKERS` | 2             | y        | Number of worker processes. # of CPU cores + 1 is likely a good choice. |
+| Variable            | Default value | Required | Description                                                             |
+| ------------------- | ------------- | -------- | ----------------------------------------------------------------------- |
+| `PUMA_LISTEN_IP`    | 127.0.0.1     | y        | IP which the application server will bind to.                           |
+| `PUMA_LISTEN_PORT`  | 8080          | y        | Port which the application server will bind to.                         |
+| `PUMA_THREADS_MIN`  | 0             | y        | Initial number of threads to spawn per worker.                          |
+| `PUMA_THREADS_MAX`  | 16            | y        | Maximum number of threads to spawn per worker.                          |
+| `PUMA_WORKERS`      | 2             | y        | Number of worker processes to spawn.                                    |
 
 #### Timezone
 

@@ -7,7 +7,7 @@ function main {
     case "$1" in
         application)
             echo "Starting application server..."
-            exec unicorn -c unicorn.conf.rb
+            exec puma -c config/puma.rb
             ;;
         worker)
             echo "Starting Resque worker..."
