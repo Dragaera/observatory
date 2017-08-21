@@ -12,6 +12,9 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Fix `docker-entrypoint.sh` using wrong CLI argument to load puma
+  configuration.
+
 ### Security
 
 ### Deprecated

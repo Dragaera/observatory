@@ -7,7 +7,7 @@ function main {
     case "$1" in
         application)
             echo "Starting application server..."
-            exec puma -c config/puma.rb
+            exec puma -C config/puma.rb
             ;;
         worker)
             echo "Starting Resque worker..."
