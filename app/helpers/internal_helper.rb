@@ -8,9 +8,7 @@ module Observatory
       def check_db_connectivity
         begin
           return false unless Sequel::Model.db.test_connection
-          puts 'oh noes'
           return false unless Sequel::Model.db.valid_connection? Sequel::Model.db
-          puts 'oh noes2'
         rescue Sequel::Error => e
           # TODO: Log
           return false
