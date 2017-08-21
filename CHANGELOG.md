@@ -8,6 +8,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- Healthcheck URL at `/health`
+
 ### Changed
 
 - Replace Unicorn in favour of Puma
