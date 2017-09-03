@@ -58,6 +58,8 @@
                 %ul.dropdown-menu
                   - if logged_in?
                     %li
+                      = link_to 'API Keys', url(:api_keys, :index)
+                    %li
                       = link_to 'Users', url(:users, :index)
                     %li
                       = link_to 'Update frequencies', url(:update_frequencies, :index)
