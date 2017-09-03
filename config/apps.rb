@@ -35,5 +35,4 @@ end
 
 # Mounts the core application for this project
 
-Padrino.mount('Observatory::Api', :app_file => Padrino.root('api/app.rb')).to('/api')
 Padrino.mount('Observatory::App', :app_file => Padrino.root('app/app.rb')).to('/')
