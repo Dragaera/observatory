@@ -18,7 +18,10 @@ class APIKey < Sequel::Model
   end
 
   def self.authenticate(token)
-    active.where(token: token).first
+    key = active.where(token: token).first
+    key.update(last_used_at: Time.now) if key
+
+    key
   end
 
   def self.generate()
