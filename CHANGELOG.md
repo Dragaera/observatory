@@ -8,6 +8,11 @@ glance - what to expact from upgrading to a new version.
 
 ### Added
 
+- API to retrieve player information as JSON.
+  - (Static) token-based authentication
+  - Returns basic player data (skill, playtime, ...)
+  - Returns some internal data (profile URL, last update)
+
 ### Changed
 
 ### Fixed
