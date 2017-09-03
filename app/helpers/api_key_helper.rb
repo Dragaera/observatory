@@ -7,7 +7,7 @@ module Observatory
         token = authorization_token
         halt 403, { error: 'No token supplied' }.to_json unless token
 
-        api_key = APIKey.where(token: token).first
+        api_key = APIKey.authenticate(token)
         halt 403, { error: 'Invalid token supplied' }.to_json unless api_key
       end
 

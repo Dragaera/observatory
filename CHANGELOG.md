@@ -14,6 +14,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Security
 
+- Deactivated API keys can no longer be used for authentication.
+
 ### Deprecated
 
 ### Removed
