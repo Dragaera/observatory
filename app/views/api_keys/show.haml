@@ -1,0 +1,42 @@
+.page-header
+  %h1
+    Louis XIV API Key
+    %small
+      = @api_key.token
+
+    - if @api_key.active
+      %span.label.label-success
+        Active
+    - else
+      %span.label.label-default
+        Inactive
+
+.row
+  .col-md-6
+    %a.btn.btn-primary{ href: url(:api_keys, :edit, id: @api_key.id) }
+      Edit
+      %span.glyphicon.glyphicon-edit
+
+    = form_tag url(:api_keys, :delete, id: @api_key.id), method: 'post', class: 'btn' do
+      = submit_tag 'Delete', class: 'btn btn-danger'
+
+.row
+  .col-md-6
+    %h2 Details
+    %table.table.table-bordered
+      %tbody
+        %tr
+          %td Key
+          %td= @api_key.key
+        %tr
+          %td Description
+          %td= @api_key.description
+        %tr
+          %td Last used at
+          %td= @api_key.last_used_at ? time_ago_in_words(@api_key.last_used_at) : 'Never'
+        %tr
+          %td Created at
+          %td= pp_datetime(@api_key.created_at)
+        %tr
+          %td Updated at
+          %td= @api_key.updated_at ? pp_datetime(@api_key.updated_at) : 'Never'

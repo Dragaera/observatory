@@ -1,0 +1,8 @@
+.page-header
+  %h1
+    Create
+    %small Observatory API Key
+
+.row
+  .col-md-6
+    = partial 'api_keys/form', locals: { type: :new, target_url: url(:api_keys, :new) }

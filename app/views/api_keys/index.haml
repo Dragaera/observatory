@@ -1,0 +1,28 @@
+.page-header
+  %h1
+    API Keys
+
+%a{ href: url(:api_keys, :new) }
+  %span.glyphicon.glyphicon-plus
+
+%table.table
+  %thead
+    %tr
+      %th Token
+      %th Key
+      %th Description
+      %th Last Used At
+      %th Active
+
+  %tbody
+    - @api_keys.each do |key|
+      %tr
+        %td= link_to "#{ key.token }", url(:api_keys, :show, id: key.id)
+        %td= key.key
+        %td= key.description
+        %td= key.last_used_at ? time_ago_in_words(key.last_used_at) : 'Never'
+        %td
+          - if key.active
+            %span.glyphicon.glyphicon-ok
+          - else
+            %span.glyphicon.glyphicon-remove
