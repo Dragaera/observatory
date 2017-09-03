@@ -20,7 +20,7 @@ class APIKey < Sequel::Model
     active.where(token: token, key: key).first
   end
 
-  def self.generate
+  def self.generate(save: true)
     api_key = APIKey.new(
       token: SecureRandom.uuid,
       key:   SecureRandom.hex(16)
@@ -34,6 +34,8 @@ class APIKey < Sequel::Model
       api_key.key = SecureRandom.hex(16)
     end
 
-    api_key.save
+    api_key.save if save
+
+    api_key
   end
 end
