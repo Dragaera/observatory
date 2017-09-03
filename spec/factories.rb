@@ -70,8 +70,8 @@ FactoryGirl.define do
   end
 
   factory :api_key, class: APIKey do
-    token SecureRandom.uuid
-    key   SecureRandom.hex(16)
-    description 'Test API key'
+    token SecureRandom.hex(16)
+    title 'Test API key'
+    description ''
   end
 end

@@ -2,7 +2,7 @@
   %h1
     Louis XIV API Key
     %small
-      = @api_key.token
+      = @api_key.title
 
     - if @api_key.active
       %span.label.label-success
@@ -26,8 +26,8 @@
     %table.table.table-bordered
       %tbody
         %tr
-          %td Key
-          %td= @api_key.key
+          %td Token
+          %td= @api_key.token
         %tr
           %td Description
           %td= @api_key.description

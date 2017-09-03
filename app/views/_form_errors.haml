@@ -1,0 +1,7 @@
+.form-errors
+  .alert.alert-danger
+    %p= "Could not #{ action } object"
+    %ul
+      - form_errors.each do |msg|
+        %li= msg
+

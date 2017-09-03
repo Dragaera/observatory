@@ -3,8 +3,8 @@ Sequel.migration do
     create_table :api_keys do
       primary_key :id
 
-      uuid    :token, null: false, unique: true
-      String  :key,   null: false, unique: true, size: 32
+      String  :token, null: false, unique: true, size: 32
+      String  :title, null: false, size: 30
       String  :description
       Boolean :active, null: false, default: true
 

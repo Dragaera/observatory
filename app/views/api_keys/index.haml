@@ -8,18 +8,16 @@
 %table.table
   %thead
     %tr
+      %th Title
       %th Token
-      %th Key
-      %th Description
       %th Last Used At
       %th Active
 
   %tbody
     - @api_keys.each do |key|
       %tr
-        %td= link_to "#{ key.token }", url(:api_keys, :show, id: key.id)
-        %td= key.key
-        %td= key.description
+        %td= link_to "#{ key.title }", url(:api_keys, :show, id: key.id)
+        %td= key.token
         %td= key.last_used_at ? time_ago_in_words(key.last_used_at) : 'Never'
         %td
           - if key.active

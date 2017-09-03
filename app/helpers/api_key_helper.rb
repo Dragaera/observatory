@@ -3,9 +3,10 @@
 module Observatory
   class App
     module ApiKeyHelper
-      # def simple_helper_method
-      # ...
-      # end
+      def api_authenticate!
+        p request.env
+        puts "HELLO"
+      end
     end
 
     helpers ApiKeyHelper
