@@ -42,7 +42,16 @@ RSpec.describe APIKey do
 
     it 'returns the key if all matches' do
       api_key = create(:api_key, token: token1)
-      expect(APIKey.authenticate(token1)).to eq api_key
+      expect(APIKey.authenticate(token1).id).to eq api_key.id
+    end
+
+    it 'updates `last_used_at`' do
+      key = create(:api_key)
+      Timecop.freeze(Time.utc(2017, 1, 1, 1, 0)) do
+        APIKey.authenticate(key.token)
+        key.refresh
+        expect(key.last_used_at.to_time).to eq Time.now
+      end
     end
   end
 end

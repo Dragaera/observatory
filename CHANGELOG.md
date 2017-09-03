@@ -12,6 +12,8 @@ glance - what to expact from upgrading to a new version.
 
 ### Fixed
 
+- Properly set `last_used_at` when API key is used.
+
 ### Security
 
 - Deactivated API keys can no longer be used for authentication.
