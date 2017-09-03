@@ -1,0 +1,8 @@
+.page-header
+  %h1
+    Edit
+    %small= @api_key.token
+
+.row
+  .col-md-6
+    = partial 'api_keys/form', locals: { type: :edit, target_url: url(:api_keys, :edit, id: @api_key.id) }

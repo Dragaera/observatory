@@ -1,0 +1,29 @@
+- if type == :new
+  - back_link = url(:api_keys, :index)
+  - action = 'create'
+  - submit_caption = 'Create'
+- elsif type == :edit
+  - back_link = url(:api_keys, :show, id: @api_key.id)
+  - action = 'edit'
+  - submit_caption = 'Edit'
+
+= form_for @api_key, target_url do |f|
+  - if flash[:form_error]
+    = partial 'form_errors', locals: { form_errors: flash[:form_error], action: action }
+
+  .form-group
+    = f.label :title
+    = f.text_field :title , class: 'form-control', required: true, maxlength: 30
+
+  .form-group
+    = f.label :description
+    = f.text_area :description , class: 'form-control'
+
+  .checkbox
+    %label
+      = f.check_box :active
+      Active
+
+  = f.submit submit_caption, class: 'btn btn-default'
+
+  = link_to 'Cancel', back_link, class: 'btn btn-link'

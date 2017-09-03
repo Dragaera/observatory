@@ -2,6 +2,8 @@ module Observatory
   class App < Padrino::Application
     register Padrino::Mailer
     register Padrino::Helpers
+
+    helpers Sinatra::JSON
     enable :sessions
 
     ##

@@ -16,6 +16,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
+    backports (3.8.0)
     bcrypt (3.1.11)
     byebug (9.0.6)
     capybara (2.14.4)
@@ -152,6 +153,13 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.0)
       tilt (~> 2.0)
+    sinatra-contrib (2.0.0)
+      backports (>= 2.0)
+      multi_json
+      mustermann (~> 1.0)
+      rack-protection (= 2.0.0)
+      sinatra (= 2.0.0)
+      tilt (>= 1.3, < 3)
     slop (3.6.0)
     steam-condenser (1.3.11)
       multi_json (~> 1.6)
@@ -199,6 +207,7 @@ DEPENDENCIES
   sequel
   sequel-pg-trgm!
   sequel_pg
+  sinatra-contrib
   steam-condenser
   steam-id2 (~> 0.3.0)
   timecop

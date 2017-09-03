@@ -68,4 +68,10 @@ FactoryGirl.define do
     sequence(:user) { |i| "user#{ i }" }
     password 'sekkrit'
   end
+
+  factory :api_key, class: APIKey do
+    token SecureRandom.hex(16)
+    title 'Test API key'
+    description ''
+  end
 end
