@@ -5,10 +5,10 @@ module Observatory
     module ApiKeyHelper
       def api_authenticate!
         token = authorization_token
-        halt 403, 'No token supplied' unless token
+        halt 403, { error: 'No token supplied' }.to_json unless token
 
         api_key = APIKey.where(token: token).first
-        halt 403, 'Invalid token supplied' unless api_key
+        halt 403, { error: 'Invalid token supplied' }.to_json unless api_key
       end
 
       private

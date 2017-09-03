@@ -15,6 +15,8 @@ gem 'sequel'
 # Padrino Stable Gem
 gem 'padrino', '0.14.1.1'
 
+gem 'sinatra-contrib'
+
 # Application server
 gem 'puma'
 
