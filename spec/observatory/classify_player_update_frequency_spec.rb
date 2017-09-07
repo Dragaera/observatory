@@ -99,6 +99,16 @@ module Observatory
             expect(player.next_update_at.to_time).to eq(Time.now + weekly.interval)
           end
         end
+
+        it 'should schedule the next update based on the time the current update was performed' do
+          player.update(next_update_at: Time.now)
+          Timecop.freeze(Time.now + 2 * 60 * 60) do
+            ClassifyPlayerUpdateFrequency.perform(player.id)
+            player.reload
+
+            expect(player.next_update_at.to_time).to eq (Time.now + 60 * 60)
+          end
+        end
       end
     end
   end
