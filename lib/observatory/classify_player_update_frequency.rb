@@ -61,7 +61,13 @@ module Observatory
 
       logger.info "Classified as '#{ f.name }'"
       player.update_frequency = f
-      player.next_update_at = player.last_update_at.to_time + f.interval
+      # Scheduling the next update based on when the current update happened -
+      # as opposed to when it *should* have happened - ensures that, if updates
+      # are delayed (due to eg rate limiting), future updates are being spread
+      # out automatically.
+      # It also prevents to have less than the desired interval between updates
+      # of a player.
+      player.next_update_at = Time.now + f.interval
       player.save
 
       true

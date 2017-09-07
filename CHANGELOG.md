@@ -10,6 +10,10 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+- Schedule player updates based on when the last update was performed - not
+  based on when it *should* have been performed. This ensures that updates
+  spread out on their own.
+
 ### Fixed
 
 - Properly set `last_used_at` when API key is used.
