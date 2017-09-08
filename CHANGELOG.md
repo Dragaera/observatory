@@ -10,6 +10,19 @@ glance - what to expact from upgrading to a new version.
 
 ### Changed
 
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.21.0] - 2017-09-08
+
+### Changed
+
 - Schedule player updates based on when the last update was performed - not
   based on when it *should* have been performed. This ensures that updates
   spread out on their own.
@@ -21,10 +34,6 @@ glance - what to expact from upgrading to a new version.
 ### Security
 
 - Deactivated API keys can no longer be used for authentication.
-
-### Deprecated
-
-### Removed
 
 
 ## [0.20.0] - 2017-09-03
