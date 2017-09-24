@@ -17,11 +17,7 @@ services:
       - observatory-ci
 
   observatory-ci:
-    build:
-      context: .
-      dockerfile: Dockerfile
-
-    image: 'lavode/observatory:latest'
+    image: 'lavode/observatory:${COMMIT_ID}'
     env_file: .env.ci
     networks:
       - observatory-ci

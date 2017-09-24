@@ -21,3 +21,5 @@ docker.env.dist
 # Dev-only files
 .env*
 !.env.dist
+
+Makefile
