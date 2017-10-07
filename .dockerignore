@@ -11,6 +11,8 @@ db/*.db
 # Logfiles
 log/*
 
+tmp/
+
 # CTags
 tags
 
@@ -23,5 +25,4 @@ docker.env.dist
 !.env.dist
 
 Makefile
-
-tmp/
+util/
