@@ -11,3 +11,7 @@ db/*.db
 .env*
 !.env.*dist
 !.env.ci
+
+# Artefacts of CI build
+image_version
+image_name

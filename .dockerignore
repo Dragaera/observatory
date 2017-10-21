@@ -11,6 +11,8 @@ db/*.db
 # Logfiles
 log/*
 
+tmp/
+
 # CTags
 tags
 
@@ -21,3 +23,6 @@ docker.env.dist
 # Dev-only files
 .env*
 !.env.dist
+
+Makefile
+util/

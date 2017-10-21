@@ -22,6 +22,7 @@ RUN bundle install
 COPY . /usr/src/app
 
 RUN chmod +x "./docker-entrypoint.sh"
+RUN mkdir tmp/ && chown -R observatory:observatory tmp/
 
 USER observatory
 ENTRYPOINT ["/tini", "--", "./docker-entrypoint.sh"]
