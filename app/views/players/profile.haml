@@ -2,7 +2,7 @@
   .page-header
     %h1
       = @player.alias
-      %small= "Updated: #{ time_ago_in_words(@player.last_update_at) } ago (Updates: Every #{ pp_timespan @player.update_frequency.interval })"
+      %small= "Updated: #{ time_ago_in_words(@player.last_update_at) } ago (Updates: Every #{ timespan_in_words @player.update_frequency.interval })"
 
       - @player.badges.each do |badge|
         %img{src: "/images/badges/#{ badge.image }", title: badge.name }

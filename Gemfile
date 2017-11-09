@@ -50,6 +50,9 @@ gem 'steam-id2', '~> 0.3.0', require: 'steam_id'
 # Bindings to Hive HTTP API
 gem 'hive-stalker', '~>0.1.0', require: 'hive_stalker'
 
+# Formatting helper
+gem 'silverball', '~>0.1.0'
+
 gem 'dotenv'
 
 group :test do

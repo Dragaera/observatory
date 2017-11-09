@@ -10,6 +10,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
+- Delegate various pretty-printing tasks to `silverball` instead of doing it
+  ourselves.
+
 ### Fixed
 
 ### Security

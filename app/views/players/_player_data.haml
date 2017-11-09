@@ -3,15 +3,15 @@
     %tr
       - ranks = player.rank([:skill, :experience, :score, :score_per_second])
       %th Skill
-      %td= pp_separator(player.skill)
+      %td= number_with_separator(player.skill)
       %td= player_rank_link(ranks, :skill)
     %tr
       %th Level / Exp
-      %td= "Lvl #{ player.level } / #{ pp_separator(player.experience) } XP"
+      %td= "Lvl #{ player.level } / #{ number_with_separator(player.experience) } XP"
       %td= player_rank_link(ranks, :experience)
     %tr
       %th Score
-      %td= pp_separator(player.score)
+      %td= number_with_separator(player.score)
       %td= player_rank_link(ranks, :score)
     %tr
       %th Score / min
@@ -24,13 +24,13 @@
       %th{ colspan: 2 } Time played as
     %tr
       %td Total
-      %td= pp_timespan(player.time_total)
+      %td= timespan_in_words(player.time_total)
     %tr
       %td Alien
-      %td= "#{ pp_timespan(player.time_alien) } (#{ pp_percentage(player.time_alien, player.time_total) })"
+      %td= "#{ timespan_in_words(player.time_alien) } (#{ fraction_as_percentage(player.time_alien, player.time_total) })"
     %tr
       %td Marine
-      %td= "#{ pp_timespan(player.time_marine) } (#{ pp_percentage(player.time_marine, player.time_total) })"
+      %td= "#{ timespan_in_words(player.time_marine) } (#{ fraction_as_percentage(player.time_marine, player.time_total) })"
     %tr
       %td Commander
-      %td= "#{ pp_timespan(player.time_commander) } (#{ pp_percentage(player.time_commander, player.time_total) })"
+      %td= "#{ timespan_in_words(player.time_commander) } (#{ fraction_as_percentage(player.time_commander, player.time_total) })"
