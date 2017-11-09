@@ -8,7 +8,7 @@ Observatory::App.controllers :player_data_exports, parent: :player do
   get :download, map: 'exports/:id/download' do |_, id|
     @export = get_or_404(PlayerDataExport, id)
 
-    unless @export.success? && File.exists?(@export.file_path)
+    unless @export.success? && File.exist?(@export.file_path)
       raise Sinatra::NotFound
     end
 
