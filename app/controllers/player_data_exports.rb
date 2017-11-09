@@ -1,15 +1,14 @@
 Observatory::App.controllers :player_data_exports, parent: :player do
-  get :show, map: 'exports/:id' do |player_id, id|
-    player  = get_or_404(Player, player_id)
-    @export = get_or_404(player.player_data_exports_dataset, id)
+  get :show, map: 'exports/:id' do |_, id|
+    @export = get_or_404(PlayerDataExport, id)
 
     render 'show'
   end
 
-  get :download, map: 'exports/:id/download' do |player_id, id|
+  get :download, map: 'exports/:id/download' do |_, id|
     @export = get_or_404(PlayerDataExport, id)
 
-    unless @export.success? && File.exists?(@export.file_path)
+    unless @export.success? && File.exist?(@export.file_path)
       raise Sinatra::NotFound
     end
 

@@ -9,7 +9,7 @@ module Observatory
         begin
           return false unless Sequel::Model.db.test_connection
           return false unless Sequel::Model.db.valid_connection? Sequel::Model.db
-        rescue Sequel::Error => e
+        rescue Sequel::Error
           # TODO: Log
           return false
         end

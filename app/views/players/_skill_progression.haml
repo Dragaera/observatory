@@ -12,8 +12,8 @@
     - player_data_points.each do |data|
       %tr
         %td= pp_datetime data.created_at
-        %td= pp_separator data.skill
-        %td= pp_separator data.score
+        %td= number_with_separator data.skill
+        %td= number_with_separator data.score
         %td= (data.score_per_second * 60).round(2)
-        %td= pp_separator data.experience
+        %td= number_with_separator data.experience
         %td= data.level
