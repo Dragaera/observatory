@@ -8,12 +8,7 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
-- Endpoint (`/player?steam_id=`) to query player profile by Steam ID.
-
 ### Changed
-
-- Delegate various pretty-printing tasks to `silverball` instead of doing it
-  ourselves.
 
 ### Fixed
 
@@ -22,6 +17,18 @@ glance - what to expect from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.22.0] - 2017-11-15
+
+### Added
+
+- Endpoint (`/player?steam_id=`) to query player profile by Steam ID.
+
+### Changed
+
+- Delegate various pretty-printing tasks to `silverball` instead of doing it
+  ourselves.
 
 
 ## [0.21.0] - 2017-09-08
