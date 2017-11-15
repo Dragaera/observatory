@@ -77,6 +77,23 @@ Observatory::App.controllers :players do
     render 'index'
   end
 
+  get :profile_direct, map: '/player' do
+    steam_id = params['steam_id']
+    if steam_id.nil? || steam_id.empty?
+      logger.warn "[Direct Profile Search]: Missing Steam ID (Steam ID = #{ steam_id })"
+      return 400, 'steam_id param missing'
+    end
+
+    player = Player.get_or_create(steam_id: steam_id)
+    if player
+      logger.info "[Direct Profile Search]: Success (Steam ID = #{ steam_id })"
+      redirect url_for(:players, :profile, id: player.id)
+    else
+      logger.warn "[Direct Profile Search]: No such player (Steam ID = #{ steam_id })"
+      return 404, 'Unknown Steam ID'
+    end
+  end
+
   get :profile, map: '/player/:id' do |id|
     @player = get_or_404(Player, id)
 

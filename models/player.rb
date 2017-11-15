@@ -1,10 +1,24 @@
 class Player < Sequel::Model
-  def self.get_or_create(account_id:)
-    Player.where(account_id: account_id).first ||
-      Player.create(
+  def self.get_or_create(account_id: nil, steam_id: nil)
+    unless account_id
+      account_id = resolve_steam_id(steam_id)
+    end
+
+    if account_id.nil?
+      return nil
+    end
+
+    p = Player.where(account_id: account_id).first
+    unless p
+      logger.debug("Creating new player with account_id: #{ account_id }")
+      p = Player.create(
         account_id:     account_id,
         next_update_at: Time.now,
-    )
+      )
+      p.async_update_data
+    end
+
+    p
   end
 
   plugin :validation_helpers
@@ -51,6 +65,11 @@ class Player < Sequel::Model
 
   def self.by_account_id(id)
     where(account_id: id).first
+  end
+
+  def self.by_steam_id(steam_id)
+    account_id = resolve_steam_id(steam_id)
+    Player.by_account_id(account_id)
   end
 
   def self.by_current_alias(name = nil)
@@ -265,5 +284,12 @@ class Player < Sequel::Model
     else
       raise ArgumentError, "Unknown type: #{ type.inspect }"
     end
+  end
+
+  private
+  def self.resolve_steam_id(steam_id)
+    SteamID::SteamID.from_string(steam_id, steam_api_key: Observatory::Config::Steam::WEB_API_KEY)
+  rescue ArgumentError, WebApiError
+    nil
   end
 end
