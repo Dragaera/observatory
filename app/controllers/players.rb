@@ -84,13 +84,13 @@ Observatory::App.controllers :players do
       return 400, 'steam_id param missing'
     end
 
-    player = Player.by_steam_id(steam_id)
+    player = Player.get_or_create(steam_id: steam_id)
     if player
       logger.info "[Direct Profile Search]: Success (Steam ID = #{ steam_id })"
       redirect url_for(:players, :profile, id: player.id)
     else
       logger.warn "[Direct Profile Search]: No such player (Steam ID = #{ steam_id })"
-      raise Sinatra::NotFound, 'No such player'
+      return 404, 'Unknown Steam ID'
     end
   end
 
