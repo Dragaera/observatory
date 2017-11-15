@@ -53,6 +53,15 @@ class Player < Sequel::Model
     where(account_id: id).first
   end
 
+  def self.by_steam_id(steam_id)
+    account_id = SteamID::SteamID.from_string(steam_id, steam_api_key: Observatory::Config::Steam::WEB_API_KEY)
+    if account_id
+      Player.by_account_id(account_id)
+    end
+  rescue ArgumentError, WebApiError
+    nil
+  end
+
   def self.by_current_alias(name = nil)
     result = Player.
       dataset.

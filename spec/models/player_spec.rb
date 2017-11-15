@@ -59,6 +59,16 @@ RSpec.describe Player do
     end
   end
 
+  describe '::by_steam_id' do
+    let!(:player) { create(:player, account_id: 48221310) }
+    it 'should return nil if no player matches' do
+      expect(Player.by_steam_id('STEAM_0:0:24110000')).to be_nil
+    end
+    it 'should return the player if any for of Steam ID matches' do
+      expect(Player.by_steam_id('STEAM_0:0:24110655')).to eq player
+    end
+  end
+
   describe '::by_current_alias' do
     let!(:player_with_two_aliases) { create(:player, :with_player_data_points, count: 2, aliases: ['Hans', 'Mittens']) }
     let!(:john)   { create(:player, :with_player_data_points, count: 1, aliases: ['John']) }
