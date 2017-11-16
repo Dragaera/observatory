@@ -178,7 +178,7 @@ class Player < Sequel::Model
       add_player_data_point(player_data)
 
       data.badges.each do |badge_key|
-        badge = Badge.where(key: badge_key).first
+        badge = Badge.where(key: badge_key, type: 'hive').first
         if badge
           if badges.include?(badge)
             logger.info "Skipping existing badge #{ badge.name }"
