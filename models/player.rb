@@ -164,6 +164,10 @@ class Player < Sequel::Model
     current_player_data_point.time_commander
   end
 
+  def steam_id
+    SteamID::SteamID.new(account_id)
+  end
+
   def update_data(stalker: nil)
     stalker ||= HiveStalker::Stalker.new
 
