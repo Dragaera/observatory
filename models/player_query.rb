@@ -9,8 +9,8 @@ class PlayerQuery < Sequel::Model
 
   def execute(resolver: nil)
     begin
-      resolver ||= SteamID::SteamID
-      update(account_id: resolver.from_string(query, steam_api_key: Observatory::Config::Steam::WEB_API_KEY))
+      resolver ||= SteamID
+      update(account_id: resolver.from_string(query, api_key: Observatory::Config::Steam::WEB_API_KEY).account_id)
       player = Player.get_or_create(account_id: self.account_id)
       player.async_update_data
 

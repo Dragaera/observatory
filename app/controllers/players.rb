@@ -29,7 +29,7 @@ Observatory::App.controllers :players do
       # Might be a Steam ID
       begin
         logger.debug "Searching for SteamID #{ search_param }"
-        account_id = SteamID::SteamID.from_string(search_param, steam_api_key: Observatory::Config::Steam::WEB_API_KEY)
+        account_id = SteamID.from_string(search_param, api_key: Observatory::Config::Steam::WEB_API_KEY).account_id
         logger.debug "Resolved to #{ account_id } as Steam ID"
 
         player = Player.by_account_id(account_id)

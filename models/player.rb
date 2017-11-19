@@ -288,7 +288,7 @@ class Player < Sequel::Model
 
   private
   def self.resolve_steam_id(steam_id)
-    SteamID::SteamID.from_string(steam_id, steam_api_key: Observatory::Config::Steam::WEB_API_KEY)
+    SteamID.from_string(steam_id, api_key: Observatory::Config::Steam::WEB_API_KEY).account_id
   rescue ArgumentError, WebApiError
     nil
   end
