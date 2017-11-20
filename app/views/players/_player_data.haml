@@ -1,6 +1,12 @@
 %table.table.table-bordered
   %tbody
     %tr
+      %th Steam ID
+      %td= link_to player.steam_id.id, player.steam_id.profile_url
+
+%table.table.table-bordered
+  %tbody
+    %tr
       - ranks = player.rank([:skill, :experience, :score, :score_per_second])
       %th Skill
       %td= number_with_separator(player.skill)

@@ -8,10 +8,10 @@ Observatory::App.controllers :api do
     halt 400, { error: "identifier missing or empty" }.to_json if identifier.nil? || identifier.empty?
 
     begin
-      account_id = SteamID::SteamID.from_string(
+      account_id = SteamID.from_string(
         identifier,
-        steam_api_key: Observatory::Config::Steam::WEB_API_KEY
-      )
+        api_key: Observatory::Config::Steam::WEB_API_KEY
+      ).account_id
     rescue ArgumentError, WebApiError => e
       halt 400, e.message
     end

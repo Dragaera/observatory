@@ -64,7 +64,7 @@ RSpec.describe Player do
     it 'should return nil if no player matches' do
       expect(Player.by_steam_id('STEAM_0:0:24110000')).to be_nil
     end
-    it 'should return the player if any for of Steam ID matches' do
+    it 'should return the player if Steam ID matches' do
       expect(Player.by_steam_id('STEAM_0:0:24110655')).to eq player
     end
   end

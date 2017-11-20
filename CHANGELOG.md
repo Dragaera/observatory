@@ -8,6 +8,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Link to player's Steam community profile on profile page.
+
 ### Changed
 
 ### Fixed

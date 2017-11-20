@@ -164,6 +164,10 @@ class Player < Sequel::Model
     current_player_data_point.time_commander
   end
 
+  def steam_id
+    SteamID::SteamID.new(account_id)
+  end
+
   def update_data(stalker: nil)
     stalker ||= HiveStalker::Stalker.new
 
@@ -288,7 +292,7 @@ class Player < Sequel::Model
 
   private
   def self.resolve_steam_id(steam_id)
-    SteamID::SteamID.from_string(steam_id, steam_api_key: Observatory::Config::Steam::WEB_API_KEY)
+    SteamID.from_string(steam_id, api_key: Observatory::Config::Steam::WEB_API_KEY).account_id
   rescue ArgumentError, WebApiError
     nil
   end
