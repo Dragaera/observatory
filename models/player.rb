@@ -190,6 +190,8 @@ class Player < Sequel::Model
         enabled:             true,
       )
 
+      async_update_steam_badges
+
       true
     rescue HiveStalker::APIError => e
       logger.error "Player update for player #{ id } failed: #{ e.message }"
@@ -207,6 +209,10 @@ class Player < Sequel::Model
       )
       raise
     end
+  end
+
+  def async_update_steam_badges
+    Resque.enqueue(Observatory::PlayerSteamUpdate, id)
   end
 
   def update_steam_badges
