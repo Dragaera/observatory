@@ -9,9 +9,10 @@ Sequel.migration do
     end
 
     group_nct_early_17 = from(:badge_groups).insert(name: 'NCT Early 2017', sort: 7)
-    group_nct_late_17  = from(:badge_groups).insert(name:  'NCT Late 2017', sort: 8)
+    group_nct_late_17  = from(:badge_groups).insert(name: 'NCT Late 2017', sort: 8)
     group_ensl_s11     = from(:badge_groups).insert(name: 'ENSL S11', sort: 9)
     group_mm_17        = from(:badge_groups).insert(name: 'Mod Madness 2017', sort: 10)
+    group_wc_14        = from(:badge_groups).insert(name: 'WC 2014', sort: 11)
 
     [
       [1, 'NCT Early 2017 Gold',   'nct_17_gold.png',   '2167766106', group_nct_early_17],
@@ -29,9 +30,9 @@ Sequel.migration do
       [2, 'Mod Madness 2017 Silver', 'mod_madness_17_silver.png', '2293500413', group_mm_17],
       [3, 'Mod Madness 2017 Blue',   'mod_madness_17_blue.png',   '2290110214', group_mm_17],
 
-      # WC 14
-      #  -> silver 2148135690
-      #
+      [1, 'WC 2014 Gold',          'wc_14_gold.png',   '2144554792', group_wc_14],
+      [2, 'WC 2014 Silver',        'wc_14_silver.png', '2148135690', group_wc_14],
+      [3, 'WC 2014 Semi-Finalist', 'wc_14_bronze.png', '2146631298', group_wc_14],
     ].each do |ary|
       from(:badges).insert(sort: ary[0], name: ary[1], image: ary[2], key: ary[3], badge_group_id: ary[4], type: 'steam')
     end
@@ -83,7 +84,7 @@ Sequel.migration do
 
   down do
     from(:badges).where(type: 'steam').delete
-    from(:badge_groups).where(name: ['NCT Early 2017', 'NCT Late 2017', 'ENSL S11', 'Mod Madness 2017']).delete
+    from(:badge_groups).where(name: ['NCT Early 2017', 'NCT Late 2017', 'ENSL S11', 'Mod Madness 2017', 'WC 2014']).delete
 
     alter_table :badges do
       drop_index [:key, :type]
