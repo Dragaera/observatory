@@ -60,12 +60,42 @@ Sequel.migration do
       "Squad5 Gold" => 1,
       "Squad5 Silver" => 2,
       "Squad5 Blue" => 3,
-      "WC 2013 Shadow" => 1,
-      "WC 2013 Gold" => 2,
-      "WC 2013 Silver" => 3,
-      "WC 2013 Supporter" => 4
+      "WC 2013 Shadow" => 4,
+      "WC 2013 Gold" => 5,
+      "WC 2013 Silver" => 6,
+      "WC 2013 Supporter" => 7
     }.each do |name, sort|
       from(:badges).where(name: name).update(sort: sort)
+    end
+
+    # Deactivate PAX badge since not trackable, as it's a DLC.
+    from(:badges).where(name: 'PAX 2012', type: 'hive').delete
+
+    # Unify some things
+    group_wc_13_supporter = from(:badge_groups).where(name: 'WC 2013').first
+    from(:badges).where(badge_group_id: group_wc_13_supporter[:id]).update(badge_group_id: group_wc_14)
+    from(:badge_groups).where(name: 'WC 2013').delete
+    from(:badges).where(key: 'wc2013_shadow').update(name: 'WC 2014 Shadow Supporter')
+    from(:badges).where(key: 'wc2013_gold').update(name: 'WC 2014 Gold Supporter')
+    from(:badges).where(key: 'wc2013_silver').update(name: 'WC 2014 Silver Supporter')
+    from(:badges).where(key: 'wc2013_supporter').update(name: 'WC 2014 Supporter')
+
+    {
+      'UWE'              => 1,
+      'Community'        => 2,
+      'Squad 5'          => 3,
+
+      'Ingame'           => 4,
+      'Reinforced'       => 5,
+      'WC 2014'          => 6,
+
+      'NCT Early 2017'   => 7,
+      'NCT Late 2017'    => 8,
+      'Mod Madness 2017' => 9,
+
+      'ENSL S11'         => 10,
+    }.each do |name, sort|
+      from(:badge_groups).where(name: name).update(sort: sort)
     end
 
     # Ensure sort order is guaranteed
@@ -76,14 +106,21 @@ Sequel.migration do
     alter_table :badge_groups do
       add_index :sort, unique: true
     end
-
-
-    # Deactivate PAX badge since not trackable, as it's a DLC.
-    from(:badges).where(name: 'PAX 2012', type: 'hive').delete
   end
 
   down do
     from(:badges).where(type: 'steam').delete
+
+    # Temporary sort key to prevent unique index conflict.
+    group_wc_13_supporter = from(:badge_groups).insert(sort: 100, name: 'WC 2013')
+    from(:badges).where(key: 'wc2013_shadow').update(name: 'WC 2013 Shadow', badge_group_id: group_wc_13_supporter)
+    from(:badges).where(key: 'wc2013_gold').update(name: 'WC 2013 Gold', badge_group_id: group_wc_13_supporter)
+    from(:badges).where(key: 'wc2013_silver').update(name: 'WC 2013 Silver', badge_group_id: group_wc_13_supporter)
+    from(:badges).where(key: 'wc2013_supporter').update(name: 'WC 2013 Supporter', badge_group_id: group_wc_13_supporter)
+
+    group_community = from(:badge_groups).where(name: 'Community').first
+    from(:badges).insert(sort: 4, name: 'PAX 2012', image: 'pax_2012.png', key: nil, badge_group_id: group_community[:id], type: 'hive')
+
     from(:badge_groups).where(name: ['NCT Early 2017', 'NCT Late 2017', 'ENSL S11', 'Mod Madness 2017', 'WC 2014']).delete
 
     alter_table :badges do
@@ -92,13 +129,22 @@ Sequel.migration do
       drop_column :type
     end
 
+    from(:badges).update(sort: 1)
+
     alter_table :badge_groups do
       drop_index :sort
     end
 
-    group_community = from(:badge_groups).where(name: 'Community').first
-    from(:badges).insert(sort: 4, name: 'PAX 2012', image: 'pax_2012.png', key: nil, badge_group_id: group_community[:id])
+    {
+      'UWE'              => 1,
+      'Community'        => 2,
+      'Ingame'           => 3,
 
-    from(:badges).update(sort: 1)
+      'Reinforced'       => 4,
+      'Squad5'           => 5,
+      'WC 2013'          => 6,
+    }.each do |name, sort|
+      from(:badge_groups).where(name: name).update(sort: sort)
+    end
   end
 end
