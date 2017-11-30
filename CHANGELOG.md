@@ -9,8 +9,15 @@ glance - what to expect from upgrading to a new version.
 ### Added
 
 - Link to player's Steam community profile on profile page.
+- Support for badges managed via Steam inventory:
+  - NCT Early & Late 2017
+  - WC 2014 Participant
+  - ENSL S11
+  - Mod Madness 2017
 
 ### Changed
+
+- Ordering of badge groups to be more sensible thematically.
 
 ### Fixed
 
@@ -19,6 +26,8 @@ glance - what to expect from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+- PAX 2012 badge, which can't be tracked due to being a game DLC.
 
 
 ## [0.22.0] - 2017-11-15
