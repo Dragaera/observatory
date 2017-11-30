@@ -8,6 +8,21 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.23.0] - 2017-11-30
+
+### Added
+
 - Link to player's Steam community profile on profile page.
 - Support for badges managed via Steam inventory:
   - NCT Early & Late 2017
@@ -18,12 +33,6 @@ glance - what to expect from upgrading to a new version.
 ### Changed
 
 - Ordering of badge groups to be more sensible thematically.
-
-### Fixed
-
-### Security
-
-### Deprecated
 
 ### Removed
 
