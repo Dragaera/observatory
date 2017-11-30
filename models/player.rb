@@ -176,20 +176,7 @@ class Player < Sequel::Model
       data = stalker.get_player_data(account_id)
       player_data = PlayerDataPoint.build_from_player_data_point(data)
       add_player_data_point(player_data)
-
-      data.badges.each do |badge_key|
-        badge = Badge.where(key: badge_key).first
-        if badge
-          if badges.include?(badge)
-            logger.info "Skipping existing badge #{ badge.name }"
-          else
-            logger.info "Adding new badge: #{ badge.name }"
-            add_badge(badge)
-          end
-        else
-          logger.error "Unknown badge key: #{ badge_key }"
-        end
-      end
+      update_hive_badges(data)
 
       # Succesful updates will lead to reclassification.
       Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
@@ -202,6 +189,8 @@ class Player < Sequel::Model
         error_message:       nil,
         enabled:             true,
       )
+
+      async_update_steam_badges
 
       true
     rescue HiveStalker::APIError => e
@@ -219,6 +208,22 @@ class Player < Sequel::Model
         enabled:             enabled,
       )
       raise
+    end
+  end
+
+  def async_update_steam_badges
+    Resque.enqueue(Observatory::PlayerSteamUpdate, id)
+  end
+
+  def update_steam_badges
+    steam_inventory = Observatory::Steam::Inventory.new(self)
+    if steam_inventory.badge_class_ids.empty?
+      logger.info "No badges found, skipping..."
+      return
+    end
+
+    Badge.where(key: steam_inventory.badge_class_ids, type: 'steam').each do |badge|
+      safe_add_badge badge
     end
   end
 
@@ -296,4 +301,24 @@ class Player < Sequel::Model
   rescue ArgumentError, WebApiError
     nil
   end
+
+  def update_hive_badges(hive_data)
+    hive_data.badges.each do |badge_key|
+      safe_add_badge Badge.where(key: badge_key, type: 'hive').first
+    end
+  end
+
+  def safe_add_badge(badge)
+    if badge
+      if badges.include?(badge)
+        logger.info "Skipping existing badge #{ badge.name }"
+      else
+        logger.info "Adding new badge: #{ badge.name }"
+        add_badge(badge)
+      end
+    else
+      logger.error "Unknown badge key: #{ badge_key }"
+    end
+  end
+
 end
