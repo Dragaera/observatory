@@ -8,19 +8,26 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
-- Rate limiting of Steam queries.
-
 ### Changed
 
 ### Fixed
-
-- Exception when searching for non-ASCII alias.
 
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.23.1] - 2017-11-30
+
+### Added
+
+- Rate limiting of Steam queries.
+
+### Fixed
+
+- Exception when searching for non-ASCII alias.
 
 
 ## [0.23.0] - 2017-11-30
