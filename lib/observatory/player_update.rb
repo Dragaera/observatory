@@ -12,7 +12,7 @@ module Observatory
         return false
       end
 
-      if RateLimit.get_player_data?(type: :background)
+      if RateLimit::Hive.get_player_data?(type: :background)
         player.update_data
       else
         delay = rand(Observatory::Config::PlayerData::BACKOFF_DELAY)

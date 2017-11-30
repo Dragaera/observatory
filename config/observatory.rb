@@ -70,14 +70,21 @@ module Observatory
     end
 
     module RateLimiting
-      TOTAL_THRESHOLD      = ENV.fetch('RATE_LIMITING_TOTAL_THRESHOLD', 2).to_i
-      TOTAL_INTERVAL       = ENV.fetch('RATE_LIMITING_TOTAL_INTERVAL', 1).to_i
+      module Hive
+        TOTAL_THRESHOLD      = ENV.fetch('HIVE_RATE_LIMITING_TOTAL_THRESHOLD', 2).to_i
+        TOTAL_INTERVAL       = ENV.fetch('HIVE_RATE_LIMITING_TOTAL_INTERVAL', 1).to_i
 
-      USER_THRESHOLD       = ENV.fetch('RATE_LIMITING_USER_THRESHOLD', 2).to_i
-      USER_INTERVAL        = ENV.fetch('RATE_LIMITING_USER_INTERVAL', 1).to_i
+        USER_THRESHOLD       = ENV.fetch('HIVE_RATE_LIMITING_USER_THRESHOLD', 2).to_i
+        USER_INTERVAL        = ENV.fetch('HIVE_RATE_LIMITING_USER_INTERVAL', 1).to_i
 
-      BACKGROUND_THRESHOLD = ENV.fetch('RATE_LIMITING_BACKGROUND_THRESHOLD', 2).to_i
-      BACKGROUND_INTERVAL  = ENV.fetch('RATE_LIMITING_BACKGROUND_INTERVAL', 1).to_i
+        BACKGROUND_THRESHOLD = ENV.fetch('HIVE_RATE_LIMITING_BACKGROUND_THRESHOLD', 2).to_i
+        BACKGROUND_INTERVAL  = ENV.fetch('HIVE_RATE_LIMITING_BACKGROUND_INTERVAL', 1).to_i
+      end
+
+      module Steam
+        TOTAL_THRESHOLD      = ENV.fetch('STEAM_RATE_LIMITING_TOTAL_THRESHOLD', 1).to_i
+        TOTAL_INTERVAL       = ENV.fetch('STEAM_RATE_LIMITING_TOTAL_INTERVAL', 3).to_i
+      end
     end
 
     module Steam

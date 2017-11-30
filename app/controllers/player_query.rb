@@ -14,10 +14,10 @@ Observatory::App.controllers :player_query do
 
     query.save
 
-    unless Observatory::RateLimit.get_player_data?(type: :user)
+    unless Observatory::RateLimit::Hive.get_player_data?(type: :user)
       query.update(
         success: false,
-        error_message: "Rate-limited: #{ Observatory::RateLimit.rate_limit.count('hive.total', 1) }"
+        error_message: "Rate-limited: #{ Observatory::RateLimit::Hive.rate_limit.count('hive.total', 1) }"
       )
       flash[:error] = 'Too many queries, please wait a few seconds.'
       redirect(url(:player_query, :new))

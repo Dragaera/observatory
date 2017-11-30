@@ -8,6 +8,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Rate limiting of Steam queries.
+
 ### Changed
 
 ### Fixed

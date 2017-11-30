@@ -172,7 +172,7 @@ class Player < Sequel::Model
     stalker ||= HiveStalker::Stalker.new
 
     begin
-      Observatory::RateLimit.log_get_player_data(type: :background)
+      Observatory::RateLimit::Hive.log_get_player_data(type: :background)
       data = stalker.get_player_data(account_id)
       player_data = PlayerDataPoint.build_from_player_data_point(data)
       add_player_data_point(player_data)
@@ -211,11 +211,21 @@ class Player < Sequel::Model
     end
   end
 
-  def async_update_steam_badges
-    Resque.enqueue(Observatory::PlayerSteamUpdate, id)
+  def async_update_steam_badges(delay: nil)
+    if delay
+      Resque.enqueue_in(
+        delay,
+        Observatory::PlayerSteamUpdate,
+        id
+      )
+    else
+      Resque.enqueue(Observatory::PlayerSteamUpdate, id)
+    end
   end
 
   def update_steam_badges
+    Observatory::RateLimit::Steam.log_steam_query
+
     steam_inventory = Observatory::Steam::Inventory.new(self)
     if steam_inventory.badge_class_ids.empty?
       logger.info "No badges found, skipping..."
