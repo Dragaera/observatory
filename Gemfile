@@ -45,7 +45,7 @@ gem 'chartkick'
 gem 'steam-condenser'
 
 # Steam ID converter
-gem 'steam-id2', '~> 0.4.2', require: 'steam_id'
+gem 'steam-id2', '~> 0.4.3', require: 'steam_id'
 
 # Bindings to Hive HTTP API
 gem 'hive-stalker', '~>0.1.0', require: 'hive_stalker'

@@ -14,6 +14,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Exception when searching for non-ASCII alias.
+
 ### Security
 
 ### Deprecated
