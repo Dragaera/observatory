@@ -12,7 +12,15 @@ module Observatory
         return false
       end
 
-      player.update_steam_badges
+      if RateLimit::Steam.steam_query?
+        player.update_steam_badges
+      else
+        delay = rand(Observatory::Config::PlayerData::BACKOFF_DELAY)
+        player.async_update_steam_badges(delay: delay)
+        logger.info "Rescheduling Steam query for #{ player_id } in #{ delay }s."
+
+        false
+      end
     end
   end
 end
