@@ -140,14 +140,16 @@ timezone.
 
 #### Rate Limiting
 
-| Variable                             | Default value | Required | Description                                                   |
-| ------------------------------------ | ------------- | -------- | ------------------------------------------------------------- |
-| `RATE_LIMITING_TOTAL_THRESHOLD`      | 2             | y        | Maximum number of API queries in set interval.                |
-| `RATE_LIMITING_TOTAL_INTERVAL`       | 1             | y        | Interval duration in seconds.                                 |
-| `RATE_LIMITING_USER_THRESHOLD`       | 2             | y        | Maximum number of user-initiated API queries in set interval. |
-| `RATE_LIMITING_USER_INTERVAL`        | 1             | y        | Interval duration in seconds.                                 |
-| `RATE_LIMITING_BACKGROUND_THRESHOLD` | 2             | y        | Maximum number of user-initiated API queries in set interval. |
-| `RATE_LIMITING_BACKGROUND_INTERVAL`  | 1             | y        | Interval duration in seconds.                                 |
+| Variable                                  | Default value | Required | Description                                                        |
+| ----------------------------------------- | ------------- | -------- | ------------------------------------------------------------------ |
+| `HIVE_RATE_LIMITING_TOTAL_THRESHOLD`      | 2             | y        | Maximum number of Hive API queries in set interval.                |
+| `HIVE_RATE_LIMITING_TOTAL_INTERVAL`       | 1             | y        | Interval duration in seconds.                                      |
+| `HIVE_RATE_LIMITING_USER_THRESHOLD`       | 2             | y        | Maximum number of user-initiated Hive API queries in set interval. |
+| `HIVE_RATE_LIMITING_USER_INTERVAL`        | 1             | y        | Interval duration in seconds.                                      |
+| `HIVE_RATE_LIMITING_BACKGROUND_THRESHOLD` | 2             | y        | Maximum number of user-initiated Hive API queries in set interval. |
+| `HIVE_RATE_LIMITING_BACKGROUND_INTERVAL`  | 1             | y        | Interval duration in seconds.                                      |
+| `STEAM_RATE_LIMITING_TOTAL_THRESHOLD`     | 3             | y        | Maximum number of Steam API queries in set interval.               |
+| `STEAM_RATE_LIMITING_TOTAL_INTERVAL`      | 1             | y        | Interval duration in seconds.                                      |
 
 #### Steam
 
