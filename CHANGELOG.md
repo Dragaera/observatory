@@ -12,6 +12,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Exception when searching for a direct identifier (eg Steam ID) and badge at
+  the same time.
+
 ### Security
 
 ### Deprecated

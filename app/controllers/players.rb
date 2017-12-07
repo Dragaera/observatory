@@ -60,8 +60,8 @@ Observatory::App.controllers :players do
       # Mind that this is actually not a plain Player dataset, but a join on
       # data points, so care must be taken to refer to the propre `id`.
       indirect_results = indirect_results.where(Sequel[:players][:id] => ids)
-      direct_results = direct_results.map do |ds|
-        ds.where(id: ids)
+      direct_results = direct_results.select do |player|
+        ids.map(&:id).include? player.id
       end
     end
 
