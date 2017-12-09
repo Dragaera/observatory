@@ -8,20 +8,27 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
-- Optional Piwik integration.
-
 ### Changed
 
 ### Fixed
-
-- Exception when searching for a direct identifier (eg Steam ID) and badge at
-  the same time.
 
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.24.0] - 2017-12-09
+
+### Added
+
+- Optional Piwik integration.
+
+### Fixed
+
+- Exception when searching for a direct identifier (eg Steam ID) and badge at
+  the same time. #2
 
 
 ## [0.23.1] - 2017-11-30
