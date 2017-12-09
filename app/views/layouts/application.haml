@@ -20,6 +20,21 @@
     = javascript_include_tag 'select2.min.js'
     = javascript_include_tag 'application.js'
 
+    - if Observatory::Config::Piwik::ENABLED
+      :javascript
+        var _paq = _paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//#{ Observatory::Config::Piwik::SERVER }/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId', '#{ Observatory::Config::Piwik::SITE_ID }']);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+
+
   %body
     %nav.navbar.navbar-default.navbar-static-top
       .container

@@ -171,6 +171,14 @@ timezone.
 | `LOCALIZATION_DATE_FORMAT`     | %F            | y        | Formatting directive which to use for formatting dates. Check the Ruby documentation for specifics, although it behaves nearly identical to `strftime` of the ISO C / POSIX standard.      |
 | `LOCALIZATION_DATETIME_FORMAT` | %FT%T%:z      | y        | Formatting directive which to use for formatting date-times. Check the Ruby documentation for specifics, although it behaves nearly identical to `strftime` of the ISO C / POSIX standard. |
 
+#### Piwik
+
+| Variable        | Default value | Required | Description                                       |
+| --------------- | ------------- | -------- | ------------------------------------------------- |
+| `PIWIK_ENABLED` | false         | y        | Set to `true` to enable Piwik integration.        |
+| `PIWIK_SERVER`  |               | n        | Host of Piwik server, eg `piwik.example.com`.     |
+| `PIWIK_SITE_ID` |               | n        | Site ID of Piwik site.                            |
+
 ## Developing
 
 Want to work on this application? Here's some steps to get you started.

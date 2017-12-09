@@ -100,5 +100,14 @@ module Observatory
       DATE_FORMAT     = ENV.fetch('LOCALIZATION_DATE_FORMAT', '%F')
       DATETIME_FORMAT = ENV.fetch('LOCALIZATION_DATETIME_FORMAT', '%FT%T%:z')
     end
+
+    module Piwik
+      ENABLED = ENV.fetch('PIWIK_ENABLED', 'false') == 'true'
+      SERVER  = ENV['PIWIK_SERVER']
+      SITE_ID = ENV['PIWIK_SITE_ID']
+      if ENABLED && !(SERVER && SITE_ID)
+        raise ArgumentError, "Must define PIWIK_SERVER and PIWIK_SITE_ID if Piwik integration enabled."
+      end
+    end
   end
 end
