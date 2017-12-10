@@ -9,6 +9,11 @@ module Observatory
       # than eg trading cards).
       BASE_URL = 'http://steamcommunity.com/inventory/%{steam_id_64}/4920/2'
 
+      # TODO: This will work fine as long as we have one worker process only,
+      # but once we have multiple worker processes, this will not work as
+      # expected due to @@current_proxy_index being process-local.
+      @@current_proxy_index = 0
+
       def initialize(player)
         @player = player
         refresh
@@ -23,7 +28,12 @@ module Observatory
       end
 
       def refresh
-        response = Typhoeus.get(url)
+        options = {}
+        unless proxy_list.empty?
+          options[:proxy] = next_proxy
+        end
+
+        response = Typhoeus.get(url, options)
 
         if response.success?
           begin
@@ -39,6 +49,18 @@ module Observatory
           logger.error "Non-success status code received from Steam inventory API: Code = #{ response.code }, body = #{ response.body}"
           @inventory = {}
         end
+      end
+
+      private
+      def next_proxy
+        return nil if proxy_list.empty?
+
+        @@current_proxy_index = (@@current_proxy_index + 1) % proxy_list.length
+        proxy_list[@@current_proxy_index]
+      end
+
+      def proxy_list
+        Config::Steam::HTTP_PROXIES
       end
     end
   end

@@ -82,13 +82,14 @@ module Observatory
       end
 
       module Steam
-        TOTAL_THRESHOLD      = ENV.fetch('STEAM_RATE_LIMITING_TOTAL_THRESHOLD', 1).to_i
-        TOTAL_INTERVAL       = ENV.fetch('STEAM_RATE_LIMITING_TOTAL_INTERVAL', 3).to_i
+        TOTAL_THRESHOLD = ENV.fetch('STEAM_RATE_LIMITING_TOTAL_THRESHOLD', 1).to_i
+        TOTAL_INTERVAL  = ENV.fetch('STEAM_RATE_LIMITING_TOTAL_INTERVAL', 3).to_i
       end
     end
 
     module Steam
-      WEB_API_KEY = ENV['STEAM_WEB_API_KEY']
+      WEB_API_KEY  = ENV['STEAM_WEB_API_KEY']
+      HTTP_PROXIES = ENV.fetch('STEAM_HTTP_PROXIES', '').split(',')
     end
 
     module Colour
