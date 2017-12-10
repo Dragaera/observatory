@@ -153,9 +153,10 @@ timezone.
 
 #### Steam
 
-| Variable                           | Default value | Required | Description                                                                                           |
-| ---------------------------------- | ------------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| `STEAM_WEB_API_KEY`                |               | n        | Key for Steam Web API, used for name resolution. If undefined, name resolution will not be supported. |
+| Variable             | Default value | Required | Description                                                                                               |
+| -------------------- | ------------- | -------- | --------------------------------------------------------------------------------------------------------- |
+| `STEAM_WEB_API_KEY`  |               | n        | Key for Steam Web API, used for name resolution. If undefined, name resolution will not be supported.     |
+| `STEAM_HTTP_PROXIES` |               | n        | List of comma-separated HTTP proxy URLs which to use for Steam inventory API calls. Empty to not use any. |
 
 #### Colour
 
