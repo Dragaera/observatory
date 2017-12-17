@@ -9,13 +9,11 @@ module Observatory
       # than eg trading cards).
       BASE_URL = 'http://steamcommunity.com/inventory/%{steam_id_64}/4920/2'
 
-      # TODO: This will work fine as long as we have one worker process only,
-      # but once we have multiple worker processes, this will not work as
-      # expected due to @@current_proxy_index being process-local.
-      @@current_proxy_index = 0
+      CURRENT_PROXY_INDEX_KEY = 'observatory:current_proxy_index'
 
       def initialize(player)
         @player = player
+        @redis  = Redis.new(host: Config::Redis::HOST, port: Config::Redis::PORT)
         refresh
       end
 
@@ -51,16 +49,24 @@ module Observatory
         end
       end
 
-      private
       def next_proxy
         return nil if proxy_list.empty?
 
-        @@current_proxy_index = (@@current_proxy_index + 1) % proxy_list.length
-        proxy_list[@@current_proxy_index]
+        proxy_list[next_proxy_index]
       end
 
       def proxy_list
         Config::Steam::HTTP_PROXIES
+      end
+
+      # This is not thread-safe, and might lead to race conditions. However, a
+      # race condition might at most lead to a proxy being used twice in a row
+      # - which will not cause any direct issues.
+      def next_proxy_index
+        i = @redis.incr(CURRENT_PROXY_INDEX_KEY) % proxy_list.length
+        @redis.set(CURRENT_PROXY_INDEX_KEY, i)
+
+        i
       end
     end
   end

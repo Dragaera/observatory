@@ -201,6 +201,7 @@ DEPENDENCIES
   rack-test
   rake
   ratelimit
+  redis
   resque
   resque-job-stats
   resque-scheduler
