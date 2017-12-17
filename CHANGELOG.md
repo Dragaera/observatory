@@ -8,8 +8,6 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
-- HTTP proxy support to Steam inventory API calls.
-
 ### Changed
 
 ### Fixed
@@ -19,6 +17,13 @@ glance - what to expect from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.25.0] - 2017-12-17
+
+### Added
+
+- HTTP proxy support to Steam inventory API calls.
 
 
 ## [0.24.0] - 2017-12-09
