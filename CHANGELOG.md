@@ -12,14 +12,19 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
-- Steam HTTP proxies not being used in round-robin fashion due to forking
-  worker processes.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.25.1] - 2017-12-17
+
+### Fixed
+
+- Steam HTTP proxies not being used in round-robin fashion due to forking
+  worker processes.
 
 
 ## [0.25.0] - 2017-12-17
