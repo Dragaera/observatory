@@ -12,6 +12,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Steam HTTP proxies not being used in round-robin fashion due to forking
+  worker processes.
+
 ### Security
 
 ### Deprecated

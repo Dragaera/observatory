@@ -29,6 +29,8 @@ gem 'resque'
 gem 'resque-scheduler'
 gem 'resque-job-stats'
 
+gem 'redis'
+
 # BCrypt
 gem 'bcrypt'
 
