@@ -55,11 +55,13 @@ gem 'hive-stalker', '~>0.1.0', require: 'hive_stalker'
 # Formatting helper
 gem 'silverball', '~>0.1.0'
 
-gem 'dotenv'
+group :development, :test do
+  gem 'dotenv'
+end
 
 group :test do
-  gem 'rspec'
   gem 'capybara'
+  gem 'rspec'
   gem 'rack-test', :require => 'rack/test'
   gem 'database_cleaner'
   gem 'factory_girl'
