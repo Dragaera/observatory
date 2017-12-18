@@ -49,6 +49,7 @@ module Observatory
         end
       end
 
+      private
       def next_proxy
         return nil if proxy_list.empty?
 
