@@ -10,7 +10,7 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
-- Update dependencies.
+- Update dependencies and base image.
 
 ### Fixed
 
