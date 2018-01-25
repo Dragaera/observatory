@@ -305,6 +305,12 @@ class Player < Sequel::Model
     end
   end
 
+  def show_ensl_tutorials?
+    Observatory::Config::Profile::ENSL::SHOW_TUTORIALS &&
+      time_total > Observatory::Config::Profile::ENSL::TIME_THRESHOLD &&
+      skill < Observatory::Config::Profile::ENSL::SKILL_THRESHOLD
+  end
+
   private
   def self.resolve_steam_id(steam_id)
     SteamID.from_string(steam_id, api_key: Observatory::Config::Steam::WEB_API_KEY).account_id
@@ -330,5 +336,4 @@ class Player < Sequel::Model
       logger.error "Unknown badge key: #{ badge_key }"
     end
   end
-
 end
