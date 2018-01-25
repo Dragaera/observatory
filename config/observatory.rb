@@ -47,6 +47,12 @@ module Observatory
       PAGINATION_LEADING = ENV.fetch('PROFILE_PAGINATION_LEADING', 5).to_i
       PAGINATION_SURROUNDING = ENV.fetch('PROFILE_PAGINATION_TRAILING', 3).to_i
       PAGINATION_TRAILING = ENV.fetch('PROFILE_PAGINATION_TRAILING', 5).to_i
+
+      module ENSL
+        SHOW_TUTORIALS  = ENV.fetch('PROFILE_ENSL_SHOW_TUTORIALS', 'y') == 'y'
+        SKILL_THRESHOLD = ENV.fetch('PROFILE_ENSL_SKILL_THRESHOLD', 2000).to_i
+        TIME_THRESHOLD  = ENV.fetch('PROFILE_ENSL_TIME_THRESHOLD', 60 * 60 * 8).to_i
+      end
     end
 
     module Player

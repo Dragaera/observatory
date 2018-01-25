@@ -104,4 +104,12 @@
         - if flash[:success]
           .alert.alert-success{role: :alert}= flash[:success]
 
+      - if @banner
+        .flash
+          .alert.alert-info.alert-dismissible{role: :alert}
+            %button.close{type: 'button', 'data-dismiss': 'alert'}
+              %span
+                &times;
+            = @banner
+
       = yield(:content)

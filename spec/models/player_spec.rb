@@ -300,4 +300,40 @@ RSpec.describe Player do
       end
     end
   end
+
+  describe '#show_ensl_tutorials?' do
+    before(:all) do
+      Observatory::Config::Profile::ENSL::SKILL_THRESHOLD = 2_000
+      Observatory::Config::Profile::ENSL::TIME_THRESHOLD  = 60 * 60 * 8
+    end
+
+    it 'should return true if skill is below, and playtime above, a given threshold' do
+      player = create(:player)
+      player.add_player_data_point(create(:player_data_point, player_id: player.id, skill: 1_000, time_total: 60 * 60 * 12))
+
+      expect(player.show_ensl_tutorials?).to be_truthy
+    end
+
+    it 'should return false if skill is above a given threshold' do
+      player = create(:player)
+      player.add_player_data_point(create(:player_data_point, player_id: player.id, skill: 3_000, time_total: 60 * 60 * 12))
+
+      expect(player.show_ensl_tutorials?).to be_falsy
+    end
+
+    it 'should return false if playtime is below a given threshold' do
+      player = create(:player)
+      player.add_player_data_point(create(:player_data_point, player_id: player.id, skill: 1_000, time_total: 60 * 60 * 4))
+
+      expect(player.show_ensl_tutorials?).to be_falsy
+    end
+
+    it 'should return false if showing of tutorials is disabled' do
+      Observatory::Config::Profile::ENSL::SHOW_TUTORIALS = false
+      player = create(:player)
+      player.add_player_data_point(create(:player_data_point, player_id: player.id, skill: 1_000, time_total: 60 * 60 * 12))
+
+      expect(player.show_ensl_tutorials?).to be_falsey
+    end
+  end
 end

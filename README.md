@@ -117,6 +117,14 @@ timezone.
 | `PROFILE_PAGINATION_SURROUNDING` | 3             | y        | Number of pages in pagination toolbar surrounding the current page. |
 | `PROFILE_PAGINATION_TRAILING`    | 5             | y        | Number of trailing pages in pagination toolbar.                     |
 
+##### ENSL
+
+| Variable                         | Default value | Required | Description                                                         |
+| -------------------------------- | ------------- | -------- | --------------------------------------------------------------------|
+| `PROFILE_ENSL_SHOW_TUTORIALS`    | y             | y        | Whether to link the ENSL tutorials on weak player's profile pages. |
+| `PROFILE_ENSL_SKILL_THRESHOLD`   | 2000          | y        | Skill below which to show ENSL tutorials on profile pages. |
+| `PROFILE_ENSL_TIME_THRESHOLD`    | 8 * 60 * 60   | y        | Playtime above which to show ENSL tutorials on profile pages. |
+
 #### Player
 
 | Variable                         | Default value | Required | Description                                                         |
