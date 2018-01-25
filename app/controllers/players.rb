@@ -104,6 +104,10 @@ Observatory::App.controllers :players do
       recent_player_data.
       paginate(page, Observatory::Config::Profile::PAGINATION_SIZE)
 
+    if @player.show_ensl_tutorials?
+      @banner = "Interested in improving your skill? Check out the tutorials on #{ link_to('ensl.org', 'https://www.ensl.org/tutorials') }.".html_safe
+    end
+
     render 'profile'
   end
 
