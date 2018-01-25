@@ -8,6 +8,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Show link to ENSL.org tutorials on profile pages of players matching certain
+  criteria.
+
 ### Changed
 
 - Update dependencies and base image.
