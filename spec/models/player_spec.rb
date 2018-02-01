@@ -302,7 +302,8 @@ RSpec.describe Player do
   end
 
   describe '#show_ensl_tutorials?' do
-    before(:all) do
+    before(:each) do
+      Observatory::Config::Profile::ENSL::SHOW_TUTORIALS = true
       Observatory::Config::Profile::ENSL::SKILL_THRESHOLD = 2_000
       Observatory::Config::Profile::ENSL::TIME_THRESHOLD  = 60 * 60 * 8
     end
@@ -332,6 +333,12 @@ RSpec.describe Player do
       Observatory::Config::Profile::ENSL::SHOW_TUTORIALS = false
       player = create(:player)
       player.add_player_data_point(create(:player_data_point, player_id: player.id, skill: 1_000, time_total: 60 * 60 * 12))
+
+      expect(player.show_ensl_tutorials?).to be_falsey
+    end
+
+    it 'should return false if the player has no data points' do
+      player = create(:player, :with_player_data_points, count: 0)
 
       expect(player.show_ensl_tutorials?).to be_falsey
     end
