@@ -307,6 +307,7 @@ class Player < Sequel::Model
 
   def show_ensl_tutorials?
     Observatory::Config::Profile::ENSL::SHOW_TUTORIALS &&
+      current_player_data_point &&
       time_total > Observatory::Config::Profile::ENSL::TIME_THRESHOLD &&
       skill < Observatory::Config::Profile::ENSL::SKILL_THRESHOLD
   end
