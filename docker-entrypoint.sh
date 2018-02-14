@@ -49,7 +49,7 @@ function _wait_for_database {
     if [ $? -eq 0 ]; then
         echo "Database ready"
     else
-        echo "Databse not ready in time"
+        echo "Database not ready in time"
         exit 1
     fi
 }
