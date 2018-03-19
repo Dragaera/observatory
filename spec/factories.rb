@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   to_create(&:save)
 
   trait :active do

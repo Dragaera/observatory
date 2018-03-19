@@ -13,7 +13,7 @@ gem 'sequel'
 # Test requirements
 
 # Padrino Stable Gem
-gem 'padrino', '0.14.1.1'
+gem 'padrino', '0.14.3'
 
 gem 'sinatra-contrib'
 
@@ -47,7 +47,7 @@ gem 'chartkick'
 gem 'steam-condenser'
 
 # Steam ID converter
-gem 'steam-id2', '~> 0.4.3', require: 'steam_id'
+gem 'steam-id2', '~> 0.4.4', require: 'steam_id'
 
 # Bindings to Hive HTTP API
 gem 'hive-stalker', '~>0.1.0', require: 'hive_stalker'
@@ -64,7 +64,7 @@ group :test do
   gem 'rspec'
   gem 'rack-test', :require => 'rack/test'
   gem 'database_cleaner'
-  gem 'factory_girl'
+  gem 'factory_bot'
   gem 'timecop'
 end
 
