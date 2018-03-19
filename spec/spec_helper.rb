@@ -6,12 +6,12 @@ require 'capybara/rspec'
 
 RSpec.configure do |conf|
   conf.include Rack::Test::Methods
-  conf.include FactoryGirl::Syntax::Methods
+  conf.include FactoryBot::Syntax::Methods
 
   # conf.filter_run_including focus: true
 
   conf.before(:suite) do
-    FactoryGirl.find_definitions
+    FactoryBot.find_definitions
 
     DatabaseCleaner.strategy = :transaction
     # This will also delete FrequencyUpdate entities - which are used in the
