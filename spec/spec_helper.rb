@@ -24,6 +24,8 @@ RSpec.configure do |conf|
       end
     end
   end
+
+  conf.profile_examples = 10
 end
 
 def app(app = nil, &blk)
