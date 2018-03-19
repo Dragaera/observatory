@@ -8,12 +8,7 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
-- Show link to ENSL.org tutorials on profile pages of players matching certain
-  criteria.
-
 ### Changed
-
-- Update dependencies and base image.
 
 ### Fixed
 
@@ -22,6 +17,18 @@ glance - what to expect from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.26.0] - 2018-03-19
+
+### Added
+
+- Show link to ENSL.org tutorials on profile pages of players matching certain
+  criteria.
+
+### Changed
+
+- Update dependencies and base image.
 
 
 ## [0.25.1] - 2017-12-17
