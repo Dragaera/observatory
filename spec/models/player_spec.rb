@@ -302,12 +302,6 @@ RSpec.describe Player do
   end
 
   describe '#show_ensl_tutorials?' do
-    before(:each) do
-      Observatory::Config::Profile::ENSL::SHOW_TUTORIALS = true
-      Observatory::Config::Profile::ENSL::SKILL_THRESHOLD = 2_000
-      Observatory::Config::Profile::ENSL::TIME_THRESHOLD  = 60 * 60 * 8
-    end
-
     it 'should return true if skill is below, and playtime above, a given threshold' do
       player = create(:player)
       player.add_player_data_point(create(:player_data_point, player_id: player.id, skill: 1_000, time_total: 60 * 60 * 12))
@@ -330,7 +324,7 @@ RSpec.describe Player do
     end
 
     it 'should return false if showing of tutorials is disabled' do
-      Observatory::Config::Profile::ENSL::SHOW_TUTORIALS = false
+      stub_const('Observatory::Config::Profile::ENSL::SHOW_TUTORIALS', false)
       player = create(:player)
       player.add_player_data_point(create(:player_data_point, player_id: player.id, skill: 1_000, time_total: 60 * 60 * 12))
 
