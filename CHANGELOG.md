@@ -12,6 +12,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Prevent trying to load `dotenv` in production.
+
 ### Security
 
 ### Deprecated

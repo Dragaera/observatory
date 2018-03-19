@@ -51,12 +51,14 @@ Padrino.dependency_paths.unshift Padrino.root('config/initializers/*.rb')
 # These hooks are run before any dependencies are required.
 #
 Padrino.before_load do
-  config_files = [
-    File.expand_path("../../.env.#{ Padrino.env }", __FILE__),
-    File.expand_path('../../.env', __FILE__),
-  ]
-  puts "Loading config files: #{ config_files.inspect }"
-  Dotenv.load(*config_files)
+  unless RACK_ENV == 'production'
+    config_files = [
+      File.expand_path("../../.env.#{ Padrino.env }", __FILE__),
+      File.expand_path('../../.env', __FILE__),
+    ]
+    puts "Loading config files: #{ config_files.inspect }"
+    Dotenv.load(*config_files)
+  end
 
   require_relative 'observatory'
 

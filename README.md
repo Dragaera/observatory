@@ -28,6 +28,7 @@ must define manually.
 | ----------------- | ------------- | -------- | -----------------------------------------------                                                                                       |
 | `DEBUG`           |               | n        | If set, this application will dump potentially sensitive session information into the log.                                            |
 | `SESSION_SECRET`  |               | y        | An alphanumeric string which is used to encrypt cookies. This config must be identical on all hosts, if you run a loadbalanced setup! |
+| `RACK_ENV`        | development   | y        | Application environment. `development`, `testing` and `production` have defined meaning, other values may cause undefined behaviour. |
 
 #### Puma
 
