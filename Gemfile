@@ -13,7 +13,7 @@ gem 'sequel'
 # Test requirements
 
 # Padrino Stable Gem
-gem 'padrino', '0.14.1.1'
+gem 'padrino', '0.14.3'
 
 gem 'sinatra-contrib'
 
