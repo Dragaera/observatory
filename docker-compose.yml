@@ -4,6 +4,9 @@ networks:
   observatory-dev:
   observatory-test:
 
+volumes:
+  gorge-data:
+
 services:
   database:
     image: 'lavode/observatory-database:9.4'
@@ -36,3 +39,26 @@ services:
       - observatory-test
     ports:
       - 26379:6379
+
+  gorge-database:
+    image: 'postgres:9.6'
+    env_file: .env.development.gorge
+    networks:
+      - observatory-dev
+
+  gorge-redis:
+    image: 'redis:3'
+    env_file: .env.development.gorge
+    networks:
+      - observatory-dev
+
+  gorge-application:
+    image: 'lavode/gorge:0.1.0'
+    env_file: .env.development.gorge
+    command: application
+    networks:
+      - observatory-dev
+    ports:
+      - 8080:8080
+    volumes:
+      - gorge-data:/tmp/gorge
