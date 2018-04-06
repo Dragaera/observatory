@@ -116,5 +116,13 @@ module Observatory
         raise ArgumentError, "Must define PIWIK_SERVER and PIWIK_SITE_ID if Piwik integration enabled."
       end
     end
+
+    module Gorge
+      BASE_URL            = ENV['GORGE_BASE_URL']
+      HTTP_BASIC_USER     = ENV['GORGE_HTTP_BASIC_USER']
+      HTTP_BASIC_PASSWORD = ENV['GORGE_HTTP_BASIC_PASSWORD']
+      CONNECT_TIMEOUT     = ENV.fetch('GORGE_CONNECT_TIMEOUT', 1).to_i
+      TIMEOUT             = ENV.fetch('GORGE_TIMEOUT', 2).to_i
+    end
   end
 end
