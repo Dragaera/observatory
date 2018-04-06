@@ -8,15 +8,15 @@
       %tr
         %th Alien
         %td= player_statistics.kdr.alien.round(2)
-        %td= "#{ (player_statistics.accuracy.alien * 100).round(1) }%"
+        %td= fraction_as_percentage(player_statistics.accuracy.alien, 1)
       %tr
         %th Marine
         %td= player_statistics.kdr.marine.round(2)
-        %td= "#{ (player_statistics.accuracy.marine.total * 100).round(1) }% (excl Onos: #{ (player_statistics.accuracy.marine.no_onos * 100).round(1) }%)"
+        %td= "#{ fraction_as_percentage(player_statistics.accuracy.marine.total, 1) } (excl Onos: #{ fraction_as_percentage(player_statistics.accuracy.marine.no_onos, 1) })"
       %tr
         %th Total
         %td= player_statistics.kdr.total.round(2)
-        %td= "#{ (player_statistics.accuracy.total * 100).round(1) }%"
+        %td= fraction_as_percentage(player_statistics.accuracy.total, 1)
 - else
   .well
     No additional data available. :(
