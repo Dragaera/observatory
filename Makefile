@@ -1,4 +1,4 @@
-.PHONY: test build push
+.PHONY: test build push clean environment
 
 IMAGE_NAME = lavode/observatory
 COMMIT_ID := $(shell git rev-parse HEAD)
@@ -24,3 +24,7 @@ test: build_test
 
 push: build
 	IMAGE_NAME=${IMAGE_NAME} util/push_container.sh
+
+clean:
+	@echo "Cleaning environment"
+	docker-compose down -v
