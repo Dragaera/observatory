@@ -100,6 +100,8 @@ Observatory::App.controllers :players do
     page = params.fetch('page', 1).to_i
     page = 1 if page < 1
 
+    @player_statistics = gorge_query(@player.account_id)
+
     @player_data_points = @player.
       recent_player_data.
       paginate(page, Observatory::Config::Profile::PAGINATION_SIZE)
