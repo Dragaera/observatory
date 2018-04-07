@@ -43,7 +43,7 @@ module Observatory
     end
 
     module Profile
-      PAGINATION_SIZE = ENV.fetch('PROFILE_PAGINATION_SIZE', 7).to_i
+      PAGINATION_SIZE = ENV.fetch('PROFILE_PAGINATION_SIZE', 14).to_i
       PAGINATION_LEADING = ENV.fetch('PROFILE_PAGINATION_LEADING', 5).to_i
       PAGINATION_SURROUNDING = ENV.fetch('PROFILE_PAGINATION_TRAILING', 3).to_i
       PAGINATION_TRAILING = ENV.fetch('PROFILE_PAGINATION_TRAILING', 5).to_i
@@ -115,6 +115,14 @@ module Observatory
       if ENABLED && !(SERVER && SITE_ID)
         raise ArgumentError, "Must define PIWIK_SERVER and PIWIK_SITE_ID if Piwik integration enabled."
       end
+    end
+
+    module Gorge
+      BASE_URL            = ENV['GORGE_BASE_URL']
+      HTTP_BASIC_USER     = ENV['GORGE_HTTP_BASIC_USER']
+      HTTP_BASIC_PASSWORD = ENV['GORGE_HTTP_BASIC_PASSWORD']
+      CONNECT_TIMEOUT     = ENV.fetch('GORGE_CONNECT_TIMEOUT', 1).to_i
+      TIMEOUT             = ENV.fetch('GORGE_TIMEOUT', 2).to_i
     end
   end
 end

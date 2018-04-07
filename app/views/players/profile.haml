@@ -17,10 +17,17 @@
 
   .row
     .col-md-4
-      %h2 Stats
-      = partial 'players/player_data', locals: { player: @player }
+      %h2 Steam
+      = partial 'players/steam_data', locals: { player: @player }
+
+      %h2 Ingame
+      = partial 'players/gorge_data', locals: { player_statistics: @player_statistics }
+
+      %h2 Hive
+      = partial 'players/hive_data', locals: { player: @player }
 
     .col-md-8
+      %h2 Skill progression
       = partial 'players/skill_progression', locals: { player_data_points: @player_data_points }
       = partial 'players/player_data_point_pagination', locals: { player: @player, dataset: @player_data_points }
 

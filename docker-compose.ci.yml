@@ -5,13 +5,13 @@ networks:
 
 services:
   database-ci:
-    image: 'lavode/observatory-database:9.4'
+    image: 'lavode/observatory-database:9.6'
     env_file: .env.ci
     networks:
       - observatory-ci
 
   redis-ci:
-    image: 'redis:3.0'
+    image: 'redis:4.0'
     env_file: .env.ci
     networks:
       - observatory-ci

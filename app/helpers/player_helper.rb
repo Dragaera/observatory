@@ -18,6 +18,41 @@ module Observatory
         page = (rank - 1) / Observatory::Config::Leaderboard::PAGINATION_SIZE + 1
         link_to "##{ rank }", url(:leaderboard, :players, page: page, sort_by: col)
       end
+
+      def gorge_query(steam_id)
+        return player_statistics_null_object unless Observatory::Config::Gorge::BASE_URL
+
+        opts = {
+          connect_timeout: Observatory::Config::Gorge::CONNECT_TIMEOUT,
+          timeout: Observatory::Config::Gorge::TIMEOUT,
+        }
+
+        if Observatory::Config::Gorge::HTTP_BASIC_USER && Observatory::Config::Gorge::HTTP_BASIC_PASSWORD
+          opts[:user]     = Observatory::Config::Gorge::HTTP_BASIC_USER
+          opts[:password] = Observatory::Config::Gorge::HTTP_BASIC_PASSWORD
+        end
+
+        client = Gorgerb::Client.new(
+          Observatory::Config::Gorge::BASE_URL,
+          opts
+        )
+
+        client.player_statistics(steam_id)
+      rescue Gorgerb::Error => e
+        player_statistics_null_object
+      end
+    end
+
+    def player_statistics_null_object
+      Gorgerb::PlayerStatistics.new(
+        nil,
+        Gorgerb::PlayerStatistics::KDR.new(nil, nil, nil),
+        Gorgerb::PlayerStatistics::Accuracy.new(
+          nil,
+          nil,
+          Gorgerb::PlayerStatistics::MarineAccuracy.new(nil, nil),
+        ),
+      )
     end
 
     helpers PlayerHelper

@@ -8,6 +8,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Basic per-player statistics (accuracy and KDR) on profile page.
+
 ### Changed
 
 ### Fixed

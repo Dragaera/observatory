@@ -4,35 +4,82 @@ networks:
   observatory-dev:
   observatory-test:
 
+volumes:
+  gorge-data:
+
+volumes:
+  database-data:
+  database-test-data:
+  redis-data:
+  redis-test-data:
+  gorge-application-data:
+  gorge-database-data:
+  gorge-redis-data:
+
 services:
   database:
-    image: 'lavode/observatory-database:9.4'
+    image: 'lavode/observatory-database:9.6'
     env_file: .env.development
     networks:
       - observatory-dev
     ports:
       - 15432:5432
+    volumes:
+      - database-data:/var/lib/postgresql/data
 
   database-test:
-    image: 'lavode/observatory-database:9.4'
+    image: 'lavode/observatory-database:9.6'
     env_file: .env.test
     networks:
       - observatory-test
     ports:
       - 25432:5432
+    volumes:
+      - database-test-data:/var/lib/postgresql/data
 
   redis:
-    image: 'redis:3.0'
+    image: 'redis:4.0'
     env_file: .env.development
     networks:
       - observatory-dev
     ports:
       - 16379:6379
+    volumes:
+      - redis-data:/data
 
   redis-test:
-    image: 'redis:3.0'
+    image: 'redis:4.0'
     env_file: .env.test
     networks:
       - observatory-test
     ports:
       - 26379:6379
+    volumes:
+      - redis-test-data:/data
+
+  gorge-database:
+    image: 'postgres:9.6'
+    env_file: .env.development.gorge
+    networks:
+      - observatory-dev
+    volumes:
+      - gorge-database-data:/var/lib/postgresql/data
+
+  gorge-redis:
+    image: 'redis:3'
+    env_file: .env.development.gorge
+    networks:
+      - observatory-dev
+    volumes:
+      - gorge-redis-data:/data
+
+  gorge-application:
+    image: 'lavode/gorge:0.1.0'
+    env_file: .env.development.gorge
+    command: application
+    networks:
+      - observatory-dev
+    ports:
+      - 8080:8080
+    volumes:
+      - gorge-application-data:/tmp/gorge
