@@ -3,19 +3,19 @@
     %tbody
       %tr
         %th
-        %th K/D
-        %th Accuracy
-      %tr
         %th Alien
-        %td= player_statistics.kdr.alien.round(2)
-        %td= fraction_as_percentage(player_statistics.accuracy.alien, 1)
-      %tr
         %th Marine
-        %td= player_statistics.kdr.marine.round(2)
-        %td= "#{ fraction_as_percentage(player_statistics.accuracy.marine.total, 1) } (excl Onos: #{ fraction_as_percentage(player_statistics.accuracy.marine.no_onos, 1) })"
-      %tr
         %th Total
+      %tr
+        %th K/D
+        %td= player_statistics.kdr.alien.round(2)
+        %td= player_statistics.kdr.marine.round(2)
         %td= player_statistics.kdr.total.round(2)
+      %tr
+        %th Accuracy
+        %td= fraction_as_percentage(player_statistics.accuracy.alien, 1)
+        %td
+          = "#{ fraction_as_percentage(player_statistics.accuracy.marine.total, 1) } (No Onos: #{ fraction_as_percentage(player_statistics.accuracy.marine.no_onos, 1) })"
         %td= fraction_as_percentage(player_statistics.accuracy.total, 1)
 - else
   .well
