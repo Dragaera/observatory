@@ -9,6 +9,10 @@ Observatory::App.controllers :observatory do
     render 'stats'
   end
 
+  get :faq, map: '/faq' do
+    render 'faq'
+  end
+
   get :scheduled_player_updates_graph do
     data = Hash[
       Player.

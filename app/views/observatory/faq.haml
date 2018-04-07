@@ -1,0 +1,135 @@
+.page-header
+  %h1 FAQ
+
+.row
+  .col-md-10
+    %h2 General
+    .panel-group
+      .panel.panel-default
+        .panel-heading
+          What's this site about?
+        .panel-body
+          %p
+            This is the Observatory - a fan-maintainted site which allows you to track various per-player statistics of
+            = link_to('Natural Selection 2', 'https://unknownworlds.com/ns2/')
+            , a first-person online shooter.
+
+      .panel.panel-default
+        .panel-heading
+          Are you using analytics software?
+        .panel-body
+          - if Observatory::Config::Piwik::ENABLED
+            %p
+              Yes, we are using
+              = link_to('Matomo', 'https://matomo.org/')
+              in order to analyze how people use this website. This allows us to
+              further improve the areas of the site which people frequent.
+            %p
+              Should you wish to not be tracked, then you can easily opt-out in one of two ways:
+              %ul
+                %li
+                  Configure your browser to send the 'Do not track' header. This
+                  can usually be done in the privacy settings. If possible, you
+                  should choose this way, as it will persist even if you clear
+                  cookies.
+                %li
+                  Visit
+                  = link_to('this link', "#{ Observatory::Config::Piwik::SERVER }/index.php?module=CoreAdminHome&action=optOut&language=en")
+                  and uncheck the checkbox.
+          - else
+            %p
+              No, analytics software is disabled on this instance.
+
+      .panel.panel-default
+        .panel-heading
+          I have a suggestion / a bug report / something else
+        .panel-body
+          %p
+            If you want to talk in person, feel free to drop by the
+            = link_to('Official NS2 Discord', 'https://discord.gg/0TKQwZWu7JE4AZnz')
+            , and look for user Morrolan#3163.
+          %p
+            Alternatively, you may also report bugs via the Github issue tracker - 
+            look for the link in the menu.
+
+
+    %h2 Quering Players
+    .panel-group
+      .panel.panel-default
+        .panel-heading
+          I can't find a player I'm looking for
+        .panel-body
+          %p
+            If you are unable to find a player, then you can try to add them
+            using their Steam ID. Mind that you can not add someone using their
+            ingame nickname!
+          %p
+            = link_to('Add new player', url(:player_query, :new))
+
+      .panel.panel-default
+        .panel-heading
+          My badges don't show up
+        .panel-body
+          %p
+            If your badges don't show up, then this is likely due to one of two reasons:
+            %ul
+              %li
+                If your Steam inventory is private, the site will be unable to
+                retrieve your badges. As such, make sure your inventory is
+                publicly accessible if you want your badges to show up.
+              %li
+                The PAX 2012 badge can not be tracked by this site, as it is managed in a special way.
+
+
+    %h2 Player Data
+    .panel-group
+      .panel.panel-default
+        .panel-heading
+          What is the difference between 'Hive' and 'Ingame' data?
+        .panel-body
+          %p
+            Data listed below 'Hive' is tracked by Hive - a statistics system
+            maintained by UWE, NS2's developers.
+          %p
+            Data listed below 'ingame' is based on NS2+/wonitor data which we
+            automatically download from selected servers. We try to retrieve
+            such data from many servers, to ensure that we are able to cover as
+            many players as possible.
+
+      .panel.panel-default
+        .panel-heading
+          What is Hive skill?
+        .panel-body
+          %p
+            Have skill measures your likelihood to win games. If you win games
+            it goes up, if you lose games it goes down. How much it goes up or
+            down depends on various factors - eg how long you played that
+            round, whether your opponents were stronger or weaker and so on.
+          %p
+            Hive skill is tracked on all servers which are whitelisted - that
+            is, those which show up as 'whitelisted' or 'ranked' in the ingame
+            server browser.
+          %p
+            Hive skill is used ingame to create balanced teams, by ensuring
+            that the average skill of both teams is similar.
+
+      .panel.panel-default
+        .panel-heading
+          How do you calculate KDR, accuracy etc?
+        .panel-body
+          %p
+            KDR as well as accuracy are based on all rounds you played for
+            which we have data.
+
+      .panel.panel-default
+        .panel-heading
+          I got a message that no additional data was available. What does this mean?
+        .panel-body
+          %p
+            This means that you have never played on any of the servers for
+            which we have additional data. If you would like this to change,
+            you could contact the operators of the servers you play on, and ask
+            them to get in contact with me.
+
+  .col-md-2
+    .test
