@@ -2,10 +2,10 @@
   %h1 FAQ
 
 .row
-  .col-md-10
+  .col-md-12
     %h2 General
     .panel-group
-      .panel.panel-default
+      #faq-general-about.panel.panel-default
         .panel-heading
           What's this site about?
         .panel-body
@@ -14,7 +14,7 @@
             = link_to('Natural Selection 2', 'https://unknownworlds.com/ns2/')
             , a first-person online shooter.
 
-      .panel.panel-default
+      #faq-general-analytics.panel.panel-default
         .panel-heading
           Are you using analytics software?
         .panel-body
@@ -40,7 +40,7 @@
             %p
               No, analytics software is disabled on this instance.
 
-      .panel.panel-default
+      #faq-general-contact.panel.panel-default
         .panel-heading
           I have a suggestion / a bug report / something else
         .panel-body
@@ -55,7 +55,7 @@
 
     %h2 Quering Players
     .panel-group
-      .panel.panel-default
+      #faq-querying-cantfind.panel.panel-default
         .panel-heading
           I can't find a player I'm looking for
         .panel-body
@@ -66,7 +66,7 @@
           %p
             = link_to('Add new player', url(:player_query, :new))
 
-      .panel.panel-default
+      #faq-querying-badges.panel.panel-default
         .panel-heading
           My badges don't show up
         .panel-body
@@ -83,7 +83,7 @@
 
     %h2 Player Data
     .panel-group
-      .panel.panel-default
+      #faq-data-hivevsingame.panel.panel-default
         .panel-heading
           What is the difference between 'Hive' and 'Ingame' data?
         .panel-body
@@ -96,7 +96,7 @@
             such data from many servers, to ensure that we are able to cover as
             many players as possible.
 
-      .panel.panel-default
+      #faq-data-hiveskill.panel.panel-default
         .panel-heading
           What is Hive skill?
         .panel-body
@@ -113,7 +113,7 @@
             Hive skill is used ingame to create balanced teams, by ensuring
             that the average skill of both teams is similar.
 
-      .panel.panel-default
+      #faq-data-kdraccuracy.panel.panel-default
         .panel-heading
           How do you calculate KDR, accuracy etc?
         .panel-body
@@ -121,7 +121,7 @@
             KDR as well as accuracy are based on all rounds you played for
             which we have data.
 
-      .panel.panel-default
+      #faq-data-noadditionaldata.panel.panel-default
         .panel-heading
           I got a message that no additional data was available. What does this mean?
         .panel-body
@@ -130,6 +130,3 @@
             which we have additional data. If you would like this to change,
             you could contact the operators of the servers you play on, and ask
             them to get in contact with me.
-
-  .col-md-2
-    .test
