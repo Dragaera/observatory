@@ -12,14 +12,19 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
-- Exception on player profile page if a player has no rounds of a given team on
-  record.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.27.1] - 2018-04-13
+
+### Fixed
+
+- Exception on player profile page if a player has no rounds of a given team on
+  record.
 
 
 ## [0.27.0] - 2018-04-13
