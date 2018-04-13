@@ -8,9 +8,6 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
-- Basic per-player statistics (accuracy and KDR) on profile page.
-- Hard-coded FAQ.
-
 ### Changed
 
 ### Fixed
@@ -20,6 +17,14 @@ glance - what to expect from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.27.0] - 2018-04-13
+
+### Added
+
+- Basic per-player statistics (accuracy and KDR) on profile page.
+- Hard-coded FAQ.
 
 
 ## [0.26.1] - 2018-03-19
