@@ -12,6 +12,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Made link to Piwik opt-out window on FAQ page absolute.
+
 ### Security
 
 ### Deprecated
