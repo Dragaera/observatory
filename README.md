@@ -189,6 +189,16 @@ timezone.
 | `PIWIK_SERVER`  |               | n        | Host of Piwik server, eg `piwik.example.com`.     |
 | `PIWIK_SITE_ID` |               | n        | Site ID of Piwik site.                            |
 
+#### Gorge
+
+| Variable                     | Default value | Required | Description                                               |
+| ---------------------------- | ------------- | -------- | --------------------------------------------------------- |
+| `GORGE_BASE_URL`             |               | n        | Base URL of Gorge. Empty to disable Gorge integration.    |
+| `GORGE_HTTP_BASIC_USER`      |               | n        | User for HTTP basic authentication. Empty to disable.     |
+| `GORGE_HTTP_BASIC_PASSWORD ` |               | n        | Password for HTTP basic authentication. Empty to disable. |
+| `GORGE_CONNECT_TIMEOUT`      | 1             | y        | HTTP connect timeout towards Gorge API.                   |
+| `GOGE_TIMEOUT`               | 2             | y        | HTTP timeout towards Gorge API.                           |
+
 ## Developing
 
 Want to work on this application? Here's some steps to get you started.
