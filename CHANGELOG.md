@@ -12,6 +12,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Exception on player profile page if a player has no rounds of a given team on
+  record.
+
 ### Security
 
 ### Deprecated
