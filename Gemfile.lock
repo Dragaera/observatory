@@ -16,7 +16,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    backports (3.11.1)
+    backports (3.11.3)
     bcrypt (3.1.11)
     byebug (10.0.0)
     capybara (2.18.0)
@@ -32,13 +32,16 @@ GEM
     database_cleaner (1.6.2)
     diff-lcs (1.3)
     dotenv (2.2.1)
-    et-orbi (1.0.9)
+    et-orbi (1.1.2)
       tzinfo
     ethon (0.11.0)
       ffi (>= 1.3.0)
     factory_bot (4.8.2)
       activesupport (>= 3.0.0)
     ffi (1.9.23)
+    fugit (1.1.1)
+      et-orbi (~> 1.1, >= 1.1.1)
+      raabro (~> 1.1)
     gorgerb (0.1.0)
       typhoeus (~> 1.3)
     haml (5.0.4)
@@ -102,8 +105,9 @@ GEM
       pry (~> 0.10)
     public_suffix (3.0.2)
     puma (3.11.3)
-    rack (2.0.4)
-    rack-protection (2.0.1)
+    raabro (1.1.5)
+    rack (2.0.5)
+    rack-protection (2.0.3)
       rack
     rack-test (0.8.3)
       rack (>= 1.0, < 3)
@@ -140,24 +144,25 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rufus-scheduler (3.4.2)
-      et-orbi (~> 1.0)
+    rufus-scheduler (3.5.0)
+      fugit (~> 1.1, >= 1.1.1)
     sequel (5.6.0)
     sequel_pg (1.8.1)
       pg (>= 0.18.0)
       sequel (>= 4.34.0)
     silverball (0.1.2)
-    sinatra (2.0.1)
+    sinatra (2.0.3)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.1)
+      rack-protection (= 2.0.3)
       tilt (~> 2.0)
-    sinatra-contrib (2.0.1)
-      backports (>= 2.0)
+    sinatra-contrib (2.0.3)
+      activesupport (>= 4.0.0)
+      backports (>= 2.8.2)
       multi_json
       mustermann (~> 1.0)
-      rack-protection (= 2.0.1)
-      sinatra (= 2.0.1)
+      rack-protection (= 2.0.3)
+      sinatra (= 2.0.3)
       tilt (>= 1.3, < 3)
     steam-condenser (1.3.11)
       multi_json (~> 1.6)
@@ -200,15 +205,15 @@ DEPENDENCIES
   rake
   ratelimit
   redis
-  resque
-  resque-job-stats
-  resque-scheduler
+  resque (>= 1.27.4)
+  resque-job-stats (>= 0.4.2)
+  resque-scheduler (>= 4.3.1)
   rspec
   sequel
   sequel-pg-trgm!
   sequel_pg
   silverball (~> 0.1.0)
-  sinatra-contrib
+  sinatra-contrib (>= 2.0.2)
   steam-condenser
   steam-id2 (~> 0.4.4)
   timecop
