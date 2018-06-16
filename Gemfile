@@ -15,7 +15,7 @@ gem 'sequel'
 # Padrino Stable Gem
 gem 'padrino', '0.14.3'
 
-gem 'sinatra-contrib'
+gem 'sinatra-contrib', '>= 2.0.2'
 
 # Application server
 gem 'puma'
@@ -25,9 +25,9 @@ gem 'sequel_pg', require: 'sequel'
 gem 'sequel-pg-trgm', ref: 'b9148f1a', git: 'https://github.com/mitchellhenke/sequel-pg-trgm'
 
 # Background tasks
-gem 'resque'
-gem 'resque-scheduler'
-gem 'resque-job-stats'
+gem 'resque', '>= 1.27.4'
+gem 'resque-scheduler', '>= 4.3.1'
+gem 'resque-job-stats', '>= 0.4.2'
 
 gem 'redis'
 
