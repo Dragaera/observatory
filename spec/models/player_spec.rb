@@ -337,4 +337,34 @@ RSpec.describe Player do
       expect(player.show_ensl_tutorials?).to be_falsey
     end
   end
+
+  describe '#rookie?' do
+    it "returns true if the player's level is below 20" do
+      player.add_player_data_point(build(:player_data_point, player: player, level: 10))
+      expect(player).to be_rookie
+    end
+
+    it 'returns true if the player has no data points' do
+      expect(player).to be_rookie
+    end
+
+    it 'returns false otherwise' do
+      player.add_player_data_point(build(:player_data_point, player: player, level: 21))
+      expect(player).to_not be_rookie
+    end
+  end
+
+  describe '#skill_tier_badge' do
+    it 'returns the rookie badge if player is a rookie' do
+      player.add_player_data_point(build(:player_data_point, player: player, level: 10))
+
+      expect(player.skill_tier_badge).to eq SkillTierBadge.rookie
+    end
+
+    it "returns the highest badge the player's skill permits otherwise" do
+      player.add_player_data_point(build(:player_data_point, player: player, level: 50, skill: 2201))
+
+      expect(player.skill_tier_badge).to eq SkillTierBadge.commandant
+    end
+  end
 end
