@@ -6,9 +6,10 @@ module Observatory
       def badge_image_path(badge)
         "/images/badges/#{ badge.image }"
       end
-      # def simple_helper_method
-      # ...
-      # end
+
+      def badge_image(badge)
+        tag(:img, src: badge_image_path(badge), title: badge.name)
+      end
     end
 
     helpers BadgesHelper
