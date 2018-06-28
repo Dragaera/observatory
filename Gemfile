@@ -50,7 +50,7 @@ gem 'steam-condenser'
 gem 'steam-id2', '~> 0.4.4', require: 'steam_id'
 
 # Bindings to Hive HTTP API
-gem 'hive-stalker', '~>0.1.0', require: 'hive_stalker'
+gem 'hive-stalker', '0.1.5'
 # Bindings to Gorge
 gem 'gorgerb', '~> 0.1.0'
 
