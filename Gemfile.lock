@@ -38,7 +38,7 @@ GEM
       ffi (>= 1.3.0)
     factory_bot (4.8.2)
       activesupport (>= 3.0.0)
-    ffi (1.9.23)
+    ffi (1.9.25)
     gorgerb (0.1.0)
       typhoeus (~> 1.3)
     haml (5.0.4)
@@ -190,7 +190,7 @@ DEPENDENCIES
   factory_bot
   gorgerb (~> 0.1.0)
   haml
-  hive-stalker (~> 0.1.0)
+  hive-stalker (= 0.1.5)
   padrino (= 0.14.3)
   pg
   pry
