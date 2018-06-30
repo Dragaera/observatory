@@ -74,7 +74,7 @@ services:
       - gorge-redis-data:/data
 
   gorge-application:
-    image: 'lavode/gorge:0.1.0'
+    image: 'lavode/gorge:0.1.1'
     env_file: .env.development.gorge
     command: application
     networks:

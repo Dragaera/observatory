@@ -312,6 +312,21 @@ class Player < Sequel::Model
       skill < Observatory::Config::Profile::ENSL::SKILL_THRESHOLD
   end
 
+  def rookie?
+    return true unless current_player_data_point
+    level < 20
+  end
+
+  def skill_tier_badge
+    return SkillTierBadge.rookie if rookie?
+
+    player_skill = skill
+    SkillTierBadge.
+      where { hive_skill_threshold <= player_skill }.
+      order_by(Sequel.desc(:hive_skill_threshold)).
+      first
+  end
+
   private
   def self.resolve_steam_id(steam_id)
     SteamID.from_string(steam_id, api_key: Observatory::Config::Steam::WEB_API_KEY).account_id

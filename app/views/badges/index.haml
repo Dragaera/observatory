@@ -9,6 +9,6 @@
         .list-group
           - badge_group.badges_dataset.order(Sequel.asc(:sort)).each do |badge|
             %a.list-group-item{ href: url(:players, :index, badges: [badge.id]) }
-              %img{ src: badge_image_path(badge), title: badge.name }
+              = badge_image(badge)
               = badge.name
               %span.badge= badge.players_dataset.count

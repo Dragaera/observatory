@@ -11,7 +11,13 @@
       %tr
         =# In case of direct searches (e.g account ID) this might be a pure player object, not a JOIN dataset.
         %td= link_to player.account_id, url(:players, :profile, id: player.id)
-        %td= player.alias
+        %td
+          .media
+            .media-left
+              = skill_tier_badge_image(player.skill_tier_badge, height: '15px', cls: 'media-object', narrow: true)
+            .media-body
+              .media-body
+                = player.alias
         %td= player.level
         %td= player.skill
         %td= player.last_activity ? pp_date(player.last_activity) : 'Never'
@@ -19,7 +25,13 @@
     - results[:indirect].each do |player|
       %tr
         %td= link_to player[:account_id], url(:players, :profile, id: player[:id])
-        %td= player[:alias]
+        %td
+          .media
+            .media-left
+              = skill_tier_badge_image(Player[player[:id]].skill_tier_badge, height: '15px', cls: 'media-object', narrow: true)
+            .media-body
+              .media-body
+                = player[:alias]
         %td= player[:level]
         %td= player[:skill]
         %td= player.last_activity ? pp_date(player.last_activity) : 'Never'

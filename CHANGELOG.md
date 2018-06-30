@@ -8,6 +8,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Skill tier badges on profile page, leaderboard, and search result page.
+
 ### Changed
 
 ### Fixed

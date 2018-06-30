@@ -5,3 +5,17 @@
 table th {
   white-space: nowrap;
 }
+
+/* 
+ * https://stackoverflow.com/questions/3186688/drop-shadow-for-png-image-in-css#12921987
+*/
+.shadowed { 
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222); 
+}
+
+.shadowed-narrow {
+  -webkit-filter: drop-shadow(3px 3px 3px #222);
+  filter: drop-shadow(3px 3px 3px #222); 
+  margin-bottom: 5px;
+}
