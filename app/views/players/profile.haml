@@ -1,6 +1,7 @@
 - if @player.current_player_data_point
   .page-header
     %h1
+      = skill_tier_badge_image(@player.skill_tier_badge)
       = @player.alias
       %small= "Updated: #{ time_ago_in_words(@player.last_update_at) } ago (Updates: Every #{ timespan_in_words @player.update_frequency.interval })"
 

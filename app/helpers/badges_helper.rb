@@ -10,6 +10,14 @@ module Observatory
       def badge_image(badge)
         tag(:img, src: badge_image_path(badge), title: badge.name)
       end
+
+      def skill_tier_badge_image_path(badge)
+        "/images/skill_tier_badges/#{ badge.image }"
+      end
+
+      def skill_tier_badge_image(badge)
+        tag(:img, src: skill_tier_badge_image_path(badge), title: badge.name, class: 'shadowed')
+      end
     end
 
     helpers BadgesHelper
