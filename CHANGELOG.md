@@ -8,6 +8,21 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.28.0] - 2018-06-30
+
+### Added
+
 - Skill tier badges on profile page, leaderboard, and search result page.
 
 ### Changed
@@ -18,12 +33,6 @@ glance - what to expect from upgrading to a new version.
 ### Fixed
 
 - Made link to Piwik opt-out window on FAQ page absolute.
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.27.1] - 2018-04-13
