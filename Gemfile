@@ -55,7 +55,7 @@ gem 'hive-stalker', '~>0.1.0', require: 'hive_stalker'
 gem 'gorgerb', '~> 0.1.0'
 
 # Formatting helper
-gem 'silverball', '~>0.1.0'
+gem 'silverball', '~>0.1.3'
 
 group :development, :test do
   gem 'dotenv'
