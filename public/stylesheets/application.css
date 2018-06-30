@@ -13,3 +13,9 @@ table th {
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222); 
 }
+
+.shadowed-narrow {
+  -webkit-filter: drop-shadow(3px 3px 3px #222);
+  filter: drop-shadow(3px 3px 3px #222); 
+  margin-bottom: 5px;
+}
