@@ -146,7 +146,7 @@ GEM
     sequel_pg (1.8.1)
       pg (>= 0.18.0)
       sequel (>= 4.34.0)
-    silverball (0.1.2)
+    silverball (0.1.3)
     sinatra (2.0.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -207,7 +207,7 @@ DEPENDENCIES
   sequel
   sequel-pg-trgm!
   sequel_pg
-  silverball (~> 0.1.0)
+  silverball (~> 0.1.3)
   sinatra-contrib
   steam-condenser
   steam-id2 (~> 0.4.4)

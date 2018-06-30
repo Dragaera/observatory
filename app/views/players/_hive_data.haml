@@ -24,13 +24,13 @@
       %th{ colspan: 2 } Time played as
     %tr
       %td Total
-      %td= timespan_in_words(player.time_total)
+      %td= timespan_in_words(player.time_total, unit: :hours)
     %tr
       %td Alien
-      %td= "#{ timespan_in_words(player.time_alien) } (#{ fraction_as_percentage(player.time_alien, player.time_total) })"
+      %td= "#{ timespan_in_words(player.time_alien, unit: :hours) } (#{ fraction_as_percentage(player.time_alien, player.time_total) })"
     %tr
       %td Marine
-      %td= "#{ timespan_in_words(player.time_marine) } (#{ fraction_as_percentage(player.time_marine, player.time_total) })"
+      %td= "#{ timespan_in_words(player.time_marine, unit: :hours) } (#{ fraction_as_percentage(player.time_marine, player.time_total) })"
     %tr
       %td Commander
-      %td= "#{ timespan_in_words(player.time_commander) } (#{ fraction_as_percentage(player.time_commander, player.time_total) })"
+      %td= "#{ timespan_in_words(player.time_commander, unit: :hours) } (#{ fraction_as_percentage(player.time_commander, player.time_total) })"

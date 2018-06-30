@@ -41,10 +41,10 @@
             %td= number_with_separator player[:score]
             %td= player[:level]
             %td= number_with_separator player[:experience]
-            %td= timespan_in_words player[:time_total]
-            %td= timespan_in_words player[:time_alien]
-            %td= timespan_in_words player[:time_marine]
-            %td= timespan_in_words player[:time_commander]
+            %td= timespan_in_words player[:time_total], unit: :hours
+            %td= timespan_in_words player[:time_alien], unit: :hours
+            %td= timespan_in_words player[:time_marine], unit: :hours
+            %td= timespan_in_words player[:time_commander], unit: :hours
             %td= pp_date player.last_activity
 
 .row
