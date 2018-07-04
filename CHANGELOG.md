@@ -12,13 +12,18 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
-- Assignment of players to skill tiers now uses adagrad sum for better accuracy.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.28.1] - 2018-07-04
+
+### Fixed
+
+- Assignment of players to skill tiers now uses adagrad sum for better accuracy.
 
 
 ## [0.28.0] - 2018-06-30
