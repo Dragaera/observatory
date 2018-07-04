@@ -362,9 +362,12 @@ RSpec.describe Player do
     end
 
     it "returns the highest badge the player's skill permits otherwise" do
-      player.add_player_data_point(build(:player_data_point, player: player, level: 50, skill: 2201))
-
+      player.add_player_data_point(build(:player_data_point, player: player, level: 50, skill: 2202, adagrad_sum: 25 * 25))
       expect(player.skill_tier_badge).to eq SkillTierBadge.commandant
+
+      player.player_data_points.first.update(adagrad_sum: 10)
+      player.refresh
+      expect(player.skill_tier_badge).to eq SkillTierBadge.veteran
     end
   end
 end

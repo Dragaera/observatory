@@ -320,7 +320,11 @@ class Player < Sequel::Model
   def skill_tier_badge
     return SkillTierBadge.rookie if rookie?
 
-    player_skill = skill
+    # NS2 supposedly uses the Adagrad sum to more determine a player's skil for
+    # the tier assignment.
+    # This likely serves to prevent flip-flopping between two different badges,
+    # as you win/lose minor amounts of skill.
+    player_skill = [0, skill - 25 / Math.sqrt(adagrad_sum)].max
     SkillTierBadge.
       where { hive_skill_threshold <= player_skill }.
       order_by(Sequel.desc(:hive_skill_threshold)).
