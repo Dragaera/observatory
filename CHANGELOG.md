@@ -8,6 +8,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- `sentry.io` integration for tracking of exceptions.
+
 ### Changed
 
 ### Fixed

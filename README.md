@@ -198,6 +198,11 @@ timezone.
 | `GORGE_HTTP_BASIC_PASSWORD ` |               | n        | Password for HTTP basic authentication. Empty to disable. |
 | `GORGE_CONNECT_TIMEOUT`      | 1             | y        | HTTP connect timeout towards Gorge API.                   |
 | `GORGE_TIMEOUT`              | 2             | y        | HTTP timeout towards Gorge API.                           |
+#### Sentry
+
+| Variable     | Default value | Required | Description                                        |
+| ------------ | ------------- | -------- | -------------------------------------------------- |
+| `SENTRY_DSN` |               | n        | Full Sentry DSN URL which to report exceptions to. |
 
 ## Developing
 
