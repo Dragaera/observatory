@@ -38,6 +38,8 @@ GEM
       ffi (>= 1.3.0)
     factory_bot (4.10.0)
       activesupport (>= 3.0.0)
+    faraday (0.15.2)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     fugit (1.1.3)
       et-orbi (~> 1.1, >= 1.1.1)
@@ -62,6 +64,7 @@ GEM
     mono_logger (1.1.0)
     multi_json (1.13.1)
     multi_xml (0.6.0)
+    multipart-post (2.0.0)
     mustermann (1.0.2)
     nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
@@ -131,6 +134,9 @@ GEM
       redis (>= 3.3, < 5)
       resque (~> 1.26)
       rufus-scheduler (~> 3.2)
+    resque-sentry (1.2.0)
+      resque (>= 1.18.0)
+      sentry-raven (>= 0.4.6)
     rspec (3.7.0)
       rspec-core (~> 3.7.0)
       rspec-expectations (~> 3.7.0)
@@ -146,6 +152,8 @@ GEM
     rspec-support (3.7.1)
     rufus-scheduler (3.5.0)
       fugit (~> 1.1, >= 1.1.1)
+    sentry-raven (2.7.4)
+      faraday (>= 0.7.6, < 1.0)
     sequel (5.9.0)
     sequel_pg (1.10.0)
       pg (>= 0.18.0)
@@ -208,7 +216,9 @@ DEPENDENCIES
   resque
   resque-job-stats
   resque-scheduler
+  resque-sentry
   rspec
+  sentry-raven
   sequel
   sequel-pg-trgm!
   sequel_pg

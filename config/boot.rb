@@ -74,6 +74,20 @@ Padrino.after_load do
   if Observatory::Config::Steam::WEB_API_KEY
     WebApi.api_key = Observatory::Config::Steam::WEB_API_KEY
   end
+
+  if Observatory::Config::Sentry.enabled?
+    puts 'Enabling sentry integration.'
+
+    Raven.configure do |config|
+      config.dsn = Observatory::Config::Sentry::DSN
+      config.release = Observatory::VERSION
+    end
+
+    Resque::Failure::Multiple.classes = [Resque::Failure::Redis, Resque::Failure::Sentry]
+    Resque::Failure.backend = Resque::Failure::Multiple
+  else
+    puts 'Skipping sentry integration.'
+  end
 end
 
 Padrino.load!

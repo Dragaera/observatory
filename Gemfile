@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Optional JSON codec (faster performance)
 # gem 'oj'
 
+gem 'sentry-raven'
+
 # Project requirements
 gem 'rake'
 
@@ -25,9 +27,10 @@ gem 'sequel_pg', require: 'sequel'
 gem 'sequel-pg-trgm', ref: 'b9148f1a', git: 'https://github.com/mitchellhenke/sequel-pg-trgm'
 
 # Background tasks
-gem 'resque'
+gem 'resque', require: ['resque', 'resque/failure/multiple', 'resque/failure/redis']
 gem 'resque-scheduler'
 gem 'resque-job-stats'
+gem 'resque-sentry'
 
 gem 'redis'
 
