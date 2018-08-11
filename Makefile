@@ -46,6 +46,7 @@ tag:
 	git push --tags
 
 	SENTRY_ORG=${SENTRY_ORGANIZATION} sentry-cli releases new -p ${SENTRY_PROJECT} ${VERSION}
+	SENTRY_ORG=${SENTRY_ORGANIZATION} sentry-cli releases set-commits --auto ${VERSION}
 
 release: tag push
 
