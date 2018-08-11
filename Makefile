@@ -1,6 +1,8 @@
 .PHONY: test build push clean environment
 
 IMAGE_NAME = lavode/observatory
+SENTRY_PROJECT = observatory
+SENTRY_ORGANIZATION = dragaera
 COMMIT_ID := $(shell git rev-parse HEAD)
 
 build:
@@ -24,6 +26,28 @@ test: build_test
 
 push: build
 	IMAGE_NAME=${IMAGE_NAME} util/push_container.sh
+
+tag:
+	@echo 'Checking for unstashed changes.'
+	! git status --porcelain 2>/dev/null | grep '^ M '
+	@echo 'None found.'
+	
+	@echo 'Checking for untracked files'
+	! git status --porcelain 2>/dev/null | grep '^?? '
+	@echo 'None found.'
+	
+	@echo "Building release: ${VERSION}"
+	sed -E -i "s/VERSION = '([0-9.]+)'/VERSION = '${VERSION}'/" lib/observatory/version.rb
+	vim CHANGELOG.md
+	git add lib/observatory/version.rb CHANGELOG.md
+	git commit -m "Bump version to '${VERSION}'."
+	git tag -a ${VERSION}
+	git push
+	git push --tags
+
+	SENTRY_ORG=${SENTRY_ORGANIZATION} sentry-cli releases new -p ${SENTRY_PROJECT} ${VERSION}
+
+release: tag push
 
 clean:
 	@echo "Cleaning environment"
