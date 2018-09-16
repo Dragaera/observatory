@@ -7,6 +7,15 @@ Observatory::App.controllers :players do
 
     search_param = params['filter']
 
+    begin
+      last_active_after = Date.strptime(
+        params.fetch('last_active_after', ''),
+        '%Y-%m-%d'
+      )
+    rescue ArgumentError
+      last_active_after = nil
+    end
+
     direct_results = []
 
     # Numeric? Match for account ID
@@ -63,6 +72,20 @@ Observatory::App.controllers :players do
       direct_results = direct_results.select do |player|
         ids.map(&:id).include? player.id
       end
+    end
+
+    if last_active_after
+      logger.debug "Filtering by last activity: #{ last_active_after }"
+
+      indirect_results = indirect_results.where {
+        Sequel[:player_data_points][:created_at] >= last_active_after
+      }
+
+      direct_results = direct_results.select do |player|
+        player.last_activity >= last_active_after
+      end
+    else
+      logger.debug 'Skipping filtering by last activity.'
     end
 
     indirect_results = indirect_results.

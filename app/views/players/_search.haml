@@ -15,4 +15,8 @@
           - else
             %option{ value: badge.id }= badge.name
 
+  .form-group
+    = label_tag :last_active_after
+    = date_field_tag :last_active_after, class: 'form-control', value: params['last_active_after'], placeholder: 'yyyy-mm-dd'
+
   = submit_tag 'Query', class: 'btn btn-default'

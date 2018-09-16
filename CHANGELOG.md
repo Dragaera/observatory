@@ -8,6 +8,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Ability to filter player search, and leaderboard, by players' last activity.
+
 ### Changed
 
 ### Fixed

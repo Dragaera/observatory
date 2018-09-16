@@ -10,6 +10,13 @@
         %ul
           %li This board only contains players who have previously queried their data via this tool.
           %li Information is based on the last time player data was refreshed - it might not be up-to-date.
+  .col-md-4
+    = form_tag url(:leaderboard, :players), method: :get do
+      .form-group
+        = label_tag :last_active_after
+        = date_field_tag :last_active_after, class: 'form-control', value: params['last_active_after'], placeholder: 'yyyy-mm-dd'
+
+      = submit_tag 'Filter', class: 'btn btn-default'
 
 .row
   .col-md-12
