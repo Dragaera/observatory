@@ -12,14 +12,23 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
-- Exception on startup caused by partially loaded `ActiveSupport`, and gems not
-  supporting this properly.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.31.1] - 2018-09-16
+
+### Added
+
+### Changed
+
+### Fixed
+
+- Exception on startup caused by partially loaded `ActiveSupport`, and gems not
+  supporting this properly.
 
 
 ## [0.30.0] - 2018-09-16
