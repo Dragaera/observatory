@@ -24,7 +24,7 @@ gem 'puma'
 
 gem 'pg'
 gem 'sequel_pg', require: 'sequel'
-gem 'sequel-pg-trgm', ref: 'b9148f1a', git: 'https://github.com/mitchellhenke/sequel-pg-trgm'
+gem 'sequel-pg-trgm'
 
 # Background tasks
 gem 'resque', require: ['resque', 'resque/failure/multiple', 'resque/failure/redis']
