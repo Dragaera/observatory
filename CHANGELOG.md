@@ -8,11 +8,7 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
-- Ability to filter player search, and leaderboard, by players' last activity.
-
 ### Changed
-
-- Update dependencies.
 
 ### Fixed
 
@@ -21,6 +17,17 @@ glance - what to expect from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.30.0] - 2018-09-16
+
+### Added
+
+- Ability to filter player search, and leaderboard, by players' last activity.
+
+### Changed
+
+- Update dependencies.
 
 
 ## [0.29.0] - 2018-08-12
