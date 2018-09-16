@@ -15,7 +15,6 @@ Observatory::App.controllers :players do
     rescue ArgumentError
       last_active_after = nil
     end
-    logger.debug "Last active after: #{ last_active_after }"
 
     direct_results = []
 

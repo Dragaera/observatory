@@ -5,6 +5,15 @@ Observatory::App.controllers :leaderboard do
     page = params.fetch('page', 1).to_i
     page = 1 if page < 1
 
+    begin
+      last_active_after = Date.strptime(
+        params.fetch('last_active_after', ''),
+        '%Y-%m-%d'
+      )
+    rescue ArgumentError
+      last_active_after = nil
+    end
+
     redirect url(:leaderboard, :players) unless ALLOWED_SORT_COLUMNS.include? sort_by
 
     sort_param = Sequel[:player_data_points][sort_by]
@@ -20,6 +29,16 @@ Observatory::App.controllers :leaderboard do
       ).
       order(Sequel.desc(sort_param)).
       paginate(page, Observatory::Config::Leaderboard::PAGINATION_SIZE)
+
+    if last_active_after
+      logger.debug "Filtering by last activity: #{ last_active_after }"
+      @players = @players.where {
+        Sequel[:player_data_points][:created_at] >= last_active_after
+      }
+    else
+      logger.debug 'Skipping filtering by last activity.'
+    end
+
     render 'players'
   end
 end
