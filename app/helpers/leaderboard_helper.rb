@@ -13,11 +13,12 @@ module Observatory
 
         current_sort_key = params['sort_by']
         current_page = params['page']
+        last_active_after = params['last_active_after']
 
         if sort_key == current_sort_key
-          sort_icon = link_to("<span class ='#{ SORT_ICON } sort-col-icon'></span>".html_safe, url(*url_key, sort_by: sort_key, page: current_page))
+          sort_icon = link_to("<span class ='#{ SORT_ICON } sort-col-icon'></span>".html_safe, url(*url_key, sort_by: sort_key, page: current_page, last_active_after: last_active_after))
         else
-          sort_icon = link_to("<span class ='#{ SORT_ICON }'></span>".html_safe, url(*url_key, sort_by: sort_key, page: current_page))
+          sort_icon = link_to("<span class ='#{ SORT_ICON }'></span>".html_safe, url(*url_key, sort_by: sort_key, page: current_page, last_active_after: last_active_after))
         end
 
         "#{ column } #{ sort_icon }".html_safe
@@ -34,7 +35,7 @@ module Observatory
       end
 
       def leaderboard_pagination_link(page)
-        link_to page, url(:leaderboard, :players, sort_by: params['sort_by'], page: page)
+        link_to page, url(:leaderboard, :players, sort_by: params['sort_by'], last_active_after: params['last_active_after'], page: page)
       end
     end
 

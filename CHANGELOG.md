@@ -12,6 +12,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Pagination links on player search and leaderboards don't reset 'last active
+  after' filter anymore.
+
 ### Security
 
 ### Deprecated
