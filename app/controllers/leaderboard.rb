@@ -27,8 +27,7 @@ Observatory::App.controllers :leaderboard do
         { id: :current_player_data_point_id },
         join_type: :inner
       ).
-      order(Sequel.desc(sort_param)).
-      paginate(page, Observatory::Config::Leaderboard::PAGINATION_SIZE)
+      order(Sequel.desc(sort_param))
 
     if last_active_after
       logger.debug "Filtering by last activity: #{ last_active_after }"
@@ -38,6 +37,8 @@ Observatory::App.controllers :leaderboard do
     else
       logger.debug 'Skipping filtering by last activity.'
     end
+
+    @players = @players.paginate(page, Observatory::Config::Leaderboard::PAGINATION_SIZE)
 
     render 'players'
   end

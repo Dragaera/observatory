@@ -9,7 +9,7 @@
               %span &laquo;
         - else
           %li
-            %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], page: item[:page]) }
+            %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], last_active_after: params['last_active_after'], page: item[:page]) }
               %span &laquo;
 
       - elsif item[:type] == :next
@@ -19,7 +19,7 @@
               %span &raquo;
         - else
           %li
-            %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], page: item[:page]) }
+            %a{ href: url(:leaderboard, :players, sort_by: params['sort_by'], last_active_after: params['last_active_after'], page: item[:page]) }
               %span &raquo;
 
 
