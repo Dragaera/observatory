@@ -23,7 +23,7 @@ glance - what to expect from upgrading to a new version.
 ### Removed
 
 
-## [0.31.1] - 2018-09-16
+## [0.30.1] - 2018-09-16
 
 ### Fixed
 
