@@ -1,7 +1,7 @@
 GIT
-  remote: https://github.com/Lavode/chartkick.git
-  revision: 2f5d35d47fa0ab36b7e1baa0573006d6e4f70987
-  ref: 2f5d35d
+  remote: https://github.com/ankane/chartkick.git
+  revision: d32ba9915fafe87d81def4851038ae9c0730f9a8
+  ref: d32ba99
   specs:
     chartkick (3.0.1)
 

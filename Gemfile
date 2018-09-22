@@ -44,7 +44,7 @@ gem 'tzinfo'
 gem 'ratelimit'
 
 # Fancy charts
-gem 'chartkick', ref: '2f5d35d', git: 'https://github.com/Lavode/chartkick.git'
+gem 'chartkick', ref: 'd32ba99', git: 'https://github.com/ankane/chartkick.git'
 
 # Bindings to Steam Web-API
 gem 'steam-condenser'
