@@ -204,6 +204,13 @@ timezone.
 | ------------ | ------------- | -------- | -------------------------------------------------- |
 | `SENTRY_DSN` |               | n        | Full Sentry DSN URL which to report exceptions to. |
 
+#### MOTD
+
+| Variable       | Default value | Required | Description                              |
+| -------------- | ------------- | -------- | ---------------------------------------- |
+| `MOTD_ENABLED` | false         | y        | Set to `true` to enable showing of MOTD. |
+| `MOTD_MESSAGE` |               | n        | String to show as MOTD on top of site.   |
+
 ## Developing
 
 Want to work on this application? Here's some steps to get you started.
