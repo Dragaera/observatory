@@ -8,6 +8,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Ability to show a configurable MOTD at the top of each page.
+
 ### Changed
 
 ### Fixed

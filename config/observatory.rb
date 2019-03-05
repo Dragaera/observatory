@@ -132,5 +132,10 @@ module Observatory
         DSN && !DSN.empty?
       end
     end
+
+    module MOTD
+      ENABLED = ENV.fetch('MOTD_ENABLED', 'false') == 'true'
+      MESSAGE = ENV['MOTD_MESSAGE']
+    end
   end
 end

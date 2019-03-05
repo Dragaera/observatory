@@ -95,6 +95,10 @@
 
     .container
       .flash
+        - if Observatory::Config::MOTD::ENABLED
+          .alert.alert-info{role: :alert}= Observatory::Config::MOTD::MESSAGE
+
+      .flash
         - if flash[:error]
           .alert.alert-danger{role: :alert}= flash[:error]
 
