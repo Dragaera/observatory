@@ -15,7 +15,7 @@ gem 'sequel'
 # Test requirements
 
 # Padrino Stable Gem
-gem 'padrino', '0.14.3'
+gem 'padrino', '0.14.4'
 
 gem 'sinatra-contrib'
 
@@ -53,7 +53,7 @@ gem 'steam-condenser'
 gem 'steam-id2', '~> 0.4.4', require: 'steam_id'
 
 # Bindings to Hive HTTP API
-gem 'hive-stalker', '~>0.1.0', require: 'hive_stalker'
+gem 'hive-stalker', '~>0.2.0', require: 'hive_stalker'
 # Bindings to Gorge
 gem 'gorgerb', '~> 0.1.0'
 
