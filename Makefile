@@ -3,7 +3,10 @@
 IMAGE_NAME = lavode/observatory
 SENTRY_PROJECT = observatory
 SENTRY_ORGANIZATION = dragaera
-COMMIT_ID := $(shell git rev-parse HEAD)
+# Must not be a simple-expansion variable (:=), as we want it to be executed
+# *when it is used*, as eg `tag` will create new commits before calling
+# `build`.
+COMMIT_ID = $(shell git rev-parse HEAD)
 
 build:
 	@echo "Building container for commit ${COMMIT_ID}"
