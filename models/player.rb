@@ -175,24 +175,38 @@ class Player < Sequel::Model
       Observatory::RateLimit::Hive.log_get_player_data(type: :background)
       data = stalker.get_player_data(account_id)
       player_data = PlayerDataPoint.build_from_player_data_point(data)
-      add_player_data_point(player_data)
-      update_hive_badges(data)
 
-      # Succesful updates will lead to reclassification.
-      Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
-      # TODO: Refactor this to use transaction-style block. `ensure` won't
-      # work, as we reraise the caught exception.
-      update(
-        update_scheduled_at: nil,
-        last_update_at:      Time.now,
-        error_count:         0,
-        error_message:       nil,
-        enabled:             true,
-      )
+      # Needed so validations on `player_id` will pass.
+      player_data.player_id = self.id
+      if player_data.valid?
+        # Overwritten to provide additional behaviour, see definition below.
+        add_player_data_point(player_data)
+        update_hive_badges(data)
 
-      async_update_steam_badges
+        # Succesful updates will lead to reclassification.
+        Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
+        # TODO: Refactor this to use transaction-style block. `ensure` won't
+        # work, as we reraise the caught exception.
+        update(
+          update_scheduled_at: nil,
+          last_update_at:      Time.now,
+          error_count:         0,
+          error_message:       nil,
+          enabled:             true,
+        )
 
-      true
+        async_update_steam_badges
+
+        true
+      else
+        # See `#validate` above, but essentially Hive account id = 0 & alias empty
+        logger.warn "Ignoring invalid player data point of player #{ player_data.player_id }: #{ player_data.inspect }"
+        update(
+          update_scheduled_at: nil
+        )
+
+        false
+      end
     rescue HiveStalker::APIError => e
       logger.error "Player update for player #{ id } failed: #{ e.message }"
 

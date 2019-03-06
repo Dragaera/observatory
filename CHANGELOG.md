@@ -10,6 +10,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
+- Do not add new data points if API result is full of zeroes, in order not to
+  pollute database with faulty data.
+
 ### Fixed
 
 ### Security
