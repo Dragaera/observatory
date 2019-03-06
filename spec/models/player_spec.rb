@@ -211,6 +211,11 @@ RSpec.describe Player do
         )
 
         # Good enough of a check. Probably. ;)
+        player.refresh
+        puts "\n\n\n"
+        p player.current_player_data_point
+        puts "\n\n\n"
+        p player.current_player_data_point
         expect(player.alias).to eq 'John'
       end
 
@@ -277,6 +282,44 @@ RSpec.describe Player do
           change{ player.update_scheduled_at }.to(nil).
           and raise_error HiveStalker::APIError
         )
+      end
+    end
+
+    context 'when the API returns nonsensical data' do
+      let(:stalker_nonsensical) do
+        stalker = double(HiveStalker::Stalker)
+        allow(stalker).to receive(:get_player_data) do
+          HiveStalker::PlayerData.new(
+            adagrad_sum: 0,
+            alias: '',
+            experience: 0,
+            player_id: 0,
+            level: 0,
+            score: 0,
+            skill: 0,
+            time_total: 0,
+            time_alien: 0,
+            time_marine: 0,
+            time_commander: 0,
+            badges: [],
+          )
+        end
+        stalker
+      end
+
+      it 'should unset `update_scheduled_at`' do
+        player.update(update_scheduled_at: Time.now)
+        expect { player.update_data(stalker: stalker_nonsensical) }.to(
+          change { player.update_scheduled_at }.to(nil)
+        )
+      end
+
+      it 'should not increase error count' do
+        expect { player.update_data(stalker: stalker_nonsensical) }.to_not(change{ player.error_count })
+      end
+
+      it 'should not add a new data point' do
+        expect { player.update_data(stalker: stalker_nonsensical) }.to_not(change{ player.player_data_points_dataset.count })
       end
     end
   end
