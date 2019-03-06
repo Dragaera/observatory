@@ -47,7 +47,7 @@ tag:
 
 	SENTRY_ORG=${SENTRY_ORGANIZATION} sentry-cli releases new -p ${SENTRY_PROJECT} ${VERSION}
 	@echo "Be sure to now associate the commits with the release, by executing something like: "
-	@echo "SENTRY_ORG=${SENTRY_ORGANIZATION} sentry-cli releases set-commits FROM_ID..TO_ID ${VERSION}"
+	@echo "SENTRY_ORG=${SENTRY_ORGANIZATION} sentry-cli releases set-commits --commit '${SENTRY_ORGANIZATION}/${SENTRY_PROJECT}@COMMIT_HASH' ${VERSION}"
 
 release: tag push
 
