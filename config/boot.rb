@@ -88,6 +88,11 @@ Padrino.after_load do
   else
     puts 'Skipping sentry integration.'
   end
+
+    REDIS = Redis.new(
+      host: Observatory::Config::Redis::HOST,
+      port: Observatory::Config::Redis::PORT,
+    )
 end
 
 Padrino.load!

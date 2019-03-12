@@ -12,11 +12,15 @@ module Observatory
       end
 
       def player_rank_link(ranks, col)
-        rank = ranks["rank_#{ col }".to_sym]
-        # rank - 1 sincce it starts at 1, not at 0. Result + 1 since pages
-        # start at 1, not 0.
-        page = (rank - 1) / Observatory::Config::Leaderboard::PAGINATION_SIZE + 1
-        link_to "##{ rank }", url(:leaderboard, :players, page: page, sort_by: col)
+        if ranks.key? col
+          rank = ranks[col]
+          # rank - 1 since it starts at 1, not at 0. Result + 1 since pages
+          # start at 1, not 0.
+          page = (rank - 1) / Observatory::Config::Leaderboard::PAGINATION_SIZE + 1
+          link_to "##{ rank }", url(:leaderboard, :players, page: page, sort_by: col)
+        else
+          '-'
+        end
       end
 
       def gorge_query(steam_id)

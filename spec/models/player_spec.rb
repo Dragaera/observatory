@@ -92,6 +92,31 @@ RSpec.describe Player do
     end
   end
 
+  describe '::ranks' do
+    let!(:player_1) { create(:player, next_update_at: Time.now + 20 * 60 * 60) }
+    let!(:player_2) { create(:player, next_update_at: Time.now + 22 * 60 * 60) }
+    let!(:player_3) { create(:player, next_update_at: Time.now + 12 * 60 * 60) }
+
+    before do
+      player_1.add_player_data_point(build(:player_data_point, skill: 100))
+      player_2.add_player_data_point(build(:player_data_point, skill: 10))
+      player_3.add_player_data_point(build(:player_data_point, skill: 11))
+    end
+
+    context 'when querying for a single column' do
+      it 'should return the ranks of all players for the queried column' do
+        result = Player.ranks(:skill).to_a.map(&:to_hash)
+        expect(result).to match_array(
+          [
+            { player_id: player_1.id, rank_skill: 1 },
+            { player_id: player_2.id, rank_skill: 3 },
+            { player_id: player_3.id, rank_skill: 2 },
+          ]
+        )
+      end
+    end
+  end
+
   describe '#add_player_data_point' do
     let(:data_point1) { build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100) }
     let(:data_point2) { build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100) }
