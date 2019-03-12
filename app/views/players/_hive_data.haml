@@ -1,7 +1,7 @@
 %table.table.table-bordered
   %tbody
     %tr
-      - ranks = player.rank([:skill, :experience, :score, :score_per_second])
+      - ranks = player.cached_ranks
       %th Skill
       %td= number_with_separator(player.skill)
       %td= player_rank_link(ranks, :skill)

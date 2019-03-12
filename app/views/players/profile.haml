@@ -24,7 +24,9 @@
       %h2 Ingame
       = partial 'players/gorge_data', locals: { player_statistics: @player_statistics }
 
-      %h2 Hive
+      %h2
+        Hive
+        %small{'data-toggle': 'tooltip', title: 'Ranks are updated every few minutes, and may be slightly out of date.'} [?]
       = partial 'players/hive_data', locals: { player: @player }
 
     .col-md-8

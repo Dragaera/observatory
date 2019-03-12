@@ -1,0 +1,19 @@
+.page-header
+  %h1
+    Caching
+
+%table.table
+  %thead
+    %tr
+      %th Cache
+      %th Updated
+      %th
+
+  %tbody
+    - @caches.each do |cache|
+      %tr
+        %td= cache.fetch(:name)
+        %td= cache[:updated] || '-' # Redis client will return an actual `nil`
+        %td
+          = form_tag(cache.fetch(:purge_url), class: 'form-inline', method: 'post') do
+            = submit_tag('Purge cache', class: 'btn btn-danger')

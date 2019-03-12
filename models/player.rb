@@ -94,6 +94,30 @@ class Player < Sequel::Model
     end
   end
 
+  # Returns ranks of all players with regards to `cols` columns.
+  #
+  # Returned dataset will contain one hash-like object per player, containing
+  # the player's ID, and one key - prefixed by `rank_` - per queried column.
+  def self.ranks(cols)
+    unless cols.is_a? Array
+      cols = [cols]
+    end
+
+    PlayerDataPoint.
+      where(id: Player.select(:current_player_data_point_id)).
+      select {
+        cols.map { |col| rank.function.over(order: Sequel.desc(col)).as("rank_#{ col }") } << :player_id
+      }
+  end
+
+  def self.ranks_cache_key(player_id)
+    "player:#{ player_id }:ranks"
+  end
+
+  def ranks_cache_key
+    Player.ranks_cache_key(id)
+  end
+
   def adagrad_sum
     return nil unless current_player_data_point
     current_player_data_point.adagrad_sum
@@ -278,18 +302,25 @@ class Player < Sequel::Model
   end
 
   def rank(cols)
-    unless cols.is_a? Array
-      cols = [cols]
-    end
-
-    PlayerDataPoint.
-      where(id: Player.select(:current_player_data_point_id)).
-      select {
-        cols.map { |col| rank.function.over(order: Sequel.desc(col)).as("rank_#{ col }") } << :player_id
-      }.
+    Player.ranks(cols).
       from_self.
       where(player_id: id).
       first
+  end
+
+  def cached_ranks
+    ranks = REDIS.hgetall(ranks_cache_key)
+
+    if ranks.empty?
+      ranks
+    else
+      {
+        skill:            ranks.fetch('skill').to_i,
+        score:            ranks.fetch('score').to_i,
+        score_per_second: ranks.fetch('score_per_second').to_i,
+        experience:       ranks.fetch('experience').to_i,
+      }
+    end
   end
 
   # Return timestamp of last time player's data changed.

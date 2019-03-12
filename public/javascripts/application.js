@@ -18,6 +18,8 @@ $(document).ready(function() {
       $(this).parents('.form-dynamic-wrapper').remove();
     }
   );
+
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 function get_html() {
