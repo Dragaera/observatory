@@ -101,17 +101,27 @@
           What is Hive skill?
         .panel-body
           %p
-            Hive skill measures your likelihood to win games. If you win games
-            it goes up, if you lose games it goes down. How much it goes up or
-            down depends on various factors - eg how long you played that
-            round, whether your opponents were stronger or weaker and so on.
+            Hive skill is a metric which is used to create balanced teams, by
+            ensuring that the average skill of both teams is similar.
+          %p
+            It is based exclusively on your likelihood of winning games. If you
+            win games it will tend to go up, whereas if you lose games it will
+            tend to go down.
+          %p
+            How much your skill is adjusted at the end of the round depends on
+            many factors:
+            %ul
+              %li
+                Participating in the whole round will lead to a bigger skill
+                adjustment than joining late.
+              %li
+                Being in an unbalanced team will barely, if at all, affect your
+                skill if the team with lower skill lost, respectively affect
+                your skill a lot if the team with lower skill won.
           %p
             Hive skill is tracked on all servers which are whitelisted - that
             is, those which show up as 'whitelisted' or 'ranked' in the ingame
             server browser.
-          %p
-            Hive skill is used ingame to create balanced teams, by ensuring
-            that the average skill of both teams is similar.
 
       #faq-data-kdraccuracy.panel.panel-default
         .panel-heading
