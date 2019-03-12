@@ -78,9 +78,11 @@
                   %li
                     = link_to 'API Keys', url(:api_keys, :index)
                   %li
-                    = link_to 'Users', url(:users, :index)
+                    = link_to 'Caching', url(:caching, :index)
                   %li
                     = link_to 'Update frequencies', url(:update_frequencies, :index)
+                  %li
+                    = link_to 'Users', url(:users, :index)
 
                 - else
                   %li

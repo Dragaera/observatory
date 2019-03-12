@@ -22,7 +22,7 @@ module Observatory
           REDIS.hmset(k, v)
         end
 
-        REDIS.set('observatory:leaderboard:updated', Time.now.iso8601)
+        REDIS.set('observatory:cache:ranks:updated', Time.now.iso8601)
       end
       logger.debug('Leaderboard: Ranks updated')
     end
