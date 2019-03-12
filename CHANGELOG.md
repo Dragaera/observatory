@@ -8,6 +8,14 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Caching of player ranks.
+  Player ranks (for skill, score, experience etc) are now cached in Redis. A
+  background job periodically recalculates them, and the profile page fetches
+  them from Redis.
+
+  This will cut load time of the profile by an order of magnitude, as rank
+  calculation has been the most time-consuming aspect.
+
 ### Changed
 
 ### Fixed
