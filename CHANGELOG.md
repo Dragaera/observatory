@@ -8,8 +8,6 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
-- Support for cached player statistics and new output format of Gorge.
-
 ### Changed
 
 ### Fixed
@@ -19,6 +17,13 @@ glance - what to expect from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.33.0] - 2019-03-17
+
+### Added
+
+- Support for cached player statistics and new output format of Gorge.
 
 
 ## [0.32.0] - 2019-03-12
