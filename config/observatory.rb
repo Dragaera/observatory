@@ -123,6 +123,7 @@ module Observatory
       HTTP_BASIC_PASSWORD = ENV['GORGE_HTTP_BASIC_PASSWORD']
       CONNECT_TIMEOUT     = ENV.fetch('GORGE_CONNECT_TIMEOUT', 1).to_i
       TIMEOUT             = ENV.fetch('GORGE_TIMEOUT', 2).to_i
+      STATISTICS_CLASSES  = ENV.fetch('GORGE_STATISTICS_CLASSES', 'n_30,n_100').split(',')
     end
 
     module Sentry

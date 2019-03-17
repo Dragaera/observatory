@@ -41,7 +41,10 @@ module Observatory
           opts
         )
 
-        client.player_statistics(steam_id)
+        client.player_statistics(
+          steam_id,
+          statistics_classes: Observatory::Config::Gorge::STATISTICS_CLASSES
+        )
       rescue Gorgerb::Error => e
         player_statistics_null_object
       end
@@ -50,12 +53,24 @@ module Observatory
     def player_statistics_null_object
       Gorgerb::PlayerStatistics.new(
         nil,
-        Gorgerb::PlayerStatistics::KDR.new(nil, nil, nil),
-        Gorgerb::PlayerStatistics::Accuracy.new(
-          nil,
-          nil,
-          Gorgerb::PlayerStatistics::MarineAccuracy.new(nil, nil),
-        ),
+        {
+          'n_nil' => Gorgerb::PlayerStatistics::StatisticsPoint.new(
+            Gorgerb::PlayerStatistics::Meta.new(
+              nil
+            ),
+            Gorgerb::PlayerStatistics::KDR.new(
+              nil,
+              nil
+            ),
+            Gorgerb::PlayerStatistics::Accuracy.new(
+              nil,
+              Gorgerb::PlayerStatistics::MarineAccuracy.new(
+                nil,
+                nil
+              )
+            )
+          )
+        }
       )
     end
 

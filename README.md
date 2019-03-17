@@ -191,13 +191,15 @@ timezone.
 
 #### Gorge
 
-| Variable                     | Default value | Required | Description                                               |
-| ---------------------------- | ------------- | -------- | --------------------------------------------------------- |
-| `GORGE_BASE_URL`             |               | n        | Base URL of Gorge. Empty to disable Gorge integration.    |
-| `GORGE_HTTP_BASIC_USER`      |               | n        | User for HTTP basic authentication. Empty to disable.     |
-| `GORGE_HTTP_BASIC_PASSWORD ` |               | n        | Password for HTTP basic authentication. Empty to disable. |
-| `GORGE_CONNECT_TIMEOUT`      | 1             | y        | HTTP connect timeout towards Gorge API.                   |
-| `GORGE_TIMEOUT`              | 2             | y        | HTTP timeout towards Gorge API.                           |
+| Variable                     | Default value | Required | Description                                                |
+| ---------------------------- | ------------- | -------- | ---------------------------------------------------------- |
+| `GORGE_BASE_URL`             |               | n        | Base URL of Gorge. Empty to disable Gorge integration.     |
+| `GORGE_HTTP_BASIC_USER`      |               | n        | User for HTTP basic authentication. Empty to disable.      |
+| `GORGE_HTTP_BASIC_PASSWORD ` |               | n        | Password for HTTP basic authentication. Empty to disable.  |
+| `GORGE_CONNECT_TIMEOUT`      | 1             | y        | HTTP connect timeout towards Gorge API.                    |
+| `GORGE_TIMEOUT`              | 2             | y        | HTTP timeout towards Gorge API.                            |
+| `STATISTICS_CLASSES`         | n_30,n_100    | y        | Comma-separated statistics classes of Gorge which to query |
+
 #### Sentry
 
 | Variable     | Default value | Required | Description                                        |
