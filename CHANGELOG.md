@@ -8,13 +8,7 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
-- Show 'no onos' accuracy on player profile page.
-- Hint about ingame stats being refreshed weekly.
-
 ### Changed
-
-- Update ruby to `2.6.1`.
-- Update dependencies.
 
 ### Fixed
 
@@ -23,6 +17,19 @@ glance - what to expect from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.34.0] - 2019-03-18
+
+### Added
+
+- Show 'no onos' accuracy on player profile page.
+- Hint about ingame stats being refreshed weekly.
+
+### Changed
+
+- Update ruby to `2.6.1`.
+- Update dependencies.
 
 
 ## [0.33.0] - 2019-03-17
