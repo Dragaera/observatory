@@ -14,6 +14,7 @@ glance - what to expect from upgrading to a new version.
 ### Changed
 
 - Update ruby to `2.6.1`.
+- Update dependencies.
 
 ### Fixed
 
