@@ -8,6 +8,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Show 'no onos' accuracy on player profile page.
+- Hint about ingame stats being refreshed weekly.
+
 ### Changed
 
 - Update ruby to `2.6.1`.

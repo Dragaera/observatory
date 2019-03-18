@@ -21,7 +21,9 @@
       %h2 Steam
       = partial 'players/steam_data', locals: { player: @player }
 
-      %h2 Ingame
+      %h2
+        Ingame
+        %small{'data-toggle': 'tooltip', title: 'Ingame data is refreshed weekly.'} [?]
       = partial 'players/gorge_data', locals: { player_statistics: @player_statistics }
 
       %h2

@@ -1,51 +1,49 @@
 - if player_statistics.steam_id
-  %h3
-    KDR
-
   %table.table.table-bordered
     %thead
       %tr
-        %th Last n rounds
-        %th Alien
-        %th Marine
-    %tbody
-      - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
-        %tr
+        %th KDR: Last n rounds
+        - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
           - data_point = player_statistics.send(cls)
-          %td= data_point.meta.sample_size
+          %th= data_point.meta.sample_size
+    %tbody
+      %tr
+        %th Alien
+        - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
+          - data_point = player_statistics.send(cls)
           %td= data_point.kdr.alien ? data_point.kdr.alien.round(2) : 'N/A'
+      %tr
+        %th Marine
+        - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
+          - data_point = player_statistics.send(cls)
           %td= data_point.kdr.marine ? data_point.kdr.marine.round(2) : 'N/A'
 
-  %h3
-    Accuracy
-
   %table.table.table-bordered
     %thead
       %tr
-        %th Last n rounds
-        %th Alien
-        %th Marine
-    %tbody
-      - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
-        %tr
+        %th Accuracy: Last n rounds
+        - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
           - data_point = player_statistics.send(cls)
-          %td= data_point.meta.sample_size
+          %th= data_point.meta.sample_size
+    %tbody
+      %tr
+        %th Alien
+        - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
+          - data_point = player_statistics.send(cls)
           %td= data_point.accuracy.alien ? fraction_as_percentage(data_point.accuracy.alien, 1) : 'N/A'
+      %tr
+        %th Marine
+        - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
+          - data_point = player_statistics.send(cls)
           %td= data_point.accuracy.marine.total ? fraction_as_percentage(data_point.accuracy.marine.total, 1) : 'N/A'
+      %tr
+        %th Marine (no Onos)
+        - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
+          - data_point = player_statistics.send(cls)
+          %td= data_point.accuracy.marine.no_onos ? fraction_as_percentage(data_point.accuracy.marine.no_onos, 1) : 'N/A'
 
 - else
   .well
     No additional data available. :(
 
     = link_to 'What does this mean?', "#{ url(:observatory, :faq) }#faq-data-noadditionaldata"
--#      %tr
--#        %th K/D
--#        %td= player_statistics.kdr.alien  ? player_statistics.kdr.alien.round(2)  : 'N/A'
--#        %td= player_statistics.kdr.marine ? player_statistics.kdr.marine.round(2) : 'N/A'
--#        %td= player_statistics.kdr.total  ? player_statistics.kdr.total.round(2)  : 'N/A'
--#      %tr
--#        %th Accuracy
--#        %td= player_statistics.accuracy.alien ? fraction_as_percentage(player_statistics.accuracy.alien, 1) : 'N/A'
--#        %td
--#          = "#{ player_statistics.accuracy.marine.total ? fraction_as_percentage(player_statistics.accuracy.marine.total, 1) : 'N/A' } (No Onos: #{ player_statistics.accuracy.marine.no_onos ? fraction_as_percentage(player_statistics.accuracy.marine.no_onos, 1) : 'Not available' })"
--#        %td= player_statistics.accuracy.total ? fraction_as_percentage(player_statistics.accuracy.total, 1) : 'N/A'
