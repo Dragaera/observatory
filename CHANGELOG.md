@@ -12,6 +12,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Exception if unknown badge encountered in Hive response.
+
 ### Security
 
 ### Deprecated

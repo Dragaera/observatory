@@ -201,7 +201,7 @@ RSpec.describe Player do
             time_alien: 3,
             time_marine: 7,
             time_commander: 2,
-            badges: ['commander', 'dev'],
+            badges: ['commander', 'dev', 'unknown'],
           )
         end
         stalker
@@ -258,6 +258,10 @@ RSpec.describe Player do
         player.update_data(stalker: stalker_success)
 
         expect { player.update_data(stalker: stalker_success) }.to_not change { player.badges_dataset.count }
+      end
+
+      it 'should handle unknown badges' do
+        expect { player.update_data(stalker: stalker_success) }.to_not raise_error
       end
     end
 
