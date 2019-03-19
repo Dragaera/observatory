@@ -8,6 +8,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- PAX2012 badge, which seems to be exported by Hive now.
+
 ### Changed
 
 ### Fixed
