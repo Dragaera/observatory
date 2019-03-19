@@ -385,7 +385,12 @@ class Player < Sequel::Model
 
   def update_hive_badges(hive_data)
     hive_data.badges.each do |badge_key|
-      safe_add_badge Badge.where(key: badge_key, type: 'hive').first
+      badge = Badge.where(key: badge_key, type: 'hive').first
+      if badge
+        safe_add_badge badge
+      else
+        logger.error "Unknown badge key: #{ badge_key }"
+      end
     end
   end
 
@@ -398,7 +403,7 @@ class Player < Sequel::Model
         add_badge(badge)
       end
     else
-      logger.error "Unknown badge key: #{ badge_key }"
+      logger.error 'Badge must not be `nil`'
     end
   end
 end
