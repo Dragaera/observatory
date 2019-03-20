@@ -8,6 +8,21 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.34.1] - 2019-03-20
+
+### Added
+
 - PAX2012 badge, which seems to be exported by Hive now.
 
 ### Changed
@@ -15,12 +30,6 @@ glance - what to expect from upgrading to a new version.
 ### Fixed
 
 - Exception if unknown badge encountered in Hive response.
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.34.0] - 2019-03-18
