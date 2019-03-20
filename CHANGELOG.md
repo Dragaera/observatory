@@ -25,8 +25,6 @@ glance - what to expect from upgrading to a new version.
 
 - PAX2012 badge, which seems to be exported by Hive now.
 
-### Changed
-
 ### Fixed
 
 - Exception if unknown badge encountered in Hive response.
