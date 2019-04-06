@@ -11,6 +11,8 @@ glance - what to expect from upgrading to a new version.
 ### Changed
 
 - Strip query parameters which are specified without a value.
+- Update skill tier badges to newest versions from game files. Thanks
+  @Adambean.
 
 ### Fixed
 
