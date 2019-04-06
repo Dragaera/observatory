@@ -18,6 +18,7 @@ glance - what to expect from upgrading to a new version.
   player for whom no data is no record yet.
 - Exception if searching for a player, and the `last_active_after` query
   parameter is given as a toggle (ie without any value).
+- Exception in classification of player update frequency, caused by race condition.
 
 ### Security
 
