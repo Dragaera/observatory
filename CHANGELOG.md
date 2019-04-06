@@ -12,6 +12,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Exception if search for a player's Steam ID and last activity matches a
+  player for whom no data is no record yet.
+
 ### Security
 
 ### Deprecated

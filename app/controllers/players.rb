@@ -82,7 +82,10 @@ Observatory::App.controllers :players do
       }
 
       direct_results = direct_results.select do |player|
-        player.last_activity >= last_active_after
+        # last_activity might be nil if the player has just been added, in
+        # which case a direct hit (by Steam ID) will be possible, but no data
+        # is on record yet.
+        player.last_activity >= last_active_after if player.last_activity
       end
     else
       logger.debug 'Skipping filtering by last activity.'
