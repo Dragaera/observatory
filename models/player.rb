@@ -207,8 +207,6 @@ class Player < Sequel::Model
         add_player_data_point(player_data)
         update_hive_badges(data)
 
-        # Succesful updates will lead to reclassification.
-        Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
         # TODO: Refactor this to use transaction-style block. `ensure` won't
         # work, as we reraise the caught exception.
         update(
@@ -218,6 +216,12 @@ class Player < Sequel::Model
           error_message:       nil,
           enabled:             true,
         )
+
+        # Succesful updates will lead to reclassification.
+        # Enqueueing of this job happens after the update above, to prevent a
+        # race condition where the new job might try to access fields which
+        # (for new users) are not set, or (in the general case) not up-to-date.
+        Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
 
         async_update_steam_badges
 

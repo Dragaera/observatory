@@ -69,6 +69,13 @@ module Observatory
     #
     before do
       logger.debug "Session: #{ session.inspect }" if Observatory::Config::DEBUG
+      # If a query parameter is specified without value, it ends up with value
+      # `nil` in the `params` hash, which makes handling tedious - not only do
+      # you have to check whether the key is present, you also have to check
+      # whether the value is not nil.
+      # As an example: `/foo?bar` will lead to a `params` hash of `{ "bar" => nil }
+      # As I do not use params as 'flags' without a value, I'll strip them fully.
+      params.delete_if { |k, v| v.nil? }
     end
   end
 end

@@ -10,7 +10,15 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
+- Strip query parameters which are specified without a value.
+
 ### Fixed
+
+- Exception if search for a player's Steam ID and last activity matches a
+  player for whom no data is no record yet.
+- Exception if searching for a player, and the `last_active_after` query
+  parameter is given as a toggle (ie without any value).
+- Exception in classification of player update frequency, caused by race condition.
 
 ### Security
 
