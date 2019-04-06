@@ -19,7 +19,7 @@ glance - what to expect from upgrading to a new version.
 ### Removed
 
 
-## [0.34.2]
+## [0.34.2] - 2019-04-06
 
 ### Changed
 
