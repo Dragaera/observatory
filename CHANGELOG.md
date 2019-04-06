@@ -10,6 +10,19 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.34.2]
+
+### Changed
+
 - Strip query parameters which are specified without a value.
 - Update skill tier badges to newest versions from game files. Thanks
   @Adambean.
@@ -21,12 +34,6 @@ glance - what to expect from upgrading to a new version.
 - Exception if searching for a player, and the `last_active_after` query
   parameter is given as a toggle (ie without any value).
 - Exception in classification of player update frequency, caused by race condition.
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.34.1] - 2019-03-20
