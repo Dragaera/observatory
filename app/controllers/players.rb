@@ -7,13 +7,15 @@ Observatory::App.controllers :players do
 
     search_param = params['filter']
 
-    begin
-      last_active_after = Date.strptime(
-        params.fetch('last_active_after', ''),
-        '%Y-%m-%d'
-      )
-    rescue ArgumentError
-      last_active_after = nil
+    last_active_after = nil
+    if params.key? 'last_active_after'
+      begin
+        last_active_after = Date.strptime(
+          params.fetch('last_active_after'),
+          '%Y-%m-%d'
+        )
+      rescue ArgumentError
+      end
     end
 
     direct_results = []
