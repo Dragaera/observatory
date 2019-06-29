@@ -1,6 +1,10 @@
 require 'bundler/setup'
 require 'padrino-core/cli/rake'
+
 require 'resque/tasks'
+# `resque/scheduler/tasks` has a missing require, the fix for which is not yet
+# released (https://github.com/resque/resque-scheduler/pull/671)
+require 'redis'
 require 'resque/scheduler/tasks'
 
 PadrinoTasks.use(:database)

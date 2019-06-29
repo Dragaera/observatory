@@ -1,4 +1,4 @@
-FROM ruby:2.6.1
+FROM ruby:2.6.3
 
 LABEL maintainer="Michael Senn <michael@morrolan.ch>"
 
