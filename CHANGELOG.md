@@ -10,6 +10,7 @@ glance - what to expect from upgrading to a new version.
 
 - Advertisement for ENSL.org-hosted tournaments / gathers.
 - Link to wiki from FAQ.
+- Opengraph tags to profile pages.
 
 ### Changed
 
