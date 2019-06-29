@@ -9,6 +9,7 @@ glance - what to expect from upgrading to a new version.
 ### Added
 
 - Advertisement for ENSL.org-hosted tournaments / gathers.
+- Link to wiki from FAQ.
 
 ### Changed
 
