@@ -6,6 +6,12 @@
     %meta{ 'http-equiv' => 'X-UA-Compatible', content: 'IE=edge' }
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1' }
 
+    %meta{ property: 'og:site_name', content: 'Observatory' }
+    %meta{ property: 'og:url', content: request.url }
+    %meta{ property: 'og:image', content: 'https://wiki.naturalselection2.com/images/5/55/Detection_buildmenu.png' }
+
+    = yield_content(:og)
+
     %title Observatory
 
     = stylesheet_link_tag 'bootstrap.min'

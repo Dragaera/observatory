@@ -1,3 +1,10 @@
+- content_for :og do
+  %meta{ property: 'og:title', content: "Observatory profile of #{ @player.alias }"}
+  %meta{ property: 'og:type', content: 'profile' }
+  %meta{ property: 'og:profile:username', content: @player.alias }
+  - description = "Skill: #{ @player.skill }, Playtime: #{ timespan_in_words(@player.time_total, unit: :hours) }, Steam profile: #{ @player.steam_id.profile_url }"
+  %meta{ property: 'og:description', content: description }
+
 - if @player.current_player_data_point
   .page-header
     %h1
