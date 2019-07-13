@@ -8,14 +8,7 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
-- Advertisement for ENSL.org-hosted tournaments / gathers.
-- Link to wiki from FAQ.
-- Opengraph tags to profile pages.
-
 ### Changed
-
-- Update ruby to `2.6.3`, update dependencies.
-- Link to tutorial landing page on wiki rather than ensl.org.
 
 ### Fixed
 
@@ -24,6 +17,20 @@ glance - what to expect from upgrading to a new version.
 ### Deprecated
 
 ### Removed
+
+
+## [0.35.0] - 2019-07-13
+
+### Added
+
+- Advertisement for ENSL.org-hosted tournaments / gathers.
+- Link to wiki from FAQ.
+- Opengraph tags to profile pages.
+
+### Changed
+
+- Update ruby to `2.6.3`, update dependencies.
+- Link to tutorial landing page on wiki rather than ensl.org.
 
 
 ## [0.34.2] - 2019-04-06
