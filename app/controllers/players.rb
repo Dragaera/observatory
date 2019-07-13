@@ -135,7 +135,7 @@ Observatory::App.controllers :players do
       paginate(page, Observatory::Config::Profile::PAGINATION_SIZE)
 
     @banner = if @player.show_ensl_tutorials?
-                "Interested in improving your skill? Check out the tutorials on #{ link_to('ensl.org', 'https://www.ensl.org/tutorials') }.".html_safe
+                "Interested in improving your skill? Check out the tutorials on #{ link_to('the wiki', 'https://wiki.naturalselection2.com/view/Guides') }.".html_safe
               else
                 "Want to play more competitive 6v6 games? Check out the ENSL, and sign up for regular tournaments or gathers, on #{ link_to('ensl.org', 'https://www.ensl.org') }".html_safe
               end

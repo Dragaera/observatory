@@ -15,6 +15,7 @@ glance - what to expect from upgrading to a new version.
 ### Changed
 
 - Update ruby to `2.6.3`, update dependencies.
+- Link to tutorial landing page on wiki rather than ensl.org.
 
 ### Fixed
 
