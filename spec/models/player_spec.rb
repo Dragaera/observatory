@@ -255,10 +255,6 @@ RSpec.describe Player do
 
         # Good enough of a check. Probably. ;)
         player.refresh
-        puts "\n\n\n"
-        p player.current_player_data_point
-        puts "\n\n\n"
-        p player.current_player_data_point
         expect(player.alias).to eq 'John'
       end
 
