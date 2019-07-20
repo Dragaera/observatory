@@ -12,6 +12,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Duplicate player updates due to race condition between player updates and
+  update frequency classification (Github issue #36)
+
 ### Security
 
 ### Deprecated

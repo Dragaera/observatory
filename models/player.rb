@@ -210,7 +210,9 @@ class Player < Sequel::Model
         # TODO: Refactor this to use transaction-style block. `ensure` won't
         # work, as we reraise the caught exception.
         update(
-          update_scheduled_at: nil,
+          update_scheduled_at: nil, # Update finished.
+          next_update_at:      nil, # We don't know when the next update will be,
+                                    # until the classification job has run.
           last_update_at:      Time.now,
           error_count:         0,
           error_message:       nil,
@@ -243,8 +245,10 @@ class Player < Sequel::Model
       error_count = self.error_count.to_i + 1
       enabled = !!(current_player_data_point ||
         (error_count < Observatory::Config::Player::ERROR_THRESHOLD))
+      # We do *not* reset `next_update_at` here, as we want a new one to be
+      # requeued, until they either succeed or the player is disabled.
       update(
-        update_scheduled_at: nil,
+        update_scheduled_at: nil, # No update is scheduled currently
         error_count:         error_count,
         error_message:       e.message,
         enabled:             enabled,
