@@ -11,8 +11,8 @@ class PlayerQuery < Sequel::Model
     begin
       resolver ||= SteamID
       update(account_id: resolver.from_string(query, api_key: Observatory::Config::Steam::WEB_API_KEY).account_id)
+      # If it's a new player, #get_or_create will also schedule an update.
       player = Player.get_or_create(account_id: self.account_id)
-      player.async_update_data
 
       update(pending: false,
              success: true,

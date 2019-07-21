@@ -44,6 +44,15 @@ RSpec.describe Player do
         expect(Player.with_stale_data).to_not include(player_5)
       end
     end
+
+    it 'should not return players where no update is scheduled' do
+      # next_update_at = nil will be set eg after an update completed, but no
+      # new one was rescheduled. This is a state where no additional updates
+      # must be run, until a new one has been scheduled.
+      # Part of the fix for https://github.com/Dragaera/observatory/issues/36
+      player_6 = create(:player, next_update_at: nil, update_scheduled_at: nil)
+      expect(Player.with_stale_data).to_not include(player_6)
+    end
   end
 
   describe '::by_account_id' do
@@ -214,6 +223,15 @@ RSpec.describe Player do
         )
       end
 
+      it 'should unset `next_update_at`' do
+        # Update was performed, so no future updates should be run until
+        # classification has run and scheduled a new one.
+        player.update(next_update_at: Time.now)
+        expect { player.update_data(stalker: stalker_success) }.to(
+          change { player.next_update_at}.to(nil)
+        )
+      end
+
       it 'should reset error-handling fields' do
         player.update(error_count: 2, error_message: 'Foo')
         expect { player.update_data(stalker: stalker_success) }.to(
@@ -237,10 +255,6 @@ RSpec.describe Player do
 
         # Good enough of a check. Probably. ;)
         player.refresh
-        puts "\n\n\n"
-        p player.current_player_data_point
-        puts "\n\n\n"
-        p player.current_player_data_point
         expect(player.alias).to eq 'John'
       end
 
@@ -311,6 +325,16 @@ RSpec.describe Player do
           change{ player.update_scheduled_at }.to(nil).
           and raise_error HiveStalker::APIError
         )
+      end
+
+      it 'should not unset `next_update_at`' do
+        # Update was performed but failed, so we want new ones to be performed
+        # until they succeed or the player gets disabled.
+        player.update(next_update_at: Time.now)
+        expect { player.update_data(stalker: stalker_failure) }.to(
+          raise_error HiveStalker::APIError
+        )
+        expect(player.next_update_at).to_not be_nil
       end
     end
 
