@@ -10,6 +10,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
+- Show no-onos accuracy above yes-onos accuracy. Change wording.
+
 ### Fixed
 
 - Duplicate player updates due to race condition between player updates and
