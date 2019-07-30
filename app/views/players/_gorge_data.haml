@@ -32,15 +32,15 @@
           - data_point = player_statistics.send(cls)
           %td= data_point.accuracy.alien ? fraction_as_percentage(data_point.accuracy.alien, 1) : 'N/A'
       %tr
-        %th Marine
-        - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
-          - data_point = player_statistics.send(cls)
-          %td= data_point.accuracy.marine.total ? fraction_as_percentage(data_point.accuracy.marine.total, 1) : 'N/A'
-      %tr
-        %th Marine (no Onos)
+        %th Marine (excl. Onos)
         - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
           - data_point = player_statistics.send(cls)
           %td= data_point.accuracy.marine.no_onos ? fraction_as_percentage(data_point.accuracy.marine.no_onos, 1) : 'N/A'
+      %tr
+        %th Marine (incl. Onos)
+        - Observatory::Config::Gorge::STATISTICS_CLASSES.each do |cls|
+          - data_point = player_statistics.send(cls)
+          %td= data_point.accuracy.marine.total ? fraction_as_percentage(data_point.accuracy.marine.total, 1) : 'N/A'
 
 - else
   .well
