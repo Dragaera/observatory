@@ -12,6 +12,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Fix issue in NSL account importer.
+
 ### Security
 
 ### Deprecated

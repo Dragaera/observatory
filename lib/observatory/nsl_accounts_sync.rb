@@ -11,7 +11,7 @@ module Observatory
 
       if response.success?
         begin
-          nsl_accounts = JSON.parse(response.body)
+          nsl_accounts = JSON.parse(response.body).fetch('users')
         rescue JSON::ParserError
           logger.error "Invalid JSON received from NSL accounts API: #{ response.body.inspect }"
           nsl_accounts = {}
