@@ -1,0 +1,14 @@
+- nsl_account = player.cached_nsl_account
+
+%table.table.table-bordered.vertical-align
+  %tbody
+    %tr
+      %th
+        %img{ src: '/images/steam_logo.png', height: '30px' }
+      %td= link_to player.steam_id.id, player.steam_id.profile_url
+    - if nsl_account
+      %tr
+        %th
+          %img{ src: '/images/nsl_logo.png', height: '30px' }
+        %td= link_to nsl_account.fetch(:nsl_name), nsl_account.fetch(:nsl_url)
+
