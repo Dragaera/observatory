@@ -13,7 +13,7 @@ glance - what to expect from upgrading to a new version.
 ### Changed
 
 - Show no-onos accuracy above yes-onos accuracy. Change wording.
-- Update base image to ruby `2.6.4`, update dependencies.
+- Update dependencies.
 
 ### Fixed
 
