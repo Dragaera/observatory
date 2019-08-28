@@ -12,13 +12,18 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
-- Fix issue in NSL account importer.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.36.2] - 2019-08-28
+
+### Fixed
+
+- Fix issue in NSL account importer.
 
 
 ## [0.36.1] - 2019-08-28
