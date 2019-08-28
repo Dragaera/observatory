@@ -8,6 +8,21 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.36.0] - 2019-08-28
+
+### Added
+
 - Links to players' ensl.org profiles if known.
 
 ### Changed
@@ -20,12 +35,6 @@ glance - what to expect from upgrading to a new version.
 - Duplicate player updates due to race condition between player updates and
   update frequency classification (Github issue #36)
 - Double updates when adding new players via web-interface.
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.35.0] - 2019-07-13
