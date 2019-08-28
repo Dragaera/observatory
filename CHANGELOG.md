@@ -19,6 +19,13 @@ glance - what to expect from upgrading to a new version.
 ### Removed
 
 
+## [0.36.1] - 2019-08-28
+
+### Fixed
+
+- Fix typo in background job schedule preventing leaderboard updates.
+
+
 ## [0.36.0] - 2019-08-28
 
 ### Added

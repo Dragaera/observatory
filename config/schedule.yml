@@ -34,7 +34,7 @@ update_leaderboard:
   args:
   description: 'Updates leaderboard'
 
-update_leaderboard:
+nsl_accounts_sync:
   cron: '1 * * * *'
   class: 'Observatory::NSLAccountsSync'
   queue: nsl_accounts_sync
