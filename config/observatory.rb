@@ -138,5 +138,10 @@ module Observatory
       ENABLED = ENV.fetch('MOTD_ENABLED', 'false') == 'true'
       MESSAGE = ENV['MOTD_MESSAGE']
     end
+
+    module NSL
+      ACCOUNTS_API_ENDPOINT = ENV.fetch('NSL_ACCOUNTS_API_ENDPOINT', 'https://www.ensl.org/api/v1/users')
+      PROFILE_BASE_URL      = ENV.fetch('NSL_PROFILE_BASE_URL', 'https://www.ensl.org/users')
+    end
   end
 end

@@ -213,6 +213,13 @@ timezone.
 | `MOTD_ENABLED` | false         | y        | Set to `true` to enable showing of MOTD. |
 | `MOTD_MESSAGE` |               | n        | String to show as MOTD on top of site.   |
 
+#### NSL
+
+| Variable                    | Default value                     | Required | Description                               |
+| --------------------------- | --------------------------------- | -------- | ----------------------------------------- |
+| `NSL_ACCOUNTS_API_ENDPOINT` | https://www.ensl.org/api/v1/users | y        | Endpoint from which to fetch NSL accounts |
+| `NSL_PROFILE_BASE_URL`      | https://www.ensl.org/users        | y        | Base URL of ensl.org profiles             |
+
 ## Developing
 
 Want to work on this application? Here's some steps to get you started.

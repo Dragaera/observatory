@@ -33,3 +33,10 @@ update_leaderboard:
   queue: leaderboard_update
   args:
   description: 'Updates leaderboard'
+
+update_leaderboard:
+  cron: '1 * * * *'
+  class: 'Observatory::NSLAccountsSync'
+  queue: nsl_accounts_sync
+  args:
+  description: 'Updates NSL accounts cache'

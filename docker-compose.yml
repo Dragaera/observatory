@@ -62,6 +62,8 @@ services:
     env_file: .env.development.gorge
     networks:
       - observatory-dev
+    ports:
+      - 15433:5432
     volumes:
       - gorge-database-data:/var/lib/postgresql/data
 

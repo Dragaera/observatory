@@ -8,9 +8,12 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Links to players' ensl.org profiles if known.
+
 ### Changed
 
 - Show no-onos accuracy above yes-onos accuracy. Change wording.
+- Update dependencies.
 
 ### Fixed
 

@@ -114,8 +114,16 @@ class Player < Sequel::Model
     "player:#{ player_id }:ranks"
   end
 
+  def self.nsl_account_cache_key(player_id)
+    "player:#{ player_id }:nsl_account"
+  end
+
   def ranks_cache_key
     Player.ranks_cache_key(id)
+  end
+
+  def nsl_account_cache_key
+    Player.nsl_account_cache_key(id)
   end
 
   def adagrad_sum
@@ -327,6 +335,20 @@ class Player < Sequel::Model
         score:            ranks.fetch('score').to_i,
         score_per_second: ranks.fetch('score_per_second').to_i,
         experience:       ranks.fetch('experience').to_i,
+      }
+    end
+  end
+
+  def cached_nsl_account
+    account = REDIS.hgetall(nsl_account_cache_key)
+
+    if account.empty?
+      nil
+    else
+      {
+        nsl_id: account.fetch('nsl_id'),
+        nsl_url: "#{ Observatory::Config::NSL::PROFILE_BASE_URL }/#{ account.fetch('nsl_id') }",
+        nsl_name: account.fetch('nsl_name'),
       }
     end
   end
