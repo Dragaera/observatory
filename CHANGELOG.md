@@ -10,6 +10,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
+- Change to new skill tier badges. Thanks Rantology. :)
+
 ### Fixed
 
 ### Security
