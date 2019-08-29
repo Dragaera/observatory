@@ -39,7 +39,7 @@
             %td
               .media
                 .media-left
-                  = skill_tier_badge_image(Player[player[:id]].skill_tier_badge, height: '15px', cls: 'media-object', narrow: true)
+                  = skill_tier_badge_image(Player[player[:id]].skill_tier_badge, width: '48px', cls: 'media-object', narrow: true)
                 .media-body
                   .media-body
                     = link_to player[:alias], url(:players, :profile, id: player[:id])

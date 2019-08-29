@@ -1,4 +1,4 @@
-%table.table.table-bordered
+%table.table.table-bordered.vertical-align
   %thead
     %tr
       %th Account ID
@@ -14,10 +14,9 @@
         %td
           .media
             .media-left
-              = skill_tier_badge_image(player.skill_tier_badge, height: '15px', cls: 'media-object', narrow: true)
+              = skill_tier_badge_image(player.skill_tier_badge, width: '48px', cls: 'media-object', narrow: true)
             .media-body
-              .media-body
-                = player.alias
+              = player.alias
         %td= player.level
         %td= player.skill
         %td= player.last_activity ? pp_date(player.last_activity) : 'Never'
@@ -28,10 +27,9 @@
         %td
           .media
             .media-left
-              = skill_tier_badge_image(Player[player[:id]].skill_tier_badge, height: '15px', cls: 'media-object', narrow: true)
+              = skill_tier_badge_image(Player[player[:id]].skill_tier_badge, width: '48px', cls: 'media-object', narrow: true)
             .media-body
-              .media-body
-                = player[:alias]
+              = player[:alias]
         %td= player[:level]
         %td= player[:skill]
         %td= player.last_activity ? pp_date(player.last_activity) : 'Never'

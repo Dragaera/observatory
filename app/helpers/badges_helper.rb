@@ -15,7 +15,7 @@ module Observatory
         "/images/skill_tier_badges/#{ badge.image }"
       end
 
-      def skill_tier_badge_image(badge, height: nil, cls: nil, narrow: false)
+      def skill_tier_badge_image(badge, height: nil, width: nil, cls: nil, narrow: false)
         shadowed_class = narrow ? 'shadowed-narrow' : 'shadowed'
         attrs = {
           src: skill_tier_badge_image_path(badge),
@@ -23,6 +23,7 @@ module Observatory
           class: shadowed_class
         }
         attrs[:height] = height if height
+        attrs[:width]  = width if width
         attrs[:class]  = "#{ shadowed_class } #{ cls }" if cls
 
         tag(:img, **attrs)
