@@ -69,7 +69,7 @@ Observatory::App.controllers :players do
       # Limit direct and indirect results to those who also own the specified
       # badges.
       # Mind that this is actually not a plain Player dataset, but a join on
-      # data points, so care must be taken to refer to the propre `id`.
+      # data points, so care must be taken to refer to the proper `id`.
       indirect_results = indirect_results.where(Sequel[:players][:id] => ids)
       direct_results = direct_results.select do |player|
         ids.map(&:id).include? player.id
