@@ -8,6 +8,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Background job to fix players in state where no future updates might happen.
+
 ### Changed
 
 - Change to new skill tier badges. Thanks Rantology. :)
