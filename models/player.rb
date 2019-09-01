@@ -88,7 +88,11 @@ class Player < Sequel::Model
       )
 
     if name
-      result.text_search(:alias, name)
+      # Sorty by similarity, with equally similar results being sorted by the
+      # player's "last active at" date.
+      result.
+        text_search(:alias, name).
+        order_append(Sequel.desc(Sequel[:player_data_points][:created_at]))
     else
       result
     end
