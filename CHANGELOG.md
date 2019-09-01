@@ -19,6 +19,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Remove incorrect reference that searching for players' previous aliases is
+  possible.
+
 ### Security
 
 ### Deprecated
