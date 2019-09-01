@@ -99,6 +99,19 @@ RSpec.describe Player do
       result = Player.by_current_alias('Hans').to_a
       expect(result).to be_empty
     end
+
+    it "should use the player's activity date as secondary order parameter" do
+      ron_1 = create(:player, :with_player_data_points, count: 1, aliases: ['Ron'])
+      ron_2 = create(:player, :with_player_data_points, count: 1, aliases: ['Ron'])
+      ron_3 = create(:player, :with_player_data_points, count: 1, aliases: ['Ron'])
+
+      ron_1.current_player_data_point.update(created_at: Time.new(2019, 1, 1))
+      ron_2.current_player_data_point.update(created_at: Time.new(2019, 3, 1))
+      ron_3.current_player_data_point.update(created_at: Time.new(2019, 2, 1))
+
+      result = Player.by_current_alias('Ron').select_map(Sequel[:players][:id])
+      expect(result).to eq [ron_2.id, ron_3.id, ron_1.id]
+    end
   end
 
   describe '::ranks' do
