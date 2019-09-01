@@ -6,12 +6,12 @@ update_stale_players:
   args:
   description: 'Schedule update for all players with stale data'
 
-clear_update_scheduled_at:
+prevent_limbo_profiles:
   cron: '* * * * *'
-  class: 'Observatory::ClearUpdateScheduledAt'
-  queue: clear_update_scheduled_at
+  class: 'Observatory::PreventLimboProfiles'
+  queue: prevent_limbo_profiles
   args:
-  description: 'Clears `update scheduled at` flag after certain time passed'
+  description: 'Run various cleanup jobs to prevent profiles stuck without future updates.'
 
 delete_invalid_players:
   cron: '* * * * *'

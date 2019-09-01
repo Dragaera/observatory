@@ -12,6 +12,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
+- Ensure new cleanup job is ran rather than old one.
+
 ### Security
 
 ### Deprecated
