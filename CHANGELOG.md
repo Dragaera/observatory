@@ -8,6 +8,21 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.37.0] - 2019-09-01
+
+### Added
+
 - Background job to fix players in state where no future updates might happen.
 - Use player's "last active at" timestamp as secondary order parameter in
   search results. Aliases which are equally similar to the search parameter
@@ -21,12 +36,6 @@ glance - what to expect from upgrading to a new version.
 
 - Remove incorrect reference that searching for players' previous aliases is
   possible.
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.36.2] - 2019-08-28
