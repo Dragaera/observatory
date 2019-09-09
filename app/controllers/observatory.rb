@@ -40,12 +40,4 @@ Observatory::App.controllers :observatory do
       map { |f| [f.name, f.players_dataset.count] }.
       to_json
   end
-
-  get :player_queries_graph do
-    PlayerQuery.
-      group_by { Sequel.cast(:created_at, :date) }.
-      select { [Sequel.function(:count, 1), Sequel.cast(:created_at, :date)] }.
-      map { |hsh| [hsh[:created_at], hsh[:count]] }.
-      to_json
-  end
 end

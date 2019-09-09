@@ -20,6 +20,9 @@ glance - what to expect from upgrading to a new version.
 
 ### Removed
 
+- Player queries graph, as it refers to queries from before persistence was a
+  thing, and is only relevant for newly added players now.
+
 
 ## [0.37.0] - 2019-09-01
 
