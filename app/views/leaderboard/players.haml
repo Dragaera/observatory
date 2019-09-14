@@ -2,7 +2,7 @@
   %h1 Player Leaderboard
 
 .row
-  .col-md-8
+  .col-md-12
     .panel.panel-default
       .panel-heading
         Disclaimer
@@ -10,13 +10,6 @@
         %ul
           %li This board only contains players who have previously queried their data via this tool.
           %li Information is based on the last time player data was refreshed - it might not be up-to-date.
-  .col-md-4
-    = form_tag url(:leaderboard, :players), method: :get do
-      .form-group
-        = label_tag :last_active_after
-        = date_field_tag :last_active_after, class: 'form-control', value: params['last_active_after'], placeholder: 'yyyy-mm-dd'
-
-      = submit_tag 'Filter', class: 'btn btn-default'
 
 .row
   .col-md-12
@@ -30,7 +23,7 @@
           %th Last active
 
       %tbody
-        - offset = 1 + (@players.current_page - 1) * @players.page_size
+        - offset = 1 + (@current_page - 1) * @page_size
         - @players.each_with_index do |player, i|
           %tr
             =# Using the attributes of the JOIN datasete prevents another query to fetch the current player data point.
@@ -39,6 +32,7 @@
             %td
               .media
                 .media-left
+                  = # Have to use the model's method (leading to one query per entry) here, as the badge has additional logic attached - ie rookie badge and uncertainity handling with the adagrad sum.
                   = skill_tier_badge_image(Player[player[:id]].skill_tier_badge, width: '48px', cls: 'media-object', narrow: true)
                 .media-body
                   .media-body
@@ -52,8 +46,8 @@
             %td= timespan_in_words player[:time_alien], unit: :hours
             %td= timespan_in_words player[:time_marine], unit: :hours
             %td= timespan_in_words player[:time_commander], unit: :hours
-            %td= pp_date player.last_activity
+            %td= pp_date player[:created_at] # `created_at` of the data point, see controller. `Player#last_activity` would cause an additional query.
 
 .row
   .col-md-12
-    = partial 'leaderboard/pagination', locals: { dataset: @players }
+    = partial 'leaderboard/pagination', locals: { page_range: (@first_page..@last_page), current_page: @current_page }

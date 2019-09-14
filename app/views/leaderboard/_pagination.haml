@@ -1,6 +1,6 @@
 %nav
   %ul.pagination
-    - pagination = Observatory::Pagination.paginate(dataset.page_range, dataset.current_page, leading: Observatory::Config::Leaderboard::PAGINATION_LEADING, surrounding: Observatory::Config::Leaderboard::PAGINATION_SURROUNDING, trailing: Observatory::Config::Leaderboard::PAGINATION_TRAILING)
+    - pagination = Observatory::Pagination.paginate(page_range, current_page, leading: Observatory::Config::Leaderboard::PAGINATION_LEADING, surrounding: Observatory::Config::Leaderboard::PAGINATION_SURROUNDING, trailing: Observatory::Config::Leaderboard::PAGINATION_TRAILING)
     - pagination.each do |item|
       - if item[:type] == :prev
         - if item[:attributes].include? :disabled

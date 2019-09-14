@@ -122,6 +122,11 @@ class Player < Sequel::Model
     "player:#{ player_id }:nsl_account"
   end
 
+  def self.leaderboard_cache_key(type)
+    "leaderboard:#{ type }"
+  end
+
+
   def ranks_cache_key
     Player.ranks_cache_key(id)
   end
@@ -237,6 +242,7 @@ class Player < Sequel::Model
         # (for new users) are not set, or (in the general case) not up-to-date.
         Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
 
+        update_leaderboard_cache
         async_update_steam_badges
 
         true
@@ -306,6 +312,26 @@ class Player < Sequel::Model
     else
       Resque.enqueue(Observatory::PlayerUpdate, id)
     end
+  end
+
+  def update_leaderboard_cache
+    logger.debug("Updating leaderboard cache of player #{ id }")
+    if current_player_data_point.nil?
+      # Players where eg the initial query failed will not have any known skill
+      # etc values, and will not be included in the leaderboard.
+      logger.debug("Player has no data, skipping.")
+      return false
+    end
+
+    REDIS.zadd(Player.leaderboard_cache_key('skill'), skill, id)
+    REDIS.zadd(Player.leaderboard_cache_key('score_per_second'), score_per_second, id)
+    REDIS.zadd(Player.leaderboard_cache_key('score'), score, id)
+    REDIS.zadd(Player.leaderboard_cache_key('level'), level, id)
+    REDIS.zadd(Player.leaderboard_cache_key('experience'), experience, id)
+    REDIS.zadd(Player.leaderboard_cache_key('time_total'), time_total, id)
+    REDIS.zadd(Player.leaderboard_cache_key('time_alien'), time_alien, id)
+    REDIS.zadd(Player.leaderboard_cache_key('time_marine'), time_marine, id)
+    REDIS.zadd(Player.leaderboard_cache_key('time_commander'), time_commander, id)
   end
 
   # Retrieves recent distinct player data.  That is, if two entries are equal
