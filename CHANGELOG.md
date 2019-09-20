@@ -10,6 +10,10 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
+- Use redis-backed leaderboard for rank determination on profile pages.
+  This, removes redundant functionality, and ensures the leaderboard and
+  profile page will match at all times.
+
 ### Fixed
 
 ### Security
