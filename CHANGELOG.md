@@ -25,7 +25,7 @@ glance - what to expect from upgrading to a new version.
 - Player queries graph, as it refers to queries from before persistence was a
   thing, and is only relevant for newly added players now.
 - Possibility to filter leaderboard by player activity. Rarely used, and would
-  have complicated usin Redis as a cache.
+  have complicated using Redis as a cache.
 
 
 ## [0.37.0] - 2019-09-01
