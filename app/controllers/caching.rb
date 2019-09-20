@@ -60,8 +60,6 @@ Observatory::App.controllers :caching do
       leaderboard_keys.each do |key|
         REDIS.del(key)
       end
-
-      # REDIS.del('observatory:cache:nsl_accounts:updated')
     end
 
     redirect(url(:caching, :index))
