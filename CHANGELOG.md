@@ -10,6 +10,8 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
+- Leaderboard now uses Redis as cache for significantly faster sorting.
+
 ### Fixed
 
 - Ensure new cleanup job is ran rather than old one.
@@ -22,6 +24,8 @@ glance - what to expect from upgrading to a new version.
 
 - Player queries graph, as it refers to queries from before persistence was a
   thing, and is only relevant for newly added players now.
+- Possibility to filter leaderboard by player activity. Rarely used, and would
+  have complicated usin Redis as a cache.
 
 
 ## [0.37.0] - 2019-09-01

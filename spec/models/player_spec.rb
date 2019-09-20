@@ -479,4 +479,13 @@ RSpec.describe Player do
       expect(player.skill_tier_badge).to eq SkillTierBadge.veteran
     end
   end
+
+  describe '#max_skill' do
+    it 'should return the highest skill the player ever achieved' do
+      player.add_player_data_point(build(:player_data_point, skill: 300))
+      player.add_player_data_point(build(:player_data_point, skill: 100))
+
+      expect(player.max_skill).to eq 300
+    end
+  end
 end

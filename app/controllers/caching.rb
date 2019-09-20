@@ -15,6 +15,11 @@ Observatory::App.controllers :caching do
         updated: REDIS.get('observatory:cache:nsl_accounts:updated'),
         purge_url: url(:caching, :purge_nsl_accounts)
       },
+      {
+        name: 'leaderboard',
+        updated: '-',
+        purge_url: url(:caching, :purge_leaderboard)
+      },
     ]
 
     render 'index'
@@ -41,6 +46,22 @@ Observatory::App.controllers :caching do
       end
 
       REDIS.del('observatory:cache:nsl_accounts:updated')
+    end
+
+    redirect(url(:caching, :index))
+  end
+
+  post :purge_leaderboard do
+    # Bit of a hacky usage of that method, which only works as we know that the
+    # `type` argument is at the *end* of the key name.
+    leaderboard_keys = REDIS.keys(Player.leaderboard_cache_key('*'))
+
+    REDIS.pipelined do
+      leaderboard_keys.each do |key|
+        REDIS.del(key)
+      end
+
+      # REDIS.del('observatory:cache:nsl_accounts:updated')
     end
 
     redirect(url(:caching, :index))
