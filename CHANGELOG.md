@@ -10,15 +10,24 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.38.0] - 2019-09-20
+
+### Changed
+
 - Leaderboard now uses Redis as cache for significantly faster sorting.
 
 ### Fixed
 
 - Ensure new cleanup job is ran rather than old one.
-
-### Security
-
-### Deprecated
 
 ### Removed
 
