@@ -35,7 +35,9 @@ Observatory::App.controllers :leaderboard do
       where(Sequel[:players][:id] => player_ids).
       order_by(
         Sequel.desc(db_sort_param),
-        Sequel.desc(Sequel[:player_data_points][:created_at])
+        # Mirror ZREVRANGE's behaviour to use descending lexographical ordering
+        # for items with equal score.
+        Sequel.desc(Sequel[:player_data_points][:alias])
       )
 
     render 'players'
