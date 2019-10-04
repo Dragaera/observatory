@@ -1,22 +1,21 @@
 %table.table.table-bordered
   %tbody
     %tr
-      - ranks = player.cached_ranks
       %th Skill
       %td= number_with_separator(player.skill)
-      %td= player_rank_link(ranks, :skill)
+      %td= player_rank_link(player, :skill)
     %tr
       %th Level / Exp
       %td= "Lvl #{ player.level } / #{ number_with_separator(player.experience) } XP"
-      %td= player_rank_link(ranks, :experience)
+      %td= player_rank_link(player, :experience)
     %tr
       %th Score
       %td= number_with_separator(player.score)
-      %td= player_rank_link(ranks, :score)
+      %td= player_rank_link(player, :score)
     %tr
       %th Score / min
       %td= (player.score_per_second * 60).round(2)
-      %td= player_rank_link(ranks, :score_per_second)
+      %td= player_rank_link(player, :score_per_second)
 
 %table.table.table-bordered
   %tbody

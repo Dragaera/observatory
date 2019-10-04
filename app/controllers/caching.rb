@@ -6,11 +6,6 @@ Observatory::App.controllers :caching do
   get :index do
     @caches = [
       {
-        name: 'ranks',
-        updated: REDIS.get('observatory:cache:ranks:updated'),
-        purge_url: url(:caching, :purge_ranks)
-      },
-      {
         name: 'nsl_accounts',
         updated: REDIS.get('observatory:cache:nsl_accounts:updated'),
         purge_url: url(:caching, :purge_nsl_accounts)

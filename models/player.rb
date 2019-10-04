@@ -114,10 +114,6 @@ class Player < Sequel::Model
       }
   end
 
-  def self.ranks_cache_key(player_id)
-    "player:#{ player_id }:ranks"
-  end
-
   def self.nsl_account_cache_key(player_id)
     "player:#{ player_id }:nsl_account"
   end
@@ -126,10 +122,6 @@ class Player < Sequel::Model
     "leaderboard:#{ type }"
   end
 
-
-  def ranks_cache_key
-    Player.ranks_cache_key(id)
-  end
 
   def nsl_account_cache_key
     Player.nsl_account_cache_key(id)
@@ -354,18 +346,14 @@ class Player < Sequel::Model
       first
   end
 
-  def cached_ranks
-    ranks = REDIS.hgetall(ranks_cache_key)
-
-    if ranks.empty?
-      ranks
+  def cached_rank(type)
+    redis_key = Player.leaderboard_cache_key(type)
+    rank = REDIS.zrevrank(redis_key, id)
+    if rank
+      # Indices are 0-based, while our ranks start at 1
+      rank + 1
     else
-      {
-        skill:            ranks.fetch('skill').to_i,
-        score:            ranks.fetch('score').to_i,
-        score_per_second: ranks.fetch('score_per_second').to_i,
-        experience:       ranks.fetch('experience').to_i,
-      }
+      nil
     end
   end
 
@@ -383,7 +371,7 @@ class Player < Sequel::Model
     end
   end
 
-  # Return timestamp of last time player's data changed.
+  # Return timestamp of the last time the player's data changed.
   def last_activity
     relevant_data = player_data_points_dataset.
       where(relevant: true).

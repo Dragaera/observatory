@@ -27,13 +27,6 @@ expire_old_player_data_exports:
   args:
   description: 'Deletes old player exports'
 
-update_leaderboard:
-  cron: '*/5 * * * *'
-  class: 'Observatory::LeaderboardUpdate'
-  queue: leaderboard_update
-  args:
-  description: 'Updates leaderboard'
-
 nsl_accounts_sync:
   cron: '1 * * * *'
   class: 'Observatory::NSLAccountsSync'
