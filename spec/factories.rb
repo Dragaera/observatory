@@ -45,6 +45,7 @@ FactoryBot.define do
     sequence(:alias) { |i| "Player #{ i }" }
     sequence(:hive_player_id) { |i| i }
     score { 100 }
+    score_offset { 0 }
     level { 10 }
     experience { 1_000 }
     skill { 500 }

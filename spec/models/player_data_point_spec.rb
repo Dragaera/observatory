@@ -114,6 +114,17 @@ RSpec.describe PlayerDataPoint do
     end
   end
 
+  describe '#==' do
+    it 'should respect score offsets' do
+      dt1 = create(:player_data_point, player: player, alias: 'player', hive_player_id: 1, score: 10, score_offset: -5)
+      dt2 = create(:player_data_point, player: player, alias: 'player', hive_player_id: 1, score: 15, score_offset: 0)
+      dt3 = create(:player_data_point, player: player, alias: 'player', hive_player_id: 1, score: 10, score_offset: 0)
+
+      expect(dt1).to eq dt2
+      expect(dt1).to_not eq dt3
+    end
+  end
+
   describe '::build_from_player_data' do
     let(:data_point) { PlayerDataPoint.build_from_player_data_point(incomplete_api_data) }
 

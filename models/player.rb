@@ -31,7 +31,9 @@ class Player < Sequel::Model
   one_to_many :player_data_points
   # Adds new player data point if it contains relevant data, discards it otherwise.
   #
-  # Returns new point if added, `false` if discarded.
+  # Returns `point` either way (behaviour of Sequel). `point.new?` will
+  # indicate whether it was saved to the DB (new = false) or discarded (new =
+  # true).
   def _add_player_data_point(point)
     # Important to do this first, as equality check also checks `player_id`.
     point.player_id = id
@@ -46,11 +48,9 @@ class Player < Sequel::Model
       # Due to us overwriting PlayerData#==, this would lead to non-relevant
       # updates being discarded.
       update(current_player_data_point_id: point.id)
-      return point
     else
       logger.debug "Discarding irrelevant player data point of player #{ point.player_id }"
       point.delete if point.exists?
-      return false
     end
   end
 
@@ -166,6 +166,11 @@ class Player < Sequel::Model
     current_player_data_point.score
   end
 
+  def score_offset
+    return nil unless current_player_data_point
+    current_player_data_point.score_offset
+  end
+
   def score_per_second
     return nil unless current_player_data_point
     current_player_data_point.score_per_second
@@ -176,7 +181,7 @@ class Player < Sequel::Model
     current_player_data_point.score_per_second_field
   end
 
-  def apply_historical_score_per_second_compensation
+  def apply_historical_score_compensation
     current_offset        = 0
     data_point_offset_map = {}
 
@@ -204,18 +209,22 @@ class Player < Sequel::Model
     end
 
     logger.info "Processing #{ data_point_offset_map.length } updates."
-    data_point_offset_map.each do |id, dt|
-      pdp = PlayerDataPoint[id]
-      offset         = dt.fetch(:offset)
-      offset_changed = dt.fetch(:offset_changed)
-      # Score-per-second will be recalculated by a before-validation hook on the model.
-      # Resetting to the original score (`pdp.score + pdp.score_offset`) allows
-      # later recalculating the offset using a new threshold.
-      pdp.update(
-        score_offset:         offset,
-        score_offset_changed: offset_changed,
-        score:                pdp.score + pdp.score_offset - offset,
-      )
+    data_points.each do |pdp|
+      update = data_point_offset_map[pdp.id]
+      if update
+        offset                  = update.fetch(:offset)
+        offset_changed          = update.fetch(:offset_changed)
+
+        # As the full model is populated and loaded we can just call #update
+        # which will - if it would not change any values - simply be a no-op.
+        pdp.update(
+          score_offset:         offset,
+          score_offset_changed: offset_changed,
+          # `pdp.score - pdp.score_offset`, is the original score, to which the
+          # new offset is then added.
+          score:                pdp.score - pdp.score_offset + offset,
+        )
+      end
     end
 
     # Mark that the processing of historical data has been performed
@@ -268,6 +277,7 @@ class Player < Sequel::Model
         old_pdp = current_player_data_point
         # Overwritten to provide additional behaviour, see definition below.
         new_pdp = add_player_data_point(player_data)
+
         update_hive_badges(data)
 
         # TODO: Refactor this to use transaction-style block. `ensure` won't
@@ -288,18 +298,37 @@ class Player < Sequel::Model
         # (for new users) are not set, or (in the general case) not up-to-date.
         Resque.enqueue(Observatory::ClassifyPlayerUpdateFrequency, id)
 
-        update_leaderboard_cache
-        async_update_steam_badges
-
         if !score_offset_calculated
           logger.warn 'Score offset for historical data not calculated yet, doing so now.'
-          apply_historical_score_per_second_compensation
-        elsif new_pdp and old_pdp
-          # Sufficient to check if offset needs adjusting with most recent data
-          # point - but only if it was a relevant (non-discarded) point and is
-          # not the first.
+          apply_historical_score_compensation
+        elsif old_pdp && !new_pdp.new?
+          # If the object is #new?, then it was not saved to the DB, ergo
+          # discarded due to irrelevancy - in which case we needn't bother.
 
+          # Ensure we're aware of potential default values set by the DB
+          new_pdp.reload
+
+          logger.info 'Calculating score offset using previous data point.'
+
+          # old_offset is the base offset which the new one is based one.
+          result         = calculate_score_offset(old_pdp: old_pdp, new_pdp: new_pdp, old_offset: old_pdp.score_offset)
+          offset         = result.fetch(:offset)
+          offset_changed = result.fetch(:offset_changed)
+          # It being a new data point we definitely have to set an offset -
+          # which might be zero.
+          new_pdp.update(
+            # No need to first recover the original score, it being a new data
+            # point the existing offset is guaranteed to be `0`.
+            score: new_pdp.score + offset,
+            score_offset: offset,
+            score_offset_changed: offset_changed,
+          )
+        else
+          logger.info 'First data point, or new data point discarded, skipping score offset calculation.'
         end
+
+        update_leaderboard_cache
+        async_update_steam_badges
 
         true
       else
@@ -520,37 +549,31 @@ class Player < Sequel::Model
   end
 
   def calculate_score_offset(old_pdp:, new_pdp:, old_offset:)
-    threshold             = Observatory::Config::PlayerData::SCORE_PER_SECOND_THRESHOLD
+    threshold = Observatory::Config::PlayerData::SCORE_PER_SECOND_THRESHOLD
 
     current_offset = old_offset
     offset_changed = false
-    previous_offset_present = new_pdp.score_offset > 0
 
-    # Resetting to the original score (`pdp.score + pdp.score_offset`) allows
+    # Resetting to the original score (`.score - score_offset`) allows
     # later recalculating the offset using a new threshold.
     # Mind that new_pdp is just the *newer* of the two, not necessarily a *new*
     # one if it's used to eg process historical data.
-    score_delta = (new_pdp.score + new_pdp.score_offset) - (old_pdp.score + old_pdp.score_offset)
+    score_delta = (new_pdp.score - new_pdp.score_offset) - (old_pdp.score - old_pdp.score_offset)
     time_delta  = new_pdp.time_total - old_pdp.time_total
 
     score_per_second = score_delta.to_f / time_delta
 
     if score_per_second >= threshold
-      # Affected data points require an update of our offset.
       logger.info "Score per second of #{ score_per_second } >= #{ threshold }: PDP #{ old_pdp.id } => #{ new_pdp.id } had score gain of #{ score_delta }"
-      current_offset += score_delta
+      # As this pair of data point has also had a too high increase, we have to
+      # increase the total offset (from now on) by the proper amount.  Note:
+      # Offset will be negative in the usual case, as it's always something
+      # which is *added* to the score.
+      current_offset -= score_delta
       logger.debug "Offset is now: #{ current_offset }"
       offset_changed = true
     end
 
-    # We must update *every* data point other than the first, not only faulty
-    # ones. Only adding updates for those where the offset is != 0 (and there
-    # was no previous offset which we need to correct for) serves as an
-    # optimization to skip fetching PDPs of unaffected players below.
-    if current_offset > 0 || previous_offset_present
-      return { offset: current_offset, offset_changed: offset_changed }
-    else
-      return nil
-    end
+    return { offset: current_offset, offset_changed: offset_changed }
   end
 end
