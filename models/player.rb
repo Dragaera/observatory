@@ -172,6 +172,77 @@ class Player < Sequel::Model
     current_player_data_point.score_per_second_field
   end
 
+  def apply_score_per_second_compensation
+    threshold             = Observatory::Config::PlayerData::SCORE_PER_SECOND_THRESHOLD
+    current_offset        = 0
+    data_point_offset_map = {}
+
+    # Loading it all into RAM for easy handling of consecutive slices. No
+    # single player has a significant number of PDPs, so this is sensible
+    # enough.
+    data_points = player_data_points_dataset.
+      order_by(Sequel.asc(:created_at)).
+      to_a
+
+    puts "Processing #{ data_points.length } player data points."
+
+    # We first get a list of data points with a suspicious increase in store,
+    # and remember which data points we need to update later.  Updating them
+    # immediately would potentially cause issues as we would, in iteration `i`,
+    # modify data which is looked at in iteration `i + 1`.
+    data_points.each_cons(2) do |dt1, dt2|
+      offset_changed = false
+
+      previous_offset_present = dt2.score_offset > 0
+
+      # Resetting to the original score (`pdp.score + pdp.score_offset`) allows
+      # later recalculating the offset using a new threshold.
+      score_delta = (dt2.score + dt2.score_offset) - (dt1.score + dt1.score_offset)
+      time_delta  = dt2.time_total - dt1.time_total
+
+      score_per_second = score_delta.to_f / time_delta
+
+      # Faulty data points require an update of our offset.
+      if score_per_second >= threshold
+        puts "Score per second of #{ score_per_second } >= #{ threshold }: PDP #{ dt1.id } => #{ dt2.id } had score gain of #{ score_delta }"
+        current_offset += score_delta
+        puts "Offset is now: #{ current_offset }"
+        offset_changed = true
+      end
+
+      # We must update *every* data point other than the first, not only faulty
+      # ones. Only adding updates for those where the offset is != 0 (and there
+      # was no previous offset which we need to correct for) serves as an
+      # optimization to skip fetching PDPs of unaffected players below.
+      if current_offset > 0 || previous_offset_present
+        data_point_offset_map[dt2.id] = { offset: current_offset, offset_changed: offset_changed }
+      end
+    end
+
+    # data_point_offset_map.each do |id, dt|
+    #   p "#{ id } => #{ dt[:offset] } / #{ dt[:offset_changed] }"
+    # end
+    # return
+
+    puts "Processing #{ data_point_offset_map.length } updates."
+    data_point_offset_map.each do |id, dt|
+      pdp = PlayerDataPoint[id]
+      offset         = dt.fetch(:offset)
+      offset_changed = dt.fetch(:offset_changed)
+      # Score-per-second will be recalculated by a before-validation hook on the model.
+      # Resetting to the original score (`pdp.score + pdp.score_offset`) allows
+      # later recalculating the offset using a new threshold.
+      pdp.update(
+        score_offset:         offset,
+        score_offset_changed: offset_changed,
+        score:                pdp.score + pdp.score_offset - offset,
+      )
+    end
+
+    # And finally recalculate the rank cache
+    update_leaderboard_cache
+  end
+
   def skill
     return nil unless current_player_data_point
     current_player_data_point.skill

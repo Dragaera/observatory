@@ -73,6 +73,8 @@ module Observatory
 
       EXPORT_ROOT = ENV.fetch('PLAYER_DATA_EXPORT_ROOT', '/mnt/observatory')
       EXPORT_EXPIRY_THRESHOLD = ENV.fetch('PLAYER_DATA_EXPORT_EXPIRY_THRESHOLD', 7 * 24 * 60 * 60).to_i
+
+      SCORE_PER_SECOND_THRESHOLD = ENV.fetch('PLAYER_DATA_SCORE_PER_SECOND_THRESHOLD', 1).to_f
     end
 
     module RateLimiting

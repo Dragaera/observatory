@@ -146,6 +146,7 @@ timezone.
 | `PLAYER_DATA_CLEAR_UPDATE_SCHEDULED_AT_DELAY` | 7200                 | y        | Number of seconds after which a scheduled player update is assumed to have failed silently, and new scheduling new updates is allowed. You should not need to tune this setting, this is only to prevent a bug from causing updates to cease. |
 | `PLAYER_DATA_EXPORT_ROOT`                     | /mnt/observatory     | y        | Path in the file system where generated CSVs will be stored for a certain duration. Default value is suitable for running in a Docker container and mounting a volume there - but feel free to adjust to your liking. |
 | `PLAYER_DATA_EXPORT_EXPIRY_THRESHOLD`         | 604800               | y        | Number of seconds after which a player data export will be expired, that is its file deleted. Set to 0 to keep indefinitely. |
+| `PLAYER_DATA_SCORE_PER_SECOND_THRESHOLD`      | 1                    | y        | Score-per-second value at which (`>=`) to treat score changes as a result of the known score-multiplying bug, and discard them. |
 
 #### Rate Limiting
 
