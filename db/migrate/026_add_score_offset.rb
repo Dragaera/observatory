@@ -4,6 +4,10 @@ Sequel.migration do
       add_column :score_offset,         Integer,   null: false, default: 0
       add_column :score_offset_changed, TrueClass, null: false, default: false
     end
+
+    alter_table :players do
+      add_column :score_offset_calculated, TrueClass, null: false, default: false
+    end
   end
 
   down do
@@ -16,6 +20,10 @@ Sequel.migration do
     alter_table :player_data_points do
       drop_column :score_offset
       drop_column :score_offset_changed
+    end
+
+    alter_table :players do
+      drop_column :score_offset_calculated
     end
   end
 end
