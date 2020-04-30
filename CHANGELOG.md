@@ -8,6 +8,21 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Removed
+
+
+## [0.39.0] - 2020-04-30
+
+### Added
+
 - Historical compensation for skill-multiplying bug. Based on the changes in
   playtime and score between data points, suspicious score increases which are
   likely the result of the known score-multiplying bug are detected, and
@@ -19,14 +34,6 @@ glance - what to expect from upgrading to a new version.
   This, removes redundant functionality, and ensures the leaderboard and
   profile page will match at all times.
 - Update dependencies.
-
-### Fixed
-
-### Security
-
-### Deprecated
-
-### Removed
 
 
 ## [0.38.0] - 2019-09-20
