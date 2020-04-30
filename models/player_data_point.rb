@@ -22,9 +22,16 @@ class PlayerDataPoint < Sequel::Model
         self.score_per_second       = score.to_f / time_total
         self.score_per_second_field = score.to_f / (time_total - time_commander)
       end
-
-      super
     end
+
+    # The default value would also be set by the database, but we need it for
+    # equality comparisons - which can (and will) happen with unsaved data
+    # points, to eg determine whether they are relevant.
+    if score_offset.nil?
+      self.score_offset = 0
+    end
+
+    super
   end
 
   many_to_one :player
@@ -51,7 +58,7 @@ class PlayerDataPoint < Sequel::Model
 
   def ==(other)
     self.alias == other.alias &&
-      self.score == other.score &&
+      self.score - self.score_offset == other.score - other.score_offset &&
       self.level == other.level &&
       self.experience == other.experience &&
       self.skill == other.skill &&

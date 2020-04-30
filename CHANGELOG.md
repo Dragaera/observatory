@@ -8,6 +8,11 @@ glance - what to expect from upgrading to a new version.
 
 ### Added
 
+- Historical compensation for skill-multiplying bug. Based on the changes in
+  playtime and score between data points, suspicious score increases which are
+  likely the result of the known score-multiplying bug are detected, and
+  compensated for.
+
 ### Changed
 
 - Use redis-backed leaderboard for rank determination on profile pages.
