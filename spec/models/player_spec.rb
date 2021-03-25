@@ -140,8 +140,9 @@ RSpec.describe Player do
   end
 
   describe '#add_player_data_point' do
-    let(:data_point1) { build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100) }
-    let(:data_point2) { build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100) }
+    # We'll also implicitly test that rounding of adagrad sum works, here
+    let(:data_point1) { build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100, adagrad_sum: 0.132725393728684) }
+    let(:data_point2) { build(:player_data_point, alias: 'John', hive_player_id: 1, score: 100, adagrad_sum: 0.13272539372868414) }
     let(:data_point3) { build(:player_data_point, alias: 'John', hive_player_id: 1, score: 150) }
 
     it 'should set `current_player_data_point` to the new data point' do

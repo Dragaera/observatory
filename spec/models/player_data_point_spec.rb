@@ -123,6 +123,15 @@ RSpec.describe PlayerDataPoint do
       expect(dt1).to eq dt2
       expect(dt1).to_not eq dt3
     end
+
+    it 'should round adagrad sum to 15 digits' do
+      # This one will go via the DB, so end up truncated
+      dt1 = create(:player_data_point, player: player, alias: 'player', hive_player_id: 1, adagrad_sum: 0.13272539372868414)
+      # This one won't, so will be as if it had come in from the API
+      dt2 = build(:player_data_point, player: player, alias: 'player', hive_player_id: 1, adagrad_sum: 0.13272539372868414)
+
+      expect(dt1).to eq dt2
+    end
   end
 
   describe '::build_from_player_data' do
