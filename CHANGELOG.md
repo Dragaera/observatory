@@ -12,14 +12,19 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
-- Round adagrad sum to 13 digits for comparison purposes. Postgres spec claims
-  15 digits accuracy, but that seems a pipe dream.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.40.1] - 2021-03-25
+
+### Fixed
+
+- Round adagrad sum to 13 digits for comparison purposes. Postgres spec claims
+  15 digits accuracy, but that seems a pipe dream.
 
 
 ## [0.40.0] - 2021-03-25
