@@ -12,15 +12,20 @@ glance - what to expect from upgrading to a new version.
 
 ### Fixed
 
-- Fix detection whether data points are irrelevant failing, due to Hive
-  returning the adagrad sum field with an accuracy the DB could not handle,
-  leading to truncation.
-
 ### Security
 
 ### Deprecated
 
 ### Removed
+
+
+## [0.40.0] - 2021-03-25
+
+### Fixed
+
+- Fix detection whether data points are irrelevant failing, due to Hive
+  returning the adagrad sum field with an accuracy the DB could not handle,
+  leading to truncation.
 
 
 ## [0.39.0] - 2020-04-30
