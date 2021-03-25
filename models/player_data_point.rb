@@ -66,11 +66,12 @@ class PlayerDataPoint < Sequel::Model
       self.time_alien == other.time_alien &&
       self.time_marine == other.time_marine &&
       self.time_commander == other.time_commander &&
-      # Adagrad sum is rounded to 15 digits as Postgres' double precision type
-      # supports no more than 15 digits precision at worst. If comparing any
-      # more accurate, you risk Ruby and Postgres not agreeing on what is, in
-      # actuality, the same value.
-      self.adagrad_sum.round(15) == other.adagrad_sum.round(15) &&
+      # Adagrad sum is rounded to 13 digits as Postgres' double precision type
+      # supports suppsedly no more than 15 digits precision at worst.
+      # Effectively it even supported fewer. 
+      # If comparing any more accurate, you risk Ruby and Postgres not agreeing
+      # on what is, in actuality, the same value.
+      self.adagrad_sum.round(13) == other.adagrad_sum.round(13) &&
       self.player_id == other.player_id &&
       self.hive_player_id == other.hive_player_id
   end
