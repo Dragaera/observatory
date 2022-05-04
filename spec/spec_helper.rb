@@ -19,7 +19,7 @@ RSpec.configure do |conf|
     # DatabaseCleaner.clean_with :truncation
 
     conf.around(:each) do |spec|
-      DatabaseCleaner.cleaning do
+      DatabaseCleaner[:sequel].cleaning do
         spec.run
       end
     end

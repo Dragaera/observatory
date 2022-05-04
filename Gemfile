@@ -15,7 +15,7 @@ gem 'sequel'
 # Test requirements
 
 # Padrino Stable Gem
-gem 'padrino', '0.14.4'
+gem 'padrino', '0.15.1'
 
 gem 'sinatra-contrib'
 
@@ -53,7 +53,7 @@ gem 'steam-condenser'
 gem 'steam-id2', '~> 0.4.4', require: 'steam_id'
 
 # Bindings to Hive HTTP API
-gem 'hive-stalker', '~>0.2.0', require: 'hive_stalker'
+gem 'hive-stalker', '~>0.3.1', require: 'hive_stalker'
 # Bindings to Gorge
 gem 'gorgerb', '~> 0.2.0'
 
@@ -68,7 +68,7 @@ group :test do
   gem 'capybara'
   gem 'rspec'
   gem 'rack-test', :require => 'rack/test'
-  gem 'database_cleaner'
+  gem 'database_cleaner-sequel'
   gem 'factory_bot'
   gem 'timecop'
 end
