@@ -481,8 +481,9 @@ RSpec.describe Player do
     end
   end
 
-  pending '#max_skill' do
+  describe '#max_skill' do
     it 'should return the highest skill the player ever achieved' do
+      pending 'awaiting implementation'
       player.add_player_data_point(build(:player_data_point, skill: 300))
       player.add_player_data_point(build(:player_data_point, skill: 100))
 
