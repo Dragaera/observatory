@@ -78,9 +78,10 @@ Padrino.after_load do
   if Observatory::Config::Sentry.enabled?
     puts 'Enabling sentry integration.'
 
-    Raven.configure do |config|
+    Sentry.init do |config|
       config.dsn = Observatory::Config::Sentry::DSN
       config.release = Observatory::VERSION
+      config.send_default_pii = true
     end
 
     Resque::Failure::Multiple.classes = [Resque::Failure::Redis, Resque::Failure::Sentry]

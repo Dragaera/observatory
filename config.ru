@@ -18,7 +18,7 @@ resque_web_path = Observatory::Config::Resque::WEB_PATH
 url_map[resque_web_path] = Resque::Server.new if resque_web_path
 
 if Observatory::Config::Sentry.enabled?
-  use Raven::Rack
+  use Sentry::Rack::CaptureExceptions
 end
 
 run Rack::URLMap.new(url_map)

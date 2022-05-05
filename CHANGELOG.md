@@ -14,6 +14,7 @@ glance - what to expect from upgrading to a new version.
 - Update to 2.7-compatible version of `steam-condenser` and `steam-id`
 - Update dependencies
 - Update application to Bundler 2
+- Migrate to new Sentry SDK
 
 ### Fixed
 

@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 # Optional JSON codec (faster performance)
 # gem 'oj'
 
-gem 'sentry-raven'
+gem 'sentry-ruby'
+gem 'sentry-resque'
 
 # Project requirements
 gem 'rake'
