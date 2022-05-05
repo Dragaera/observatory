@@ -1,3 +1,21 @@
+GIT
+  remote: https://github.com/Dragaera/steam-id.git
+  revision: dc106b72f5c8375b022b511368a4470b769e3fd3
+  ref: dc106b7
+  specs:
+    steam-id2 (0.4.5)
+      steam-condenser (~> 1.3)
+
+GIT
+  remote: https://github.com/koraktor/steam-condenser-ruby.git
+  revision: 3ee580b5c5d390ee3a706357f18f2e9a2949e5c2
+  ref: 3ee580b
+  specs:
+    steam-condenser (1.3.11)
+      multi_json (~> 1.6)
+      multi_xml (~> 0.5)
+      rexml (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -142,6 +160,7 @@ GEM
     resque-sentry (1.2.0)
       resque (>= 1.18.0)
       sentry-raven (>= 0.4.6)
+    rexml (3.2.5)
     rspec (3.11.0)
       rspec-core (~> 3.11.0)
       rspec-expectations (~> 3.11.0)
@@ -178,11 +197,6 @@ GEM
       rack-protection (= 2.2.0)
       sinatra (= 2.2.0)
       tilt (~> 2.0)
-    steam-condenser (1.3.11)
-      multi_json (~> 1.6)
-      multi_xml (~> 0.5)
-    steam-id2 (0.4.5)
-      steam-condenser (~> 1.3)
     temple (0.8.2)
     thor (1.2.1)
     tilt (2.0.10)
@@ -227,8 +241,8 @@ DEPENDENCIES
   sequel_pg
   silverball (~> 0.1.3)
   sinatra-contrib
-  steam-condenser
-  steam-id2 (~> 0.4.4)
+  steam-condenser!
+  steam-id2!
   timecop
   tzinfo
 

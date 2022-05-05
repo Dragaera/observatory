@@ -72,7 +72,7 @@ end
 #
 Padrino.after_load do
   if Observatory::Config::Steam::WEB_API_KEY
-    WebApi.api_key = Observatory::Config::Steam::WEB_API_KEY
+    SteamCondenser::Community::WebApi.api_key = Observatory::Config::Steam::WEB_API_KEY
   end
 
   if Observatory::Config::Sentry.enabled?

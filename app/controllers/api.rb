@@ -12,7 +12,7 @@ Observatory::App.controllers :api do
         identifier,
         api_key: Observatory::Config::Steam::WEB_API_KEY
       ).account_id
-    rescue ArgumentError, WebApiError => e
+    rescue ArgumentError, SteamCondenser::Error::WebApi => e
       halt 400, e.message
     end
 

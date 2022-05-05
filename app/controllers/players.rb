@@ -51,7 +51,7 @@ Observatory::App.controllers :players do
         else
           logger.debug 'No matching player found'
         end
-      rescue ArgumentError, WebApiError
+      rescue ArgumentError, SteamCondenser::Error::WebApi
         # Or not
         logger.debug 'Not a valid Steam ID'
       end

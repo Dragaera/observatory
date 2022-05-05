@@ -47,10 +47,14 @@ gem 'ratelimit'
 gem 'chartkick', '>= 3.0.2'
 
 # Bindings to Steam Web-API
-gem 'steam-condenser'
+# The most recent published version (1.3.11) does not yet contain fixes for
+# Ruby 2.7+ compatiblity, so we'll need to rely on Github.
+gem 'steam-condenser', git: 'https://github.com/koraktor/steam-condenser-ruby.git', ref: '3ee580b'
 
 # Steam ID converter
-gem 'steam-id2', '~> 0.4.4', require: 'steam_id'
+# We also need a version of it which is compatible with the unpublished version
+# of `steam-condenser` we use. Fun. :)
+gem 'steam-id2', git: 'https://github.com/Dragaera/steam-id.git', ref: 'dc106b7' , require: 'steam_id'
 
 # Bindings to Hive HTTP API
 gem 'hive-stalker', '~>0.3.1', require: 'hive_stalker'
