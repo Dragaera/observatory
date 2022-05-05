@@ -10,12 +10,6 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
-- Update Ruby base image to 2.7
-- Update to 2.7-compatible version of `steam-condenser` and `steam-id`
-- Update dependencies
-- Update application to Bundler 2
-- Migrate to new Sentry SDK
-
 ### Fixed
 
 ### Security
@@ -24,6 +18,16 @@ glance - what to expect from upgrading to a new version.
 
 ### Removed
 
+
+## [0.41.0] - 2022-05-05
+
+### Changed
+
+- Update Ruby base image to 2.7
+- Update to 2.7-compatible version of `steam-condenser` and `steam-id`
+- Update dependencies
+- Update application to Bundler 2
+- Migrate to new Sentry SDK
 
 ## [0.40.1] - 2021-03-25
 
