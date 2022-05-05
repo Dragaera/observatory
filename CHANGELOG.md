@@ -10,6 +10,11 @@ glance - what to expect from upgrading to a new version.
 
 ### Changed
 
+- Update Ruby base image to 2.7
+- Update to 2.7-compatible version of `steam-condenser` and `steam-id`
+- Update dependencies
+- Update application to Bundler 2
+
 ### Fixed
 
 ### Security
